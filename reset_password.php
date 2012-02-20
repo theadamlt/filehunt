@@ -1,0 +1,67 @@
+<?php
+require('lib.php');
+mysql_selector();
+
+if (isset($_POST['username']) && isset($_POST['security_code']))
+{
+	$username      = mysql_enteries_fix_string($_POST['username']);
+	$security_code = mysql_enteries_fix_string($_POST['security_code']);
+	$sql = "SELECT * FROM users WHERE username='$username' AND security_code=$security_code LIMIT 1";
+	$result = mysql_query($sql,$con);
+	if(mysql_num_rows($result) == 1)
+	$row = mysql_fetch_array($result);
+	$email = $row['email'];
+		echo <<< _END
+	<form class="form" action="?page=reset_password" method="post">
+		<p class="password">
+			<input type="password" name="password" id="password1" />
+			<label for="password1">New password</label>
+		</p>
+		<p class="password">
+			<input type="password" name="password2" id="password2" />
+			<label for="password2">New password again</label>
+		</p>
+		<input type="hidden" name="username" value="$username" />
+		<input type="hidden" name="email" value="$email" />
+		<p class="submit">
+			<input type="submit" value="submit" />
+		</p>
+	</form>
+_END;
+}
+else
+{
+	echo <<< _END
+	<form class="form" action="?page=reset_password" method="post">
+		<p class="username">
+			<input type="text" name="username" id="username" />
+			<label for="username">Username</label>
+		</p>
+		<p class="security_code">
+			<input type="text" name="security_code" id="security_code" />
+			<label for="security_code">Security code</label>
+		</p>
+		<p class="submit">
+			<input type="submit" value="submit" />
+		</p>
+	</form>
+_END;
+}
+
+if(isset($_POST['password']) && isset($_POST['password2']))
+{
+	if($_POST['password'] == $_POST['password2'])
+	{
+		$password = mysql_enteries_fix_string($_POST['password']);
+		$username = mysql_enteries_fix_string($_POST['username']);
+		$email    = mysql_enteries_fix_string($_POST['email']);
+		$random = rand(30, 100)*rand(7574,324)*rand(323,876);
+		$sql = "UPDATE files SET password=MD5('$password') AND security_code=$random WHERE username='$username' AND email='$email'";
+		$result =  mysql_query($sql,$con);
+		header('Location: ?page=search&newPassword=true');
+		die();
+	}
+
+}
+
+?>
