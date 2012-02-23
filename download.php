@@ -1,5 +1,6 @@
 <?php
-require('lib.php');
+ob_start();
+require_once('lib.php');
 mysql_selector();
 
 $file = $_GET['file'];
@@ -16,9 +17,11 @@ $sql    = "UPDATE files SET times_downloaded=times_downloaded+1 WHERE times_down
 $result = mysql_query($sql,$con);
 
 
+ob_clean();
 header("Content-length: ".$row['size']);
 header("Content-type: ".$row['mimetype']);
 header("Content-Disposition: attachment; filename=".$row['file']);
-//header('Location: ?index.php?page=search');
+ob_start();
 echo $row['data'];
+ob_flush();
 ?>

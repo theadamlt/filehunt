@@ -1,5 +1,5 @@
 <?php
-require('lib.php');
+require_once('lib.php');;
 mysql_selector();
 if(isset($_SESSION['dbuserid']) && isset($_GET['reportedFile']))
 {

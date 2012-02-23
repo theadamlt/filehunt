@@ -4,7 +4,7 @@ mysql_selector();
 
 if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 {
-	header('Location: ?page=login&myprofileAttempt=true&attemptedSite=upload');
+	header('Location: ?page=login&attemptedSite=myprofile');
 	die();
 }
 else 
@@ -73,6 +73,7 @@ else
 	        echo $row['uploded_by'];
 	        echo "</table></center>";
     }
+    else echo '<div id="error">You have no uploads!</div>';
 }
 
 ?>

@@ -5,7 +5,7 @@
 </head>
 <body>
 <?php
-require('lib.php');
+require_once('lib.php');
 mysql_selector();
 
 if ((isset($_POST['username'])) && (isset($_POST['password'])))

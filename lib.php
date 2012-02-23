@@ -3,7 +3,8 @@ function mysql_selector()
 {
 	$host = $_SERVER['HTTP_HOST'];
 	if($host == 'localhost' || $host == '62.199.33.99' || $host == '85.83.1.123') localhost_con('filehunt');
-	else if($host == www_domain) mysql_con("mysql7.000webhost.com", "a4438711_user", "kage123", "a4438711_fh1");
+	else if($host == www_domain) /*mysql_con("mysql7.000webhost.com", "a4438711_user", "kage123", "a4438711_fh1")*/
+		mysql_con($mysql_host, $mysql_user, $mysql_password, $mysql_database);
 	else localhost_con('filehunt');
 }
 
@@ -85,6 +86,25 @@ function oddOrEven($num)
 {
 if($odd = $num%2 ) return(0); //Odd number
 else return(1); //Even number
+}
+
+function facebookShare($url)
+{
+		echo <<<_END
+<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_link { padding:2px 0 0 20px; }</style><a title="Share on Facebook" rel="nofollow" href="http://www.facebook.com/share.php?u=$url" onclick="return fbs_click()" target="_blank" class="fb_share_link"><img src="img/facebook.ico" height="32" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+_END;
+}
+function twitterShare($url)
+{
+	echo <<< _END
+<a href="http://twitter.com/home?status=I just uploaded a file on fileHunt! $url" title="Share on Twitter" target='_blank'><img src="img/twitter.ico" height="32" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+_END;
+}
+function googleShare($url)
+{
+	echo <<< _END
+	<a title="Share on Google+" href="https://m.google.com/app/plus/x/?v=compose&content=I just uploaded a file on fileHunt! $url" onclick="window.open('https://m.google.com/app/plus/x/?v=compose&content=I just uploaded a file on fileHunt $url','gplusshare','width=450,height=300,left='+(screen.availWidth/2-225)+',top='+(screen.availHeight/2-150)+'');return false;"><img src="img/google+.ico" height="32" width="32"></a>
+_END;
 }
 
 

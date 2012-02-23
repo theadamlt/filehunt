@@ -18,27 +18,7 @@
 </head>
 <body>
 <?php
-
-function facebookShare($url)
-{
-		echo <<<_END
-<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_link { padding:2px 0 0 20px; }</style><a title="Share on Facebook" rel="nofollow" href="http://www.facebook.com/share.php?u=$url" onclick="return fbs_click()" target="_blank" class="fb_share_link"><img src="img/facebook.ico" height="32" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-_END;
-}
-function twitterShare($url)
-{
-	echo <<< _END
-<a href="http://twitter.com/home?status=I just uploaded a file on fileHunt! $url" title="Share on Twitter" target='_blank'><img src="img/twitter.ico" height="32" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-_END;
-}
-function googleShare($url)
-{
-	echo <<< _END
-	<a title="Share on Google+" href="https://m.google.com/app/plus/x/?v=compose&content=I just uploaded a file on fileHunt! $url" onclick="window.open('https://m.google.com/app/plus/x/?v=compose&content=I just uploaded a file on fileHunt $url','gplusshare','width=450,height=300,left='+(screen.availWidth/2-225)+',top='+(screen.availHeight/2-150)+'');return false;"><img src="img/google+.ico" height="32" width="32"></a>
-_END;
-}
-
-
+require_once('lib.php');
 session_start();
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
@@ -60,10 +40,10 @@ session_start();
 		$host = $_SERVER['HTTP_HOST'];
 		$id = $_GET['id'];
 		$downloadLink = "download.php?file=$id";
-	
-		$url = $host.'/'.$downloadLink;
+		if ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
+		else $url = $host.'/'.$downloadLink;
 		echo '<div id="success">Upload succeeded</div>';
-		echo "<p>Your download link is: <a href='$url'>http://$url</a><br />";
+		echo "<p>Your download link is: <a href='http://$url'>http://$url</a><br />";
 		echo '<div id="socailshare">';
 		facebookShare($url);
 		twitterShare($url);
@@ -72,7 +52,17 @@ session_start();
 			 '</div>';
 	}
 	if(isset($_GET['signupCompleted'])) echo '<div id="success">Signup completed</div>';
-	if(isset($_GET['newPassword'])) echo '<div id="success">Your password has been changed. You can now login</div>';
+	if(isset($_GET['newPassword']))
+	{
+		if($_GET['newPassword']=='true')
+		{
+			echo '<div id="success">Your password has been changed. You can now login</div>';
+		}
+		else
+		{
+			echo "<div id='success'>Oups... Your password hasen't been changed. Please try again later</div>";
+		}
+	}
 	if(isset($_GET['newPasswordEmailSent']))
 	{
 		$print_email = $_GET['newPasswordEmailSent'];

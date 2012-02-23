@@ -24,13 +24,16 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 		$_SESSION['dbpassword'] = $row['password'];
 		$_SESSION['dbuserid']   = $row['rowID'];
 		$_SESSION['dbemail']    = $row['email'];
-		if(isset($_GET['uploadAttempt']) && $_GET['uploadAttempt']!='comments')
-		{
-			header("Location: ?page=".$_GET['attemptedSite']);
-		}
-		elseif(isset($_GET['attemptedSite']) && $_GET['attemptedSite']=='comments' && isset($_GET['fileID']))
+	
+		if(isset($_GET['attemptedSite']) && $_GET['attemptedSite']=='comments' && isset($_GET['fileID']))
 		{
 			header('Location: ?page=comments&fileID='.$_GET['fileID']);
+			die();
+		}
+		if(isset($_GET['attemptedSite']))
+		{
+			header('Location: ?page='.$_GET['attemptedSite']);
+			die();
 		}
 	} 
 	else
@@ -39,7 +42,7 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 		die();
 	}
 }
-if (isset($_GET['uploadAttempt']))
+if (isset($_GET['attemptedSite']))
 {
 	echo "<div id='error'>You need to login first!</div>";
 }

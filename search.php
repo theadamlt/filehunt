@@ -1,5 +1,5 @@
 <?php
-require('lib.php');
+require_once('lib.php');;
 mysql_selector();
 
 if (!isset($_POST['search']))
@@ -33,7 +33,7 @@ elseif (isset($_POST['search']))
 <p class="search">
 <form class="form" action="?page=search" method="post">
 <p class="search">
-	<input type="text" style="width: 45%;" name="search" value='.$search_strip.' placeholder="Search" />
+	<input type="text" style="width: 45%;" name="search" value="'.$search_strip.'" placeholder="Search" />
 </p>
 <p class="search_for">
 	<select name="select">';

@@ -37,7 +37,7 @@ if (isset($_GET['uploadError']))
 }
 elseif ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 {
-	header('Location: ?page=login&uploadAttempt=true&attemptedSite=upload');
+	header('Location: ?page=login&attemptedSite=upload');
 	die();
 }
 else
