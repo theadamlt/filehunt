@@ -142,6 +142,10 @@ input:focus, textarea:focus
 	-webkit-border-radius: 5px;
 }
 
+.captcha {
+	text-align:center;
+}
+
 /*Table styling*/
 
 table, th, tr, td
@@ -166,7 +170,7 @@ table, th, tr, td
 	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
-/*From styling*/
+/*Table styling*/
 #table
 {
 width:50%;

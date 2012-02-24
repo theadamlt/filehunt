@@ -10,7 +10,22 @@ if (isset($_SESSION['dbusername']))
 
 if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['password2']) && (isset($_POST['email']))))
 {
-	
+	require_once('recaptchalib.php');
+	$privatekey = "6LewEM4SAAAAAFb7bWOf7PWVH1c6aarqrk8quPOZ";
+	$resp = recaptcha_check_answer ($privatekey,
+    $_SERVER["REMOTE_ADDR"],
+    $_POST["recaptcha_challenge_field"],
+    $_POST["recaptcha_response_field"]);
+
+	if (!$resp->is_valid)
+	{
+	    // What happens when the CAPTCHA was entered incorrectly
+	    header('Location: ?page=signup&captchaErr=true');
+	    die();
+	    //die ("<div id='error>'The reCAPTCHA wasn't entered correctly. Go back and try it again</div>");
+  	}
+  	else
+	{
 	if($_POST['username']!='' || $_POST['password']!='' || $_POST['password2']!='' || $_POST['email']!='')
 	{
 		$username  = mysql_enteries_fix_string($_POST['username']);
@@ -65,13 +80,13 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 				}
 			}
 		} else echo '<div id="error"><b>Oups... The passwords did not match. Try again</b></div>';
+	}
+	else
+	{
+		header('Location: ?page=signup&signupEmpty=true');
+		die();
+	}
 }
-else
-{
-	header('Location: ?page=signup&signupEmpty=true');
-	die();
-}
-
 }
 ?>
 <h1 style="text-align:center;">Signup</h1>
@@ -96,6 +111,13 @@ else
 <p class="email">
 	<input type="email" name="email" placeholder="Email" id="email" />
 	<label for="email">Email</label>
+</p>
+<p class="captcha">
+	<?php
+	    require_once('recaptchalib.php');
+	    $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN"; // you got this from the signup page
+	    echo recaptcha_get_html($publickey);
+	?>
 </p>
 <p class="submit">
 	<input type="hidden" name="start" />

@@ -25,7 +25,7 @@ if (isset($_GET['uploadError']))
 	echo '
 	<center>
 	<form class="form" enctype="multipart/form-data" action="uploadaction.php" method="POST">
-	<input type="hidden" name="MAX_FILE_SIZE" value="30720" />
+	<input type="hidden" name="MAX_FILE_SIZE" value="31457280" />
 	<p class="uploadfile">
 		<input name="uploadedfile" type="file" />
 	</p>
@@ -45,7 +45,7 @@ else
 	echo '
 	<center>
 	<form class="form" enctype="multipart/form-data" action="uploadaction.php" method="POST">
-	<input type="hidden" name="MAX_FILE_SIZE" value="30720" />
+	<input type="hidden" name="MAX_FILE_SIZE" value="31457280" />
 	<p class="uploadfile">
 		<input name="uploadedfile" type="file" />
 	</p>

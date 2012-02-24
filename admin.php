@@ -35,7 +35,7 @@ _END;
 				{
 					mail($row2['email'], $_POST['subject'], $_POST['message'], 'From: filehunt@filehunt.com');
 				}
-			header('Location: ?page=admin&mailSuccess=true');
+				header('Location: ?page=admin&mailSuccess=true');
 				
 			} else echo 'You left someting empty!';
 		

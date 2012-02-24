@@ -68,6 +68,7 @@ session_start();
 		$print_email = $_GET['newPasswordEmailSent'];
 		echo "<div id='success'>An email has been sent to you at $print_email</div>";
 	}
+	if(isset($_GET['captchaErr'])) echo "<div id='error'>The CAPTCHA field was not entered correctly. Please try again</div>";
 
 	$page = $_GET['page'];
 
