@@ -15,7 +15,7 @@ if(isset($_POST['username']) && isset($_POST['email']))
 	$message = "Hi $username_r
 It seems like you have been trying to reset you password on filehunt.
 http://filehunt.netau.net/?page=reset_password&yes=true
-Click on this link and insert this code to reset your password:
+Click on the link and insert this code to reset your password:
 $sec_code
 
 Sincerly
@@ -23,7 +23,7 @@ The filehunt team";
 
 	if(mail($row['email'], 'Password Reset', $message, 'From: Filehunt@filehunt.com'))
 		{ 
-			$email_r = $row'[email'];
+			$email_r = $row['email'];
 			header("Location: ?page=search&newPasswordEmailSent=$email_r");
 			//echo "<div id='success'>An email has been sent to you at $email_r</div>";
 		}

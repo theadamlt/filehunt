@@ -32,7 +32,9 @@ if(isset($_GET['userID']))
 				<center><br />
 				<table id="table">
 				<th>Filename</th>
-				<th>Date</th>';
+				<th>Uploaded Date</th>
+				<th>Comments</th>
+				<th>Report abuse</th>';
 				$count = 0;
 				while($row = mysql_fetch_array($result))
 				{
@@ -46,10 +48,13 @@ if(isset($_GET['userID']))
 					if(oddOrEven($count)==1) echo '<tr class="alt">';
 					elseif(oddOrEven($count)==0) echo '<tr>';
 					echo '
-						<td><a href="download.php?file='.$row['rowID'].'>"'.$row["file"].'</a></td>
+						<td><a href="download.php?file='.$row['rowID'].'">'.$row["file"].'</a></td>
 						<td>'.$row["uploaded_date"].'</td>';
-						echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>
-						</tr>";;
+					echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>";
+					$string1   = 'onClick=areYouSure2('.$row['rowID'].');';
+					echo "<td><a onClick=$string1 href='#'".$row['rowID']."' title='Report abuse'><img src='img/abuse.png'></a></td>";
+					echo '</tr>';
+
 				}
 			}
 			else

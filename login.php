@@ -48,8 +48,6 @@ if (isset($_GET['attemptedSite']))
 }
 	
 ?>
-
-
 <h1 style="text-align:center;">Login</h1>
 
 <?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>' ?>
@@ -73,6 +71,4 @@ if (isset($_GET['attemptedSite']))
 </p>
 </form>
 <a href="?page=forgot_password">Forgot password?</a>
-
-
 </div>

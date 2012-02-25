@@ -4,15 +4,15 @@
 <link rel="icon" type="image/png" href="img/favicon.png" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript">
-	function areYouSure(arg)
+	function areYouSure(arg,site)
 	{
 		var sure = confirm("Are you sure that you want to delete that file?");
-		if(sure == true) window.location.href="?page=delete_file&fileID="+arg;
+		if(sure == true) window.location.href="?page=delete_file&fileID="+arg+"&site="+site;
 	}
-	function areYouSure2(arg)
+	function areYouSure2(file,site)
 	{
 		var sure = confirm("Are you sure that you want to report this file as abuse?");
-		if(sure == true) window.location.href="?page=report_abuse&reportedFile="+arg;
+		if(sure == true) window.location.href="?page=report_abuse&reportedFile="+file;
 	}
 </script>
 </head>

@@ -112,13 +112,11 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 	<input type="email" name="email" placeholder="Email" id="email" />
 	<label for="email">Email</label>
 </p>
-<p class="captcha">
-	<?php
-	    require_once('recaptchalib.php');
-	    $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN"; // you got this from the signup page
-	    echo recaptcha_get_html($publickey);
-	?>
-</p>
+<?php
+	require_once('recaptchalib.php');
+	$publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN"; // you got this from the signup page
+    echo '<center>'.recaptcha_get_html($publickey).'</center>';
+?>
 <p class="submit">
 	<input type="hidden" name="start" />
 	<input type="submit" value="Signup"/>

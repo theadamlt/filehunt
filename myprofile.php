@@ -64,7 +64,7 @@ else
 	        echo '<td>'.$row['times_downloaded'].'</td>';
 	        echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>";
 			$rowidfile = $row['rowID'];
-			$string1   = 'onClick=areYouSure('.$rowidfile.');';
+			$string1   = 'onClick=areYouSure('.$rowidfile.',"myprofile");';
 	        echo "<td><a title='Delete file' onClick=areYouSure('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
 	        echo "</tr>";
 	        ++$count;
