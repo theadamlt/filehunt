@@ -1,13 +1,4 @@
 <?php
-function mysql_selector()
-{
-	$host = $_SERVER['HTTP_HOST'];
-	if($host == 'localhost' || $host == '62.199.33.99' || $host == '85.83.1.123') localhost_con('filehunt');
-	else if($host == www_domain) /*mysql_con("mysql7.000webhost.com", "a4438711_user", "kage123", "a4438711_fh1")*/
-		mysql_con($mysql_host, $mysql_user, $mysql_password, $mysql_database);
-	else localhost_con('filehunt');
-}
-
 
 $mysql_host = "mysql7.000webhost.com";
 $mysql_database = "a4438711_fh1";
@@ -91,7 +82,7 @@ else return(1); //Even number
 function facebookShare($url)
 {
 		echo <<<_END
-<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_link { padding:2px 0 0 20px; }</style><a title="Share on Facebook" rel="nofollow" href="http://www.facebook.com/share.php?u=$url" onclick="return fbs_click()" target="_blank" class="fb_share_link"><img src="img/facebook.ico" height="32" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><a rel="nofollow" href="http://www.facebook.com/share.php?u=$url" onclick="return fbs_click()" target="_blank"><img src="img/facebook.ico" height="32" width="32"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 _END;
 }
 function twitterShare($url)
@@ -107,6 +98,21 @@ function googleShare($url)
 _END;
 }
 
+function mysql_selector()
+{
+	$host = $_SERVER['HTTP_HOST'];
+	if($host == 'localhost' || $host == '62.199.33.99' || $host == '85.83.1.123') localhost_con('filehunt');
+	else if($host == www_domain) /*mysql_con("mysql7.000webhost.com", "a4438711_user", "kage123", "a4438711_fh1")*/
+		mysql_con($mysql_host, $mysql_user, $mysql_password, $mysql_database);
+	else localhost_con('filehunt');
+}
+
+function isRequired($string,$target6)
+{
+	$result = substr($string, 0, 5);
+	if ($result=='page=') return 1;
+	else return 0;
+}
 
 ?>
 
