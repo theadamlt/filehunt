@@ -25,7 +25,7 @@ _END;
 	$userid   = $_SESSION['dbuserid'];
 	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password' AND rowID=$userid AND admin=1 LIMIT 1";
 	$result = mysql_query($sql,$con);
-	if(mysql_num_rows($result)=='1')
+	if(mysql_num_rows($result)==1)
 	{
 		if(isset($_POST['username']) && isset($_POST['password']))
 		{
@@ -110,10 +110,9 @@ _END;
 	}
 	else echo '<div id="error>There is no reported files</div>"';
 }
-
 else
 {
-	header('Location: ?page=search');
+	header('Location: ?page=404');
 	die();
 }
 ?>
