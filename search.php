@@ -12,7 +12,7 @@ if (!isset($_POST['search']))
     echo <<< _END
 <center>
 <h2>Search</h2>
-<form class="form" action="?page=search" method="post">
+<form class="form " action="?page=search" method="post">
 <p class="search">
 	<input type="text" style="width: 45%;" name="search" placeholder="Search" x-webkit-speech />
 </p>
@@ -25,7 +25,11 @@ if (!isset($_POST['search']))
 </p>
 <p class="submit">
 	<input type="submit" value="Search" />
-</p>
+</span>
+<div class="dropbox">
+    <ul class="result">
+    </ul>
+</div>
 </form>
 </center>
 _END;
@@ -36,7 +40,7 @@ elseif (isset($_POST['search']))
     echo '<center>
 <h2>Search</h2>
 <p class="search">
-<form class="form" action="?page=search" method="post">
+<form class="form autosuggest" action="?page=search" method="post">
 <p class="search">
 	<input type="text" style="width: 45%;" name="search" value="'.$search_strip.'" placeholder="Search" />
 </p>
@@ -71,7 +75,6 @@ if ((isset($_POST['select'])))
     elseif($search_for == 'all') $sql = "SELECT f.size AS size, f.rowID AS file_row, u.rowID AS user_row, f.file AS file, f.uploaded_date AS uploaded_date, u.username AS username FROM files f, users u WHERE u.username='$search' AND u.rowID=f.uploaded_by OR f.file='$search' AND u.rowID=f.uploaded_by";
    
     $result = mysql_query($sql, $con);
-
 
     if (mysql_num_rows($result) > 0)
     {
@@ -113,4 +116,6 @@ if ((isset($_POST['select'])))
     else
         echo '<div id="error">Nothing matched your search</div>';
 }
+echo '<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/autosuggest.js"></script>';
 ?>

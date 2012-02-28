@@ -104,7 +104,7 @@ _END;
 			//Delete
 			$rowidfile = $row['f_rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.');';
-			echo "<td><a title='Delete file' onClick=areYouSure('$rowidfile','admin'); href='#'><img src='img/trash.png'></a></td>";
+			echo "<td><a title='Delete file' onClick=areYouSure3('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
 			echo "</tr>";
 			 ++$count;
 			    
