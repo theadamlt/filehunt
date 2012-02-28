@@ -1,5 +1,10 @@
 <?php
-require_once('lib.php');;
+require_once('lib.php');
+if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
+	{
+		header('Location: index.php?page=report_abuse');
+		die();
+	}
 mysql_selector();
 if(isset($_SESSION['dbuserid']) && isset($_GET['reportedFile']))
 {

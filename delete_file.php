@@ -1,5 +1,10 @@
 <?php
 require_once('lib.php');
+if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
+	{
+		header('Location: index.php?page=delete_file');
+		die();
+	}
 mysql_selector();
 if(!isset($_SESSION['dbuserid']))
 {

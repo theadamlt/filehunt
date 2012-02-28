@@ -1,4 +1,9 @@
-<?php 
+<?php
+if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
+	{
+		header('Location: index.php?page=upload');
+		die();
+	}
 if (isset($_GET['uploadError']))
 {
 	$error = $_GET['uploadError'];

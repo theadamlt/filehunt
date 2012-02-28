@@ -106,13 +106,5 @@ function mysql_selector()
 		mysql_con($mysql_host, $mysql_user, $mysql_password, $mysql_database);
 	else localhost_con('filehunt');
 }
-
-function isRequired($string,$target6)
-{
-	$result = substr($string, 0, 5);
-	if ($result=='page=') return 1;
-	else return 0;
-}
-
 ?>
 

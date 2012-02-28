@@ -1,5 +1,12 @@
 <?php
 require_once('lib.php');
+if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
+	{
+		header('Location: index.php?page=comments');
+		die();
+	}
+
+
 mysql_selector();
 
 if(isset($_POST['comment']) && $_POST['comment']!='' && isset($_POST['submit']))
