@@ -12,24 +12,21 @@ if (!isset($_POST['search']))
     echo <<< _END
 <center>
 <h2>Search</h2>
-<form class="form " action="?page=search" method="post">
-<p class="search">
-	<input type="text" style="width: 45%;" name="search" placeholder="Search" x-webkit-speech />
-</p>
-<p class="search_for">
+<form class="form" action="?page=search" method="post" autocomplete="off">
+<span class="search">
+	<input class="autosuggest" type="text" name="search" placeholder="Search"/>
+    <ul class="result"></ul>    
+</span>
+<span class="search_for">
 	<select name="select">
         <option value="all">All</option>
 		<option value="filename">Filename</option>
 		<option value="username">Username</option>
 	</select>
-</p>
-<p class="submit">
+</span>
+<span class="submit">
 	<input type="submit" value="Search" />
 </span>
-<div class="dropbox">
-    <ul class="result">
-    </ul>
-</div>
 </form>
 </center>
 _END;
@@ -39,13 +36,13 @@ elseif (isset($_POST['search']))
     $search_strip = stripcslashes($_POST['search']);
     echo '<center>
 <h2>Search</h2>
-<p class="search">
-<form class="form autosuggest" action="?page=search" method="post">
-<p class="search">
-	<input type="text" style="width: 45%;" name="search" value="'.$search_strip.'" placeholder="Search" />
-</p>
-<p class="search_for">
-	<select name="select">';
+<form class="form" action="?page=search" method="post" autocomplete="off">
+<span class="search">
+    <input class="autosuggest" type="text" name="search" placeholder="Search"/>
+    <ul class="result"></ul>    
+</span>
+<span class="search_for">
+    <select name="select">';
     if ($_POST['select'] == 'all') echo '<option value="all" selected=selected>All</option>';
     else echo '<option value="all">All</option>';
     if ($_POST['select'] == 'filename') echo '<option value="filename" selected=selected>Filename</option>';
@@ -53,10 +50,11 @@ elseif (isset($_POST['search']))
     if ($_POST['select'] == 'username') echo '<option value="username" selected=selected>Username</option>';
     else echo'<option value="username">Username</option>';
 
-    echo '</select>
-</p>
-<p class="submit">
-	<input type="submit" value="Search" />
+    echo '  </select>
+</span>
+<span class="submit">
+    <input type="submit" value="Search" />
+</span>
 </form>
 </center>';
 }

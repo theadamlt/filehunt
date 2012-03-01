@@ -8,6 +8,7 @@ session_start();
 
 if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 {
+
 	$fileName = $_FILES['uploadedfile']['name'];
 	$tmpName  = $_FILES['uploadedfile']['tmp_name'];
 	$fileSize = $_FILES['uploadedfile']['size'];

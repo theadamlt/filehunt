@@ -1,6 +1,6 @@
 <?php
 require_once('lib.php');
-localhost_con('filehunt');
+mysql_selector();
 
 if(isset($_POST['search_term']) && !empty($_POST['search_term']))
 {
