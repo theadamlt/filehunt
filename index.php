@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <head>
 	<title>Filehunt beta 0.4</title>
