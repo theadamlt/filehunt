@@ -40,6 +40,11 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 			header('Location: ?page='.$_GET['attemptedSite']);
 			die();
 		}
+		else
+		{
+			header('Location: ?page=search');
+			die();
+		}
 	} 
 	else
 	{
