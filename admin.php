@@ -53,8 +53,7 @@ _END;
 		header('Location: ?page=404');
 		die();		
 	}
-	$sql = "SELECT a.rowID as a_rowID, a.fileID as a_fileID, a.report_by AS a_report_by, a.date_reported AS a_date_reported, f.rowID as f_rowID, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.times_downloaded AS f_times_downloaded, f.file AS f_file, f.uploaded_date AS f_uploaded_date, u.rowID as u_rowID, u.username as u_username FROM abuse a, files f, users u WHERE a.fileID=f.rowID and a.report_by=u.rowID;
-";
+	$sql = "SELECT a.rowID AS a_rowID, a.fileID AS a_fileID, a.report_by AS a_report_by, a.date_reported AS a_date_reported, f.rowID AS f_rowID, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.times_downloaded AS f_times_downloaded, f.file AS f_file, f.uploaded_date AS f_uploaded_date, u.rowID AS u_rowID, u.username AS u_username FROM abuse a, files f, users u WHERE a.fileID=f.rowID AND a.report_by=u.rowID";
 	$result = mysql_query($sql,$con);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -98,13 +97,17 @@ _END;
 			//Comments
 			echo "<td><a href='?page=comments&fileID=".$row['f_rowID']."'>$numrows2 $comment_string</a></td>";
 			//report by
-			echo '<td>'.$row["a_report_by"].'</td>';
+			$a_report_by = $row['a_report_by'];
+			$sql3 = "SELECT * FROM users WHERE rowID=$a_report_by LIMIT 1";
+			$result3 = mysql_query($sql3,$con);
+			$row3 = mysql_fetch_array($result3);
+			echo '<td><a href="?page=profile&userID='.$row['a_report_by'].'">'.$row3["username"].'</a></td>';
 			//date reported
 			echo '<td>'.$row["a_date_reported"].'</td>';
 			//Delete
 			$rowidfile = $row['f_rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.');';
-			echo "<td><a title='Delete file' onClick=areYouSure3('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
+			echo "<td><a title='Delete file' onClick=adminDeleteFile('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
 			echo "</tr>";
 			 ++$count;
 			    
@@ -113,7 +116,7 @@ _END;
 		</center>
 		</table>";
 	}
-	else echo '<div id="error>There is no reported files</div>"';
+	else echo '<div id="error">There is no reported files</div>';
 }
 else
 {

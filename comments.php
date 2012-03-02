@@ -42,7 +42,9 @@ elseif(isset($_GET['fileID']))
 		<th>Date commented</th>
 		<th>Comment</th>
 _END;
-		$sql2 ="SELECT f.file AS filename, f.rowID AS file_row, f.uploaded_by AS uploaded_by, u.rowID AS user_row, u.username AS username FROM files f, users u WHERE f.rowID=9 LIMIT 1";
+		
+		$fileID  = $_GET['fileID'];
+		$sql2 ="SELECT f.file AS filename, f.rowID AS file_row, f.uploaded_by AS uploaded_by, u.rowID AS user_row, u.username AS username FROM files f, users u WHERE f.rowID=$fileID LIMIT 1";
 		$result2 = mysql_query($sql2,$con);
 		while($row2 = mysql_fetch_array($result2))
 		{

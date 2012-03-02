@@ -9,8 +9,8 @@ mysql_selector();
 if(!isset($_SESSION['dbuserid']))
 {
 	header('Location: ?page=search');
+	die();
 }
-
 if(isset($_SESSION['dbuserid']) && isset($_GET['fileID']))
 {
 	$profileID = $_SESSION['dbuserid'];
@@ -19,19 +19,18 @@ if(isset($_SESSION['dbuserid']) && isset($_GET['fileID']))
 
 	if($result = mysql_query($sql,$con))
 	{
-		$sql2 = "SELECT * FROM abuse WHERE fileID=$fileID";
+		//Delete abuse reports
+		$sql2    = "DELETE FROM abuse WHERE fileID=$fileID";
 		$result2 = mysql_query($sql,$con);
-		if(mysql_num_rows($result)!=0)
-		{
-			$sql3 = "DELETE FROM abuse WHERE fileID=$fileID";
-			$result3 = mysql_query($sql,$con);
-		}
-		header('Location: ?page=admin&deleteSuccess=true');
+		//Delete comments
+		$sql3    = "DELETE FROM comments WHERE fileID=$fileID";
+		$result3 = mysql_query($sql3,$con);
+		header('Location: ?page=myprofile&deleteSuccess=true');
 		die();
 	}
 	else
 	{
-		header('Location: ?page=admin&deleteSuccess=false');
+		header('Location: ?page=myprofile&deleteSuccess=false');
 		die();
 	}
 }

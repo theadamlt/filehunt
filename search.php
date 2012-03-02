@@ -101,7 +101,7 @@ if ((isset($_POST['select'])))
             if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).'KB</td>';
             elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).'MB</td>';
             else echo '<td>'.$row['size'].'bytes</td>';
-            $string1   = 'onClick=areYouSure2('.$row['file_row'].');';
+            $string1   = 'onClick=reportFile('.$row['file_row'].');';
             echo "<td><a href='?page=comments&fileID=".$row['file_row']."'>$numrows2 $comment_string</a></td>
             <td><a onClick=$string1 href='#'".$row['file_row']."' title='Report abuse'><img src='img/abuse.png'></a></td>";
             echo "</tr>";

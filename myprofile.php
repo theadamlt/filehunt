@@ -39,6 +39,7 @@ else
 	$result = mysql_query($sql,$con);
 	if(mysql_num_rows($result)!=0)
 	{
+	$count = 0; 
 	echo "
 		<center>
 		<h1 class='message'>Your uploaded files</h1>
@@ -56,8 +57,7 @@ else
 			$result2  = mysql_query($sql2,$con);
 			$numrows2 = mysql_num_rows($result2);
 	        if($numrows2 == 1) $comment_string = 'comment';
-            else $comment_string = 'comments';
-			$count = 0;  
+            else $comment_string = 'comments'; 
 	        //File size calc
 	        if(oddOrEven($count)==1) echo '<tr class="alt">';
 	        elseif(oddOrEven($count)==0) echo '<tr>';
@@ -70,7 +70,7 @@ else
 	        echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>";
 			$rowidfile = $row['rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.',"myprofile");';
-	        echo "<td><a title='Delete file' onClick=areYouSure('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
+	        echo "<td><a title='Delete file' onClick=deleteOwnFile('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
 	        echo "</tr>";
 	        ++$count;
 	    }
