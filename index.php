@@ -18,7 +18,7 @@ session_start();
 		else
 		{
 			echo '<div id="links">
-			Logged in as: '.$_SESSION["dbusername"].' | <a href="?page=logout">Logout</a> | <a href="?page=myprofile">My profile</a> | <a href="?page=mysubscriptions">My subscriptions'./*Num of new files here*/.'</a> | <a href="?page=search">Home</a> | <a href="?page=upload">Upload</a> </div>';
+			Logged in as: '.$_SESSION["dbusername"].' | <a href="?page=logout">Logout</a> | <a href="?page=myprofile">My profile</a> | <a href="?page=mysubscriptions">My subscriptions</a> | <a href="?page=search">Home</a> | <a href="?page=upload">Upload</a> </div>';
 		}
 
 	echo '
