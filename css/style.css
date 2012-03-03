@@ -248,4 +248,5 @@ table, th, tr, td
 .result li:hover {
 	background:#617798;
 	color:white;
+	cursor:pointer
 }

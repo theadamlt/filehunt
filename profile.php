@@ -13,12 +13,25 @@ if(isset($_GET['userID']))
 	else
 	{
 		$profile = $_GET['userID'];
-		$sql     = "SELECT * FROM users where rowID=$profile LIMIT 1";
+		$sql     = "SELECT * FROM users WHERE rowID=$profile LIMIT 1";
 		$result  = mysql_query($sql,$con);
 		$numrows = mysql_num_rows($result);
 		if($numrows == 1)
 		{
 			$row = mysql_fetch_array($result);
+
+			//Subscribe user message
+			if(isset($_GET['subscribeSuccess']) && $_GET['subscribeSuccess'] == 'true')
+			{
+				echo '<div id="success">You have successfully subscribed to '.$row["username"].'</div><br />';
+			}
+			elseif(isset($_GET['subscribeSuccess']) && $_GET['subscribeSuccess'] == 'false')
+			{
+				echo '<div id="error">An error occured. You have not subscribed to '.$row['username'].'. Please try again later</div><br />';
+			}
+
+
+
 			echo '<center><br />';
 			echo  'Username: '.$row['username'];
 			echo '<br /><br />';
@@ -26,6 +39,30 @@ if(isset($_GET['userID']))
 			echo '<br /><br />';
 			if($row['admin'] == '1') echo  'Admin';
 			echo '</center>';
+
+			//Is logged in user a subscriber?
+			$sql3 = "SELECT * FROM subs WHERE subscriber=$_SESSION[dbuserid] AND subscribed=$_GET[userID]";
+			$result3 = mysql_query($sql3);
+			if(mysql_num_rows($result3) == 1)
+			{
+				echo "
+				<form action='?page=unsubscribe' method='post'>
+					<input type='hidden' name='unsubscribeTo' value='$profile' />
+					<p class='submit'>
+						<input type='submit' value='Unsubscribe' />
+					</p>
+				</form>";
+			}
+			else
+			{
+				echo "
+				<form action='?page=subscribe' method='post'>
+					<input type='hidden' name='subscribeTo' value='$profile' />
+					<p class='submit'>
+						<input type='submit' value='Subscribe' />
+					</p>
+				</form>";
+			}
 
 			//Find uploads
 			$sql = "SELECT * FROM files WHERE uploaded_by='$profile'";
@@ -67,7 +104,12 @@ if(isset($_GET['userID']))
 				echo '<br /><div id="error">The user has no uploads</div>';
 			} 
 			
-		} else header('Location: google.com');
+		}
+		else
+		{
+			header('Location: ?page=404');
+			die();
+		}
 	}
 }
 else
