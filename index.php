@@ -12,13 +12,13 @@ session_start();
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 		{
-			echo '<div id="links">
-			<a href="?page=signup">Signup</a> | <a href="?page=login">Login</a> | <a href="?page=search">Home</a></div>';
+			echo '<div id="links"><ul>
+			<li><a href="?page=signup">Signup</a> | </li><li><a href="?page=login">Login</a> | </li><li><a href="?page=search">Home</a> | </li></ul></div>';
 		}
 		else
 		{
-			echo '<div id="links">
-			Logged in as: '.$_SESSION["dbusername"].' | <a href="?page=logout">Logout</a> | <a href="?page=myprofile">My profile</a> | <a href="?page=mysubscriptions">My subscriptions</a> | <a href="?page=search">Home</a> | <a href="?page=upload">Upload</a> </div>';
+			echo '<div id="links"><ul>
+			<li><span class="loggedin">Logged in as: '.$_SESSION["dbusername"].' </span> | </li> <li><a href="?page=logout">Logout</a> | </li> <li><a href="?page=myprofile">My profile</a> | </li> <li><a href="?page=mysubscriptions">My subscriptions</a> | </li> <li><a href="?page=search">Home</a> | </li> <li><a href="?page=upload">Upload</a> </li></ul></div>';
 		}
 
 	echo '

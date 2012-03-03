@@ -26,8 +26,13 @@ if(isset($_POST['comment']) && $_POST['comment']!='' && isset($_POST['submit']))
 if(!isset($_GET['fileID'])) header('Location: ?page=search');
 elseif(isset($_GET['fileID']))
 {
+
 	$fileID  = $_GET['fileID'];
-	//
+	
+	$sql3 = "SELECT * FROM files WHERE rowID=fileID";
+	$result3 = mysql_query($sq3);
+
+
 	$sql     = "SELECT c.rowID AS comment_rowID, c.fileID AS fileID, c.comment_by AS comment_by_id, c.date_commented AS date_commented, c.comment AS comment, u.username AS username, u.rowID AS user_row FROM comments c, users u WHERE c.fileID=$fileID AND c.comment_by=u.rowID";
 	//
 	$result  = mysql_query($sql,$con);
@@ -69,6 +74,11 @@ _END;
 		echo '</table></center>';
 		
 	}
+	elseif(mysql_num_rows($result3)==0)
+	{
+		header('Location: ?page=404');
+		die();
+	}
 	elseif($numrows == 0 && isset($_SESSION['dbusername']))
 	{
 		echo "<div id='error'>There is no comments for this file! Why dont ya' add one?</div>";
@@ -76,6 +86,16 @@ _END;
 	elseif($numrows == 0 && !isset($_SESSION['dbusername']))
 	{
 		echo "<div id='error'>There is no comments for this file!</div>";
+	}
+	else
+	{
+		$sql3 = "SELECT * FROM files WHERE rowID=$row2[file_row]";
+		$result3 = mysql_query($sq3);
+		if(mysql_num_rows($result3)==0)
+		{
+			header('Location: ?page=404');
+			die();
+		}
 	}
 }
 

@@ -39,7 +39,6 @@ if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 		header("Location: index.php?page=search&uploadSucces=true&id=$fileRow");
 		die();
 	} 
-	else echo mysql_error();
 } 
 else
 {
