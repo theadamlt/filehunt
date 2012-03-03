@@ -111,8 +111,60 @@ if ((isset($_POST['select'])))
         echo $row['uploded_by'];
         echo "</table></center>";
     }
-    else
+
+    elseif($_POST['select'] == 'filename')
+    {
         echo '<div id="error">Nothing matched your search</div>';
+    }
+
+    elseif($_POST['select'] == 'username')
+    {
+        $usersql = "SELECT * FROM users WHERE username LIKE '$search%'";
+        $userresult = mysql_query($usersql);
+        if(mysql_num_rows($userresult) != 0)
+        {
+            $count = 0;
+            echo '<center><table id="table">
+            <th>Username</th>
+            <th>Files</th>';
+
+            while($row2 = mysql_fetch_array($userresult))
+            {
+                if(oddOrEven($count)==1) echo "<tr class='alt'>";
+                elseif(oddOreven($count)==0) echo '<tr>';
+                echo '<td><a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a></td>';
+                echo '<td>The user has no uploads</td>';
+                echo '</tr>';                
+            }
+            echo '</table></center>';
+        } 
+        else echo '<div id="error">Nothing matched your search</div>';
+    }
+
+    elseif($_POST['select'] == 'all')
+    {
+        $usersql = "SELECT * FROM users WHERE username LIKE '$search%'";
+        $userresult = mysql_query($usersql);
+        if(mysql_num_rows($userresult) != 0)
+        {
+            $count = 0;
+            echo '<center><table id="table">
+            <th>Username</th>
+            <th>Files</th>';
+
+            while($row2 = mysql_fetch_array($userresult))
+            {
+                if(oddOrEven($count)==1) echo "<tr class='alt'>";
+                elseif(oddOreven($count)==0) echo '<tr>';
+                echo '<td><a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a></td>';
+                echo '<td>The user has no uploads</td>';
+                echo '</tr>';                
+            }
+            echo '</table></center>';
+        } 
+        else echo '<div id="error">Nothing matched your search</div>';
+    }
+
 }
 echo '<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="js/autosuggest.js"></script>';
