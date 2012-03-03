@@ -30,6 +30,15 @@ if(isset($_GET['userID']))
 				echo '<div id="error">An error occured. You have not subscribed to '.$row['username'].'. Please try again later</div><br />';
 			}
 
+			//Unsubscribe user message
+			if(isset($_GET['unsubscribeSuccess']) && $_GET['unsubscribeSuccess'] == 'true')
+			{
+				echo '<div id="success">You have successfully unsubscribed to '.$row["username"].'</div><br />';
+			}
+			elseif(isset($_GET['unsubscribeSuccess']) && $_GET['unsubscribeSuccess'] == 'false')
+			{
+				echo '<div id="error">An error occured. You have not unsubscribed to '.$row['username'].'. Please try again later</div><br />';
+			}
 
 
 			echo '<center><br />';

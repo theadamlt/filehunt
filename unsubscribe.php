@@ -7,10 +7,10 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 }
 mysql_selector();
 
-if(isset($_SESSION['dbuserid']) && isset($_POST['subscribeTo']) && $_SESSION['dbuserid'] != $_POST['subscribeTo'])
+if(isset($_SESSION['dbuserid']) && isset($_POST['unsubscribeTo']) && $_SESSION['dbuserid'] != $_POST['unsubscribeTo'])
 {
 	$userID = $_SESSION['dbuserid'];
-	$subscribeTo = $_POST['subscribeTo'];
+	$unsubscribeTo = $_POST['unsubscribeTo'];
 	$sql = "SELECT * FROM subs WHERE subscriber=$userID AND subscribed=subscribeTo LIMIT 1";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
@@ -20,17 +20,19 @@ if(isset($_SESSION['dbuserid']) && isset($_POST['subscribeTo']) && $_SESSION['db
 	}
 	else
 	{
-		$sql2 = "INSERT INTO subs (rowID, subscriber, subscribed) VALUES (NULL, $userID, $subscribeTo)";
+		$userID = $_SESSION['dbuserid'];
+		$unsubscribeTo = $_POST['unsubscribeTo'];
+		$sql2 = "DELETE FROM subs WHERE subscriber=$userID AND subscribed=$unsubscribeTo LIMIT 1";
 		if($result2 = mysql_query($sql2))
 		{
-			$redirectTo = $_POST['subscribeTo'];
-			header("Location: ?page=profile&userID=$subscribeTo&subscribeSuccess=true");
+			$redirectTo = $_POST['unsubscribeTo'];
+			header("Location: ?page=profile&userID=$unsubscribeTo&unsubscribeSuccess=true");
 			die();
 		}
 		else
 		{
 			$redirectTo = $_POST['subscribeTo'];
-			header("Location: ?page=profile&userID=$subscribeTo&subscribeSuccess=false");
+			header("Location: ?page=profile&userID=$unsubscribeTo&unsubscribeSuccess=false");
 			die();
 		}
 
