@@ -67,12 +67,13 @@ _END;
 		++$count;
 		}
 		echo '</table></center>';
+		
 	}
-	elseif($numrows = 0 && isset($_SESSION['dbusername']))
+	elseif($numrows == 0 && isset($_SESSION['dbusername']))
 	{
-		echo "<div id='error'>There is no comments for this file! Why dont ya' add one?";
+		echo "<div id='error'>There is no comments for this file! Why dont ya' add one?</div>";
 	}
-	elseif($numrows = 0 && !isset($_SESSION['dbusername']))
+	elseif($numrows == 0 && !isset($_SESSION['dbusername']))
 	{
 		echo "<div id='error'>There is no comments for this file!</div>";
 	}
