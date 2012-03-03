@@ -12,13 +12,33 @@ session_start();
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 		{
-			echo '<div id="links"><ul>
-			<li><a href="?page=signup">Signup</a> | </li><li><a href="?page=login">Login</a> | </li><li><a href="?page=search">Home</a> | </li></ul></div>';
+			echo '<div id="links"><ul>';
+			if($_GET['page'] == 'signup') echo '<li class=current_page_item>';
+			else echo '<li>';
+			echo '<a href="?page=signup">Signup</a></li>';
+			if($_GET['page'] == 'login') echo '<li class=current_page_item>';
+			else echo'<li>';
+			echo '<a href="?page=login">Login</a></li>';
+			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
+			else echo '<li>';
+			echo '<a href="?page=search">Home</a></li></ul></div>';
 		}
 		else
 		{
 			echo '<div id="links"><ul>
-			<li><span class="loggedin">Logged in as: '.$_SESSION["dbusername"].' </span> | </li> <li><a href="?page=logout">Logout</a> | </li> <li><a href="?page=myprofile">My profile</a> | </li> <li><a href="?page=mysubscriptions">My subscriptions</a> | </li> <li><a href="?page=search">Home</a> | </li> <li><a href="?page=upload">Upload</a> </li></ul></div>';
+			<li><span class="loggedin">Logged in as: '.$_SESSION["dbusername"].' </span> </li><li><a href="?page=logout">Logout</a></li>';
+			if($_GET['page'] == 'myprofile') echo'<li class=current_page_item>';
+			else echo '<li>';
+			echo '<a href="?page=myprofile">My profile</a></li>';
+			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item">';
+			else echo '<li>';
+			echo '<a href="?page=mysubscriptions">My subscriptions</a></li>';
+			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
+			else echo '<li>';
+			echo '<a href="?page=search">Home</a></li>';
+			if($_GET['page'] == 'upload') echo '<li class=current_page_item>';
+			else echo '<li>';
+			echo '<a href="?page=upload">Upload</a></li></ul></div>';
 		}
 
 	echo '
