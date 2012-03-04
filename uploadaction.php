@@ -24,11 +24,12 @@ if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 	    $fileName = mysql_real_escape_string($fileName);
 	}
 
-	$date = date("y/m/d : H:i:s", time());
+	$date = date("d/m/y H:i", time());
+	$datestrto = strtotime($date);
 	$user = $_SESSION['dbuserid'];
 
 	$sql = "INSERT INTO files (rowID, file, mimetype, data, uploaded_by, uploaded_date, size, times_downloaded) 
-	VALUES (NULL, '$fileName', '$fileType', '$content', '$user', '$date', $fileSize, 0);";
+	VALUES (NULL, '$fileName', '$fileType', '$content', '$user', '$datestrto', $fileSize, 0);";
 
 	if (mysql_query($sql,$con))
 	{

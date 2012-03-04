@@ -5,7 +5,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=reset_password');
 		die();
 	}
-mysql_selector();
+
 
 if (isset($_POST['username']) && isset($_POST['security_code']))
 {

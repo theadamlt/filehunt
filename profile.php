@@ -5,7 +5,6 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=profile');
 		die();
 	}
-mysql_selector();
 
 if(isset($_GET['userID']))
 {
@@ -85,6 +84,7 @@ if(isset($_GET['userID']))
 				<th>Filename</th>
 				<th>Uploaded Date</th>
 				<th>Comments</th>
+				<th>Size</th>
 				<th>Report abuse</th>';
 				$count = 0;
 				while($row = mysql_fetch_array($result))
@@ -100,8 +100,11 @@ if(isset($_GET['userID']))
 					elseif(oddOrEven($count)==0) echo '<tr>';
 					echo '
 						<td><a href="download.php?file='.$row['rowID'].'">'.$row["file"].'</a></td>
-						<td>'.$row["uploaded_date"].'</td>';
+						<td>'.date("d/m/y H:i",$row['uploaded_date']).'</td>';
 					echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>";
+					if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).' KB</td>';
+	        		elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).' MB</td>';
+	        		else echo '<td>'.$row['size'].' bytes</td>';
 					$string1   = 'onClick=areYouSure2('.$row['rowID'].');';
 					echo "<td><a onClick=$string1 href='#'".$row['rowID']."' title='Report abuse'><img src='img/abuse.png'></a></td>";
 					echo '</tr>';

@@ -5,7 +5,6 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=delete_file');
 		die();
 	}
-mysql_selector();
 if(!isset($_SESSION['dbuserid']))
 {
 	header('Location: ?page=search');

@@ -8,6 +8,7 @@
 <body>
 <?php
 require_once('lib.php');
+mysql_selector();
 session_start();
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
@@ -25,6 +26,8 @@ session_start();
 		}
 		else
 		{
+			$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID FROM subs s, users u, files f WHERE s.subscriber=$_SESSION[dbuserid] AND s.subscribed=u.rowID AND f.uploaded_date > u.last_sub_check AND f.uploaded_by=u.rowID";
+			if(!$result = mysql_query($sql)) echo mysql_error();
 			echo '<div id="links"><ul>
 			<li><span class="loggedin">Logged in as: '.$_SESSION["dbusername"].' </span> </li><li><a href="?page=logout">Logout</a></li>';
 			if($_GET['page'] == 'myprofile') echo'<li class=current_page_item>';
@@ -32,7 +35,7 @@ session_start();
 			echo '<a href="?page=myprofile">My profile</a></li>';
 			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item">';
 			else echo '<li>';
-			echo '<a href="?page=mysubscriptions">My subscriptions</a></li>';
+			echo '<a href="?page=mysubscriptions">My subscriptions('.mysql_num_rows($result).')</a></li>';
 			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
 			else echo '<li>';
 			echo '<a href="?page=search">Home</a></li>';

@@ -7,16 +7,20 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	}
 
 
-mysql_selector();
-
 if(isset($_POST['comment']) && $_POST['comment']!='' && isset($_POST['submit']))
 {
 	$get_fileid     = $_GET['fileID'];
 	$session_userid = $_SESSION['dbuserid'];
-	$date           = date("y/m/d : H:i:s", time());
+	$date = date("d/m/y H:i", time());
+	$datestrto = strtotime($date);
 	$post_comment   = $_POST['comment'];
-	$sql            = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, comment) VALUES(NULL, $get_fileid, $session_userid, '$date', '$post_comment')";
-	$result = mysql_query($sql,$con);
+	$sql_uniq = "SELECT * FROM comments WHERE comment='$post_comment' AND comment_by=$session_userid";
+	$result_uniq = mysql_query($sql_uniq);
+	if(mysql_num_rows($result_uniq) == 0)
+	{
+		$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, comment) VALUES(NULL, $get_fileid, $session_userid, '$datestrto', '$post_comment')";
+		$result = mysql_query($sql,$con);
+	}
 }
 
 
@@ -29,15 +33,19 @@ elseif(isset($_GET['fileID']))
 
 	$fileID  = $_GET['fileID'];
 	
-	$sql3 = "SELECT * FROM files WHERE rowID=fileID";
-	$result3 = mysql_query($sq3);
+	$sql3 = "SELECT * FROM files WHERE rowID=$fileID";
+	$result3 = mysql_query($sql3,$con);
+	if(mysql_num_rows($result3) == 0)
+	{
+		header('Location: ?page=404');
+		die();
+	}
 
 
 	$sql     = "SELECT c.rowID AS comment_rowID, c.fileID AS fileID, c.comment_by AS comment_by_id, c.date_commented AS date_commented, c.comment AS comment, u.username AS username, u.rowID AS user_row FROM comments c, users u WHERE c.fileID=$fileID AND c.comment_by=u.rowID";
 	//
 	$result  = mysql_query($sql,$con);
 	$numrows = mysql_num_rows($result);
-	
 	if($numrows !=0)
 	{
 		echo <<< _END
@@ -51,17 +59,15 @@ _END;
 		$fileID  = $_GET['fileID'];
 		$sql2 ="SELECT f.file AS filename, f.rowID AS file_row, f.uploaded_by AS uploaded_by, u.rowID AS user_row, u.username AS username FROM files f, users u WHERE f.rowID=$fileID LIMIT 1";
 		$result2 = mysql_query($sql2,$con);
-		while($row2 = mysql_fetch_array($result2))
-		{
-			$fileName = $row2['filename'];
-			$uploaded_by = $row2['username'];
-		}
+		$row2 = mysql_fetch_array($result2);
+		$fileName = $row2['filename'];
+		$uploaded_by = $row2['username'];
 		echo "<h2>$fileName, uploaded by $uploaded_by</h2>";
 		$count = 0;
 		while($row = mysql_fetch_array($result))
 		{
 			$commented_by   = $row['username'];
-			$date_commented = $row['date_commented'];
+			$date_commented = $strtDate = date("d/m/y H:i",$row['date_commented']);
 			$comment        = $row['comment'];
 			if(oddOrEven($count)==1) echo '<tr class="alt">';
 			elseif(oddOrEven($count)) echo '<tr>';
@@ -74,11 +80,6 @@ _END;
 		echo '</table></center>';
 		
 	}
-	elseif(mysql_num_rows($result3)==0)
-	{
-		header('Location: ?page=404');
-		die();
-	}
 	elseif($numrows == 0 && isset($_SESSION['dbusername']))
 	{
 		echo "<div id='error'>There is no comments for this file! Why dont ya' add one?</div>";
@@ -87,16 +88,16 @@ _END;
 	{
 		echo "<div id='error'>There is no comments for this file!</div>";
 	}
-	else
-	{
-		$sql3 = "SELECT * FROM files WHERE rowID=$row2[file_row]";
-		$result3 = mysql_query($sq3);
-		if(mysql_num_rows($result3)==0)
-		{
-			header('Location: ?page=404');
-			die();
-		}
-	}
+	// else
+	// {
+	// 	$sql3 = "SELECT * FROM files WHERE rowID=$row2[file_row]";
+	// 	$result3 = mysql_query($sq3);
+	// 	if(mysql_num_rows($result3)==0)
+	// 	{
+	// 		header('Location: ?page=404');
+	// 		die();
+	// 	}
+	// }
 }
 
 if (isset($_SESSION['dbusername']))

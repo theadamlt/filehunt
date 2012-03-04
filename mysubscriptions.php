@@ -5,11 +5,10 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	header('Location: index.php?page=mysubscribtions');
 	die();
 }
-mysql_selector();
+
 
 if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 {
-
 	$userID = $_SESSION['dbuserid'];
 	$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username FROM subs s, users u WHERE s.subscriber=$userID AND s.subscribed=u.rowID";
 	$result = mysql_query($sql);
@@ -38,14 +37,11 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 	}
 	else echo '<div id="error">You have no subscribers</div>';
 
-
-
-	/*$userID = $_SESSION['dbuserid'];
-	$sql = "SELECT * FROM subs WHERE subscriber=$userID";
+	
+	$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID FROM subs s, users u, files f WHERE s.subscriber=$userID2 AND s.subscribed=u.rowID AND f.uploaded_date > u.last_sub_check AND f.uploaded_by=u.rowID";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
-		$sql2 = "SELECT * FROM files WHERE "; //Make subscribtions function
         echo '<h1>The files</h1>
         	<center><table id="table">
         	<th>Filename</th>
@@ -56,9 +52,23 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
         $count = 0;
 		while($row = mysql_fetch_array($result))
 		{
+
+			$sql2     = "SELECT * FROM comments WHERE fileID='".$row['f_rowID']."'";
+			$result2  = mysql_query($sql2,$con);
+			$numrows2 = mysql_num_rows($result2);
+	        if($numrows2 == 1) $comment_string = 'comment';
+            else $comment_string = 'comments'; 
+
+
 			if(oddOrEven($count)==1) echo "<tr class='alt'>";
             elseif(oddOreven($count)==0) echo '<tr>';
-            echo '<td>'.$row.'</td>'
+            echo '<td><a href=download.php?file=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td>';
+            echo '<td><a href=?page=profile&userID='.$row['f_uploaded_by'].'>'.$row['u_username'].'</a></td>';
+            echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
+            if($row['f_size'] >= 1024) echo '<td>'.($row["size"]/1024).' KB</td>';
+	        elseif($row['f_size'] >= 1048576) echo '<td>'.($row['size']/10485776).' MB</td>';
+	        else echo '<td>'.$row['f_size'].' bytes</td>';
+            echo '<td><a href=?page=comments&fileID='.$row['f_rowID'].'>'.$numrows2.' '.$comment_string.'</a></td>';
             echo '</tr>';
             ++$count;
 		}
@@ -67,7 +77,16 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 	else
 	{
 		echo '<div id="error">You have no subscribtions</div>';
-	}*/
+	}
+
+	$checkDate = date("d/m/y H:i", time());
+	$datestrto = strtotime($checkDate);
+	$curUserID = $_SESSION['dbuserid'];
+	$curUsername = $_SESSION['dbusername'];
+	$curUserPassword = $_SESSION['dbpassword'];
+	$sql3 = "UPDATE users SET last_sub_check='$datestrto' WHERE rowID=$curUserID AND username='$curUsername' AND password='$curUserPassword' LIMIT 1";
+	$result3 = mysql_query($sql3);
+
 }
 else
 {

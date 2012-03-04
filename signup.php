@@ -5,7 +5,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=signup');
 		die();
 	}
-mysql_selector();
+
 
 if (isset($_SESSION['dbusername']))
 {

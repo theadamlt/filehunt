@@ -5,7 +5,6 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=myprofile');
 		die();
 	}
-mysql_selector();
 
 if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 {
@@ -62,10 +61,10 @@ else
 	        if(oddOrEven($count)==1) echo '<tr class="alt">';
 	        elseif(oddOrEven($count)==0) echo '<tr>';
 	        echo '<td><a href=download.php?file=' . $row['rowID'] . '>' . $row['file'] . '</a></td>';
-	        echo '<td>' . $row['uploaded_date'] . '</td>';  
-	        if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).'kB</td>';
-	        elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).'mB</td>';
-	        else echo '<td>'.$row['size'].'bytes</td>';
+	        echo '<td>' . date("d/m/y H:i",$row['uploaded_date']) . '</td>';  
+	        if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).' KB</td>';
+	        elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).' MB</td>';
+	        else echo '<td>'.$row['size'].' bytes</td>';
 	        echo '<td>'.$row['times_downloaded'].'</td>';
 	        echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>";
 			$rowidfile = $row['rowID'];

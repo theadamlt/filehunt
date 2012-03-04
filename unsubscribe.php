@@ -5,7 +5,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	header('Location: index.php?page=404');
 	die();
 }
-mysql_selector();
+
 
 if(isset($_SESSION['dbuserid']) && isset($_POST['unsubscribeTo']) && $_SESSION['dbuserid'] != $_POST['unsubscribeTo'])
 {

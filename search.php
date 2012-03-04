@@ -5,7 +5,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
         header('Location: index.php?page=search');
         die();
     }
-mysql_selector();
+
 
 if (!isset($_POST['search']))
 {
@@ -97,7 +97,7 @@ if ((isset($_POST['select'])))
             elseif(oddOreven($count)==0) echo '<tr>';
             echo '<td><a href=download.php?file=' . $row['file_row'] . '>' . $row['file'] . '</a></td>';
             echo '<td><a href=?page=profile&userID=' . $row["user_row"] . '>' . $row["username"] . '</a></td>';
-            echo '<td>' . $row['uploaded_date'] . '</td>';  
+            echo '<td>' .date("d/m/y H:i",$row['uploaded_date']).'</td>';  
             if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).'KB</td>';
             elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).'MB</td>';
             else echo '<td>'.$row['size'].'bytes</td>';

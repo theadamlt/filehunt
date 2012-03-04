@@ -5,7 +5,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=admin');
 		die();
 	}
-mysql_selector();
+subscribeTo
 if ((isset($_SESSION['dbusername']))&&(isset($_SESSION['dbpassword'])))
 {
 	if(isset($_GET['deleteSuccess'])) echo '<div id="success">The file was successfully deleted</div>';
@@ -87,11 +87,11 @@ _END;
 			//uploaded by
 			echo '<td><a href="?page=profile&userID='.$row['u_rowID'].'">' . $row['u_username'].'</a></td>';
 			//uploaded date
-			echo '<td>'.$row['f_uploaded_date'].'</td>';
+			echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
 			//size
-			if($row['f_size'] >= 1024) echo '<td>'.($row["f_size"]/1024).'kB</td>';
-			elseif($row['f_size'] >= 1048576) echo '<td>'.($row['f_size']/10485776).'mB</td>';
-			else echo '<td>'.$row['f_size'].'bytes</td>';
+			if($row['f_size'] >= 1024) echo '<td>'.($row["f_size"]/1024).' KB</td>';
+			elseif($row['f_size'] >= 1048576) echo '<td>'.($row['f_size']/10485776).'MB</td>';
+			else echo '<td>'.$row['f_size'].' bytes</td>';
 			//times downloaded
 			echo '<td>'.$row['f_times_downloaded'].'</td>';
 			//Comments
@@ -103,7 +103,7 @@ _END;
 			$row3 = mysql_fetch_array($result3);
 			echo '<td><a href="?page=profile&userID='.$row['a_report_by'].'">'.$row3["username"].'</a></td>';
 			//date reported
-			echo '<td>'.$row["a_date_reported"].'</td>';
+			echo '<td>'.date("d/m/y H:i",$row['a_date_reported']).'</td>';
 			//Delete
 			$rowidfile = $row['f_rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.');';
