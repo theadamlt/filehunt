@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Filehunt beta 0.5</title>
+	<title>Filehunt beta 0.5 <?echo $_SERVER['HTTP_HOST'];?></title>
 <link rel="icon" type="image/png" href="img/favicon.png" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <script language="javascript" type="text/javascript" src="js/main.js"></script>
@@ -38,7 +38,10 @@ session_start();
 			echo '<a href="?page=search">Home</a></li>';
 			if($_GET['page'] == 'upload') echo '<li class=current_page_item>';
 			else echo '<li>';
-			echo '<a href="?page=upload">Upload</a></li></ul></div>';
+			echo '<a href="?page=upload">Upload</a></li>';
+			//Miniform
+			// echo '<li><form action="?page=search" method="post"><span class="minisearch"><input type="text" name="search"></span><input type="hidden" name="select" value="all"><input type="submit" value="Search"></form></li>';
+			echo '</ul></div>';
 		}
 
 	echo '
