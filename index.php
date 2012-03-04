@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Filehunt beta 0.5 <?echo $_SERVER['HTTP_HOST'];?></title>
+	<title>Filehunt beta <?echo $_SERVER['HTTP_HOST'];?></title>
 <link rel="icon" type="image/png" href="img/favicon.png" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <script language="javascript" type="text/javascript" src="js/main.js"></script>
