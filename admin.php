@@ -66,7 +66,6 @@ _END;
 		<th>Upload date</th>
 		<th>Filesize</th>
 		<th>Times downloaded</th>
-		<th>Comments</th>
 		<th>Report by</th>
 		<th>Reported date</th>
 		<th>Delete</th>";
@@ -94,8 +93,6 @@ _END;
 			else echo '<td>'.$row['f_size'].' bytes</td>';
 			//times downloaded
 			echo '<td>'.$row['f_times_downloaded'].'</td>';
-			//Comments
-			echo "<td><a href='?page=comments&fileID=".$row['f_rowID']."'>$numrows2 $comment_string</a></td>";
 			//report by
 			$a_report_by = $row['a_report_by'];
 			$sql3 = "SELECT * FROM users WHERE rowID=$a_report_by LIMIT 1";

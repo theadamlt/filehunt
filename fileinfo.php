@@ -115,6 +115,7 @@ _END;
 			$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, comment) VALUES(NULL, $get_fileid, $session_userid, '$datestrto', '$post_comment')";
 			$result = mysql_query($sql,$con);
 		}
+		header('Location: '.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
 	}
 }
 else

@@ -47,7 +47,6 @@ else
 		<th>Upload date</th>
 		<th>Filesize</th>
 		<th>Times downloaded</th>
-		<th>Comments</th>
 		<th>Delete file</th>";
 		while($row = mysql_fetch_array($result))
 		{
@@ -66,7 +65,6 @@ else
 	        elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).' MB</td>';
 	        else echo '<td>'.$row['size'].' bytes</td>';
 	        echo '<td>'.$row['times_downloaded'].'</td>';
-	        echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>";
 			$rowidfile = $row['rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.',"myprofile");';
 	        echo "<td><a title='Delete file' onClick=deleteOwnFile('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
