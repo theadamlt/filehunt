@@ -12,7 +12,7 @@ if(isset($_GET['fileID']))
 	}
 	$row = mysql_fetch_array($result);
 	echo '<h1>'.$row['f_file'].'</h1><br />';
-	echo '<a href="download.php?file='.$row['f_rowID'].'">Download file</a><br><br>';
+	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p><br>';
 	
 	echo '<center><table id="table">
 	<th>Uploaded by</th>
@@ -123,6 +123,5 @@ else
 	header('Location: ?page=404');
 	die();
 }
-
 
 ?>
