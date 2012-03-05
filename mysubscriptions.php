@@ -79,13 +79,14 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 		echo '<div id="error">You have no subscribtions</div>';
 	}
 
-	$checkDate = date("d/m/y H:i", time());
+	//Update last login. The piece needs to be moved to an other place
+	/*$checkDate = date("d/m/y H:i", time());
 	$datestrto = strtotime($checkDate);
 	$curUserID = $_SESSION['dbuserid'];
 	$curUsername = $_SESSION['dbusername'];
 	$curUserPassword = $_SESSION['dbpassword'];
 	$sql3 = "UPDATE users SET last_sub_check='$datestrto' WHERE rowID=$curUserID AND username='$curUsername' AND password='$curUserPassword' LIMIT 1";
-	$result3 = mysql_query($sql3);
+	$result3 = mysql_query($sql3); */
 
 }
 else
