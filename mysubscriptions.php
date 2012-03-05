@@ -62,11 +62,11 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 
 			if(oddOrEven($count)==1) echo "<tr class='alt'>";
             elseif(oddOreven($count)==0) echo '<tr>';
-            echo '<td><a href=download.php?file=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td>';
+            echo '<td><a href=?page=fileinfo&fileID=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td>';
             echo '<td><a href=?page=profile&userID='.$row['f_uploaded_by'].'>'.$row['u_username'].'</a></td>';
             echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
-            if($row['f_size'] >= 1024) echo '<td>'.($row["size"]/1024).' KB</td>';
-	        elseif($row['f_size'] >= 1048576) echo '<td>'.($row['size']/10485776).' MB</td>';
+            if($row['f_size'] >= 1024) echo '<td>'.($row['f_size']/1024).' KB</td>';
+	        elseif($row['f_size'] >= 1048576) echo '<td>'.($row['f_size']/10485776).' MB</td>';
 	        else echo '<td>'.$row['f_size'].' bytes</td>';
             echo '<td><a href=?page=comments&fileID='.$row['f_rowID'].'>'.$numrows2.' '.$comment_string.'</a></td>';
             echo '</tr>';

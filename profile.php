@@ -102,7 +102,7 @@ if(isset($_GET['userID']))
 					if(oddOrEven($count)==1) echo '<tr class="alt">';
 					elseif(oddOrEven($count)==0) echo '<tr>';
 					echo '
-						<td><a href="download.php?file='.$row['rowID'].'">'.$row["file"].'</a></td>
+						<td><a href="?page=fileinfo&fileID='.$row['rowID'].'">'.$row["file"].'</a></td>
 						<td>'.date("d/m/y H:i",$row['uploaded_date']).'</td>';
 					echo "<td><a href='?page=comments&fileID=".$row['rowID']."'>$numrows2 $comment_string</a></td>";
 					if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).' KB</td>';
@@ -111,6 +111,7 @@ if(isset($_GET['userID']))
 					$string1   = 'onClick=areYouSure2('.$row['rowID'].');';
 					echo "<td><a onClick=$string1 href='#'".$row['rowID']."' title='Report abuse'><img src='img/abuse.png'></a></td>";
 					echo '</tr>';
+					++$count;
 
 				}
 			}

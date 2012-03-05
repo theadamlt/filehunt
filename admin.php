@@ -83,7 +83,7 @@ _END;
 			elseif(oddOrEven($count)==0) echo '<tr>';
 
 			//Filename
-			echo '<td><a href=download.php?file=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td>';
+			echo '<td><a href=?page=fileinfo&fileID=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td>';
 			//uploaded by
 			echo '<td><a href="?page=profile&userID='.$row['u_rowID'].'">' . $row['u_username'].'</a></td>';
 			//uploaded date
