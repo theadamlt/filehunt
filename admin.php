@@ -5,7 +5,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=admin');
 		die();
 	}
-subscribeTo
+
 if ((isset($_SESSION['dbusername']))&&(isset($_SESSION['dbpassword'])))
 {
 	if(isset($_GET['deleteSuccess'])) echo '<div id="success">The file was successfully deleted</div>';

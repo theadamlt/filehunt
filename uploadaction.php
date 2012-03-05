@@ -33,7 +33,7 @@ if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 
 	if (mysql_query($sql,$con))
 	{
-		$sql = "SELECT * FROM files WHERE file='$fileName' AND size=$fileSize AND uploaded_date='$date' LIMIT 1";
+		$sql = "SELECT * FROM files WHERE file='$fileName' AND size=$fileSize AND uploaded_date='$datestrto' LIMIT 1";
 		$result = mysql_query($sql,$con);
 		$row = mysql_fetch_array($result);
 		$fileRow = $row['rowID'];

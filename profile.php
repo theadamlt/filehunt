@@ -48,28 +48,31 @@ if(isset($_GET['userID']))
 			if($row['admin'] == '1') echo  'Admin';
 			echo '</center>';
 
-			//Is logged in user a subscriber?
-			$sql3 = "SELECT * FROM subs WHERE subscriber=$_SESSION[dbuserid] AND subscribed=$_GET[userID]";
-			$result3 = mysql_query($sql3);
-			if(mysql_num_rows($result3) == 1)
+			if(isset($_SESSION['dbuserid']))
 			{
-				echo "
-				<form action='?page=unsubscribe' method='post'>
-					<input type='hidden' name='unsubscribeTo' value='$profile' />
-					<p class='submit'>
-						<input type='submit' value='Unsubscribe' />
-					</p>
-				</form>";
-			}
-			else
-			{
-				echo "
-				<form action='?page=subscribe' method='post'>
-					<input type='hidden' name='subscribeTo' value='$profile' />
-					<p class='submit'>
-						<input type='submit' value='Subscribe' />
-					</p>
-				</form>";
+				//Is logged in user a subscriber?
+				$sql3 = "SELECT * FROM subs WHERE subscriber=$_SESSION[dbuserid] AND subscribed=$_GET[userID]";
+				$result3 = mysql_query($sql3);
+				if(mysql_num_rows($result3) == 1)
+				{
+					echo "
+					<form action='?page=unsubscribe' method='post'>
+						<input type='hidden' name='unsubscribeTo' value='$profile' />
+						<p class='submit'>
+							<input type='submit' value='Unsubscribe' />
+						</p>
+					</form>";
+				}
+				else
+				{
+					echo "
+					<form action='?page=subscribe' method='post'>
+						<input type='hidden' name='subscribeTo' value='$profile' />
+						<p class='submit'>
+							<input type='submit' value='Subscribe' />
+						</p>
+					</form>";
+				}
 			}
 
 			//Find uploads
