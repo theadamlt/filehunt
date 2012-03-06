@@ -1,17 +1,3 @@
-web1:
-name: filehunt            #component settings
-  shared_writable_dirs:
-    - var/cache
-    - var/sessions
-  php_extensions:
-    - mysql
-    - gd
-    - eaccelerator
-     
-db1: #component type & number 
-  name: filehunt            #component settings
-  type: mysql
-  
 ################################################
 ## GENERAL SETTINGS
 ################################################
