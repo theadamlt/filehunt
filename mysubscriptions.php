@@ -35,7 +35,7 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 		}
 		echo '</details><br />';
 	}
-	else echo '<div id="error">You have no subscribtions</div>';
+	else echo '<div id="error">You have no subscribers</div>';
 
 	
 	$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID FROM subs s, users u, files f WHERE s.subscriber=$userID2 AND s.subscribed=u.rowID AND f.uploaded_date > u.last_sub_check AND f.uploaded_by=u.rowID";
