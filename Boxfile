@@ -13,7 +13,7 @@
   ################################################
   ## PHP SPECIFIC SETTINGS
   ################################################
-  php_version: 5.4
+  php_version: 5.3.8
   php_extensions: [mysqli, curl, gd, mbstring]
   php_date_timezone: Europe/London
   php_max_execution_time: 30
