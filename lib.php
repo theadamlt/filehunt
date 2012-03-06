@@ -108,5 +108,12 @@ function mysql_selector()
 	else if($host == pagoda) mysql_con('tunnel.pagodabox.com:3306', 'luba', '9pctB2Vg', 'filehunt');
 	else localhost_con('filehunt');
 }
+
+function getBrowser()
+    {
+	    $u_agent = $_SERVER['HTTP_USER_AGENT'];
+	    $browser = get_browser(null, true);
+		return trim($browser['browser'], ' ');  
+	}
 ?>
 

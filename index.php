@@ -70,6 +70,17 @@ session_start();
 	echo '
 	<div id="logo">
 	<a href="?page=search"><img src="img/logo.png" /></a>';
+	if(getBrowser() != 'Chrome' && !isset($_COOKIE['rmNotice']))
+		{
+	 		echo '<div id="error">This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site</div>';
+	 		echo '<form action=?page=search method=post><input type="hidden" name="rmNotice" value="true"><input type="submit" value="Remove notice"></form>';
+			//echo '<div id="notice"><div id="error">This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site <a title="Remove notice" href="#" onclick="removeNotice()"><img src="img/delete.png"></a></div></div>';
+	}
+	if(isset($_POST['rmNotice']))
+	{
+		setcookie("rmNotice", 'false', time()+604800);
+		header('Location: '.$_SERVER['PHP_SELF']);
+	}
 	if (isset($_GET['uploadSucces']))
 	{
 		$host = $_SERVER['HTTP_HOST'];
