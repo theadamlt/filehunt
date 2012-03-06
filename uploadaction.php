@@ -27,9 +27,10 @@ if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 	$date = date("d/m/y H:i", time());
 	$datestrto = strtotime($date);
 	$user = $_SESSION['dbuserid'];
+	$description = mysql_enteries_fix_string($_POST['description']);
 
-	$sql = "INSERT INTO files (rowID, file, mimetype, data, uploaded_by, uploaded_date, size, times_downloaded) 
-	VALUES (NULL, '$fileName', '$fileType', '$content', '$user', '$datestrto', $fileSize, 0);";
+	$sql = "INSERT INTO files (rowID, file, mimetype, data, uploaded_by, uploaded_date, size, times_downloaded, description) 
+	VALUES (NULL, '$fileName', '$fileType', '$content', '$user', '$datestrto', $fileSize, 0, '$description')";
 
 	if (mysql_query($sql,$con))
 	{

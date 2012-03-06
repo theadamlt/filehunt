@@ -27,18 +27,18 @@ if (isset($_GET['uploadError']))
 			echo '<div id="error">There was an error uploading your file</div>';
 			break;
 	}
-	echo '
-	<center>
-	<form class="form" enctype="multipart/form-data" action="uploadaction.php" method="POST">
-	<input type="hidden" name="MAX_FILE_SIZE" value="31457280" />
-	<p class="uploadfile">
-		<input name="uploadedfile" type="file" />
-	</p>
-	<p class="submit">
-		<input type="hidden" name="upload" value="start" />
-		<input type="submit" value="Upload File" />
-	</p>
-	</form></center>';
+	// echo '
+	// <center>
+	// <form class="form" enctype="multipart/form-data" action="uploadaction.php" method="POST">
+	// <input type="hidden" name="MAX_FILE_SIZE" value="31457280" />
+	// <p class="uploadfile">
+	// 	<input name="uploadedfile" type="file" />
+	// </p>
+	// <p class="submit">
+	// 	<input type="hidden" name="upload" value="start" />
+	// 	<input type="submit" value="Upload File" />
+	// </p>
+	// </form></center>';
 }
 elseif ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 {
@@ -47,17 +47,34 @@ elseif ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 }
 else
 {
-	echo '
-	<center>
-	<form class="form" enctype="multipart/form-data" action="uploadaction.php" method="POST">
-	<input type="hidden" name="MAX_FILE_SIZE" value="31457280" />
-	<p class="uploadfile">
-		<input name="uploadedfile" type="file" />
-	</p>
-	<p class="submit">
-		<input type="hidden" name="upload" value="start" />
-		<input type="submit" value="Upload File" />
-	</p>
-	</form></center>';
+	// echo '
+	// <center>
+	// <form class="form" enctype="multipart/form-data" action="uploadaction.php" method="POST">
+	// <input type="hidden" name="MAX_FILE_SIZE" value="31457280" />
+	// <p class="uploadfile">
+	// 	<input name="uploadedfile" type="file" />
+	// </p>
+	// <p class="submit">
+	// 	<input type="hidden" name="upload" value="start" />
+	// 	<input type="submit" value="Upload File" />
+	// </p>
+	// </form></center>';
 }
 ?>
+<center>
+	<form class="form" enctype="multipart/form-data" action="uploadaction.php" method="POST">
+		<input type="hidden" name="MAX_FILE_SIZE" value="31457280" />
+		<p class="uploadfile">
+			<input name="uploadedfile" type="file" />
+		</p>
+		<p class="message">
+			<label for="description">Description, max 255 characters</label><br />
+			<textarea maxlength="255" onKeyPress='return calChars(this);' onpaste='return calChars(this);' onkeydown="plusCount(this)" name="description" cols="40" rows="6" placeholder="Please write a description of the file" id="description" ></textarea>
+		<p id="count">255 characters left</p>
+		</p>
+		<p class="submit">
+			<input type="hidden" name="upload" value="start" />
+			<input type="submit" value="Upload File" />
+		</p>
+	</form>
+</center>

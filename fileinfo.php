@@ -10,7 +10,7 @@ if(isset($_GET['fileID']))
 	if(isset($_GET['reportSuccess']) && $_GET['reportSuccess'] == 'true') echo '<div id="success">You have succesfully reported the file as abuse. Thank you!</div>';
 	$fileID = $_GET['fileID'];
 
-	$sql = "SELECT f.rowID AS f_rowID, f.file AS f_file, f.uploaded_by AS f_uploaded_by, f.uploaded_date AS f_uploaded_date, f.size AS f_size, f.times_downloaded AS f_times_downloaded, f.mimetype AS f_mimetype, u.rowID AS u_rowID, u.username AS u_username FROM users u, files f WHERE f.uploaded_by=u.rowID AND f.rowID=$fileID LIMIT 1";
+	$sql = "SELECT f.rowID AS f_rowID, f.file AS f_file, f.uploaded_by AS f_uploaded_by, f.uploaded_date AS f_uploaded_date, f.size AS f_size, f.times_downloaded AS f_times_downloaded, f.mimetype AS f_mimetype, f.description AS f_description, u.rowID AS u_rowID, u.username AS u_username FROM users u, files f WHERE f.uploaded_by=u.rowID AND f.rowID=$fileID LIMIT 1";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) == 0)
 	{
@@ -42,6 +42,11 @@ if(isset($_GET['fileID']))
 	echo '<td>'.$row['f_mimetype'].'</td>';
 	echo '</tr>';
 	echo '</table></center>';
+
+	//Description
+	echo '<h2>Description</h2>';
+	
+	echo $row['f_description'];
 
 	if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '<br /><img src="printimage.php?id='.$fileID.'" />';
 

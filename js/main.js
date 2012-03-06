@@ -44,3 +44,21 @@ function removeNotice()
 	var noticeChild = document.getElementById('error');
 	notice.removeChild(noticeChild);
 }
+
+function calChars(field)
+{
+	var element = document.getElementById('count');
+	var left = 255-field.value.length;
+    element.innerHTML = left+' characters left';
+}
+
+function plusCount(field)
+{
+	if(event.keyCode == '8' || event.keyCode == '46')
+	{
+		var element = document.getElementById('count');
+		var left = field.value.length;
+		var result = 255-left+1;
+	    element.innerHTML = result+' characters left';
+	}
+}

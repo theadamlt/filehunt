@@ -84,12 +84,12 @@ session_start();
 	{
 		$host = $_SERVER['HTTP_HOST'];
 		$id = $_GET['id'];
-		$downloadLink = "download.php?file=$id";
+		$downloadLink = "?page=fileinfo&fileID=$id";
 		if($host == 'filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
 		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
 		else $url = $host.'/'.$downloadLink;
 		echo '<div id="success">Upload succeeded</div>';
-		echo "<p>Your download link is: <a href='http://$url'>http://$url</a><br />";
+		echo "<p>Your file link is: <a href='http://$url'>http://$url</a><br />";
 		echo '<div id="socailshare">';
 		facebookShare($url);
 		twitterShare($url);
