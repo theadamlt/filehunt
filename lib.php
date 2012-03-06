@@ -109,11 +109,30 @@ function mysql_selector()
 	else localhost_con('filehunt');
 }
 
+// function getBrowser()
+//     {
+// 	    $u_agent = $_SERVER['HTTP_USER_AGENT'];
+// 	    $browser = get_browser(null, true);
+// 		return trim($browser['browser'], ' ');  
+// 	}
+
 function getBrowser()
-    {
-	    $u_agent = $_SERVER['HTTP_USER_AGENT'];
-	    $browser = get_browser(null, true);
-		return trim($browser['browser'], ' ');  
-	}
+{
+	if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE) 
+		$browser = 'Internet explorer';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE) 
+		$browser = 'Firefox';
+		
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE) 
+		$browser = 'Chrome';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
+		$browser = 'Opera';
+	else
+		$browser = 'Undefined';
+
+	return $browser;
+}
 ?>
 
