@@ -20,7 +20,7 @@ if(isset($_GET['fileID']))
 	echo '<h1>'.$row['f_file'].'</h1>';
 	//Has the file been reported as abuse?
 	$sql3    = "SELECT * FROM abuse WHERE fileID=$fileID";
-	$result3 = mysql_query($sql);
+	$result3 = mysql_query($sql3);
 	if(mysql_num_rows($result3) != 0 && !isset($_GET['reportSuccess'])) echo '<div id="error">Be careful! This file has been reported at abuse! We are on the case. You can still download the file, but: BE CAREFUL!<br>';
 	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p></div>';
 
