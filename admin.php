@@ -6,6 +6,8 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		die();
 	}
 
+if(isset($_GET['deleteReport']) && $_GET['deleteReport'] == 'true') echo '<div id="success">The report has successfylly been removed</div>';
+
 if ((isset($_SESSION['dbusername']))&&(isset($_SESSION['dbpassword'])))
 {
 	if(isset($_GET['deleteSuccess'])) echo '<div id="success">The file was successfully deleted</div>';
@@ -68,7 +70,8 @@ _END;
 		<th>Times downloaded</th>
 		<th>Report by</th>
 		<th>Reported date</th>
-		<th>Delete</th>";
+		<th>Delete file</th>
+		<th>Delete report</th>";
 		$count = 0;
 		while($row =mysql_fetch_array($result))
 		{			
@@ -105,6 +108,7 @@ _END;
 			$rowidfile = $row['f_rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.');';
 			echo "<td><a title='Delete file' onClick=adminDeleteFile('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
+			echo "<td><a title='Delete report' onClick='deleteReport(\"$rowidfile\")' href='#'><img src='img/delete.png'></td>";
 			echo "</tr>";
 			 ++$count;
 			    

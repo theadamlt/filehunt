@@ -15,9 +15,7 @@ if(isset($_SESSION['dbuserid']) && isset($_GET['reportedFile']))
 
 	$sql = "INSERT INTO abuse(rowID, fileID, report_by, date_reported) VALUES(NULL, '$fileID', '$reportBy', '$datestrto')";
 	$result = mysql_query($sql,$con);
-	/*echo '<script>
-		history.back();
-	</script>';*/ header('Location: ?page=search');
+	header('Location: ?page=fileinfo&fileID='.$fileID.'&reportSuccess=true');
 }
 else header('Location: ?page=search');
 ?>

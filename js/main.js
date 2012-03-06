@@ -14,3 +14,8 @@ function adminDeleteFile(arg)
 	var sure = confirm("Are you sure that you want to delete that file?");
 	if(sure == true) window.location.href="?page=delete_file_admin&fileID="+arg;
 }
+function deleteReport(file)
+{
+	var sure = confirm("Are you sure that you want to delete the report?");
+	if(sure == true) window.location.href="?page=delete_report&file="+file;
+}

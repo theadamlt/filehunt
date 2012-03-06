@@ -1,6 +1,12 @@
 <?php
+if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
+	{
+		header('Location: index.php?page=fileinfo');
+		die();
+	}
 if(isset($_GET['fileID']))
 {
+	if(isset($_GET['reportSuccess']) && $_GET['reportSuccess'] == 'true') echo '<div id="success">You have succesfully reported the file as abuse. Thank you!</div>';
 	$fileID = $_GET['fileID'];
 
 	$sql = "SELECT f.rowID AS f_rowID, f.file AS f_file, f.uploaded_by AS f_uploaded_by, f.uploaded_date AS f_uploaded_date, f.size AS f_size, f.times_downloaded AS f_times_downloaded, f.mimetype AS f_mimetype, u.rowID AS u_rowID, u.username AS u_username FROM users u, files f WHERE f.uploaded_by=u.rowID AND f.rowID=$fileID LIMIT 1";
@@ -11,9 +17,16 @@ if(isset($_GET['fileID']))
 		die();
 	}
 	$row = mysql_fetch_array($result);
-	echo '<h1>'.$row['f_file'].'</h1><br />';
-	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p><br>';
-	
+	echo '<h1>'.$row['f_file'].'</h1>';
+	//Has the file been reported as abuse?
+	$sql3    = "SELECT * FROM abuse WHERE fileID=$fileID";
+	$result3 = mysql_query($sql);
+	if(mysql_num_rows($result3) != 0 && !isset($_GET['reportSuccess'])) echo '<div id="error">Be careful! This file has been reported at abuse! We are on the case. You can still download the file, but: BE CAREFUL!<br>';
+	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p></div>';
+
+	$string1   = 'onClick=reportFile('.$row['f_rowID'].');';
+    echo "<p class='submit'><input type='button' onClick=$string1 href='#'".$row['f_rowID']."' value='Report abuse' ></p>";
+
 	echo '<center><table id="table">
 	<th>Uploaded by</th>
 	<th>Size</th>

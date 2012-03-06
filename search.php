@@ -78,10 +78,7 @@ if ((isset($_POST['select'])))
     {
         echo "<center><table id='table'>"; //Start table
         echo '<th>Filename</th>
-			<th>Uploaded by</th>
-			<th>Upload date</th>
-            <th>Filesize</th>
-            <th>Report abuse</th>';
+			<th>Uploaded by</th>';
         $count = 0;
         while ($row = mysql_fetch_array($result))
         {
@@ -96,12 +93,6 @@ if ((isset($_POST['select'])))
             elseif(oddOreven($count)==0) echo '<tr>';
             echo '<td><a href=?page=fileinfo&fileID=' . $row['file_row'] . '>' . $row['file'] . '</a></td>';
             echo '<td><a href=?page=profile&userID=' . $row["user_row"] . '>' . $row["username"] . '</a></td>';
-            echo '<td>' .date("d/m/y H:i",$row['uploaded_date']).'</td>';  
-            if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).'KB</td>';
-            elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).'MB</td>';
-            else echo '<td>'.$row['size'].'bytes</td>';
-            $string1   = 'onClick=reportFile('.$row['file_row'].');';
-            echo "<td><a onClick=$string1 href='#'".$row['file_row']."' title='Report abuse'><img src='img/abuse.png'></a></td>";
             echo "</tr>";
             ++$count;
         }
