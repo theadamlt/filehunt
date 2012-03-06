@@ -4,6 +4,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=fileinfo');
 		die();
 	}
+
 if(isset($_GET['fileID']))
 {
 	if(isset($_GET['reportSuccess']) && $_GET['reportSuccess'] == 'true') echo '<div id="success">You have succesfully reported the file as abuse. Thank you!</div>';
@@ -25,7 +26,7 @@ if(isset($_GET['fileID']))
 	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p></div>';
 
 	$string1   = 'onClick=reportFile('.$row['f_rowID'].');';
-    echo "<p class='submit'><input type='button' onClick=$string1 href='#'".$row['f_rowID']."' value='Report abuse' ></p>";
+    echo "<p class='submit'><input type='button' onClick='$string1' href='#' value='Report abuse' ></p>";
 
 	echo '<center><table id="table">
 	<th>Uploaded by</th>

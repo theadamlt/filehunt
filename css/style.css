@@ -1,6 +1,7 @@
 body
 { 
 font:16px/150% Verdana, Tahoma, sans-serif;
+text-align:center;
 }
 /*Basic divs for user messages */
 #login
