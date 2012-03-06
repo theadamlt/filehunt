@@ -53,8 +53,8 @@ session_start();
 			if($_GET['page'] == 'myprofile') echo'<li class=current_page_item>';
 			else echo '<li>';
 			echo '<a href="?page=myprofile">My profile</a></li>';
-			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item">';
-			else echo '<li>';
+			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item" id="sub">';
+			else echo '<li id="sub">';
 			echo '<a href="?page=mysubscriptions">My subscriptions ('.mysql_num_rows($result).')</a></li>';
 			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
 			else echo '<li>';
@@ -74,7 +74,6 @@ session_start();
 		{
 	 		echo '<div id="error">This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site</div>';
 	 		echo '<form action=?page=search method=post><input type="hidden" name="rmNotice" value="true"><input type="submit" value="Remove notice"></form>';
-			//echo '<div id="notice"><div id="error">This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site <a title="Remove notice" href="#" onclick="removeNotice()"><img src="img/delete.png"></a></div></div>';
 	}
 	if(isset($_POST['rmNotice']))
 	{

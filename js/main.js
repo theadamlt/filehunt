@@ -30,6 +30,10 @@ function deleteFromSubList(file)
 		var tbody = table.getElementsByTagName('tbody')[0];
 		var tr = document.getElementById(file);
 		tbody.removeChild(tr);
+		var subNumber = document.getElementById('sub');
+		var rowLenght = document.getElementById('table').rows.length;
+		rowLenght = rowLenght-1;
+		sub.innerHTML = '<a href="?page=mysubscriptions">My subscriptions ('+rowLenght+')</a>';
 		//window.location.href="?page=remove_from_sub_list&file="+file;
 	}	
 }
