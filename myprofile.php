@@ -44,9 +44,6 @@ else
 		<h1 class='message'>Your uploaded files</h1>
 		<table id='table'>
 		<th>Filename</th>
-		<th>Upload date</th>
-		<th>Filesize</th>
-		<th>Times downloaded</th>
 		<th>Delete file</th>";
 		while($row = mysql_fetch_array($result))
 		{
@@ -60,11 +57,6 @@ else
 	        if(oddOrEven($count)==1) echo '<tr class="alt">';
 	        elseif(oddOrEven($count)==0) echo '<tr>';
 	        echo '<td><a href=?page=fileinfo&fileID=' . $row['rowID'] . '>' . $row['file'] . '</a></td>';
-	        echo '<td>' . date("d/m/y H:i",$row['uploaded_date']) . '</td>';  
-	        if($row['size'] >= 1024) echo '<td>'.($row["size"]/1024).' KB</td>';
-	        elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).' MB</td>';
-	        else echo '<td>'.$row['size'].' bytes</td>';
-	        echo '<td>'.$row['times_downloaded'].'</td>';
 			$rowidfile = $row['rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.',"myprofile");';
 	        echo "<td><a title='Delete file' onClick=deleteOwnFile('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";

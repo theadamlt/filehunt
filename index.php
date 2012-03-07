@@ -30,6 +30,23 @@ _END;
 require_once('lib.php');
 mysql_selector();
 session_start();
+
+if(
+	isset($_COOKIE['dbuserid'])
+	&& isset($_COOKIE['dbusername'])
+	&& isset($_COOKIE['dbpassword'])
+	&& isset($_COOKIE['dbuseremail'])
+	&& !isset($_SESSION['dbuserid'])
+	&& !isset($_SESSION['dbusername'])
+	&& !isset($_SESSION['dbuseremail'])
+	&& !isset($_SESSION['dbpassword']))
+	{
+		$_SESSION['dbuserid']    = $_COOKIE['dbuserid'];
+		$_SESSION['dbusername']  = $_COOKIE['dbusername'];
+		$_SESSION['dbuseremail'] = $_COOKIE['dbuseremail'];
+		$_SESSION['dbpassword']  = $_COOKIE['dbpassword'];
+	}
+
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 		{
@@ -90,6 +107,7 @@ session_start();
 		else $url = $host.'/'.$downloadLink;
 		echo '<div id="success">Upload succeeded</div>';
 		echo "<p>Your file link is: <a href='http://$url'>http://$url</a><br />";
+		echo "<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>";
 		echo '<div id="socailshare">';
 		facebookShare($url);
 		twitterShare($url);

@@ -25,6 +25,14 @@ if(isset($_GET['fileID']))
 	if(mysql_num_rows($result3) != 0 && !isset($_GET['reportSuccess'])) echo '<div id="error">Be careful! This file has been reported at abuse! We are on the case. You can still download the file, but: BE CAREFUL!<br>';
 	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p></div>';
 
+	$sql4 = "SELECT d.rowID AS d_rowID, d.downloaded_by AS d_downloaded_by, d.fileID AS d_fileID, d.downloaded_by AS d_downloaded_date, u.rowID AS u_rowID, u.username AS u_username, u.rowID AS u_rowID, f.rowID AS f_rowID
+		FROM downloads d, users u, files f
+		WHERE d.fileID =$fileID
+		AND d.downloaded_by = u.rowID
+		AND d.fileID = f.rowID";
+	$result4 = mysql_query($sql4);
+	$download_numrows = mysql_num_rows($result4);
+
 	$string1   = 'onClick=reportFile('.$row['f_rowID'].');';
     echo "<p class='submit'><input type='button' onClick='$string1' href='#' value='Report abuse' ></p>";
 
@@ -32,7 +40,8 @@ if(isset($_GET['fileID']))
 	<th>Uploaded by</th>
 	<th>Size</th>
 	<th>Date uploaded</th>
-	<th>Mimetype</th>';
+	<th>Mimetype</th>
+	<th>Times downloaded</th>';
 	echo '<tr class="alt">';
 	echo '<td><a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a></td>';
 	if($row['f_size'] >= 1024) echo '<td>'.($row['f_size']/1024).' KB</td>';
@@ -40,6 +49,7 @@ if(isset($_GET['fileID']))
 	else echo '<td>'.$row['f_size'].' bytes</td>';
 	echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
 	echo '<td>'.$row['f_mimetype'].'</td>';
+	echo "<td><a href='?page=download_analyse&file=$fileID'>$download_numrows</a></td>";
 	echo '</tr>';
 	echo '</table></center>';
 

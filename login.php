@@ -28,7 +28,15 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 		$_SESSION['dbpassword'] = $row['password'];
 		$_SESSION['dbuserid']   = $row['rowID'];
 		$_SESSION['dbemail']    = $row['email'];
-	
+
+		if($_POST['remember'])
+		{
+			setcookie("dbusername", $row['username'], time()+604800);
+			setcookie("dbpassword", $row['password'], time()+604800);
+			setcookie("dbuserid", $row['rowID'], time()+604800);
+			setcookie("dbuseremail", $row['email'], time()+604800);
+		}
+
 		if(isset($_GET['attemptedSite']) && $_GET['attemptedSite']=='comments' && isset($_GET['fileID']))
 		{
 			header('Location: ?page=comments&fileID='.$_GET['fileID']);
@@ -60,8 +68,6 @@ if (isset($_GET['attemptedSite']))
 <h1 style="text-align:center;">Login</h1>
 
 <?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>' ?>
-<!-- <fieldset>
-	<legend>Login</legend> -->
 	<div id="login">
 
 		<form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>"
@@ -75,6 +81,10 @@ if (isset($_GET['attemptedSite']))
 				<input type="password" name="password" placeholder="Password" id="password" />
 				<label for="password">Password</label>
 			</p>
+			<p class="checkbox">
+				<label for="checkbox">Remember me</label>
+				<input type="checkbox" name="remember" value="true" checked id="checkbox">
+			</p>
 			<p class="submit">
 				<input type="hidden" name="start" />
 				<input type="submit" value="Login" >
@@ -82,4 +92,3 @@ if (isset($_GET['attemptedSite']))
 		</form>
 		<a href="?page=forgot_password">Forgot password?</a>
 	</div>
-<!-- </fieldset> -->

@@ -45,7 +45,7 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 		AND s.subscribed = f.uploaded_by
 		AND f.uploaded_by = s.subscribed
 		AND f.uploaded_by = u.rowID
-		AND f.uploaded_date > u.last_sub_check";
+		AND u.last_sub_check < f.uploaded_date";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -76,21 +76,12 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
             ++$count;
 		}
 		echo '</table></center>';
+		echo '<form action="?page=clear_sub_list" method="post"><input type="hidden" name="clear_list" value="true"><p class="submit"><input type="submit" value="Clear list"></p></form>';
 	}
 	else
 	{
 		echo '<div id="error">You have no unseen files</div>';
 	}
-
-	/*
-	//Update last login. The piece needs to be moved to an other place
-	$checkDate = date("d/m/y H:i", time());
-	$datestrto = strtotime($checkDate);
-	$curUserID = $_SESSION['dbuserid'];
-	$curUsername = $_SESSION['dbusername'];
-	$curUserPassword = $_SESSION['dbpassword'];
-	$sql3 = "UPDATE users SET last_sub_check='$datestrto' WHERE rowID=$curUserID AND username='$curUsername' AND password='$curUserPassword'";
-	$result3 = mysql_query($sql3);*/
 
 }
 else

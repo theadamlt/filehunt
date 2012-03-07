@@ -62,3 +62,7 @@ function plusCount(field)
 	    element.innerHTML = result+' characters left';
 	}
 }
+
+function copyToClipboard(text) {
+  window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+}
