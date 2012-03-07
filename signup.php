@@ -103,7 +103,6 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 <div id="signup">
 
 <? if (isset($_GET['signupEmpty'])) echo '<div id="error">You left somwthing empty. Try again</div>'; ?>
-
 <form class="form" action="?page=signup" method="post">
 <p class="username">
 	<input type="text" name="username" placeholder="Username" id="username" />

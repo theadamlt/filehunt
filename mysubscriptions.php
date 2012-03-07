@@ -38,7 +38,14 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 	else echo '<div id="error">You have no subscribers</div>';
 
 	
-	$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID FROM subs s, users u, files f WHERE s.subscriber=$userID2 AND s.subscribed=u.rowID AND f.uploaded_date > u.last_sub_check AND f.uploaded_by=u.rowID";
+	//$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID FROM subs s, users u, files f WHERE s.subscriber=$userID2 AND s.subscribed=u.rowID AND f.uploaded_date > u.last_sub_check AND f.uploaded_by=u.rowID";
+	$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID
+		FROM subs s, users u, files f
+		WHERE s.subscriber = $userID2
+		AND s.subscribed = f.uploaded_by
+		AND f.uploaded_by = s.subscribed
+		AND f.uploaded_by = u.rowID
+		AND f.uploaded_date > u.last_sub_check";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -75,14 +82,15 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 		echo '<div id="error">You have no unseen files</div>';
 	}
 
+	/*
 	//Update last login. The piece needs to be moved to an other place
-	/*$checkDate = date("d/m/y H:i", time());
+	$checkDate = date("d/m/y H:i", time());
 	$datestrto = strtotime($checkDate);
 	$curUserID = $_SESSION['dbuserid'];
 	$curUsername = $_SESSION['dbusername'];
 	$curUserPassword = $_SESSION['dbpassword'];
-	$sql3 = "UPDATE users SET last_sub_check='$datestrto' WHERE rowID=$curUserID AND username='$curUsername' AND password='$curUserPassword' LIMIT 1";
-	$result3 = mysql_query($sql3); */
+	$sql3 = "UPDATE users SET last_sub_check='$datestrto' WHERE rowID=$curUserID AND username='$curUsername' AND password='$curUserPassword'";
+	$result3 = mysql_query($sql3);*/
 
 }
 else

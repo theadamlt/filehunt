@@ -13,7 +13,6 @@ if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 	$tmpName  = $_FILES['uploadedfile']['tmp_name'];
 	$fileSize = $_FILES['uploadedfile']['size'];
 	$fileType = $_FILES['uploadedfile']['type'];
-	$fileType;
 	
 	$fp      = fopen($tmpName, 'r');
 	$content = fread($fp, filesize($tmpName));
@@ -27,7 +26,7 @@ if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 	$date = date("d/m/y H:i", time());
 	$datestrto = strtotime($date);
 	$user = $_SESSION['dbuserid'];
-	$description = mysql_enteries_fix_string($_POST['description']);
+	$description = mysql_enteries_fix_string(trim($_POST['description']));
 
 	$sql = "INSERT INTO files (rowID, file, mimetype, data, uploaded_by, uploaded_date, size, times_downloaded, description) 
 	VALUES (NULL, '$fileName', '$fileType', '$content', '$user', '$datestrto', $fileSize, 0, '$description')";

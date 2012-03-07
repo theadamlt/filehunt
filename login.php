@@ -60,24 +60,26 @@ if (isset($_GET['attemptedSite']))
 <h1 style="text-align:center;">Login</h1>
 
 <?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>' ?>
+<!-- <fieldset>
+	<legend>Login</legend> -->
+	<div id="login">
 
-<div id="login">
+		<form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>"
+		 method="post">
+			<p class="name">
+				<input type="text" name="username" placeholder="Username" id="username" />
+				<label for="name">Username</label> 
+			</p>
 
-<form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>"
- method="post">
-<p class="name">
-	<input type="text" name="username" placeholder="Username" id="username" />
-	<label for="name">Username</label> 
-</p>
-
-<p class="password">
-	<input type="password" name="password" placeholder="Password" id="password" />
-	<label for="password">Password</label>
-</p>
-<p class="submit">
-	<input type="hidden" name="start" />
-	<input type="submit" value="Login" >
-</p>
-</form>
-<a href="?page=forgot_password">Forgot password?</a>
-</div>
+			<p class="password">
+				<input type="password" name="password" placeholder="Password" id="password" />
+				<label for="password">Password</label>
+			</p>
+			<p class="submit">
+				<input type="hidden" name="start" />
+				<input type="submit" value="Login" >
+			</p>
+		</form>
+		<a href="?page=forgot_password">Forgot password?</a>
+	</div>
+<!-- </fieldset> -->

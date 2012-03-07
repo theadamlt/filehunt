@@ -44,9 +44,11 @@ if(isset($_GET['fileID']))
 	echo '</table></center>';
 
 	//Description
-	echo '<h2>Description</h2>';
-	
-	echo $row['f_description'];
+	if($row['f_description'] != '')
+	{
+		echo '<fieldset><legend>Description</legend>';
+		echo $row['f_description'].'</fieldset>';
+	}
 
 	if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '<br /><img src="printimage.php?id='.$fileID.'" />';
 
@@ -120,7 +122,7 @@ _END;
 		echo "<br /><div id='error'>You need to <a href='?page=login&attemptedSite=comments&fileID=$fileID_attempt'>login</a> to comment!</div>";
 	}
 
-	if(isset($_POST['comment']) && $_POST['comment']!='' && isset($_POST['submit']))
+	if(isset($_POST['comment']) && !empty($_POST['comment']) && isset($_POST['submit']))
 	{
 		$get_fileid     = $_GET['fileID'];
 		$session_userid = $_SESSION['dbuserid'];
