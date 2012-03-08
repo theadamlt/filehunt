@@ -311,11 +311,3 @@ table, th, tr, td
 	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 	height: 35px;
 }
-
-fieldset
-{
-	/*position: absolute;*/
-	text-align:center;
-	width:40%;
-	margin:auto;
-}

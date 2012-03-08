@@ -56,8 +56,8 @@ if(isset($_GET['fileID']))
 	//Description
 	if($row['f_description'] != '')
 	{
-		echo '<fieldset><legend>Description</legend>';
-		echo $row['f_description'].'</fieldset>';
+		echo '<br /><fieldset class="description"><legend>Description</legend>';
+		echo $row['f_description'].'</fieldset><br />';
 	}
 
 	if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '<br /><img src="printimage.php?id='.$fileID.'" />';
