@@ -10,7 +10,15 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 {
 	$userID = $_SESSION['dbuserid'];
-	$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username FROM subs s, users u WHERE s.subscriber=$userID AND s.subscribed=u.rowID";
+	$sql = "SELECT s.rowID AS s_rowID,
+			       s.subscriber AS s_subscriber,
+			       s.subscribed,
+			       u.rowID AS u_rowID,
+			       u.username AS u_username
+			FROM subs s,
+			     users u
+			WHERE s.subscriber=$userID
+			    AND s.subscribed=u.rowID";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -24,7 +32,15 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 	else echo '<div id="error">You have no subscriptions</div><br />';
 
 	$userID2 = $_SESSION['dbuserid'];
-	$sql2 = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username FROM subs s, users u WHERE s.subscribed=$userID2 AND s.subscriber=u.rowID";
+	$sql2 = "SELECT s.rowID AS s_rowID,
+			       s.subscriber AS s_subscriber,
+			       s.subscribed,
+			       u.rowID AS u_rowID,
+			       u.username AS u_username
+			FROM subs s,
+			     users u
+			WHERE s.subscribed=$userID2
+			    AND s.subscriber=u.rowID";
 	$result2 = mysql_query($sql2);
 	if(mysql_num_rows($result2) != 0)
 	{
@@ -39,13 +55,25 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 
 	
 	//$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID FROM subs s, users u, files f WHERE s.subscriber=$userID2 AND s.subscribed=u.rowID AND f.uploaded_date > u.last_sub_check AND f.uploaded_by=u.rowID";
-	$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID
-		FROM subs s, users u, files f
-		WHERE s.subscriber = $userID2
-		AND s.subscribed = f.uploaded_by
-		AND f.uploaded_by = s.subscribed
-		AND f.uploaded_by = u.rowID
-		AND u.last_sub_check < f.uploaded_date";
+	$sql = "SELECT s.rowID AS s_rowID,
+			       s.subscriber AS s_subscriber,
+			       s.subscribed,
+			       u.rowID AS u_rowID,
+			       u.username AS u_username,
+			       f.file AS f_file,
+			       f.uploaded_date AS f_uploaded_date,
+			       f.uploaded_by AS f_uploaded_by,
+			       f.size AS f_size,
+			       f.rowID AS f_rowID
+			FROM subs s,
+			     users u,
+			     files f
+			WHERE s.subscriber = $userID2
+
+			    AND s.subscribed = f.uploaded_by
+			    AND f.uploaded_by = s.subscribed
+			    AND f.uploaded_by = u.rowID
+			    AND u.last_sub_check < f.uploaded_date";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -59,7 +87,9 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 		while($row = mysql_fetch_array($result))
 		{
 
-			$sql2     = "SELECT * FROM comments WHERE fileID='".$row['f_rowID']."'";
+			$sql2     = "SELECT *
+						FROM comments
+						WHERE fileID='".$row['f_rowID']."'";
 			$result2  = mysql_query($sql2,$con);
 			$numrows2 = mysql_num_rows($result2);
 	        if($numrows2 == 1) $comment_string = 'comment';

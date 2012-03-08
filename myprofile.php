@@ -18,7 +18,10 @@ else
 	$session_userid   = $_SESSION['dbuserid'];
 
 
-	$sql    = "SELECT * FROM users WHERE username='$session_user' AND password='$session_password'";
+	$sql    = "SELECT *
+			FROM users
+			WHERE username='$session_user'
+			    AND password='$session_password'";
 	$result = mysql_query($sql,$con);
 	$row    = mysql_fetch_array($result);
 	$sql_username = $row['username'];
@@ -34,7 +37,9 @@ else
 				<p>Email: '.$sql_email.'</p>
 	</div>';
 
-	$sql = "SELECT * FROM files WHERE uploaded_by=$session_userid";
+	$sql = "SELECT *
+			FROM files
+			WHERE uploaded_by=$session_userid";
 	$result = mysql_query($sql,$con);
 	if(mysql_num_rows($result)!=0)
 	{
@@ -48,7 +53,9 @@ else
 		while($row = mysql_fetch_array($result))
 		{
 			$fileRow  = $row['rowID'];
-			$sql2     = "SELECT * FROM comments WHERE fileID='$fileRow'";
+			$sql2     = "SELECT *
+						FROM comments
+						WHERE fileID='$fileRow'";
 			$result2  = mysql_query($sql2,$con);
 			$numrows2 = mysql_num_rows($result2);
 	        if($numrows2 == 1) $comment_string = 'comment';

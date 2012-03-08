@@ -66,11 +66,43 @@ if ((isset($_POST['select'])))
     $search_for = mysql_enteries_fix_string($_POST['select']);
     $search = mysql_enteries_fix_string($_POST['search']);
     
-    if ($search_for == "filename") $sql = "SELECT f.size AS size, f.rowID AS file_row, u.rowID AS user_row, f.file AS file, f.uploaded_date AS uploaded_date, u.username AS username FROM files f, users u WHERE f.file='$search' AND u.rowID=f.uploaded_by";
+    if ($search_for == "filename") 
+        $sql = "SELECT f.size AS SIZE,
+                       f.rowID AS file_row,
+                       u.rowID AS user_row,
+                       f.file AS file,
+                       f.uploaded_date AS uploaded_date,
+                       u.username AS username
+                FROM files f,
+                     users u
+                WHERE f.file='$search'
+                    AND u.rowID=f.uploaded_by";
 
-    elseif ($search_for == "username") $sql = "SELECT f.size AS size, f.rowID AS file_row, u.rowID AS user_row, f.file AS file, f.uploaded_date AS uploaded_date, u.username AS username FROM files f, users u WHERE u.username='$search' AND u.rowID=f.uploaded_by";
+    elseif ($search_for == "username")
+        $sql = "SELECT f.size AS SIZE,
+                       f.rowID AS file_row,
+                       u.rowID AS user_row,
+                       f.file AS file,
+                       f.uploaded_date AS uploaded_date,
+                       u.username AS username
+                FROM files f,
+                     users u
+                WHERE u.username='$search'
+                    AND u.rowID=f.uploaded_by";
 
-    elseif($search_for == 'all') $sql = "SELECT f.size AS size, f.rowID AS file_row, u.rowID AS user_row, f.file AS file, f.uploaded_date AS uploaded_date, u.username AS username FROM files f, users u WHERE u.username='$search' AND u.rowID=f.uploaded_by OR f.file='$search' AND u.rowID=f.uploaded_by";
+    elseif($search_for == 'all')
+        $sql = "SELECT f.size AS SIZE,
+                       f.rowID AS file_row,
+                       u.rowID AS user_row,
+                       f.file AS file,
+                       f.uploaded_date AS uploaded_date,
+                       u.username AS username
+                FROM files f,
+                     users u
+                WHERE u.username='$search'
+                    AND u.rowID=f.uploaded_by
+                    OR f.file='$search'
+                    AND u.rowID=f.uploaded_by";
    
     $result = mysql_query($sql, $con);
 
@@ -83,7 +115,9 @@ if ((isset($_POST['select'])))
         while ($row = mysql_fetch_array($result))
         {
             $fileRow  = $row['file_row'];
-            $sql2     = "SELECT * FROM comments WHERE fileID='$fileRow'";
+            $sql2     = "SELECT *
+                        FROM comments
+                        WHERE fileID='$fileRow'";
             $result2  = mysql_query($sql2,$con);
             $numrows2 = mysql_num_rows($result2);
             if($numrows2 == 1) $comment_string = 'comment';
@@ -108,7 +142,9 @@ if ((isset($_POST['select'])))
 
     elseif($_POST['select'] == 'username')
     {
-        $usersql = "SELECT * FROM users WHERE username LIKE '$search%'";
+        $usersql = "SELECT *
+                    FROM users
+                    WHERE username LIKE '$search%'";
         $userresult = mysql_query($usersql);
         if(mysql_num_rows($userresult) != 0)
         {
@@ -132,7 +168,9 @@ if ((isset($_POST['select'])))
 
     elseif($_POST['select'] == 'all')
     {
-        $usersql = "SELECT * FROM users WHERE username LIKE '$search%'";
+        $usersql = "SELECT *
+                    FROM users
+                    WHERE username LIKE '$search%'";
         $userresult = mysql_query($usersql);
         if(mysql_num_rows($userresult) != 0)
         {

@@ -10,7 +10,10 @@ if(isset($_SESSION['dbuserid']) && isset($_POST['subscribeTo']) && $_SESSION['db
 {
 	$userID = $_SESSION['dbuserid'];
 	$subscribeTo = $_POST['subscribeTo'];
-	$sql = "SELECT * FROM subs WHERE subscriber=$userID AND subscribed=subscribeTo LIMIT 1";
+	$sql = "SELECT *
+			FROM subs
+			WHERE subscriber=$userID
+			    AND subscribed=subscribeTo LIMIT 1";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -19,7 +22,8 @@ if(isset($_SESSION['dbuserid']) && isset($_POST['subscribeTo']) && $_SESSION['db
 	}
 	else
 	{
-		$sql2 = "INSERT INTO subs (rowID, subscriber, subscribed) VALUES (NULL, $userID, $subscribeTo)";
+		$sql2 = "INSERT INTO subs (rowID, subscriber, subscribed)
+					VALUES (NULL, $userID, $subscribeTo)";
 		if($result2 = mysql_query($sql2))
 		{
 			$redirectTo = $_POST['subscribeTo'];

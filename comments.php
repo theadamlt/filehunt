@@ -14,11 +14,14 @@ if(isset($_POST['comment']) && $_POST['comment']!='' && isset($_POST['submit']))
 	$date = date("d/m/y H:i", time());
 	$datestrto = strtotime($date);
 	$post_comment   = $_POST['comment'];
-	$sql_uniq = "SELECT * FROM comments WHERE comment='$post_comment' AND comment_by=$session_userid";
+	$sql_uniq = "SELECT *
+				FROM comments
+				WHERE COMMENT='$post_comment'
+				    AND comment_by=$session_userid";
 	$result_uniq = mysql_query($sql_uniq);
 	if(mysql_num_rows($result_uniq) == 0)
 	{
-		$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, comment) VALUES(NULL, $get_fileid, $session_userid, '$datestrto', '$post_comment')";
+		$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, COMMENT) VALUES(NULL, $get_fileid, $session_userid, '$datestrto', '$post_comment')";
 		$result = mysql_query($sql,$con);
 	}
 }

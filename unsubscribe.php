@@ -11,7 +11,10 @@ if(isset($_SESSION['dbuserid']) && isset($_POST['unsubscribeTo']) && $_SESSION['
 {
 	$userID = $_SESSION['dbuserid'];
 	$unsubscribeTo = $_POST['unsubscribeTo'];
-	$sql = "SELECT * FROM subs WHERE subscriber=$userID AND subscribed=subscribeTo LIMIT 1";
+	$sql = "SELECT *
+			FROM subs
+			WHERE subscriber=$userID
+			    AND subscribed=subscribeTo LIMIT 1";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -22,7 +25,10 @@ if(isset($_SESSION['dbuserid']) && isset($_POST['unsubscribeTo']) && $_SESSION['
 	{
 		$userID = $_SESSION['dbuserid'];
 		$unsubscribeTo = $_POST['unsubscribeTo'];
-		$sql2 = "DELETE FROM subs WHERE subscriber=$userID AND subscribed=$unsubscribeTo LIMIT 1";
+		$sql2 = "DELETE
+				FROM subs
+				WHERE subscriber=$userID
+				    AND subscribed=$unsubscribeTo LIMIT 1";
 		if($result2 = mysql_query($sql2))
 		{
 			$redirectTo = $_POST['unsubscribeTo'];

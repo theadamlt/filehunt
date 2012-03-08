@@ -11,7 +11,10 @@ if(isset($_POST['username']) && isset($_POST['email']))
 {
 	$username = mysql_enteries_fix_string($_POST['username']);
 	$email = mysql_enteries_fix_string($_POST['email']);
-	$sql = "SELECT * FROM users WHERE username='$username' AND email='$email' LIMIT 1";
+	$sql = "SELECT *
+			FROM users
+			WHERE username='$username'
+			    AND email='$email' LIMIT 1";
 	$result = mysql_query($sql,$con);
 	$row = mysql_fetch_array($result);
 	$username_r = $row['username'];

@@ -11,7 +11,10 @@ if (isset($_POST['username']) && isset($_POST['security_code']))
 {
 	$username      = mysql_enteries_fix_string($_POST['username']);
 	$security_code = mysql_enteries_fix_string($_POST['security_code']);
-	$sql = "SELECT * FROM users WHERE username='$username' AND security_code=$security_code LIMIT 1";
+	$sql = "SELECT *
+			FROM users
+			WHERE username='$username'
+			    AND security_code=$security_code LIMIT 1";
 	$result = mysql_query($sql,$con);
 	if(mysql_num_rows($result) == 1)
 	$row = mysql_fetch_array($result);
@@ -63,7 +66,11 @@ if(isset($_POST['password']) && isset($_POST['password2']))
 		$email    = mysql_enteries_fix_string($_POST['email']);
 		$random = $_POST['security_code'];
 		$random_new = rand(30, 100)*rand(7574,324)*rand(323,876);
-		$sql = "UPDATE users SET password=MD5('$password'), security_code=$random_new WHERE security_code=$random AND username='$username' LIMIT 1";
+		$sql = "UPDATE users
+				SET password=MD5('$password'),
+				             security_code=$random_new
+				WHERE security_code=$random
+				    AND username='$username' LIMIT 1";
 		if($result =  mysql_query($sql,$con))
 		{
 			header('Location: ?page=search&newPassword=true');

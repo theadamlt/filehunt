@@ -7,7 +7,11 @@ if(isset($_POST['clear_list']) && $_POST['clear_list'] == 'true' && isset($_SESS
 	$curUserID = $_SESSION['dbuserid'];
 	$curUsername = $_SESSION['dbusername'];
 	$curUserPassword = $_SESSION['dbpassword'];
-	$sql = "UPDATE users SET last_sub_check='$datestrto' WHERE rowID=$curUserID AND username='$curUsername' AND password='$curUserPassword'";
+	$sql = "UPDATE users
+			SET last_sub_check='$datestrto'
+			WHERE rowID=$curUserID
+			    AND username='$curUsername'
+			    AND password='$curUserPassword'";
 	$result = mysql_query($sql);
 	header('Location: ?page=mysubscriptions');
 	die();

@@ -10,7 +10,20 @@ if(isset($_GET['fileID']))
 	if(isset($_GET['reportSuccess']) && $_GET['reportSuccess'] == 'true') echo '<div id="success">You have succesfully reported the file as abuse. Thank you!</div>';
 	$fileID = $_GET['fileID'];
 
-	$sql = "SELECT f.rowID AS f_rowID, f.file AS f_file, f.uploaded_by AS f_uploaded_by, f.uploaded_date AS f_uploaded_date, f.size AS f_size, f.times_downloaded AS f_times_downloaded, f.mimetype AS f_mimetype, f.description AS f_description, u.rowID AS u_rowID, u.username AS u_username FROM users u, files f WHERE f.uploaded_by=u.rowID AND f.rowID=$fileID LIMIT 1";
+	$sql = "SELECT f.rowID AS f_rowID,
+	        f.file AS f_file,
+	        f.uploaded_by AS f_uploaded_by,
+			f.uploaded_date AS f_uploaded_date,
+			f.size AS f_size,
+			f.times_downloaded AS f_times_downloaded,
+			f.mimetype AS f_mimetype,
+			f.description AS f_description,
+			u.rowID AS u_rowID,
+			u.username AS u_username
+				FROM users u,
+				     files f
+				WHERE f.uploaded_by=u.rowID
+				AND f.rowID=$fileID LIMIT 1";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) == 0)
 	{
@@ -20,22 +33,32 @@ if(isset($_GET['fileID']))
 	$row = mysql_fetch_array($result);
 	echo '<h1>'.$row['f_file'].'</h1>';
 	//Has the file been reported as abuse?
-	$sql3    = "SELECT * FROM abuse WHERE fileID=$fileID";
+	$sql3    = "SELECT *
+				FROM abuse
+				WHERE fileID=$fileID";
 	$result3 = mysql_query($sql3);
 	if(mysql_num_rows($result3) != 0 && !isset($_GET['reportSuccess'])) echo '<div id="error">Be careful! This file has been reported at abuse! We are on the case. You can still download the file, but: BE CAREFUL!<br>';
 	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p></div>';
 
-	$sql4 = "SELECT d.rowID AS d_rowID, d.downloaded_by AS d_downloaded_by, d.fileID AS d_fileID, d.downloaded_by AS d_downloaded_date, u.rowID AS u_rowID, u.username AS u_username, u.rowID AS u_rowID, f.rowID AS f_rowID
-		FROM downloads d, users u, files f
-		WHERE d.fileID =$fileID
-		AND d.downloaded_by = u.rowID
-		AND d.fileID = f.rowID";
+	$sql4 = "SELECT d.rowID AS d_rowID,
+		       d.downloaded_by AS d_downloaded_by,
+		       d.fileID AS d_fileID,
+		       d.downloaded_by AS d_downloaded_date,
+		       u.rowID AS u_rowID,
+		       u.username AS u_username,
+		       u.rowID AS u_rowID,
+		       f.rowID AS f_rowID
+				FROM downloads d,
+				     users u,
+				     files f
+				WHERE d.fileID =$fileID
+				AND d.downloaded_by = u.rowID
+    			AND d.fileID = f.rowID";
 	$result4 = mysql_query($sql4);
 	$download_numrows = mysql_num_rows($result4);
 
 	$string1   = 'onClick=reportFile('.$row['f_rowID'].');';
     echo "<p class='submit'><input type='button' onClick='$string1' href='#' value='Report abuse' ></p>";
-
 	echo '<center><table id="table">
 	<th>Uploaded by</th>
 	<th>Size</th>
@@ -49,7 +72,7 @@ if(isset($_GET['fileID']))
 	else echo '<td>'.$row['f_size'].' bytes</td>';
 	echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
 	echo '<td>'.$row['f_mimetype'].'</td>';
-	echo "<td><a href='?page=download_analyse&file=$fileID'>$download_numrows</a></td>";
+	echo "<td><a href='?page=download_analysis&file=$fileID'>$download_numrows</a></td>";
 	echo '</tr>';
 	echo '</table></center>';
 
@@ -60,11 +83,22 @@ if(isset($_GET['fileID']))
 		echo $row['f_description'].'</fieldset><br />';
 	}
 
+
 	if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '<br /><img src="printimage.php?id='.$fileID.'" />';
 
 	echo '<h1>Comments</h1>';
 
-	$sql = "SELECT c.rowID AS comment_rowID, c.fileID AS fileID, c.comment_by AS comment_by_id, c.date_commented AS date_commented, c.comment AS comment, u.username AS username, u.rowID AS user_row FROM comments c, users u WHERE c.fileID=$fileID AND c.comment_by=u.rowID";
+	$sql = "SELECT c.rowID AS comment_rowID,
+			c.fileID AS fileID,
+			c.comment_by AS comment_by_id,
+			c.date_commented AS date_commented,
+			c.comment AS COMMENT,
+			u.username AS username,
+			u.rowID AS user_row
+			FROM comments c,
+     			users u
+			WHERE c.fileID=$fileID
+    		AND c.comment_by=u.rowID";
 	//
 	$result  = mysql_query($sql,$con);
 	$numrows = mysql_num_rows($result);
@@ -79,7 +113,15 @@ if(isset($_GET['fileID']))
 _END;
 		
 		$fileID  = $_GET['fileID'];
-		$sql2 ="SELECT f.file AS filename, f.rowID AS file_row, f.uploaded_by AS uploaded_by, u.rowID AS user_row, u.username AS username FROM files f, users u WHERE f.rowID=$fileID LIMIT 1";
+		$sql2 ="SELECT f.file AS filename,
+				f.rowID AS file_row,
+				f.uploaded_by AS uploaded_by,
+				u.rowID AS user_row,
+				u.username AS username
+				FROM files f,
+				     users u
+				WHERE f.rowID=$fileID 
+				LIMIT 1";
 		$result2 = mysql_query($sql2,$con);
 		$row2 = mysql_fetch_array($result2);
 		$fileName = $row2['filename'];
@@ -139,11 +181,14 @@ _END;
 		$date = date("d/m/y H:i", time());
 		$datestrto = strtotime($date);
 		$post_comment   = $_POST['comment'];
-		$sql_uniq = "SELECT * FROM comments WHERE comment='$post_comment' AND comment_by=$session_userid";
+		$sql_uniq = "SELECT *
+					FROM comments
+					WHERE COMMENT='$post_comment'
+					    AND comment_by=$session_userid";
 		$result_uniq = mysql_query($sql_uniq);
 		if(mysql_num_rows($result_uniq) == 0)
 		{
-			$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, comment) VALUES(NULL, $get_fileid, $session_userid, '$datestrto', '$post_comment')";
+			$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, COMMENT) VALUES(NULL, $get_fileid, $session_userid, '$datestrto', '$post_comment')";
 			$result = mysql_query($sql,$con);
 		}
 		header('Location: '.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);

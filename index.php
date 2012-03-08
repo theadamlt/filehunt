@@ -48,6 +48,7 @@ if(
 	}
 
 	if(!isset($_GET['page'])) header('Location: ?page=search');
+
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 		{
 			echo '<div id="links"><ul>';
@@ -63,7 +64,23 @@ if(
 		}
 		else
 		{
-			$sql = "SELECT s.rowID AS s_rowID, s.subscriber AS s_subscriber, s.subscribed, u.rowID AS u_rowID, u.username AS u_username, f.file AS f_file, f.uploaded_date AS f_uploaded_date, f.uploaded_by AS f_uploaded_by, f.size AS f_size, f.rowID AS f_rowID FROM subs s, users u, files f WHERE s.subscriber=$_SESSION[dbuserid] AND s.subscribed=u.rowID AND f.uploaded_date > u.last_sub_check AND f.uploaded_by=u.rowID";
+			$sql = "SELECT s.rowID AS s_rowID,
+				       s.subscriber AS s_subscriber,
+				       s.subscribed,
+				       u.rowID AS u_rowID,
+				       u.username AS u_username,
+				       f.file AS f_file,
+				       f.uploaded_date AS f_uploaded_date,
+				       f.uploaded_by AS f_uploaded_by,
+				       f.size AS f_size,
+				       f.rowID AS f_rowID
+					FROM subs s,
+						     users u,
+						     files f
+					WHERE s.subscriber=$_SESSION[dbuserid]
+						    AND s.subscribed=u.rowID
+						    AND f.uploaded_date > u.last_sub_check
+						    AND f.uploaded_by=u.rowID";
 			$result = mysql_query($sql);
 			echo '<div id="links"><ul>
 			<li><span class="loggedin">Logged in as: '.$_SESSION["dbusername"].' </span> </li><li><a href="?page=logout">Logout</a></li>';

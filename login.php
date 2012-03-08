@@ -18,7 +18,10 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 	$username = mysql_enteries_fix_string($_POST['username']);
 	$password = MD5(mysql_enteries_fix_string($_POST['password']));
 
-	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
+	$sql = "SELECT *
+			FROM users
+			WHERE username='$username'
+			    AND password='$password' LIMIT 1";
 	$result = mysql_query($sql,$con);
 
 	if (mysql_num_rows($result)==1)

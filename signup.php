@@ -46,16 +46,17 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 		if($password == $password2)
 		{
 			//Check if user exists
-			$sql = "SELECT * FROM users WHERE username='$username' OR email='$email'";
+			$sql = "SELECT *
+					FROM users
+					WHERE username='$username'
+					    OR email='$email'";
 			$result = mysql_query($sql,$con);
 			$numrows = mysql_num_rows($result);
 			if($numrows!=0) echo '<div id="error"><b>Oups... Username or email already exists in database. Try another one</b></div>';
 			else
 			{
 				$random = rand(30, 100)*rand(7574,324)*rand(323,876);
-				$sql = "INSERT INTO 
-				users(rowID, username, password, email, security_code, admin) 
-				VALUES(NULL, '$username', MD5('$password'), '$email', $random, '0')";
+				$sql = "INSERT INTO users(rowID, username, password, email, security_code, ADMIN) VALUES(NULL, '$username', MD5('$password'), '$email', $random, '0')";
 				if (!$result = mysql_query($sql,$con))
 				{
 					header('Location:');
@@ -75,7 +76,9 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 					The fileHunt team";
 					mail($email, $subject, $body, 'From: Filehunt@filehunt.com');
 					
-					$sql    = "SELECT * FROM users WHERE username='$username' LIMIT 1";
+					$sql    = "SELECT *
+								FROM users
+								WHERE username='$username' LIMIT 1";
 					$result = mysql_query($sql,$con);
 					$row    = mysql_fetch_array($result);
 					

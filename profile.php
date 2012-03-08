@@ -12,7 +12,9 @@ if(isset($_GET['userID']))
 	else
 	{
 		$profile = $_GET['userID'];
-		$sql     = "SELECT * FROM users WHERE rowID=$profile LIMIT 1";
+		$sql     = "SELECT *
+				FROM users
+				WHERE rowID=$profile LIMIT 1";
 		$result  = mysql_query($sql,$con);
 		$numrows = mysql_num_rows($result);
 		if($numrows == 1)
@@ -51,7 +53,10 @@ if(isset($_GET['userID']))
 			if(isset($_SESSION['dbuserid']))
 			{
 				//Is logged in user a subscriber?
-				$sql3 = "SELECT * FROM subs WHERE subscriber=$_SESSION[dbuserid] AND subscribed=$_GET[userID]";
+				$sql3 = "SELECT *
+						FROM subs
+						WHERE subscriber=$_SESSION[dbuserid]
+						    AND subscribed=$_GET[userID]";
 				$result3 = mysql_query($sql3);
 				if(mysql_num_rows($result3) == 1)
 				{
@@ -76,7 +81,9 @@ if(isset($_GET['userID']))
 			}
 
 			//Find uploads
-			$sql = "SELECT * FROM files WHERE uploaded_by='$profile'";
+			$sql = "SELECT *
+					FROM files
+					WHERE uploaded_by='$profile'";
 			$result = mysql_query($sql,$con);
 			$numrows = mysql_num_rows($result); 
 			if($numrows > 0)
@@ -92,7 +99,9 @@ if(isset($_GET['userID']))
 				while($row = mysql_fetch_array($result))
 				{
 					$fileRow = $row['rowID'];
-					$sql2     = "SELECT * FROM comments WHERE fileID='$fileRow'";
+					$sql2     = "SELECT *
+								FROM comments
+								WHERE fileID='$fileRow'";
 			        $result2  = mysql_query($sql2,$con);
 			        $numrows2 = mysql_num_rows($result2);
 			        if($numrows2 == 1) $comment_string = 'comment';
