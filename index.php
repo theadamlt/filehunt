@@ -25,7 +25,7 @@
 	<link rel="icon" type="image/png" href="img/favicon.png" />
 	<link rel="stylesheet" type="text/css" href="css/style.min.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script src="js/main.min.js"></script>
+	<script async src="js/main.min.js"></script>
 </head>
 <body>
 	<?php

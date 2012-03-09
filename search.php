@@ -192,6 +192,7 @@ if ((isset($_POST['select'])))
         else echo '<div id="error">Nothing matched your search</div>';
     }
 }
-echo '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/autosuggest.min.js"></script>';
+echo '';
 ?>
+<script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script async type="text/javascript" src="js/autosuggest.min.js"></script>
