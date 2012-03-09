@@ -150,15 +150,13 @@ if ((isset($_POST['select'])))
         {
             $count = 0;
             echo '<center><table id="table">
-            <th>Username</th>
-            <th>Files</th>';
+            <th>Username</th>';
 
             while($row2 = mysql_fetch_array($userresult))
             {
                 if(oddOrEven($count)==1) echo "<tr class='alt'>";
                 elseif(oddOreven($count)==0) echo '<tr>';
                 echo '<td><a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a></td>';
-                echo '<td>The user has no uploads</td>';
                 echo '</tr>';                
             }
             echo '</table></center>';
@@ -185,14 +183,13 @@ if ((isset($_POST['select'])))
                 elseif(oddOreven($count)==0) echo '<tr>';
                 echo '<td><a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a></td>';
                 echo '<td>The user has no uploads</td>';
-                echo '</tr>';                
+                echo '</tr>';
             }
             echo '</table></center>';
         } 
         else echo '<div id="error">Nothing matched your search</div>';
     }
 }
-echo '';
 ?>
 <script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script async type="text/javascript" src="js/autosuggest.min.js"></script>
