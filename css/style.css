@@ -281,6 +281,7 @@ table, th, tr, td
 	padding: 9px;
 	border: solid 1px #E5E5E5;
 	outline: 0;
+	width:100%;
 	font: normal 13px/100% Verdana, Tahoma, sans-serif;
 	background: #FFFFFF url('bg_form.png') left top repeat-x;
 	background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
