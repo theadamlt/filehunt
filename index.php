@@ -31,9 +31,7 @@
 	<?php
 	ob_start();
 	ob_clean();
-	header('Vary: Accept-Encoding');
-	header('Cache-Control: max-age=604800');
-	header('Accept-Charset: UTF-8');
+	header('Vary: Accept-Encoding; Cache-Control: max-age=604800; Accept-Charset: UTF-8');
 	ob_start();
 	ob_flush();
 	require_once('main.php');
