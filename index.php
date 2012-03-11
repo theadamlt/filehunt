@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<?
 	if($_SERVER['HTTP_HOST'] == 'filehunt.pagodabox.com')
 	{
@@ -29,11 +29,8 @@
 </head>
 <body>
 	<?php
-	ob_start();
-	ob_clean();
-	header('Vary: Accept-Encoding; Cache-Control: max-age=604800; Accept-Charset: UTF-8');
-	ob_start();
-	ob_flush();
+	header('Content-Type: text/html; charset=utf-8');
+	header('Accept-encoding: gzip, deflate');
 	require_once('main.php');
 	?>
 	<br />

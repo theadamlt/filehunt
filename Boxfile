@@ -13,8 +13,9 @@ web1:
   ################################################
   ## PHP SPECIFIC SETTINGS
   ################################################
-  php_version: 5.3.8
-  php_extensions: [mysqli, curl, gd, mbstring, mysql]
+  #php_version: 5.3.8
+  php_version: 5.4
+  php_extensions: [mysqli, curl, gd, mbstring, mysql,]
   php_date_timezone: Europe/Copenhagen
   php_max_execution_time: 30
   php_max_input_time: 60
