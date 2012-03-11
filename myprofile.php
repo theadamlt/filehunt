@@ -66,7 +66,7 @@ else
 	        echo '<td><a href=?page=fileinfo&fileID=' . $row['rowID'] . '>' . $row['file'] . '</a></td>';
 			$rowidfile = $row['rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.',"myprofile");';
-	        echo "<td><a title='Delete file' onClick=deleteOwnFile('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
+	        echo "<td><a title='Delete file' onClick=deleteOwnFile('$rowidfile'); href='#'><img src='img/trash.png' height=32 width=32></a></td>";
 	        echo "</tr>";
 	        ++$count;
 	    }

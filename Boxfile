@@ -21,5 +21,4 @@ web1:
   php_post_max_size: 25M
   php_file_uploads: On
   php_upload_max_filesize: 30M
-  php_max_file_uploads: 30
-  #browscap: http://filehunt.pagodabox.com/browscap.ini
+  php_max_file_uploads: 30M

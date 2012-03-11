@@ -116,7 +116,7 @@ if(isset($_GET['userID']))
 	        		elseif($row['size'] >= 1048576) echo '<td>'.($row['size']/10485776).' MB</td>';
 	        		else echo '<td>'.$row['size'].' bytes</td>';
 					$string1   = 'onClick=areYouSure2('.$row['rowID'].');';
-					echo "<td><a onClick=$string1 href='#'".$row['rowID']."' title='Report abuse'><img src='img/abuse.png'></a></td>";
+					echo "<td><a onClick=$string1 href='#'".$row['rowID']."' title='Report abuse'><img src='img/abuse.png' height=32 width=32></a></td>";
 					echo '</tr>';
 					++$count;
 

@@ -101,7 +101,7 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
             echo '<td><a href=?page=fileinfo&fileID=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td>';
             echo '<td><a href=?page=profile&userID='.$row['f_uploaded_by'].'>'.$row['u_username'].'</a></td>';
             echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
-            echo '<td><a href="#" onClick=deleteFromSubList('.$row['f_rowID'].')><img src="img/delete.png"></td>';
+            echo '<td><a href="#" onClick=deleteFromSubList('.$row['f_rowID'].')><img height=32 width=32 src="img/delete.png"></td>';
             echo '</tr>';
             ++$count;
 		}

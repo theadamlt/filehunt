@@ -132,8 +132,8 @@ _END;
 			//Delete
 			$rowidfile = $row['f_rowID'];
 			$string1   = 'onClick=areYouSure('.$rowidfile.');';
-			echo "<td><a title='Delete file' onClick=adminDeleteFile('$rowidfile'); href='#'><img src='img/trash.png'></a></td>";
-			echo "<td><a title='Delete report' onClick='deleteReport(\"$rowidfile\")' href='#'><img src='img/delete.png'></td>";
+			echo "<td><a title='Delete file' onClick=adminDeleteFile('$rowidfile'); href='#'><img height=32 width=32 src='img/trash.png'></a></td>";
+			echo "<td><a title='Delete report' onClick='deleteReport(\"$rowidfile\")' href='#'><img src='img/delete.png' height=32 width=32></td>";
 			echo "</tr>";
 			 ++$count;
 			    
