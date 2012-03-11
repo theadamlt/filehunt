@@ -1,2 +1,2 @@
 RewriteEngine On
-ErrorDocument 404 http://localhost/filehunt/?page=404
+ErrorDocument 404 http://filehunt.pagodabox.com?page=404
