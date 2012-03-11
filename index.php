@@ -29,6 +29,9 @@
 </head>
 <body>
 	<?php
+	// header('Vary: Accept-Encoding');
+	// header('Cache-Control: max-age=604800');
+	//header('Accept-Charset: UTF-8');
 	require_once('main.php');
 	?>
 	<br />
