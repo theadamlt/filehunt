@@ -130,7 +130,7 @@ input, textarea {
     box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     */
-	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
 textarea {
@@ -191,7 +191,7 @@ table, th, tr, td {
     box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     */
-	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
 /*Table styling*/
@@ -229,8 +229,8 @@ table, th, tr, td {
 }
 
 .autosuggest {
-	/*padding:4px;*/
-	/*border: 1px solid #000;*/
+    /*padding:4px;*/
+    /*border: 1px solid #000;*/
 }
 
 .search {
@@ -249,10 +249,10 @@ table, th, tr, td {
 }
 
 .result li {
-	/*padding:5px;
-	border:1px solid #000;
-	border-top:0;
-	cursor:pointer;*/
+    /*padding:5px;
+    border:1px solid #000;
+    border-top:0;
+    cursor:pointer;*/
     padding: 9px;
     border: solid 1px #E5E5E5;
     outline: 0;
@@ -264,7 +264,7 @@ table, th, tr, td {
     box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     */
-	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
 .result li:hover {
@@ -285,13 +285,18 @@ table, th, tr, td {
     box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     */
-	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     height: 35px;
 }
 
 fieldset {
-	/*position: absolute;*/
+    /*position: absolute;*/
     text-align: center;
     width: 40%;
     margin: auto;
 }
+
+a:link {color:#415f8c;}
+a:visited {color:#415f8c;}
+a:hover {color:orange}
+a:active {color:orange}
