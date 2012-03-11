@@ -123,11 +123,11 @@ if ((isset($_POST['select'])))
             if($numrows2 == 1) $comment_string = 'comment';
             else $comment_string = 'comments';
              //File size calc
-            if(oddOrEven($count)==1) echo "<tr class='alt'>";
+            if(oddOrEven($count)==1) echo '<tr class="alt">';
             elseif(oddOreven($count)==0) echo '<tr>';
             echo '<td><a href=?page=fileinfo&fileID=' . $row['file_row'] . '>' . $row['file'] . '</a></td>';
             echo '<td><a href=?page=profile&userID=' . $row["user_row"] . '>' . $row["username"] . '</a></td>';
-            echo "</tr>";
+            echo '</tr>';
             ++$count;
         }
         

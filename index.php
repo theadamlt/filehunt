@@ -30,7 +30,6 @@
 <body>
 	<?php
 	header('Content-Type: text/html; charset=utf-8');
-	header('Accept-encoding: gzip, deflate');
 	require_once('main.php');
 	?>
 	<br />
