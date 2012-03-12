@@ -115,8 +115,8 @@ if(
 		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
 		else $url = $host.'/'.$downloadLink;
 		echo '<div id="success">Upload succeeded</div>';
-		echo "<p>Your file link is: <a href='http://$url'>http://$url</a></p><br />";
-		echo "<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>";
+		echo "<p>Your file link is: <a href='http://$url'>http://$url</a></p>";
+		echo "<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'><br />";
 		echo '<div id="socailshare">';
 		facebookShare($url);
 		twitterShare($url);

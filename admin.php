@@ -58,7 +58,7 @@ _END;
 	else
 	{
 		header('Location: ?page=404');
-		die();		
+		die();
 	}
 	$sql = "SELECT a.rowID AS a_rowID,
 	       a.fileID AS a_fileID,
@@ -134,7 +134,7 @@ _END;
 			$string1   = 'onClick=areYouSure('.$rowidfile.');';
 			echo "<td><a title='Delete file' onClick=adminDeleteFile('$rowidfile'); href='#'><img height=32 width=32 src='img/trash.png'></a></td>";
 			echo "<td><a title='Delete report' onClick='deleteReport(\"$rowidfile\")' href='#'><img src='img/delete.png' height=32 width=32></td>";
-			echo "</tr>";
+			echo '</tr>';
 			 ++$count;
 			    
 		}

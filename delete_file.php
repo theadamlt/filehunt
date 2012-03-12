@@ -19,7 +19,7 @@ if(isset($_SESSION['dbuserid']) && isset($_GET['fileID']))
 			WHERE uploaded_by='$profileID'
 			    AND rowID=$fileID";
 
-	if($result = mysql_query($sql,$con))
+	if($result = mysql_query($sql,$con) && mysql_num_rows($result) !=0)
 	{
 		//Delete abuse reports
 		$sql2    = "DELETE
