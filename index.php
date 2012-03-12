@@ -25,36 +25,8 @@
 	<link rel="icon" type="image/png" href="img/favicon.png" />
 	<link rel="stylesheet" type="text/css" href="css/style.min.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script async src="js/main.min.js"></script>
+	<script src="js/main.min.js"></script>
 	<script>
-		var isDetailsSupported = (function(doc) {
-  var el = doc.createElement('details'),
-      fake,
-      root,
-      diff;
-  if (!('open' in el)) {
-    return false;
-  }
-  root = doc.body || (function() {
-    var de = doc.documentElement;
-    fake = true;
-    return de.insertBefore(doc.createElement('body'), de.firstElementChild || de.firstChild);
-  }());
-  el.innerHTML = '<summary>a</summary>b';
-  el.style.display = 'block';
-  root.appendChild(el);
-  diff = el.offsetHeight;
-  el.open = true;
-  diff = diff != el.offsetHeight;
-  root.removeChild(el);
-  if (fake) {
-    root.parentNode.removeChild(root);
-  }
-  return diff;
-}(document));
-
-
-
 	if (!isDetailsSupported)
 	{
 		document.documentElement.className += ' no-details';
@@ -63,8 +35,8 @@
 </head>
 <body>
 	<?php
-	header('Content-Type: text/html; charset=utf-8');
-	require_once('main.php');
+		header('Content-Type: text/html; charset=utf-8');
+		require_once('main.php');
 	?>
 	<br />
 	<br />

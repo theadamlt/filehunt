@@ -24,14 +24,23 @@ if(
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 		{
 			echo '<div id="links"><ul>';
+
 			if($_GET['page'] == 'signup') echo '<li class=current_page_item>';
+
 			else echo '<li>';
+
 			echo '<a href="?page=signup">Signup</a></li>';
+
 			if($_GET['page'] == 'login') echo '<li class=current_page_item>';
+
 			else echo'<li>';
+
 			echo '<a href="?page=login">Login</a></li>';
+
 			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
+
 			else echo '<li>';
+
 			echo '<a href="?page=search">Home</a></li></ul></div>';
 		}
 		else
@@ -57,16 +66,27 @@ if(
 			echo '<div id="links"><ul>
 			<li><span class="loggedin">Logged in as: '.$_SESSION["dbusername"].' </span> </li><li><a href="?page=logout">Logout</a></li>';
 			if($_GET['page'] == 'myprofile') echo'<li class=current_page_item>';
+
 			else echo '<li>';
+
 			echo '<a href="?page=myprofile">My profile</a></li>';
+
 			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item" id="sub">';
+
 			else echo '<li id="sub">';
+
 			echo '<a href="?page=mysubscriptions">My subscriptions ('.mysql_num_rows($result).')</a></li>';
+
 			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
+
 			else echo '<li>';
+
 			echo '<a href="?page=search">Home</a></li>';
+
 			if($_GET['page'] == 'upload') echo '<li class=current_page_item>';
+
 			else echo '<li>';
+
 			echo '<a href="?page=upload">Upload</a></li>';
 			//Miniform
 			// echo '<li><form action="?page=search" method="post"><span class="minisearch"><input type="text" name="search"></span><input type="hidden" name="select" value="all"><input type="submit" value="Search"></form></li>';
@@ -79,12 +99,12 @@ if(
 	if(getBrowser() != 'Chrome' && !isset($_COOKIE['rmNotice']))
 		{
 	 		echo '<div id="error">This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site</div>';
-	 		echo '<form action=?page=search method=post><input type="hidden" name="rmNotice" value="true"><input type="submit" value="Remove notice"></form>';
+	 		echo '<form action=?'.$_SERVER['QUERY_STRING'].' method=post><input type="hidden" name="rmNotice" value="true"><input type="submit" value="Remove notice"><input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form><br />';
 	}
 	if(isset($_POST['rmNotice']))
 	{
 		setcookie("rmNotice", 'false', time()+604800);
-		header('Location: '.$_SERVER['PHP_SELF']);
+		header('Location: ?'.$_POST['loca']);
 	}
 	if (isset($_GET['uploadSucces']))
 	{
@@ -95,7 +115,7 @@ if(
 		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
 		else $url = $host.'/'.$downloadLink;
 		echo '<div id="success">Upload succeeded</div>';
-		echo "<p>Your file link is: <a href='http://$url'>http://$url</a><br />";
+		echo "<p>Your file link is: <a href='http://$url'>http://$url</a></p><br />";
 		echo "<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>";
 		echo '<div id="socailshare">';
 		facebookShare($url);

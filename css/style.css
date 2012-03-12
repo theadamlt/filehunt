@@ -88,15 +88,6 @@ pre {
 }
 
 /*Form styling */
-input, textarea {
-    padding: 9px;
-    border: solid 1px hsl(0, 0%, 90%);
-    outline: 0;
-    font: normal 13px/100% Verdana, Tahoma, sans-serif;
-    width: 200px;
-    background: hsl(0, 0%, 100%);
-}
-
 textarea {
     width: 400px;
     max-width: 400px;
@@ -109,14 +100,6 @@ input:focus, textarea:focus {
     border-color: hsl(0, 0%, 79%);
 }
 
-.submit input {
-    width: auto;
-    padding: 9px 15px;
-    background: hsl(216, 22%, 49%);
-    border: 0;
-    font-size: 14px;
-    color: hsl(0, 0%, 100%);
-}
 
 input, textarea {
     padding: 9px;
@@ -149,6 +132,7 @@ input:focus, textarea:focus {
 .form {
     position: relative;
     width: 100%;
+    display: block;
 }
 
 .form label {
@@ -159,7 +143,7 @@ input:focus, textarea:focus {
 .submit input {
     width: auto;
     padding: 9px 15px;
-    background: #617798;
+    background: hsl(216, 22%, 49%);
     border: 0;
     font-size: 14px;
     color: hsl(0, 0%, 100%);
