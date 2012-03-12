@@ -44,12 +44,12 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 	$result2 = mysql_query($sql2);
 	if(mysql_num_rows($result2) != 0)
 	{
-		echo '<details><summary>Your subscribers('.mysql_num_rows($result2).')</summary>';
+		echo '<selection class="progress window"><details><summary>Your subscribers('.mysql_num_rows($result2).')</summary>';
 		while($row2 = mysql_fetch_array($result2))
 		{
 			echo '<a href="?page=profile&userID='.$row2['u_rowID'].'">'.$row2['u_username'].'</a><br />';
 		}
-		echo '</details><br />';
+		echo '</details></selection><br />';
 	}
 	else echo '<div id="error">You have no subscribers</div>';
 
