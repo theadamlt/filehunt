@@ -97,7 +97,7 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 
 
 			if(oddOrEven($count)==1) echo "<tr class='alt'  id=".$row['f_rowID'].">";
-            elseif(oddOreven($count)==0) echo '<tr  id='.$row['f_rowID'].'>';
+            elseif(oddOreven($count)==0) echo '<tr id='.$row['f_rowID'].'>';
             echo '<td><a href=?page=fileinfo&fileID=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td>';
             echo '<td><a href=?page=profile&userID='.$row['f_uploaded_by'].'>'.$row['u_username'].'</a></td>';
             echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
