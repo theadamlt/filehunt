@@ -92,7 +92,7 @@ if(isset($_GET['fileID']))
 			c.fileID AS fileID,
 			c.comment_by AS comment_by_id,
 			c.date_commented AS date_commented,
-			c.comment AS COMMENT,
+			c.comment AS comment,
 			u.username AS username,
 			u.rowID AS user_row
 			FROM comments c,
