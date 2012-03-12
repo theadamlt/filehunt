@@ -43,10 +43,10 @@ if(isset($_GET['file']))
 				else echo '<tr>';
 				echo '<td>'.$count.'</td>
 				<td><a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a></td>
-				<td>'.date("d/m/y H:i",$row['d_downloaded_date']).'</td>';
+				<td>'.date("d/m/y H:i",$row['d_downloaded_date']).'</td></tr>';
 				++$count;
 			}
-
+			echo '</table></center>';
 		}
 		else
 		{

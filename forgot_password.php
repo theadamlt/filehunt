@@ -39,7 +39,7 @@ The filehunt team";
 	<form class="form" action="?page=forgot_password" method="post">
 <p class="usermame">
 	<input type="text" name="username" id="username" />
-	<label for="username">Username<label>
+	<label for="username">Username</label>
 </p>
 <p class="email">
 	<input type="email" name="email" id="email" />
@@ -57,7 +57,7 @@ else
 <form class="form" action="?page=forgot_password" method="post">
 <p class="usermame">
 	<input type="text" name="username" id="username" />
-	<label for="username">Username<label>
+	<label for="username">Username</label>
 </p>
 <p class="email">
 	<input type="email" name="email" id="email" />

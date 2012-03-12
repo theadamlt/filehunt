@@ -22,12 +22,12 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
-		echo '<details><summary>Your subscriptions('.mysql_num_rows($result).')</summary>';
+		echo '<selection class="progress window"><details><summary>Your subscriptions('.mysql_num_rows($result).')</summary>';
 		while($row = mysql_fetch_array($result))
 		{
 			echo '<a href="?page=profile&userID='.$row['u_rowID'].'">'.$row['u_username'].'</a><br />';
 		}
-		echo '</details><br />';
+		echo '</details></selection><br />';
 	}
 	else echo '<div id="error">You have no subscriptions</div><br />';
 
@@ -122,3 +122,30 @@ else
 
 
 ?>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="js/jquery.details.min.js"></script>
+		<script>
+			window.console || (window.console = { 'log': alert });
+			$(function() {
+
+				// Add conditional classname based on support
+				$('html').addClass($.fn.details.support ? 'details' : 'no-details');
+
+				// Show a message based on support
+				//$('body').prepend($.fn.details.support ? 'Native support detected; the plugin will only add ARIA annotations and fire custom open/close events.' : 'Emulation active; you are watching the plugin in action!');
+
+				// Emulate <details> where necessary and enable open/close event handlers
+				$('details').details();
+
+				// Bind some example event handlers
+				$('details').on({
+					'open.details': function() {
+						//console.log('opened');
+					},
+					'close.details': function() {
+						//console.log('closed');
+					}
+				});
+
+			});
+		</script>
