@@ -69,7 +69,7 @@ if(
 
 			else echo '<li>';
 
-			echo '<a href="?page=myprofile">My profile</a></li>';
+			echo '<a href="?page=myprofile" >My profile</a></li>';
 
 			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item" id="sub">';
 
