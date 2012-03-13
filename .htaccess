@@ -2,4 +2,4 @@ RewriteEngine On
 ErrorDocument 404 http://filehunt.pagodabox.com?page=404
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^http://(www.)filehunt.pagodabox.com.com/.*$ [NC]
-RewriteRule .*.(gif|jpg|png|ico|php)$ – [F,L]
+RewriteRule .*.(gif|jpg|png|ico)$ – [F,L]
