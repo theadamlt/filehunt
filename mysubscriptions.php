@@ -86,6 +86,7 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 			       s.subscribed,
 			       u.rowID AS u_rowID,
 			       u.username AS u_username,
+			       u.last_sub_check AS u_lase_sub_check,
 			       f.file AS f_file,
 			       f.uploaded_date AS f_uploaded_date,
 			       f.uploaded_by AS f_uploaded_by,

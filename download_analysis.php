@@ -8,13 +8,13 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 
 if(isset($_GET['file']))
 {
-	$sql = "SELECT *
-			FROM files
-			WHERE uploaded_by=$_SESSION[dbuserid]
-			    AND rowID=$_GET[file] LIMIT 1";
-	$result = mysql_query($sql);
-	if(mysql_num_rows($result) == 1)
-	{
+// 	$sql = "SELECT *
+// 			FROM files
+// 			WHERE uploaded_by=$_SESSION[dbuserid]
+// 			    AND rowID=$_GET[file] LIMIT 1";
+// 	$result = mysql_query($sql);
+// 	if(mysql_num_rows($result) == 1)
+// 	{
 		$sql = "SELECT d.rowID AS d_rowID,
 				       d.downloaded_by AS d_downloaded_by,
 				       d.fileID AS d_fileID,
@@ -48,7 +48,7 @@ if(isset($_GET['file']))
 		<tr>
 			';
 				echo '
-			<td>'.$count.'</td>
+			<td>'.++$count.'</td>
 			<td>
 				<a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a>
 			</td>
@@ -68,12 +68,12 @@ if(isset($_GET['file']))
 <div id="error">Your file has never been downloaded</div>
 ';
 		}
-	}
-	else
-	{
-		header('Location: ?page=404');
-		die();
-	}
+	// }
+	// else
+	// {
+	// 	header('Location: ?page=404');
+	// 	die();
+	// }
 }
 else
 {
