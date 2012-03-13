@@ -6,7 +6,7 @@
 	if($_SERVER['HTTP_HOST'] == 'filehunt.pagodabox.com')
 	{
 		echo "
-			<script async type='text/javascript'>
+			<script type='text/javascript'>
 	var _gaq = _gaq || [];
 			  _gaq.push(['_setAccount', 'UA-29716641-1']);
 			  _gaq.push(['_trackPageview']);

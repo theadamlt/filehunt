@@ -180,11 +180,11 @@ if(
 						</div>
 						';
 	 		echo '
-						<form action=?'.$_SERVER['QUERY_STRING'].' method=post>
+						<form action="?'.$_SERVER['QUERY_STRING'].'"" method="post">
 							<input type="hidden" name="rmNotice" value="true">
 							<input type="submit" value="Remove notice">
 							<input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form>
-						<br />
+						<br /></form>
 						';
 	}
 	if(isset($_POST['rmNotice']))
@@ -197,7 +197,7 @@ if(
 		$host = $_SERVER['HTTP_HOST'];
 		$id = $_GET['id'];
 		$downloadLink = "?page=fileinfo&fileID=$id";
-		if($host == 'filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
+		if($host == ',filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
 		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
 		else $url = $host.'/'.$downloadLink;
 		echo '
