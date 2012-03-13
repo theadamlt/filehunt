@@ -144,12 +144,12 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 			<td>
 				<a href="?page=fileinfo&fileID='.$row['rowID'].'">'.$row["file"].'</a>
 			</td>
-			;
 		</tr>
 		';
 					++$count;
 
 				}
+				echo '</table></center>';
 			}
 			else
 			{
