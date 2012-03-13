@@ -151,14 +151,14 @@ if(
 								';
 			//Miniform
 			// echo '
-								<li>
-									<form action="?page=search" method="post">
-										<span class="minisearch">
-											<input type="text" name="search"></span>
-										<input type="hidden" name="select" value="all">
-										<input type="submit" value="Search"></form>
-								</li>
-								';
+			//					<li>
+			//						<form action="?page=search" method="post">
+			//							<span class="minisearch">
+			//								<input type="text" name="search"></span>
+			//							<input type="hidden" name="select" value="all">
+			//							<input type="submit" value="Search"></form>
+			//					</li>
+			//					';
 			echo '
 							</ul>
 						</div>
