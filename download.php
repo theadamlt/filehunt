@@ -14,8 +14,9 @@ $downloaded = $row['times_downloaded'];
 $uploaded_by = $row['uploaded_by'];
 $rowID = $row['rowID'];
 
-$checkDate = date("d/m/y H:i", time());
-$datestrto = strtotime($checkDate);
+// $checkDate = date("d/m/y H:i", time());
+// $datestrto = strtotime($checkDate);
+$datestrto = time();
 
 if(isset($_SESSION['dbuserid'])) $downloaded_by = $_SESSION['dbuserid'];
 else $downloaded_by = 'anon';

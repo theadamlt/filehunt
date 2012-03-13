@@ -185,7 +185,7 @@ _END;
 		while($row = mysql_fetch_array($result))
 		{
 			$commented_by   = $row['username'];
-			$date_commented = $strtDate = date("d/m/y H:i",$row['date_commented']);
+			$date_commented = date("d/m/y H:i",$row['date_commented']);
 			$comment        = $row['comment'];
 			if(oddOrEven($count)==1) echo '
 	<tr class="alt">
@@ -258,18 +258,20 @@ _END;
 	{
 		$get_fileid     = $_GET['fileID'];
 		$session_userid = $_SESSION['dbuserid'];
-		$date = date("d/m/y H:i", time());
-		$datestrto = strtotime($date);
+		// $date = date("d/m/y H:i", time());
+		// $datestrto = strtotime($date);
+		$datestrto = time();
 		$post_comment   = $_POST['comment'];
 		$sql_uniq = "SELECT *
 					FROM comments
-					WHERE COMMENT='$post_comment'
+					WHERE comment='$post_comment'
 					    AND comment_by=$session_userid";
 		$result_uniq = mysql_query($sql_uniq);
 		if(mysql_num_rows($result_uniq) == 0)
 		{
-			$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, COMMENT) VALUES(NULL, $get_fileid, $session_userid, '$datestrto', '$post_comment')";
+			$sql = "INSERT INTO comments (rowID, fileID, comment_by, date_commented, comment) VALUES(NULL, $get_fileid, $session_userid, $datestrto, '$post_comment')";
 			$result = mysql_query($sql,$con);
+
 		}
 		header('Location: '.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
 	}

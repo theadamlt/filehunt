@@ -2,8 +2,9 @@
 require_once('lib.php');
 if(isset($_POST['clear_list']) && $_POST['clear_list'] == 'true' && isset($_SESSION['dbuserid']))
 {
-	$checkDate = date("d/m/y H:i", time());
-	$datestrto = strtotime($checkDate);
+	// $checkDate = date("d/m/y H:i", time());
+	// $datestrto = strtotime($checkDate);
+	$datestrto = time();
 	$curUserID = $_SESSION['dbuserid'];
 	$curUsername = $_SESSION['dbusername'];
 	$curUserPassword = $_SESSION['dbpassword'];
