@@ -98,8 +98,7 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 			    AND s.subscribed = f.uploaded_by
 			    AND f.uploaded_by = s.subscribed
 			    AND f.uploaded_by = u.rowID
-			    AND u.last_sub_check
-< f.uploaded_date";
+			    AND u.last_sub_check < f.uploaded_date";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{

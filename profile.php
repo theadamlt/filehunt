@@ -121,9 +121,6 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 <br />
 <table id="table">
 	<th>Filename</th>
-	<th>Uploaded Date</th>
-	<th>Size</th>
-	<th>Report abuse</th>
 	';
 				$count = 0;
 				while($row = mysql_fetch_array($result))
@@ -147,25 +144,7 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 			<td>
 				<a href="?page=fileinfo&fileID='.$row['rowID'].'">'.$row["file"].'</a>
 			</td>
-			<td>'.date("d/m/y H:i",$row['uploaded_date']).'</td>
-			';
-					if($row['size'] >= 1024) echo '
-			<td>'.($row["size"]/1024).' KB</td>
-			';
-	        		elseif($row['size'] >= 1048576) echo '
-			<td>'.($row['size']/10485776).' MB</td>
-			';
-	        		else echo '
-			<td>'.$row['size'].' bytes</td>
-			';
-					$string1   = 'onClick=areYouSure2('.$row['rowID'].');';
-					echo "
-			<td>
-				<a onClick=$string1 href='#'".$row['rowID']."' title='Report abuse'>
-					<img src='img/abuse.png' height=32 width=32></a>
-			</td>
-			";
-					echo '
+			;
 		</tr>
 		';
 					++$count;
