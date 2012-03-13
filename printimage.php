@@ -11,7 +11,7 @@ $result = mysql_query($sql);
 $row = mysql_fetch_array($result);
 $content = $row['data'];
 ob_clean();
-header('Content-type: image/jpg');
+header("Content-type: $row[mimetype]");
 ob_start();
 echo $content;
 ob_flush();
