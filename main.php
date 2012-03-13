@@ -23,25 +23,50 @@ if(
 
 		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 		{
-			echo '<div id="links"><ul>';
+			echo '<div id="links">
+<ul>
+	';
 
-			if($_GET['page'] == 'signup') echo '<li class=current_page_item>';
+			if($_GET['page'] == 'signup') echo '
+	<li class=current_page_item>
+		';
 
-			else echo '<li>';
+			else echo '
+		<li>
+			';
 
-			echo '<a href="?page=signup">Signup</a></li>';
+			echo '
+			<a href="?page=signup">Signup</a>
+		</li>
+		';
 
-			if($_GET['page'] == 'login') echo '<li class=current_page_item>';
+			if($_GET['page'] == 'login') echo '
+		<li class=current_page_item>
+			';
 
-			else echo'<li>';
+			else echo'
+			<li>
+				';
 
-			echo '<a href="?page=login">Login</a></li>';
+			echo '
+				<a href="?page=login">Login</a>
+			</li>
+			';
 
-			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
+			if($_GET['page'] == 'search') echo '
+			<li class=current_page_item>
+				';
 
-			else echo '<li>';
+			else echo '
+				<li>
+					';
 
-			echo '<a href="?page=search">Home</a></li></ul></div>';
+			echo '
+					<a href="?page=search">Home</a>
+				</li>
+			</ul>
+		</div>
+		';
 		}
 		else
 		{
@@ -63,43 +88,104 @@ if(
 						    AND f.uploaded_date > u.last_sub_check
 						    AND f.uploaded_by=u.rowID";
 			$result = mysql_query($sql);
-			echo '<div id="links"><ul>
-			<li><span class="loggedin">Logged in as: '.$_SESSION["dbusername"].' </span> </li><li><a href="?page=logout">Logout</a></li>';
-			if($_GET['page'] == 'myprofile') echo'<li class=current_page_item>';
+			echo '
+		<div id="links">
+			<ul>
+				<li>
+					<span class="loggedin">Logged in as: '.$_SESSION["dbusername"].'</span>
+				</li>
+				<li>
+					<a href="?page=logout">Logout</a>
+				</li>
+				';
+			if($_GET['page'] == 'myprofile') echo'
+				<li class=current_page_item>
+					';
 
-			else echo '<li>';
+			else echo '
+					<li>
+						';
 
-			echo '<a href="?page=myprofile" >My profile</a></li>';
+			echo '
+						<a href="?page=myprofile" >My profile</a>
+					</li>
+					';
 
-			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item" id="sub">';
+			if($_GET['page'] == 'mysubscriptions') echo '
+					<li class="current_page_item" id="sub">
+						';
 
-			else echo '<li id="sub">';
+			else echo '
+						<li id="sub">
+							';
 
-			echo '<a href="?page=mysubscriptions">My subscriptions ('.mysql_num_rows($result).')</a></li>';
+			echo '
+							<a href="?page=mysubscriptions">My subscriptions ('.mysql_num_rows($result).')</a>
+						</li>
+						';
 
-			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
+			if($_GET['page'] == 'search') echo '
+						<li class=current_page_item>
+							';
 
-			else echo '<li>';
+			else echo '
+							<li>
+								';
 
-			echo '<a href="?page=search">Home</a></li>';
+			echo '
+								<a href="?page=search">Home</a>
+							</li>
+							';
 
-			if($_GET['page'] == 'upload') echo '<li class=current_page_item>';
+			if($_GET['page'] == 'upload') echo '
+							<li class=current_page_item>
+								';
 
-			else echo '<li>';
+			else echo '
+								<li>
+									';
 
-			echo '<a href="?page=upload">Upload</a></li>';
+			echo '
+									<a href="?page=upload">Upload</a>
+								</li>
+								';
 			//Miniform
-			// echo '<li><form action="?page=search" method="post"><span class="minisearch"><input type="text" name="search"></span><input type="hidden" name="select" value="all"><input type="submit" value="Search"></form></li>';
-			echo '</ul></div>';
+			// echo '
+								<li>
+									<form action="?page=search" method="post">
+										<span class="minisearch">
+											<input type="text" name="search"></span>
+										<input type="hidden" name="select" value="all">
+										<input type="submit" value="Search"></form>
+								</li>
+								';
+			echo '
+							</ul>
+						</div>
+						';
 		}
 
 	echo '
-	<div id="logo">
-	<a href="?page=search"><img src="img/logo.png" height=179 width=207 /></a></div>';
+						<div id="logo">
+							<a href="?page=search">
+								<img src="img/logo.png" height=179 width=207 />
+							</a>
+						</div>
+						';
 	if(getBrowser() != 'Chrome' && !isset($_COOKIE['rmNotice']))
 		{
-	 		echo '<div id="error">This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site</div>';
-	 		echo '<form action=?'.$_SERVER['QUERY_STRING'].' method=post><input type="hidden" name="rmNotice" value="true"><input type="submit" value="Remove notice"><input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form><br />';
+	 		echo '
+						<div id="error">
+							This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site
+						</div>
+						';
+	 		echo '
+						<form action=?'.$_SERVER['QUERY_STRING'].' method=post>
+							<input type="hidden" name="rmNotice" value="true">
+							<input type="submit" value="Remove notice">
+							<input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form>
+						<br />
+						';
 	}
 	if(isset($_POST['rmNotice']))
 	{
@@ -114,34 +200,64 @@ if(
 		if($host == 'filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
 		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
 		else $url = $host.'/'.$downloadLink;
-		echo '<div id="success">Upload succeeded</div>';
-		echo "<p>Your file link is: <a href='http://$url'>http://$url</a></p>";
-		echo "<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'><br />";
-		echo '<div id="socailshare">';
+		echo '
+						<div id="success">Upload succeeded</div>
+						';
+		echo "
+						<p>
+							Your file link is:
+							<a href='http://$url'>http://$url</a>
+						</p>
+						";
+		echo "
+						<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>
+						<br />
+						";
+		echo '
+						<div id="socailshare">
+							';
 		facebookShare($url);
 		twitterShare($url);
 		googleShare($url);
-		echo '</div>';
-			 '</div>';
+		echo '
+						</div>
+						';
+			 '
+					</div>
+					';
 	}
-	if(isset($_GET['signupCompleted'])) echo '<div id="success">Signup completed</div>';
+	if(isset($_GET['signupCompleted'])) echo '
+					<div id="success">Signup completed</div>
+					';
 	if(isset($_GET['newPassword']))
 	{
 		if($_GET['newPassword']=='true')
 		{
-			echo '<div id="success">Your password has been changed. You can now login</div>';
+			echo '
+					<div id="success">Your password has been changed. You can now login</div>
+					';
 		}
 		else
 		{
-			echo "<div id='success'>Oups... Your password hasen't been changed. Please try again later</div>";
+			echo "
+					<div id='success'>
+						Oups... Your password hasen't been changed. Please try again later
+					</div>
+					";
 		}
 	}
 	if(isset($_GET['newPasswordEmailSent']))
 	{
 		$print_email = $_GET['newPasswordEmailSent'];
-		echo "<div id='success'>An email has been sent to you at $print_email</div>";
+		echo "
+					<div id='success'>An email has been sent to you at $print_email</div>
+					";
 	}
-	if(isset($_GET['captchaErr'])) echo "<div id='error'>The CAPTCHA field was not entered correctly. Please try again</div>";
+	if(isset($_GET['captchaErr'])) echo "
+					<div id='error'>
+						The CAPTCHA field was not entered correctly. Please try again
+					</div>
+					";
 	$page = $_GET['page'];
 
 	//If no, $page=main

@@ -64,34 +64,35 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 }
 if (isset($_GET['attemptedSite']))
 {
-	echo "<div id='error'>You need to login first!</div>";
+	echo "<div id='error'>You need to login first!</div>
+";
 }
 	
 ?>
 <h1 style="text-align:center;">Login</h1>
 
-<?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>' ?>
-	<div id="login">
+<?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>
+' ?>
+<div id="login">
 
-		<form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>"
+<form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>
+"
 		 method="post">
-			<p class="name">
-				<input type="text" name="username" placeholder="Username" id="username" />
-				<label for="name">Username</label> 
-			</p>
+<p class="name">
+	<input type="text" name="username" placeholder="Username" id="username" />
+	<label for="name">Username</label>
+</p>
 
-			<p class="password">
-				<input type="password" name="password" placeholder="Password" id="password" />
-				<label for="password">Password</label>
-			</p>
-			<p class="checkbox">
-				<label for="checkbox">Remember me</label>
-				<input type="checkbox" name="remember" value="true" checked id="checkbox">
-			</p>
-			<p class="submit">
-				<input type="hidden" name="start" />
-				<input type="submit" value="Login" >
-			</p>
-		</form>
-		<a href="?page=forgot_password">Forgot password?</a>
-	</div>
+<p class="password">
+	<input type="password" name="password" placeholder="Password" id="password" />
+	<label for="password">Password</label>
+</p>
+<p class="checkbox">
+	<label for="checkbox">Remember me</label>
+	<input type="checkbox" name="remember" value="true" checked id="checkbox"></p>
+<p class="submit">
+	<input type="hidden" name="start" />
+	<input type="submit" value="Login" ></p>
+</form>
+<a href="?page=forgot_password">Forgot password?</a>
+</div>

@@ -21,39 +21,40 @@ if (isset($_POST['username']) && isset($_POST['security_code']))
 	$email = $row['email'];
 		echo <<< _END
 	<form class="form" action="?page=reset_password&yes=true" method="post">
-		<p class="password">
-			<input type="password" name="password" id="password1" />
-			<label for="password1">New password</label>
-		</p>
-		<p class="password">
-			<input type="password" name="password2" id="password2" />
-			<label for="password2">New password again</label>
-		</p>
-		<input type="hidden" name="username" value="$username" />
-		<input type="hidden" name="email" value="$email" />
-		<input type="hidden" name="security_code" value="$security_code" />
-		<p class="submit">
-			<input type="submit" value="submit" />
-		</p>
-	</form>
+<p class="password">
+	<input type="password" name="password" id="password1" />
+	<label for="password1">New password</label>
+</p>
+<p class="password">
+	<input type="password" name="password2" id="password2" />
+	<label for="password2">New password again</label>
+</p>
+<input type="hidden" name="username" value="$username" />
+<input type="hidden" name="email" value="$email" />
+<input type="hidden" name="security_code" value="$security_code" />
+<p class="submit">
+	<input type="submit" value="submit" />
+</p>
+</form>
 _END;
 }
 else
 {
-	echo <<< _END
+	echo
+<<< _END
 	<form class="form" action="?page=reset_password&yes=true" method="post">
-		<p class="username">
-			<input type="text" name="username" id="username" />
-			<label for="username">Username</label>
-		</p>
-		<p class="security_code">
-			<input type="text" name="security_code" id="security_code" />
-			<label for="security_code">Security code</label>
-		</p>
-		<p class="submit">
-			<input type="submit" value="submit" />
-		</p>
-	</form>
+<p class="username">
+	<input type="text" name="username" id="username" />
+	<label for="username">Username</label>
+</p>
+<p class="security_code">
+	<input type="text" name="security_code" id="security_code" />
+	<label for="security_code">Security code</label>
+</p>
+<p class="submit">
+	<input type="submit" value="submit" />
+</p>
+</form>
 _END;
 }
 

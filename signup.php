@@ -32,7 +32,6 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 	    // What happens when the CAPTCHA was entered incorrectly
 	    header('Location: ?page=signup&captchaErr=true');
 	    die();
-	    //die ("<div id='error>'The reCAPTCHA wasn't entered correctly. Go back and try it again</div>");
   	}
   	else
 	{
@@ -52,11 +51,15 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 					    OR email='$email'";
 			$result = mysql_query($sql,$con);
 			$numrows = mysql_num_rows($result);
-			if($numrows!=0) echo '<div id="error"><b>Oups... Username or email already exists in database. Try another one</b></div>';
+			if($numrows!=0) echo '
+<div id="error"> <b>Oups... Username or email already exists in database. Try another one</b> 
+</div>
+';
 			else
 			{
 				$random = rand(30, 100)*rand(7574,324)*rand(323,876);
-				$sql = "INSERT INTO users(rowID, username, password, email, security_code, ADMIN) VALUES(NULL, '$username', MD5('$password'), '$email', $random, '0')";
+				$sql = "INSERT INTO users(rowID, username, password, email, security_code, ADMIN)
+						VALUES(NULL, '$username', MD5('$password'), '$email', $random, '0')";
 				if (!$result = mysql_query($sql,$con))
 				{
 					header('Location:');
@@ -92,7 +95,10 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 
 				}
 			}
-		} else echo '<div id="error"><b>Oups... The passwords did not match. Try again</b></div>';
+		} else echo '
+<div id="error"> <b>Oups... The passwords did not match. Try again</b>
+</div>
+';
 	}
 	else
 	{
@@ -105,33 +111,35 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 <h1 style="text-align:center;">Signup</h1>
 <div id="signup">
 
-<? if (isset($_GET['signupEmpty'])) echo '<div id="error">You left somwthing empty. Try again</div>'; ?>
+	<? if (isset($_GET['signupEmpty'])) echo '<div id="error">You left somwthing empty. Try again</div>
+'; ?>
 <form class="form" action="?page=signup" method="post">
-<p class="username">
-	<input type="text" name="username" placeholder="Username" id="username" />
-	<label for="username">Username</label>
-</p>
+	<p class="username">
+		<input type="text" name="username" placeholder="Username" id="username" />
+		<label for="username">Username</label>
+	</p>
 
-<p class="password">
-	<input type="password" name="password" placeholder="Password" id="password" />
-	<label for="password">Password</label>
-</p>
-<p class="password">
-	<input type="password" name="password2" placeholder="Password again" id="password2" />
-	<label for="password2">Password Again</label>
-</p>
-<p class="email">
-	<input type="email" name="email" placeholder="Email" id="email" />
-	<label for="email">Email</label>
-</p>
-<?php
+	<p class="password">
+		<input type="password" name="password" placeholder="Password" id="password" />
+		<label for="password">Password</label>
+	</p>
+	<p class="password">
+		<input type="password" name="password2" placeholder="Password again" id="password2" />
+		<label for="password2">Password Again</label>
+	</p>
+	<p class="email">
+		<input type="email" name="email" placeholder="Email" id="email" />
+		<label for="email">Email</label>
+	</p>
+	<?php
 	require_once('recaptchalib.php');
 	if($_SERVER['HTTP_HOST']=='85.83.1.123') $publickey = "6LdnNM4SAAAAAGyaTpT4VCx7Ig4UZJ9YL0vUYTeT"; // you got this from the signup page
 	if($_SERVER['HTTP_HOST']=='localhost') $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN"; // you got this from the signup page
 	if($_SERVER['HTTP_HOST']=='filehunt.netau.net') $publickey = "6Le7M84SAAAAALJaZciDaXI-BkCuwU7ftbt1ZoIZ"; // you got this from the signup page
 	if($_SERVER['HTTP_HOST']=='10.180.2.167' )$publickey = "6Le4M84SAAAAAFu5m6IE_LERTQK--fIrEaqHoHuX"; // you got this from the signup page
     if($_SERVER['HTTP_HOST']=='filehunt.pagodabox.com') $publickey = "6LerWs4SAAAAACRBvAwWasnmrRMHs_ptXUpmSVvm";
-    echo '<center>'.recaptcha_get_html($publickey).'</center>';
+    echo '<center>'.recaptcha_get_html($publickey).'</center>
+';
 ?>
 <p class="submit">
 	<input type="hidden" name="start" />

@@ -35,38 +35,40 @@ The filehunt team";
 			//echo "<div id='success'>An email has been sent to you at $email_r</div>";
 		}
 		else echo <<< _END
-		<div id="error">Something went wrong</div>';
-	<form class="form" action="?page=forgot_password" method="post">
-<p class="usermame">
-	<input type="text" name="username" id="username" />
-	<label for="username">Username</label>
-</p>
-<p class="email">
-	<input type="email" name="email" id="email" />
-	<label for="email">Email</label>
-</p>
-<p class="submit">
-	<input type="submit" value="Submit" />
-</p>
-</form>
+		<div id="error">Something went wrong</div>
+		<form class="form" action="?page=forgot_password" method="post">
+			<p class="username">
+				<input type="text" name="username" id="username" />		
+				<label for="username">Username</label>
+			</p>
+			<p class="email">
+				<input type="email" name="email" id="email" />		
+				<label for="email">Email</label>
+			</p>
+			<p class="submit">
+				<input type="submit" value="Submit" />		
+			</p>
+		</form>
 _END;
 }
 else
 {
-	echo '<center>
-<form class="form" action="?page=forgot_password" method="post">
-<p class="usermame">
-	<input type="text" name="username" id="username" />
-	<label for="username">Username</label>
-</p>
-<p class="email">
-	<input type="email" name="email" id="email" />
-	<label for="email">Email</label>
-</p>
-<p class="submit">
-	<input type="submit" value="Submit" />
-</p>
-</form>
-</center>';
+	echo '
+	<center>
+		<form class="form" action="?page=forgot_password" method="post">
+			<p class="username">
+				<input type="text" name="username" id="username" />	
+				<label for="username">Username</label>
+			</p>
+			<p class="email">
+				<input type="email" name="email" id="email" />	
+				<label for="email">Email</label>
+			</p>
+			<p class="submit">
+				<input type="submit" value="Submit" />	
+			</p>
+		</form>
+	</center>
+	';
 }
 ?>

@@ -7,7 +7,8 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 
 if(isset($_GET['fileID']))
 {
-	if(isset($_GET['reportSuccess']) && $_GET['reportSuccess'] == 'true') echo '<div id="success">You have succesfully reported the file as abuse. Thank you!</div>';
+	if(isset($_GET['reportSuccess']) && $_GET['reportSuccess'] == 'true') echo '<div id="success">You have succesfully reported the file as abuse. Thank you!</div>
+';
 	$fileID = $_GET['fileID'];
 
 	$sql = "SELECT f.rowID AS f_rowID,
@@ -31,14 +32,24 @@ if(isset($_GET['fileID']))
 		die();
 	}
 	$row = mysql_fetch_array($result);
-	echo '<h1>'.$row['f_file'].'</h1>';
+	echo '
+<h1>'.$row['f_file'].'</h1>
+';
 	//Has the file been reported as abuse?
 	$sql3    = "SELECT *
 				FROM abuse
 				WHERE fileID=$fileID";
 	$result3 = mysql_query($sql3);
-	if(mysql_num_rows($result3) != 0 && !isset($_GET['reportSuccess'])) echo '<div id="error">Be careful! This file has been reported at abuse! We are on the case. You can still download the file, but: BE CAREFUL!<br>';
-	echo '<p class="submit"><input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p></div>';
+	if(mysql_num_rows($result3) != 0 && !isset($_GET['reportSuccess'])) echo '
+<div id="error">
+Be careful! This file has been reported at abuse! We are on the case. You can still download the file, but: BE CAREFUL!
+<br>
+';
+	echo '
+<p class="submit">
+	<input type="button" value="Download file" onClick="window.location.href=\'download.php?file='.$row['f_rowID'].'\'"></p>
+</div>
+';
 
 	$sql4 = "SELECT d.rowID AS d_rowID,
 		       d.downloaded_by AS d_downloaded_by,
@@ -58,35 +69,78 @@ if(isset($_GET['fileID']))
 	$download_numrows = mysql_num_rows($result4);
 
 	$string1   = 'onClick=reportFile('.$row['f_rowID'].');';
-    echo "<p class='submit'><input type='button' onClick='$string1' href='#' value='Report abuse' ></p>";
-	echo '<center><table id="table">
+    echo "
+<p class='submit'>
+<input type='button' onClick='$string1' href='#' value='Report abuse' ></p>
+";
+	echo '
+<center>
+<table id="table">
 	<th>Uploaded by</th>
 	<th>Size</th>
 	<th>Date uploaded</th>
 	<th>Mimetype</th>
-	<th>Times downloaded</th>';
-	echo '<tr class="alt">';
-	echo '<td><a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a></td>';
-	if($row['f_size'] >= 1024) echo '<td>'.($row['f_size']/1024).' KB</td>';
-	elseif($row['f_size'] >= 1048576) echo '<td>'.($row['f_size']/10485776).' MB</td>';
-	else echo '<td>'.$row['f_size'].' bytes</td>';
-	echo '<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>';
-	echo '<td>'.$row['f_mimetype'].'</td>';
-	echo "<td><a href='?page=download_analysis&file=$fileID'>$download_numrows</a></td>";
-	echo '</tr>';
-	echo '</table></center>';
+	<th>Times downloaded</th>
+	';
+	echo '
+	<tr class="alt">
+		';
+	echo '
+		<td>
+			<a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a>
+		</td>
+		';
+	if($row['f_size'] >= 1024) echo '
+		<td>'.($row['f_size']/1024).' KB</td>
+		';
+	elseif($row['f_size'] >= 1048576) echo '
+		<td>'.($row['f_size']/10485776).' MB</td>
+		';
+	else echo '
+		<td>'.$row['f_size'].' bytes</td>
+		';
+	echo '
+		<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>
+		';
+	echo '
+		<td>'.$row['f_mimetype'].'</td>
+		';
+	echo "
+		<td>
+			<a href='?page=download_analysis&file=$fileID'>$download_numrows</a>
+		</td>
+		";
+	echo '
+	</tr>
+	';
+	echo '
+</table>
+</center>
+';
 
 	//Description
 	if($row['f_description'] != '')
 	{
-		echo '<br /><fieldset class="description"><legend>Description</legend>';
-		echo $row['f_description'].'</fieldset><br />';
+		echo '
+<br />
+<fieldset class="description">
+<legend>Description</legend>
+';
+		echo $row['f_description'].'
+</fieldset>
+<br />
+';
 	}
 
 
-	if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '<br /><img src="printimage.php?id='.$fileID.'" />';
+	if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '
+<br />
+<img src="printimage.php?id='.$fileID.'" />
+';
 
-	echo '<h1>Comments</h1>';
+	echo '
+<h1>Comments</h1>
+';
 
 	$sql = "SELECT c.rowID AS comment_rowID,
 			c.fileID AS fileID,
@@ -104,12 +158,13 @@ if(isset($_GET['fileID']))
 	$numrows = mysql_num_rows($result);
 	if($numrows !=0)
 	{
-		echo <<< _END
+		echo
+<<< _END
 		<center>
-		<table id="table">
-		<th>Commented by</th>
-		<th>Date commented</th>
-		<th>Comment</th>
+<table id="table">
+	<th>Commented by</th>
+	<th>Date commented</th>
+	<th>Comment</th>
 _END;
 		
 		$fileID  = $_GET['fileID'];
@@ -132,33 +187,51 @@ _END;
 			$commented_by   = $row['username'];
 			$date_commented = $strtDate = date("d/m/y H:i",$row['date_commented']);
 			$comment        = $row['comment'];
-			if(oddOrEven($count)==1) echo '<tr class="alt">';
-			elseif(oddOrEven($count)) echo '<tr>';
+			if(oddOrEven($count)==1) echo '
+	<tr class="alt">
+		';
+			elseif(oddOrEven($count)) echo '
+		<tr>
+			';
 			$row_userid = $row['user_row'];
-			echo "<td><a href='?page=profile&userID=$row_userid'>$commented_by</a></td>
+			echo "
+			<td>
+				<a href='?page=profile&userID=$row_userid'>$commented_by</a>
+			</td>
 			<td>$date_commented</td>
-			<td>$comment</td></tr>";
+			<td>$comment</td>
+		</tr>
+		";
 		++$count;
 		}
-		echo '</table></center>';
+		echo '
+	</table>
+</center>
+';
 		
 	}
 	elseif($numrows == 0 && isset($_SESSION['dbusername']))
 	{
-		echo "<div id='error'>There is no comments for this file! Why dont ya' add one?</div>";
+		echo "
+<div id='error'>There is no comments for this file! Why dont ya' add one?</div>
+";
 	}
 	elseif($numrows == 0 && !isset($_SESSION['dbusername']))
 	{
-		echo "<div id='error'>There is no comments for this file!</div>";
+		echo "
+<div id='error'>There is no comments for this file!</div>
+";
 	}
 
 	if (isset($_SESSION['dbusername']))
 	{
 	$query_string = '?'.$_SERVER['QUERY_STRING'];
-	echo <<< _END
+	echo
+<<< _END
 <form class="form" action="$query_string" method="post">
 	<p class="message">
-		<label for="message">Message</label><br />
+		<label for="message">Message</label>
+		<br />
 		<textarea name="comment" cols="40" rows="6" placeholder="Message" id="message" ></textarea>
 		<input type='hidden' name='submit' value='true' />
 	</p>
@@ -171,7 +244,14 @@ _END;
 	else
 	{
 		$fileID_attempt = $_GET['fileID'];
-		echo "<br /><div id='error'>You need to <a href='?page=login&attemptedSite=comments&fileID=$fileID_attempt'>login</a> to comment!</div>";
+		echo "
+<br />
+<div id='error'>
+	You need to
+	<a href='?page=login&attemptedSite=comments&fileID=$fileID_attempt'>login</a>
+	to comment!
+</div>
+";
 	}
 
 	if(isset($_POST['comment']) && !empty($_POST['comment']) && isset($_POST['submit']))

@@ -32,25 +32,41 @@ if(isset($_GET['file']))
 		$result = mysql_query($sql);
 		if(mysql_num_rows($result) != 0)
 		{
-			echo '<center><table id="table">
-			<th></th>
-			<th>Downloaded by</th>
-			<th>Downloaded date</th>';
+			echo '<center>
+<table id="table">
+	<th></th>
+	<th>Downloaded by</th>
+	<th>Downloaded date</th>
+	';
 			$count = 0;
 			while ($row = mysql_fetch_array($result))
 			{
-				if(oddOrEven($count) == 1) echo '<tr class="alt">';
-				else echo '<tr>';
-				echo '<td>'.$count.'</td>
-				<td><a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a></td>
-				<td>'.date("d/m/y H:i",$row['d_downloaded_date']).'</td></tr>';
+				if(oddOrEven($count) == 1) echo '
+	<tr class="alt">
+		';
+				else echo '
+		<tr>
+			';
+				echo '
+			<td>'.$count.'</td>
+			<td>
+				<a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a>
+			</td>
+			<td>'.date("d/m/y H:i",$row['d_downloaded_date']).'</td>
+		</tr>
+		';
 				++$count;
 			}
-			echo '</table></center>';
+			echo '
+	</table>
+</center>
+';
 		}
 		else
 		{
-			echo '<div id="error">Your file has never been downloaded</div>';
+			echo '
+<div id="error">Your file has never been downloaded</div>
+';
 		}
 	}
 	else
