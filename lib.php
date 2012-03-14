@@ -1,4 +1,5 @@
 <?php
+$lines = file_get_contents('passwords.txt');
 
 $mysql_host = "mysql7.000webhost.com";
 $mysql_database = "a4438711_fh1";
@@ -115,7 +116,7 @@ function mysql_selector()
 	if($host == 'localhost' || $host == '62.199.33.99' || $host == '85.83.1.123') localhost_con('filehunt');
 	else if($host == 'filehunt.netau.net') mysql_con("mysql7.000webhost.com", "a4438711_user", "kage123", "a4438711_fh1");
 		//mysql_con($mysql_host, $mysql_user, $mysql_password, $mysql_database);
-	else if($host == pagoda) mysql_con('tunnel.pagodabox.com:3306', 'luba', '9pctB2Vg', 'filehunt');
+	else if($host == pagoda) mysql_con('tunnel.pagodabox.com:3306', 'luba', $_SERVER['DB_PASSWORD'], 'filehunt');
 	else localhost_con('filehunt');
 }
 
