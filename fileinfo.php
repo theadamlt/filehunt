@@ -90,14 +90,14 @@ Be careful! This file has been reported at abuse! We are on the case. You can st
 			<a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a>
 		</td>
 		';
-	if($row['f_size'] >= 1024 && $row['f_size'] < 1048576) echo '
-		<td>'.($row['f_size']/1024).' KB</td>
+	if($row['f_size'] >= 1024) echo '
+		<td>'.round($row['f_size']/1024).' KB</td>
 		';
 	elseif($row['f_size'] >= 1048576) echo '
-		<td>'.($row['f_size']/10485776).' MB</td>
+		<td>'.round($row['f_size']/10485776).' MB</td>
 		';
 	else echo '
-		<td>'.$row['f_size'].' bytes</td>
+		<td>'.round($row['f_size']).' bytes</td>
 		';
 	echo '
 		<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>
