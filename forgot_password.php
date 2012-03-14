@@ -7,6 +7,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	}
 
 
+
 if(isset($_POST['username']) && isset($_POST['email']))
 {
 	$username = mysql_enteries_fix_string($_POST['username']);

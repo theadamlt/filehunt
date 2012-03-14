@@ -15,9 +15,9 @@ if(isset($_POST['search_term']) && !empty($_POST['search_term']))
 				       u.username AS username
 				FROM files f,
 				     users u
-				WHERE f.file LIKE '$search_term%'
+				WHERE f.file LIKE '%$search_term%'
 				    AND f.uploaded_by = u.rowID
-				    OR u.username LIKE '$search_term%'
+				    OR u.username LIKE '%$search_term%'
 				    AND f.uploaded_by = u.rowID";
 		$result = mysql_query($sql,$con);
 		while($row = mysql_fetch_assoc($result))
@@ -30,7 +30,7 @@ if(isset($_POST['search_term']) && !empty($_POST['search_term']))
 	{
 		$sql = "SELECT *
 				FROM users
-				WHERE username LIKE '$search_term%'";
+				WHERE username LIKE '%$search_term%'";
 		$result = mysql_query($sql,$con);
 		while($row = mysql_fetch_assoc($result))
 		{
@@ -39,7 +39,7 @@ if(isset($_POST['search_term']) && !empty($_POST['search_term']))
 		}
 		$sql2 = "SELECT f.file
 				FROM files f
-				WHERE f.file LIKE '$search_term%'";
+				WHERE f.file LIKE '%$search_term%'";
 		$result2 = mysql_query($sql2,$con);
 		if(mysql_num_rows($result2) != 0)
 		{
@@ -54,7 +54,7 @@ if(isset($_POST['search_term']) && !empty($_POST['search_term']))
 	{
 		$sql = "SELECT *
 				FROM users
-				WHERE username LIKE '$search_term%'";
+				WHERE username LIKE '%$search_term%'";
 		$result = mysql_query($sql,$con);
 		while($row = mysql_fetch_assoc($result))
 		{

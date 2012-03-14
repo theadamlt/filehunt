@@ -20,18 +20,22 @@
 ";
 	}		
 	?>
-<title>Filehunt beta
+	<title>Filehunt beta
 	<?= $_SERVER['HTTP_HOST'];?></title>
-<link rel="icon" type="image/png" href="img/favicon.png" />
-<link rel="stylesheet" type="text/css" href="css/style.min.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script src="js/main.min.js"></script>
-<script>
+	<link rel="icon" type="image/png" href="img/favicon.png" />
+	<link rel="stylesheet" type="text/css" href="css/style.min.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="js/main.min.js"></script>
+	<script>
 	if (!isDetailsSupported)
 	{
 		document.documentElement.className += ' no-details';
 	}
 	</script>
+	<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
 </head>
 <body>
 <?php
