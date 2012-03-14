@@ -166,6 +166,7 @@ if(
 		}
 
 	echo '
+<<<<<<< HEAD
 						<script type="text/javascript"><!--
 					google_ad_client = "ca-pub-6531227695181642";
 					/* Filehunt over logo */
@@ -176,6 +177,8 @@ if(
 					</script>
 						<script type="text/javascript"
 					src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+=======
+>>>>>>> ffd4097aeae407d03d37ff1c65f6c13e42cb3efe
 						<div id="logo">
 							<a href="?page=search">
 								<img src="img/logo.png" height=179 width=207 />

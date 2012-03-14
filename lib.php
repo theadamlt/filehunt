@@ -1,6 +1,18 @@
 <?php
+<<<<<<< HEAD
 
 //The www domain for mysql connection function
+=======
+$lines = file_get_contents('passwords.txt');
+
+$mysql_host = "mysql7.000webhost.com";
+$mysql_database = "a4438711_fh1";
+$mysql_user = "a4438711_user";
+$mysql_password = 'kage123';
+
+//The www domain for mysql connection function
+define('www_domain', 'filehunt.netau.net');
+>>>>>>> ffd4097aeae407d03d37ff1c65f6c13e42cb3efe
 define('pagoda', 'filehunt.pagodabox.com');
 
 //Define Environment
@@ -106,8 +118,14 @@ _END;
 function mysql_selector()
 {
 	$host = $_SERVER['HTTP_HOST'];
+<<<<<<< HEAD
 
 	if($host == 'localhost' || $host == '62.199.33.99' || $host == '85.83.1.123') localhost_con('filehunt');
+=======
+	if($host == 'localhost' || $host == '62.199.33.99' || $host == '85.83.1.123') localhost_con('filehunt');
+	else if($host == 'filehunt.netau.net') mysql_con("mysql7.000webhost.com", "a4438711_user", "kage123", "a4438711_fh1");
+		//mysql_con($mysql_host, $mysql_user, $mysql_password, $mysql_database);
+>>>>>>> ffd4097aeae407d03d37ff1c65f6c13e42cb3efe
 	else if($host == pagoda) mysql_con('tunnel.pagodabox.com:3306', 'luba', $_SERVER['DB_PASSWORD'], 'filehunt');
 	else localhost_con('filehunt');
 }

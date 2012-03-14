@@ -1,0 +1,2 @@
+RewriteEngine On
+ErrorDocument 404 http://filehunt.pagodabox.com?page=404
