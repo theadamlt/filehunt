@@ -150,15 +150,22 @@ if(
 								</li>
 								';
 			//Miniform
-			// echo '
-			//					<li>
-			//						<form action="?page=search" method="post">
-			//							<span class="minisearch">
-			//								<input type="text" name="search"></span>
-			//							<input type="hidden" name="select" value="all">
-			//							<input type="submit" value="Search"></form>
-			//					</li>
-			//					';
+			/*echo '
+			
+								<li>
+									//
+									<form action="?page=search" method="post">
+										//
+										<span class="minisearch">
+											//
+											<input type="text" name="search"></span>
+										//
+										<input type="hidden" name="select" value="all">
+										//
+										<input type="submit" value="Search"></form>
+									//
+								</li>
+								//';*/
 			echo '
 							</ul>
 						</div>
@@ -166,7 +173,6 @@ if(
 		}
 
 	echo '
-<<<<<<< HEAD
 						<script type="text/javascript"><!--
 					google_ad_client = "ca-pub-6531227695181642";
 					/* Filehunt over logo */
@@ -177,8 +183,7 @@ if(
 					</script>
 						<script type="text/javascript"
 					src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-=======
->>>>>>> ffd4097aeae407d03d37ff1c65f6c13e42cb3efe
+
 						<div id="logo">
 							<a href="?page=search">
 								<img src="img/logo.png" height=179 width=207 />
@@ -197,8 +202,7 @@ if(
 							<input type="hidden" name="rmNotice" value="true">
 							<input type="submit" value="Remove notice">
 							<input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form>
-						<br /></form>
-						';
+						<br />';
 	}
 	if(isset($_POST['rmNotice']))
 	{
@@ -214,67 +218,62 @@ if(
 		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
 		else $url = $host.'/'.$downloadLink;
 		echo '
-						<div id="success">Upload succeeded</div>
-						';
+					<div id="success">Upload succeeded</div>
+					';
 		echo "
-						<p>
-							Your file link is:
-							<a href='http://$url'>http://$url</a>
-						</p>
-						";
+					<p>
+						Your file link is:
+						<a href='http://$url'>http://$url</a>
+					</p>
+					";
 		echo "
-						<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>
-						<br />
-						";
+					<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>
+					<br />
+					";
 		echo '
-						<div id="socailshare">
-							';
+					<div id="socailshare">
+						';
 		facebookShare($url);
 		twitterShare($url);
 		googleShare($url);
 		echo '
-						</div>
-						';
-			 '
 					</div>
 					';
 	}
 	if(isset($_GET['signupCompleted'])) echo '
-					<div id="success">Signup completed</div>
-					';
+				<div id="success">Signup completed</div>
+				';
 	if(isset($_GET['newPassword']))
 	{
 		if($_GET['newPassword']=='true')
 		{
 			echo '
-					<div id="success">Your password has been changed. You can now login</div>
-					';
+				<div id="success">Your password has been changed. You can now login</div>
+				';
 		}
 		else
 		{
 			echo "
-					<div id='success'>
-						Oups... Your password hasen't been changed. Please try again later
-					</div>
-					";
+				<div id='success'>
+					Oups... Your password hasen't been changed. Please try again later
+				</div>
+				";
 		}
 	}
 	if(isset($_GET['newPasswordEmailSent']))
 	{
 		$print_email = $_GET['newPasswordEmailSent'];
 		echo "
-					<div id='success'>An email has been sent to you at $print_email</div>
-					";
+				<div id='success'>An email has been sent to you at $print_email</div>
+				";
 	}
 	if(isset($_GET['captchaErr'])) echo "
-					<div id='error'>
-						The CAPTCHA field was not entered correctly. Please try again
-					</div>
-					";
+				<div id='error'>
+					The CAPTCHA field was not entered correctly. Please try again
+				</div>
+				";
 	$page = $_GET['page'];
 
-	//If no, $page=main
-	//if (!$page) $page = "search";
 	if (file_exists($page.'.php'))
 	{
 		require($page.'.php');
