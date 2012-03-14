@@ -74,49 +74,43 @@ Be careful! This file has been reported at abuse! We are on the case. You can st
 <input type='button' onClick='$string1' href='#' value='Report abuse' ></p>
 ";
 	echo '
-<center>
-<table id="table">
-	<th>Uploaded by</th>
-	<th>Size</th>
-	<th>Date uploaded</th>
-	<th>Mimetype</th>
-	<th>Times downloaded</th>
-	';
+	<center>
+		<table id="table">
+			<th>Uploaded by</th>
+			<th>Size</th>
+			<th>Date uploaded</th>
+			<th>Mimetype</th>
+			<th>Times downloaded</th>
+			';
 	echo '
-	<tr class="alt">
-		';
+			<tr class="alt">
+				';
 	echo '
-		<td>
-			<a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a>
-		</td>
-		';
-	if($row['f_size'] >= 1024) echo '
-		<td>'.round($row['f_size']/1024).' KB</td>
-		';
-	elseif($row['f_size'] >= 1048576) echo '
-		<td>'.round($row['f_size']/10485776).' MB</td>
-		';
-	else echo '
-		<td>'.round($row['f_size']).' bytes</td>
-		';
+				<td>
+					<a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a>
+				</td>
+				';
+		echo '
+				<td>'.calc_file_size($row['f_size']).'</td>
+				';
 	echo '
-		<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>
-		';
+				<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>
+				';
 	echo '
-		<td>'.$row['f_mimetype'].'</td>
-		';
+				<td>'.$row['f_mimetype'].'</td>
+				';
 	echo "
-		<td>
-			<a href='?page=download_analysis&file=$fileID'>$download_numrows</a>
-		</td>
-		";
+				<td>
+					<a href='?page=download_analysis&file=$fileID'>$download_numrows</a>
+				</td>
+				";
 	echo '
-	</tr>
+			</tr>
+			';
+	echo '
+		</table>
+	</center>
 	';
-	echo '
-</table>
-</center>
-';
 
 	//Description
 	if($row['f_description'] != '')

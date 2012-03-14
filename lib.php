@@ -139,9 +139,51 @@ function getBrowser()
 
 	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
 		$browser = 'Opera';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
+		$browser = 'Safari';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'SeaMonkey') !== FALSE)
+		$browser = 'SeaMonkey';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Flock') !== FALSE)
+		$browser = 'Flock';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Prism') !== FALSE)
+		$browser = 'Prism';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Deepnet Explorer') !== FALSE)
+		$browser = 'Deepnet Explorer';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Maxthon') !== FALSE)
+		$browser = 'Maxthon';
+
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'SeaMonkey') !== FALSE)
+		$browser = 'SeaMonkey';
+
 	else
 		$browser = 'Undefined';
 
 	return $browser;
+}
+
+function calc_file_size($file)
+{
+
+	$kb = 1024;
+	$mb = 1048576;
+	$gb = 1073741824;
+	$tb = 1099511627776;
+	if($file >= $kb && $file < $mb) $size = round($file/$kb, 1).' Kb';
+	elseif($file >= $mb && $file < $gb) $size = round($file/$mb, 1).' MB';
+	elseif($file >= $gb && $file < $tb) $size = round($file/$gb, 1).' GB';
+	elseif($file >= $tb) $size = round($file/$tb, 1).'TB';
+	else
+	{
+		$size = round($file, 1);
+		if($size == 1) $size = $size.' Byte';
+		else $size = $size.' Bytes';
+	}
+	return $size;
 }
 ?>
