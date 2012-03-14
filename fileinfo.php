@@ -90,7 +90,7 @@ Be careful! This file has been reported at abuse! We are on the case. You can st
 			<a href=?page=profile&userID='.$row['u_rowID'].'>'.$row['u_username'].'</a>
 		</td>
 		';
-	if($row['f_size'] >= 1024 && $row['f_size'] !> 1048576) echo '
+	if($row['f_size'] >= 1024 && $row['f_size'] < 1048576) echo '
 		<td>'.($row['f_size']/1024).' KB</td>
 		';
 	elseif($row['f_size'] >= 1048576) echo '
