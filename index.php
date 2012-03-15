@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta name="google-site-verification" content="2iJhMBF2ixUIrJXnBSedVKJgYP5lqyq03vfCf51qlBY" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<?
 	if($_SERVER['HTTP_HOST'] == 'filehunt.pagodabox.com')

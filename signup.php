@@ -17,10 +17,9 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 {
 	require_once('recaptchalib.php');
 	if($_SERVER['HTTP_HOST'] =='localhost') $privatekey = "6LewEM4SAAAAAFb7bWOf7PWVH1c6aarqrk8quPOZ";
-	if($_SERVER['HTTP_HOST'] =='85.83.1.123') $privatekey = "6LdnNM4SAAAAANM1Pn1m9u9vn4si_0APRAO7Draa";
-	if($_SERVER['HTTP_HOST'] =='filehunt.netau.net') $privatekey = "6LevEM4SAAAAAPL6_aWkuYYTw7cW9OY6fkly6Xhg";
-	if($_SERVER['HTTP_HOST'] =='10.180.2.167') $privatekey = "6Le4M84SAAAAAMwymwm6YVRAuLFyB0zTrlQK0kIl";
-	if($_SERVER['HTTP_HOST'] == 'filehunt.pagodabox.com') $privatekey = $_SERVER['CAPTCHA_PRIVATE'] /*"6LerWs4SAAAAABL-czz_uPXmJLHCaYCkIodB24-Q"*/;
+	elseif($_SERVER['HTTP_HOST'] =='85.83.1.123') $privatekey = "6LdnNM4SAAAAANM1Pn1m9u9vn4si_0APRAO7Draa";
+	elseif($_SERVER['HTTP_HOST'] =='10.180.2.167') $privatekey = "6Le4M84SAAAAAMwymwm6YVRAuLFyB0zTrlQK0kIl";
+	elseif($_SERVER['HTTP_HOST'] == 'filehunt.pagodabox.com') $privatekey = $_SERVER['CAPTCHA_PRIVATE'];
 
 	$resp = recaptcha_check_answer ($privatekey,
     $_SERVER["REMOTE_ADDR"],
@@ -116,28 +115,27 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 <form class="form" action="?page=signup" method="post">
 	<p class="username">
 		<input type="text" name="username" placeholder="Username" id="username" />
-		<label for="username">Username</label>
+		<label for="username">Username*</label>
 	</p>
 
 	<p class="password">
 		<input type="password" name="password" placeholder="Password" id="password" />
-		<label for="password">Password</label>
+		<label for="password">Password*</label>
 	</p>
 	<p class="password">
 		<input type="password" name="password2" placeholder="Password again" id="password2" />
-		<label for="password2">Password Again</label>
+		<label for="password2">Password Again*</label>
 	</p>
 	<p class="email">
 		<input type="email" name="email" placeholder="Email" id="email" />
-		<label for="email">Email</label>
+		<label for="email">Email*</label>
 	</p>
 	<?php
 	require_once('recaptchalib.php');
 	if($_SERVER['HTTP_HOST']=='85.83.1.123') $publickey = "6LdnNM4SAAAAAGyaTpT4VCx7Ig4UZJ9YL0vUYTeT"; // you got this from the signup page
 	if($_SERVER['HTTP_HOST']=='localhost') $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN"; // you got this from the signup page
-	if($_SERVER['HTTP_HOST']=='filehunt.netau.net') $publickey = "6Le7M84SAAAAALJaZciDaXI-BkCuwU7ftbt1ZoIZ"; // you got this from the signup page
 	if($_SERVER['HTTP_HOST']=='10.180.2.167' )$publickey = "6Le4M84SAAAAAFu5m6IE_LERTQK--fIrEaqHoHuX"; // you got this from the signup page
-    if($_SERVER['HTTP_HOST']=='filehunt.pagodabox.com') $publickey = $_SERVER['CAPTCHA_PUBLIC']/*"6LerWs4SAAAAACRBvAwWasnmrRMHs_ptXUpmSVvm"*/;
+    if($_SERVER['HTTP_HOST']=='filehunt.pagodabox.com') $publickey = $_SERVER['CAPTCHA_PUBLIC'];
     echo '<center>'.recaptcha_get_html($publickey).'</center>
 ';
 ?>

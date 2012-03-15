@@ -117,37 +117,37 @@ function mysql_selector()
 
 function getBrowser()
 {
-	if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE) 
+	if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) 
 		$browser = 'Internet explorer';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE) 
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox')) 
 		$browser = 'Firefox';
 		
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE) 
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome')) 
 		$browser = 'Chrome';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera'))
 		$browser = 'Opera';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari'))
 		$browser = 'Safari';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'SeaMonkey') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'SeaMonkey'))
 		$browser = 'SeaMonkey';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Flock') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Flock'))
 		$browser = 'Flock';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Prism') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Prism'))
 		$browser = 'Prism';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Deepnet Explorer') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Deepnet Explorer'))
 		$browser = 'Deepnet Explorer';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Maxthon') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Maxthon'))
 		$browser = 'Maxthon';
 
-	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'SeaMonkey') !== FALSE)
+	elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'SeaMonkey'))
 		$browser = 'SeaMonkey';
 
 	else

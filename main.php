@@ -277,6 +277,6 @@ if(
 
 	if (file_exists($page.'.php'))
 	{
-		require($page.'.php');
-	} else require('404.php');
+		if($page != '404' || $page != '403') require($page.'.php');
+	} else require('errors/'.$page.'.php');
 ?>

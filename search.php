@@ -145,9 +145,9 @@ if ((isset($_POST['select'])))
             else $comment_string = 'comments';
              //File size calc
             if(oddOrEven($count)==1) echo '
-    <tr class="alt">
-        ';
-            elseif(oddOreven($count)==0) echo '
+                <tr class="alt">
+                ';
+        elseif(oddOreven($count)==0) echo '
         <tr>
             ';
             echo '
