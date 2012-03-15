@@ -172,6 +172,7 @@ if(
 		}
 
 	echo '
+						<br />
 						<script type="text/javascript"><!--
 							google_ad_client = "ca-pub-6531227695181642";
 							/* Filehunt top logo */
