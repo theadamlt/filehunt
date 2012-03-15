@@ -9,11 +9,14 @@ if(isset($_POST['delete']))
 {
 	$sql = "SELECT *
 			FROM users
-			WHERE username='$_SESSION[dbusername]'
-			    AND password='$_SESSION[dbpassword]'
-			    AND rowID=$_SESSION[dbuserid]
+			WHERE rowID=$_SESSION[dbuserid]
 			    AND ADMIN=1 LIMIT 1";
 	$result = mysql_query($sql);
+	if(mysql_query($result) == 1)
+	{
+		$date = time() -7257600;
+		$sql = "DELETE FROM files WHERE uploaded_date < $date";
+	}
 }
 else
 {

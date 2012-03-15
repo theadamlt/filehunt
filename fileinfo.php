@@ -204,20 +204,20 @@ _END;
 ';
 		
 	}
-	elseif($numrows == 0 && isset($_SESSION['dbusername']))
+	elseif($numrows == 0 && isset($_SESSION['dbuserid']))
 	{
 		echo "
 <div id='error'>There is no comments for this file! Why dont ya' add one?</div>
 ";
 	}
-	elseif($numrows == 0 && !isset($_SESSION['dbusername']))
+	elseif($numrows == 0 && !isset($_SESSION['dbuserid']))
 	{
 		echo "
 <div id='error'>There is no comments for this file!</div>
 ";
 	}
 
-	if (isset($_SESSION['dbusername']))
+	if (isset($_SESSION['dbuserid']))
 	{
 	$query_string = '?'.$_SERVER['QUERY_STRING'];
 	echo

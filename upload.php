@@ -39,7 +39,7 @@ if (isset($_GET['uploadError']))
 			break;
 	}
 }
-elseif (!isset($_SESSION['dbusername']))
+elseif (!isset($_SESSION['dbuserid']))
 {
 	header('Location: ?page=login&attemptedSite=upload');
 	die();

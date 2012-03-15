@@ -7,7 +7,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	}
 
 
-if (isset($_SESSION['dbusername']))
+if (isset($_SESSION['dbuserid']))
 {
 	header('Location: ?page=search');
 	die();
@@ -34,15 +34,12 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
   	}
   	else
 	{
-	if($_POST['username']!='' || $_POST['password']!='' || $_POST['password2']!='' || $_POST['email']!='')
+	if($_POST['username']!='' || $_POST['password']!='' || $_POST['email']!='')
 	{
 		$username  = mysql_enteries_fix_string($_POST['username']);
 		$password  = mysql_enteries_fix_string($_POST['password']);
-		$password2 = mysql_enteries_fix_string($_POST['password2']);
 		$email     = mysql_enteries_fix_string($_POST['email']);
 
-		if($password == $password2)
-		{
 			//Check if user exists
 			$sql = "SELECT *
 					FROM users
@@ -58,10 +55,10 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 			{
 				$random = rand(30, 100)*rand(7574,324)*rand(323,876);
 				$sql = "INSERT INTO users(rowID, username, password, email, security_code, ADMIN)
-						VALUES(NULL, '$username', MD5('$password'), '$email', $random, '0')";
+						VALUES(NULL, '$username', '$password', '$email', $random, '0')";
 				if (!$result = mysql_query($sql,$con))
 				{
-					header('Location:');
+					header('Location: ?page=signup&signupError=true');
 					die();
 				}
 				else 
@@ -84,19 +81,12 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 					$result = mysql_query($sql,$con);
 					$row    = mysql_fetch_array($result);
 					
-					$_SESSION['dbusername'] = $row['username'];
 					$_SESSION['dbuserid']   = $row['rowID'];
-					$_SESSION['dbemail']    = $row['email'];
-
 					header('Location: ?page=search&signupCompleted=true');
 					die();
 
 				}
 			}
-		} else echo '
-<div id="error"> <b>Oups... The passwords did not match. Try again</b>
-</div>
-';
 	}
 	else
 	{
@@ -111,7 +101,7 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 
 	<? if (isset($_GET['signupEmpty'])) echo '<div id="error">You left somwthing empty. Try again</div>
 '; ?>
-<form class="form" action="?page=signup" method="post">
+<form class="form" action="?page=signup" method="post" onsubmit="validateSignup()" name="signup">
 	<p class="username">
 		<input type="text" name="username" placeholder="Username" id="username" />
 		<label for="username">Username*</label>

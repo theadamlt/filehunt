@@ -4,24 +4,14 @@ mysql_selector();
 session_start();
 
 if(
-	isset($_COOKIE['dbuserid'])
-	&& isset($_COOKIE['dbusername'])
-	&& isset($_COOKIE['dbpassword'])
-	&& isset($_COOKIE['dbuseremail'])
-	&& !isset($_SESSION['dbuserid'])
-	&& !isset($_SESSION['dbusername'])
-	&& !isset($_SESSION['dbuseremail'])
-	&& !isset($_SESSION['dbpassword']))
+	isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 	{
 		$_SESSION['dbuserid']    = $_COOKIE['dbuserid'];
-		$_SESSION['dbusername']  = $_COOKIE['dbusername'];
-		$_SESSION['dbuseremail'] = $_COOKIE['dbuseremail'];
-		$_SESSION['dbpassword']  = $_COOKIE['dbpassword'];
 	}
 
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 
-		if ((!isset($_SESSION['dbusername'])))
+		if ((!isset($_SESSION['dbuserid'])))
 		{
 			echo '<div id="links">
 <ul>
@@ -95,7 +85,7 @@ if(
 		<div id="links">
 			<ul>
 				<li>
-					<span class="loggedin">Logged in as: '.$_SESSION["dbusername"].'</span>
+					<span class="loggedin">Logged in as: '.$_SESSION["dbuserid"].'</span>
 				</li>
 				<li>
 					<a href="?page=logout">Logout</a>

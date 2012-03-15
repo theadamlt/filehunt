@@ -13,12 +13,10 @@ if(!isset($_SESSION['dbuserid']))
 }
 if(isset($_SESSION['dbuserid']) && isset($_GET['fileID']))
 {
-	$adminusername = $_SESSION['dbusername'];
 	$adminuserid   = $_SESSION['dbuserid'];
 	$sql = "SELECT *
 			FROM users
-			WHERE username='$adminusername'
-			    AND rowID=$adminuserid
+			WHERE rowID=$adminuserid
 			    AND ADMIN=1 LIMIT 1";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result)==1)

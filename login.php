@@ -6,17 +6,17 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		die();
 	}
 
-if (isset($_SESSION['dbusername']))
+if (isset($_SESSION['dbuserid']))
 {
 	header('Location: ?page=search');
 	die();
 }
 
 
-if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSION['dbusername'])))
+if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSION['dbuserid'])))
 {
 	$username = mysql_enteries_fix_string($_POST['username']);
-	$password = MD5(mysql_enteries_fix_string($_POST['password']));
+	$password = mysql_enteries_fix_string($_POST['password']);
 
 	$sql = "SELECT *
 			FROM users
@@ -27,15 +27,11 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 	if (mysql_num_rows($result)==1)
 	{	
 		$row = mysql_fetch_array($result);
-		$_SESSION['dbusername'] = $row['username'];
 		$_SESSION['dbuserid']   = $row['rowID'];
-		$_SESSION['dbemail']    = $row['email'];
 
 		if($_POST['remember'])
 		{
-			setcookie("dbusername", $row['username'], time()+604800);
 			setcookie("dbuserid", $row['rowID'], time()+604800);
-			setcookie("dbuseremail", $row['email'], time()+604800);
 		}
 
 		if(isset($_GET['attemptedSite']) && $_GET['attemptedSite']=='comments' && isset($_GET['fileID']))
@@ -73,9 +69,7 @@ if (isset($_GET['attemptedSite']))
 ' ?>
 <div id="login">
 
-<form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>
-"
-		 method="post">
+<form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>" method="post" onsubmit="validate_login()" name="login">
 <p class="name">
 	<input type="text" name="username" placeholder="Username" id="username" />
 	<label for="name">Username</label>

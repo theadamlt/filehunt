@@ -6,20 +6,17 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		die();
 	}
 
-if ((!isset($_SESSION['dbusername'])))
+if ((!isset($_SESSION['dbuserid'])))
 {
 	header('Location: ?page=login&attemptedSite=myprofile');
 	die();
 }
 else 
 {
-	$session_user     = $_SESSION['dbusername'];
 	$session_userid   = $_SESSION['dbuserid'];
-
-
 	$sql    = "SELECT *
 			FROM users
-			WHERE username='$session_user'";
+			WHERE rowID=$session_userid";
 	$result = mysql_query($sql,$con);
 	$row    = mysql_fetch_array($result);
 	$sql_username = $row['username'];
