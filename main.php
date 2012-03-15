@@ -151,7 +151,6 @@ if(
 								';
 			//Miniform
 			/*echo '
-			
 								<li>
 									//
 									<form action="?page=search" method="post">
@@ -173,6 +172,16 @@ if(
 		}
 
 	echo '
+						<script type="text/javascript"><!--
+							google_ad_client = "ca-pub-6531227695181642";
+							/* Filehunt over logo */
+							google_ad_slot = "6700430681";
+							google_ad_width = 468;
+							google_ad_height = 60;
+							//-->
+						</script>
+						<script type="text/javascript"
+							src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 						<div id="logo">
 							<a href="?page=search">
 								<img src="img/logo.png" height=179 width=207 />
@@ -191,7 +200,8 @@ if(
 							<input type="hidden" name="rmNotice" value="true">
 							<input type="submit" value="Remove notice">
 							<input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form>
-						<br />';
+						<br />
+						';
 	}
 	if(isset($_POST['rmNotice']))
 	{
@@ -207,60 +217,60 @@ if(
 		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
 		else $url = $host.'/'.$downloadLink;
 		echo '
-					<div id="success">Upload succeeded</div>
-					';
-		echo "
-					<p>
-						Your file link is:
-						<a href='http://$url'>http://$url</a>
-					</p>
-					";
-		echo "
-					<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>
-					<br />
-					";
-		echo '
-					<div id="socailshare">
+						<div id="success">Upload succeeded</div>
 						';
+		echo "
+						<p>
+							Your file link is:
+							<a href='http://$url'>http://$url</a>
+						</p>
+						";
+		echo "
+						<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>
+						<br />
+						";
+		echo '
+						<div id="socailshare">
+							';
 		facebookShare($url);
 		twitterShare($url);
 		googleShare($url);
 		echo '
-					</div>
-					';
+						</div>
+						';
 	}
 	if(isset($_GET['signupCompleted'])) echo '
-				<div id="success">Signup completed</div>
-				';
+						<div id="success">Signup completed</div>
+						';
 	if(isset($_GET['newPassword']))
 	{
 		if($_GET['newPassword']=='true')
 		{
 			echo '
-				<div id="success">Your password has been changed. You can now login</div>
-				';
+						<div id="success">Your password has been changed. You can now login</div>
+						';
 		}
 		else
 		{
 			echo "
-				<div id='success'>
-					Oups... Your password hasen't been changed. Please try again later
-				</div>
-				";
+						<div id='success'>
+							Oups... Your password hasen't been changed. Please try again later
+						</div>
+						";
 		}
 	}
 	if(isset($_GET['newPasswordEmailSent']))
 	{
 		$print_email = $_GET['newPasswordEmailSent'];
 		echo "
-				<div id='success'>An email has been sent to you at $print_email</div>
-				";
+						<div id='success'>An email has been sent to you at $print_email</div>
+						";
 	}
 	if(isset($_GET['captchaErr'])) echo "
-				<div id='error'>
-					The CAPTCHA field was not entered correctly. Please try again
-				</div>
-				";
+						<div id='error'>
+							The CAPTCHA field was not entered correctly. Please try again
+						</div>
+						";
 	$page = $_GET['page'];
 
 	if (file_exists($page.'.php'))
