@@ -174,14 +174,15 @@ if(
 	echo '
 						<script type="text/javascript"><!--
 							google_ad_client = "ca-pub-6531227695181642";
-							/* Filehunt over logo */
-							google_ad_slot = "6700430681";
-							google_ad_width = 468;
-							google_ad_height = 60;
+							/* Filehunt top logo */
+							google_ad_slot = "4106923675";
+							google_ad_width = 728;
+							google_ad_height = 90;
 							//-->
 						</script>
 						<script type="text/javascript"
-							src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+							src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+						</script>
 						<div id="logo">
 							<a href="?page=search">
 								<img src="img/logo.png" height=179 width=207 />
