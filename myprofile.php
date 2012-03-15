@@ -6,7 +6,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		die();
 	}
 
-if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
+if ((!isset($_SESSION['dbusername'])))
 {
 	header('Location: ?page=login&attemptedSite=myprofile');
 	die();
@@ -14,18 +14,15 @@ if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
 else 
 {
 	$session_user     = $_SESSION['dbusername'];
-	$session_password = $_SESSION['dbpassword'];
 	$session_userid   = $_SESSION['dbuserid'];
 
 
 	$sql    = "SELECT *
 			FROM users
-			WHERE username='$session_user'
-			    AND password='$session_password'";
+			WHERE username='$session_user'";
 	$result = mysql_query($sql,$con);
 	$row    = mysql_fetch_array($result);
 	$sql_username = $row['username'];
-	$sql_password = $row['password'];
 	$sql_email    = $row['email'];
 
 	if(isset($_GET['deleteSuccess']) && $_GET['deleteSuccess']=='true') echo '<div id="success">Your file was successfully deleted</div>

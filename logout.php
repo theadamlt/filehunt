@@ -6,7 +6,6 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	}
 
 setcookie("dbusername", $_SESSION['dbusername'], time()-604800);
-setcookie("dbpassword", $_SESSION['dbpassword'], time()-604800);
 setcookie("dbuserid", $_SESSION['dbuserid'], time()-604800);
 setcookie("dbuseremail", $_SESSION['dbuseremail'], time()-604800);
 session_destroy();

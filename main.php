@@ -21,7 +21,7 @@ if(
 
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 
-		if ((!isset($_SESSION['dbusername']))&&(!isset($_SESSION['dbpassword'])))
+		if ((!isset($_SESSION['dbusername'])))
 		{
 			echo '<div id="links">
 <ul>

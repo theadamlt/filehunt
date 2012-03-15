@@ -9,7 +9,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 if(isset($_GET['deleteReport']) && $_GET['deleteReport'] == 'true') echo '<div id="success">The report has successfylly been removed</div>
 ';
 
-if ((isset($_SESSION['dbusername']))&&(isset($_SESSION['dbpassword'])))
+if (isset($_SESSION['dbusername']))
 {
 	if(isset($_GET['deleteSuccess'])) echo '
 <div id="success">The file was successfully deleted</div>
@@ -34,12 +34,10 @@ _END;
 <div id="success">The mails was successfully sent</div>
 ';
 	$username = $_SESSION['dbusername'];
-	$password = $_SESSION['dbpassword'];
 	$userid   = $_SESSION['dbuserid'];
 	$sql = "SELECT *
 			FROM users
 			WHERE username='$username'
-			    AND password='$password'
 			    AND rowID=$userid
 			    AND ADMIN=1 LIMIT 1";
 	$result = mysql_query($sql,$con);
@@ -206,8 +204,7 @@ _END;
 				FROM files f,
 				     users u,
 				     downloads d
-				WHERE f.uploaded_date
-	< $datestrto
+				WHERE f.uploaded_date < $datestrto
 				    AND f.uploaded_by=u.rowID
 				    AND d.downloaded_date < $datestrto";
 	$result = mysql_query($sql);

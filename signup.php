@@ -85,7 +85,6 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 					$row    = mysql_fetch_array($result);
 					
 					$_SESSION['dbusername'] = $row['username'];
-					$_SESSION['dbpassword'] = $row['password'];
 					$_SESSION['dbuserid']   = $row['rowID'];
 					$_SESSION['dbemail']    = $row['email'];
 

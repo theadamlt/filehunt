@@ -6,7 +6,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		die();
 	}
 
-if (isset($_SESSION['dbusername']) && isset($_SESSION['dbpassword']))
+if (isset($_SESSION['dbusername']))
 {
 	header('Location: ?page=search');
 	die();
@@ -28,14 +28,12 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 	{	
 		$row = mysql_fetch_array($result);
 		$_SESSION['dbusername'] = $row['username'];
-		$_SESSION['dbpassword'] = $row['password'];
 		$_SESSION['dbuserid']   = $row['rowID'];
 		$_SESSION['dbemail']    = $row['email'];
 
 		if($_POST['remember'])
 		{
 			setcookie("dbusername", $row['username'], time()+604800);
-			setcookie("dbpassword", $row['password'], time()+604800);
 			setcookie("dbuserid", $row['rowID'], time()+604800);
 			setcookie("dbuseremail", $row['email'], time()+604800);
 		}
