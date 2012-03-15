@@ -86,7 +86,7 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 			       s.subscribed,
 			       u.rowID AS u_rowID,
 			       u.username AS u_username,
-			       u.last_sub_check AS u_lase_sub_check,
+			       me.last_sub_check AS u_last_sub_check,
 			       f.file AS f_file,
 			       f.uploaded_date AS f_uploaded_date,
 			       f.uploaded_by AS f_uploaded_by,
@@ -94,12 +94,13 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 			       f.rowID AS f_rowID
 			FROM subs s,
 			     users u,
+			     users me,
 			     files f
 			WHERE s.subscriber = $userID2
+			    AND me.rowID = $userID2
 			    AND s.subscribed = f.uploaded_by
-			    AND f.uploaded_by = s.subscribed
 			    AND f.uploaded_by = u.rowID
-			    AND u.last_sub_check < f.uploaded_date";
+			    AND me.last_sub_check < f.uploaded_date";
 	$result = mysql_query($sql);
 	if(mysql_num_rows($result) != 0)
 	{
@@ -109,7 +110,6 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
 	<th>Filename</th>
 	<th>Uploaded by</th>
 	<th>Upload date</th>
-	<th>Remove from list</th>
 	';
         $count = 0;
 		while($row = mysql_fetch_array($result))
@@ -143,11 +143,6 @@ if(isset($_SESSION['dbuserid']) && isset($_SESSION['dbuserid']))
             echo '
 			<td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td>
 			';
-            echo '
-			<td>
-				<a href="#" onClick=deleteFromSubList('.$row['f_rowID'].')>
-					<img height=32 width=32 src="img/delete.png"></td>
-				';
             echo '
 			</tr>
 			';
