@@ -79,8 +79,9 @@ Be careful! This file has been reported at abuse! We are on the case. You can st
 			<th>Uploaded by</th>
 			<th>Size</th>
 			<th>Date uploaded</th>
-			<th>Mimetype</th>
-			<th>Times downloaded</th>
+			<th>Mimetype</th>';
+			if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '<th>Dimentions</th>';
+			echo '<th>Times downloaded</th>
 			';
 	echo '
 			<tr class="alt">
@@ -99,6 +100,18 @@ Be careful! This file has been reported at abuse! We are on the case. You can st
 	echo '
 				<td>'.$row['f_mimetype'].'</td>
 				';
+	if(substr($row['f_mimetype'], 0, 6) == 'image/')
+	{
+		if($_SERVER['HTTP_HOST'] == 'localhost') $url = 'http://localhost/filehunt/';
+		else $url = $_SERVER['HTTP_HOST'].'/';
+		$size = getimagesize($url.'printimage.php?id='.$fileID);
+		$explode = explode('"', $size[3]);
+		$width = $explode[1];
+		$height = $explode[3];
+		echo '
+		<td>Height: '.$height.' Width: '.$width.'</td>';
+	}
+
 	echo "
 				<td>
 					<a href='?page=download_analysis&file=$fileID'>$download_numrows</a>
@@ -127,10 +140,17 @@ Be careful! This file has been reported at abuse! We are on the case. You can st
 	}
 
 
-	if(substr($row['f_mimetype'], 0, 6) == 'image/') echo '
-<br />
-<img src="printimage.php?id='.$fileID.'" />
-';
+	if(substr($row['f_mimetype'], 0, 6) == 'image/')
+	{
+		if($height > 500)
+		{
+			$height = round($height / 5.184);
+			$width = round($width / 5.184);
+		}
+		echo '
+			<br />
+			<img src="printimage.php?id='.$fileID.'" height="'.$height.'" width="'.$width.'" />';
+	}
 
 	echo '
 <h1>Comments</h1>
