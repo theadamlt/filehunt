@@ -38,8 +38,10 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 	{
 		$username  = mysql_enteries_fix_string($_POST['username']);
 		$password  = mysql_enteries_fix_string($_POST['password']);
+		$password2  = mysql_enteries_fix_string($_POST['password2']);
 		$email     = mysql_enteries_fix_string($_POST['email']);
-
+		if($password == $password2)
+		{
 			//Check if user exists
 			$sql = "SELECT *
 					FROM users
@@ -48,9 +50,9 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 			$result = mysql_query($sql,$con);
 			$numrows = mysql_num_rows($result);
 			if($numrows!=0) echo '
-<div id="error"> <b>Oups... Username or email already exists in database. Try another one</b> 
-</div>
-';
+							<div id="error"> <b>Oups... Username or email already exists in database. Try another one</b> 
+							</div>
+							';
 			else
 			{
 				$random = rand(30, 100)*rand(7574,324)*rand(323,876);
@@ -88,10 +90,16 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 
 				}
 			}
+		}
+		else
+		{
+			header('Location: ?page=signup&signupError=true');
+			die();
+		}
 	}
 	else
 	{
-		header('Location: ?page=signup&signupEmpty=true');
+		header('Location: ?page=signup&signupError=true');
 		die();
 	}
 }
@@ -100,7 +108,7 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 <h1 style="text-align:center;">Signup</h1>
 <div id="signup">
 
-	<? if (isset($_GET['signupEmpty'])) echo '<div id="error">You left somwthing empty. Try again</div>
+	<? if (isset($_GET['signupError'])) echo '<div id="error">Oups... You either left something empty or the passwords didn\'t match. Try again</div>
 '; ?>
 <form class="form" action="?page=signup" method="post" onsubmit="validateSignup()" name="signup">
 	<p class="username">
