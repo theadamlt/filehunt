@@ -176,7 +176,7 @@ else
 
 
 ?>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
 	<script src="js/jquery.details.min.js"></script>
 	<script>
 			window.console || (window.console = { 'log': alert });

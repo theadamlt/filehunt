@@ -26,6 +26,7 @@
 <link rel="icon" type="image/png" href="img/favicon.png" />
 <link rel="stylesheet" type="text/css" href="css/style.min.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="js/main.min.js"></script>
 <script>
 	if (!isDetailsSupported)
@@ -41,6 +42,9 @@
 <body>
 	<?php
 			header('Content-Type: text/html; charset=utf-8');
+			header('Cache-control: public');
+			header('Vary: Accept-Encoding');
+			header('Last-Modified: Friday 16 March 2012');
 			require_once('main.php');
 		?>
 	<br />
@@ -53,8 +57,7 @@ google_ad_width = 728;
 google_ad_height = 90;
 //-->
 </script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+<script async type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 
 </body>
