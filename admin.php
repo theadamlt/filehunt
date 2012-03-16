@@ -202,7 +202,8 @@ _END;
 				FROM files f,
 				     users u,
 				     downloads d
-				WHERE f.uploaded_date < $datestrto
+				WHERE f.uploaded_date
+	< $datestrto
 				    AND f.uploaded_by=u.rowID
 				    AND d.downloaded_date < $datestrto";
 	$result = mysql_query($sql);

@@ -60,16 +60,12 @@ if(
 		}
 		else
 		{
-			$sql = "SELECT s.rowID AS s_rowID,
-			       s.subscriber AS s_subscriber,
+			$sql = "SELECT s.subscriber AS s_subscriber,
 			       s.subscribed AS s_subscribed, 
 			       u.rowID AS u_rowID,
-			       u.username AS u_username,
 			       me.last_sub_check AS u_last_sub_check,
-			       f.file AS f_file,
 			       f.uploaded_date AS f_uploaded_date,
 			       f.uploaded_by AS f_uploaded_by,
-			       f.size AS f_size,
 			       f.rowID AS f_rowID
 			FROM subs s,
 			     users u,
@@ -81,11 +77,15 @@ if(
 			    AND f.uploaded_by = u.rowID
 			    AND me.last_sub_check < f.uploaded_date";
 			$result = mysql_query($sql);
+			echo mysql_error();
+			$sql2 = "SELECT * FROM users WHERE rowID=$_SESSION[dbuserid] LIMIT 1";
+			$result2 = mysql_query($sql2);
+			$row = mysql_fetch_array($result2);
 			echo '
 		<div id="links">
 			<ul>
 				<li>
-					<span class="loggedin">Logged in as: '.$_SESSION["dbuserid"].'</span>
+					<span class="loggedin">Logged in as: '.$row['username'].'</span>
 				</li>
 				<li>
 					<a href="?page=logout">Logout</a>
@@ -142,6 +142,8 @@ if(
 									<a href="?page=upload">Upload</a>
 								</li>
 								';
+			if($row['admin'] == 1 && $_GET['page'] == 'admin') echo '<li class=current_page_item><a href="?page=admin">Admin</a></li>';
+			elseif($row['admin'] == 1) echo '<li><a href="?page=admin">Admin</a></li>';
 			//Miniform
 			/*echo '
 								<li>
@@ -248,7 +250,7 @@ if(
 		else
 		{
 			echo "
-						<div id='success'>
+						<div id='error'>
 							Oups... Your password hasen't been changed. Please try again later
 						</div>
 						";

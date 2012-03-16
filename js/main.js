@@ -290,3 +290,16 @@ function validate_login()
         document.login.password.value = MD5(document.login.password.value);
         return true;
 }
+
+function validate_password_reset()
+{
+    if(document.reset.password.value == document.reset.password2.value)
+    { 
+        document.reset.password.value = MD5(document.reset.password.value);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

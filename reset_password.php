@@ -20,7 +20,7 @@ if (isset($_POST['username']) && isset($_POST['security_code']))
 	$row = mysql_fetch_array($result);
 	$email = $row['email'];
 		echo <<< _END
-	<form class="form" action="?page=reset_password&yes=true" method="post">
+	<form class="form" name="reset" action="?page=reset_password&yes=true" method="post" onsubmit="validate_password_reset()">
 <p class="password">
 	<input type="password" name="password" id="password1" />
 	<label for="password1">New password</label>
@@ -42,7 +42,7 @@ else
 {
 	echo
 <<< _END
-	<form class="form" action="?page=reset_password&yes=true" method="post">
+	<form class="form" action="?page=reset_password&yes=true"  method="post">
 <p class="username">
 	<input type="text" name="username" id="username" />
 	<label for="username">Username</label>
@@ -60,15 +60,13 @@ _END;
 
 if(isset($_POST['password']) && isset($_POST['password2']))
 {
-	if($_POST['password'] == $_POST['password2'])
-	{
 		$password = mysql_enteries_fix_string($_POST['password']);
 		$username = mysql_enteries_fix_string($_POST['username']);
 		$email    = mysql_enteries_fix_string($_POST['email']);
 		$random = $_POST['security_code'];
 		$random_new = rand(30, 100)*rand(7574,324)*rand(323,876);
 		$sql = "UPDATE users
-				SET password=MD5('$password'),
+				SET password='$password',
 				             security_code=$random_new
 				WHERE security_code=$random
 				    AND username='$username' LIMIT 1";
@@ -77,7 +75,6 @@ if(isset($_POST['password']) && isset($_POST['password2']))
 			header('Location: ?page=search&newPassword=true');
 			die();
 		}
-	}
 	else
 	{
 		header('Location: ?page=search&newPassword=false');
