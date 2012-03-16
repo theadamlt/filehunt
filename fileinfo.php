@@ -103,7 +103,7 @@ Be careful! This file has been reported at abuse! We are on the case. You can st
 	if(substr($row['f_mimetype'], 0, 6) == 'image/')
 	{
 		if($_SERVER['HTTP_HOST'] == 'localhost') $url = 'http://localhost/filehunt/';
-		else $url = $_SERVER['HTTP_HOST'].'/';
+		else $url = 'http://'.$_SERVER['HTTP_HOST'].'/';
 		$size = getimagesize($url.'printimage.php?id='.$fileID);
 		$explode = explode('"', $size[3]);
 		$width = $explode[1];
