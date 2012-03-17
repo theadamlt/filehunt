@@ -2,6 +2,10 @@ body {
     font: 16px/150% Verdana, Tahoma, sans-serif;
     text-align: center;
 }
+a img
+{
+    border: none;
+}
 
 /*Basic divs for user messages */
 #login {

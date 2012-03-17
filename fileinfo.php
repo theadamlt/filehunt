@@ -262,7 +262,7 @@ _END;
 <br />
 <div id='error'>
 	You need to
-	<a href='?page=login&attemptedSite=comments&fileID=$fileID_attempt'>login</a>
+	<a href='?page=login&attemptedSite=fileinfo&fileID=$fileID_attempt'>login</a>
 	to comment!
 </div>
 ";

@@ -268,9 +268,10 @@ if(
 							The CAPTCHA field was not entered correctly. Please try again
 						</div>
 						";
+	
 	$page = $_GET['page'];
 
-	if (file_exists($page.'.php'))
+	if(file_exists($page.'.php'))
 	{
 		if($page != '404' || $page != '403') require($page.'.php');
 	} else require('errors/'.$page.'.php');

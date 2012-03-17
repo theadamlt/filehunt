@@ -44,7 +44,6 @@
 			header('Content-Type: text/html; charset=utf-8');
 			header('Cache-control: public');
 			header('Vary: Accept-Encoding');
-			header('Last-Modified: Friday 16 March 2012');
 			require_once('main.php');
 		?>
 	<br />
