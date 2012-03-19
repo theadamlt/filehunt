@@ -77,13 +77,10 @@ else return(1); //Even number
 
 function facebookShare($url)
 {
-		echo <<<_END
-<script>
-function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
-</script>
-<a rel="nofollow" href="http://www.facebook.com/share.php?u=$url" onclick="return fbs_click()" target="_blank">
-<img src="img/facebook.ico" height="32" width="32"></a>
-&nbsp;&nbsp;&nbsp;&nbsp;
+echo <<< _END
+	<a href="http://www.facebook.com/sharer.php
+?u=$url&t=I+just+uploaded+a+file+in+filehunt%21"><img src="img/facebook.ico" height="32" width="32"></a>
+	&nbsp;&nbsp;&nbsp;&nbsp;
 _END;
 }
 function twitterShare($url)
