@@ -48,13 +48,8 @@
 		?>
 	<br />
 	<br />
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-6531227695181642";
-/* Filehunt under logo */
-google_ad_slot = "5163483525";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
+<script type="text/javascript">
+document.getElementById('links').innerhtml = 'Hej';
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>

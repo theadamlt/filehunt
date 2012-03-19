@@ -210,8 +210,7 @@ if(
 		$host = $_SERVER['HTTP_HOST'];
 		$id = $_GET['id'];
 		$downloadLink = "?page=fileinfo&fileID=$id";
-		if($host == ',filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
-		elseif ($host != 'filehunt.netau.net') $url = $host.'/filehunt/'.$downloadLink;
+		if($host == 'filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
 		else $url = $host.'/'.$downloadLink;
 		echo '
 						<div id="success">Upload succeeded</div>
