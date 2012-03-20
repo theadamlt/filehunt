@@ -41,15 +41,15 @@ _END;
 	$result = mysql_query($sql,$con);
 	if(mysql_num_rows($result)==1)
 	{
-		if(isset($_POST['username']) && isset($_POST['password']))
+		if(isset($_POST['subject']) && isset($_POST['message']))
 		{
-			$sql2    = "SELECT * FROM users";
-			$result2 = mysql_query($sql,$con);
+			$sql2 = "SELECT * FROM users";
+			$result2 = mysql_query($sql2);
 			if($_POST['subject']!='' && $_POST['message']!='')
 			{
 				while ($row2 = mysql_fetch_array($result2))
 				{
-					mail($row2['email'], $_POST['subject'], $_POST['message'], 'From: filehunt@filehunt.com');
+					mail($row2['email'], trim(strtoupper($_POST['subject'])), trim(strtoupper($_POST['message'])), 'From: filehunt@filehunt.com');
 				}
 				header('Location: ?page=admin&mailSuccess=true');
 				
