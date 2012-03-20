@@ -11,15 +11,15 @@ if(isset($_GET['passwordChange']))
 	if($_GET['passwordChange'] == 'true')
 	{
 		echo '
-					<div id="success">Your password has been changed!</div>
+					<br><div id="success">Your password has been changed!</div><br>
 					';
 	}
 	else
 	{
 		echo "
-					<div id='error'>
+					<br><div id='error'>
 						Oups... Your password hasen't been changed. Please try again later
-					</div>
+					</div><br>
 					";
 	}
 }
@@ -44,7 +44,7 @@ else
 	if(isset($_GET['deleteSuccess']) && $_GET['deleteSuccess']=='true') echo '<div id="success">Your file was successfully deleted</div>
 ';
 	elseif(isset($_GET['deleteSuccess'])) echo "
-<div id='error'>Your file wasn't deleted. Please try again later</div>
+<br><div id='error'>Your file wasn't deleted. Please try again later</div><br>
 ";
 
 	echo '
@@ -106,7 +106,7 @@ else
 			</form>
 		</details>
 	</details>
-</selection>
+</selection><br>
 ';
 
 	$sql = "SELECT *
@@ -166,7 +166,7 @@ else
 ";
 	}
 	else echo '
-<div id="error">You have no uploads!</div>
+<br><div id="error">You have no uploads!</div><br>
 ';
 }
 
