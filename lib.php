@@ -175,4 +175,11 @@ function calc_file_size($file)
 	}
 	return $size;
 }
+
+function format_string($str)
+{
+	$str = trim(ucfirst(strtolower($str)));
+	$str = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'),$str);
+	return $str;
+}
 ?>

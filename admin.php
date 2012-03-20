@@ -6,16 +6,17 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		die();
 	}
 
-if(isset($_GET['deleteReport']) && $_GET['deleteReport'] == 'true') echo '<div id="success">The report has successfylly been removed</div>
+if(isset($_GET['deleteReport']) && $_GET['deleteReport'] == 'true') echo '<div id="success">The report has successfully been removed</div>';
+if(isset($_GET['mailSuccess'])) echo '
+<div id="success">The mails was successfully sent</div>
 ';
 
 if (isset($_SESSION['dbuserid']))
 {
 	if(isset($_GET['deleteSuccess'])) echo '
-<div id="success">The file was successfully deleted</div>
-';
-	echo
-<<< _END
+	<div id="success">The file was successfully deleted</div>';
+	
+	echo <<< _END
 <h2>Send mail to all users</h2>
 <form class="form" action="?page=admin" method="post">
 <p class="subject">
@@ -30,9 +31,6 @@ if (isset($_SESSION['dbuserid']))
 	<input type="submit" value="Send"></form>
 </p>
 _END;
-	if(isset($_GET['mailSuccess'])) echo '
-<div id="success">The mails was successfully sent</div>
-';
 	$userid   = $_SESSION['dbuserid'];
 	$sql = "SELECT *
 			FROM users
@@ -47,9 +45,10 @@ _END;
 			$result2 = mysql_query($sql2);
 			if($_POST['subject']!='' && $_POST['message']!='')
 			{
+				$message = trim(ucfirst(strtolower($_POST['message'])));
 				while ($row2 = mysql_fetch_array($result2))
 				{
-					mail($row2['email'], trim(strtoupper($_POST['subject'])), trim(strtoupper($_POST['message'])), 'From: filehunt@filehunt.com');
+					mail($row2['email'], format_string($_POST['subject']), format_string($_POST['message']), 'From: filehunt@filehunt.com');
 				}
 				header('Location: ?page=admin&mailSuccess=true');
 				
