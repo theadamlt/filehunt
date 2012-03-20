@@ -269,8 +269,9 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 	
 	$page = $_GET['page'];
 
-	if(file_exists($page.'.php'))
+	if(file_exists($page.'.php') && $page != '404' && $page != '403')
 	{
-		if($page != '404' || $page != '403') require($page.'.php');
-	} else require('errors/'.$page.'.php');
+		require($page.'.php');
+	} 
+	else require('errors/404.php');
 ?>

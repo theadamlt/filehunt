@@ -17,7 +17,7 @@ if (isset($_SESSION['dbuserid']))
 	echo
 <<< _END
 <h2>Send mail to all users</h2>
-<form class="form" action="?page='admin'" method="post">
+<form class="form" action="?page=admin" method="post">
 <p class="subject">
 	<input type="text" name="subject" placeholder="Subject" id="subject" />
 	<label for="subject">Subject</label>
