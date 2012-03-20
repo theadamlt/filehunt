@@ -1,10 +1,28 @@
 <?php
 require_once('lib.php');
 if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
+{
+	header('Location: index.php?page=myprofile');
+	die();
+}
+
+if(isset($_GET['passwordChange']))
+{
+	if($_GET['passwordChange'] == 'true')
 	{
-		header('Location: index.php?page=myprofile');
-		die();
+		echo '
+					<div id="success">Your password has been changed!</div>
+					';
 	}
+	else
+	{
+		echo "
+					<div id='error'>
+						Oups... Your password hasen't been changed. Please try again later
+					</div>
+					";
+	}
+}
 
 if ((!isset($_SESSION['dbuserid'])))
 {
@@ -36,50 +54,66 @@ else
 		<br>
 		<div id="signup">
 			<span class="form">
-			<table>
-			<tr>
-			<td><input type="text" id="username" value="'.$sql_username.'" readonly></td>
-			<td><label for="username">Username</label></td>
-			</tr>
-			<tr>
-			<td><input type="text" id="email" value="'.$sql_email.'" readonly></td>
-			<td><label for="email">Email</label></td>
-			</tr>
-			</table>
+				<table>
+					<tr>
+						<td>
+							<input type="text" id="username" value="'.$sql_username.'" readonly></td>
+						<td>
+							<label for="username">Username</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" id="email" value="'.$sql_email.'" readonly></td>
+						<td>
+							<label for="email">Email</label>
+						</td>
+					</tr>
+				</table>
 			</div>
-			</span>
-			<details>
+		</span>
+		<details>
 			<summary class="second">New password</summary>
 			<br>
 			<form class="form" name="newpassword" action="?page=myprofile" onsubmit="validate_new_password()" method="post">
-			<table>
-			<tr>
-			<td><input type="password" id="curpassword" name="curpassword"></td>			
-			<td><label for="curpassword">Curent password</label></td>
-			</tr>		
-			<tr>
-			<td><input type="password" name="password" id="password"></td>
-			<td><label for="password">New password</label></td>
-			</tr>									
-			<tr>
-			<td><input type="password" name="password1" id="password2"></td>
-			<td><label for="password2">New Password again</label></td>
-			</tr>
-			<tr>
-			<td class="submit"><input type="submit" value="Submit"></td>
-			</tr>
-			</table>
+				<table>
+					<tr>
+						<td>
+							<input type="password" id="curpassword" name="curpassword"></td>
+						<td>
+							<label for="curpassword">Curent password</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" name="password" id="password"></td>
+						<td>
+							<label for="password">New password</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" name="password2" id="password2"></td>
+						<td>
+							<label for="password2">New Password again</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="submit">
+							<input type="submit" value="Submit"></td>
+					</tr>
+				</table>
 			</form>
-			</details>
+		</details>
 	</details>
-	</selection>
+</selection>
 ';
 
 	$sql = "SELECT *
 			FROM files
 			WHERE uploaded_by=$session_userid";
 	$result = mysql_query($sql,$con);
-	if(mysql_num_rows($result)!=0)
+	if(mysql_num_rows($result) != 0)
 	{
 	$count = 0; 
 	echo "
@@ -136,11 +170,12 @@ else
 ';
 }
 
-if(isset($_POST['curpassword']) && isset($_POST['password']))
+if(isset($_POST['curpassword']) && isset($_POST['password']) && isset($_POST['password2']))
 {
-	$password = mysql_enteries_fix_string($_POST['password']);
-	$password2 = mysql_enteries_fix_string($_POST['password']);
+	$password    = mysql_enteries_fix_string($_POST['password']);
+	$password2   = mysql_enteries_fix_string($_POST['password2']);
 	$curpassword = mysql_enteries_fix_string($_POST['curpassword']);
+
 	if($password == $password2)
 	{
 		$sql = "SELECT * FROM users WHERE rowID=$_SESSION[dbuserid]";
@@ -148,24 +183,30 @@ if(isset($_POST['curpassword']) && isset($_POST['password']))
 		$row = mysql_fetch_array($result);
 		if($row['password'] == $curpassword)
 		{
-			$curpassword = mysql_enteries_fix_string($_POST['curpassword']);
 			$userid = $_SESSION['dbuserid'];
 			$sql = "UPDATE users
-					SET password='$password',
-					WHERE rowID='$userid' LIMIT 1";
-			$result =  mysql_query($sql);
-			header('Location: ?page=myprofile&newPassword=true');
-			die();
+					SET password='$password'
+					WHERE rowID=$userid LIMIT 1";
+			if($result =  mysql_query($sql))
+			{
+				header('Location: ?page=myprofile&passwordChange=true');
+				die();
+			}
+			else
+			{
+				header('Location: ?page=myprofile&passwordChange=false');
+				die();
+			}
 		}
 		else
 		{
-			header('Location: ?page=myprofile&newPassword=false');
+			header('Location: ?page=myprofile&passwordChange=false');
 			die();
 		}
 	}
 	else
 	{
-		header('Location: ?page=myprofile&newPassword=false');
+		header("Location: ?page=myprofile&passwordChange=false");
 		die();
 	}
 }
