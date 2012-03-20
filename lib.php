@@ -81,7 +81,7 @@ $url = urlencode($url);
 
 echo <<< _END
 	<a href="http://www.facebook.com/sharer.php
-?u=$url&t=I+just+uploaded+a+file+on+filehunt%21"><img src="img/facebook.ico" height="32" width="32"></a>
+?u=http://$url&t=I+just+uploaded+a+file+on+filehunt%21"><img src="img/facebook.ico" height="32" width="32"></a>
 	&nbsp;&nbsp;&nbsp;&nbsp;
 _END;
 }
@@ -90,7 +90,7 @@ function twitterShare($url)
 	$url = urlencode($url);
 	echo
 <<< _END
-<a href="http://twitter.com/home?status=I just uploaded a file on fileHunt! $url" title="Share on Twitter" target=' _blank'><img src="img/twitter.ico" height="32" width="32"></a>
+<a href="http://twitter.com/home?status=I just uploaded a file on fileHunt! http://$url" title="Share on Twitter" target=' _blank'><img src="img/twitter.ico" height="32" width="32"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
 
 _END;

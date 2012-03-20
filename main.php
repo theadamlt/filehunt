@@ -3,8 +3,7 @@ require_once('lib.php');
 mysql_selector();
 session_start();
 
-if(
-	isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
+if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 	{
 		$_SESSION['dbuserid']    = $_COOKIE['dbuserid'];
 	}

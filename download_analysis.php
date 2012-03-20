@@ -55,7 +55,6 @@ if(isset($_GET['file']))
 			<td>'.date("d/m/y H:i",$row['d_downloaded_date']).'</td>
 		</tr>
 		';
-				++$count;
 			}
 			echo '
 	</table>
