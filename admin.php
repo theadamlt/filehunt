@@ -45,10 +45,9 @@ _END;
 			$result2 = mysql_query($sql2);
 			if($_POST['subject']!='' && $_POST['message']!='')
 			{
-				$message = trim(ucfirst(strtolower($_POST['message'])));
 				while ($row2 = mysql_fetch_array($result2))
 				{
-					mail($row2['email'], format_string($_POST['subject']), format_string($_POST['message']), 'From: filehunt@filehunt.com');
+					mail($row2['email'], ($_POST['subject']), format_string($_POST['message']), 'From: filehunt@filehunt.com');
 				}
 				header('Location: ?page=admin&mailSuccess=true');
 				
