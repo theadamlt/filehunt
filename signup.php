@@ -111,35 +111,40 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 	<? if (isset($_GET['signupError'])) echo '<div id="error">Oups... You either left something empty or the passwords didn\'t match. Try again</div>
 '; ?>
 <form class="form" action="?page=signup" method="post" onsubmit="validateSignup()" name="signup">
-	<p class="username">
-		<input type="text" name="username" placeholder="Username" id="username" />
-		<label for="username">Username*</label>
-	</p>
+<table>
+	<tr>
+	<td><input type="text" name="username" placeholder="Username" id="username" /></td>
+	<td><label for="name">Username</label></td>
+	</tr>
 
-	<p class="password">
-		<input type="password" name="password" placeholder="Password" id="password" />
-		<label for="password">Password*</label>
-	</p>
-	<p class="password">
-		<input type="password" name="password2" placeholder="Password again" id="password2" />
-		<label for="password2">Password Again*</label>
-	</p>
-	<p class="email">
-		<input type="email" name="email" placeholder="Email" id="email" />
-		<label for="email">Email*</label>
-	</p>
+<tr>
+<td><input type="password" name="password" placeholder="Password" id="password" /></td>
+<td><label for="password">Password</label></td>
+</tr>
+
+<tr>
+<td><input type="password" name="password2" placeholder="Password again" id="password2" /></td>
+<td><label for="password2">Password Again*</label></td>
+</tr>
+
+<tr>
+<td><input type="email" name="email" placeholder="Email" id="email" /></td>
+<td><label for="email">Email*</label></td>
+</tr>
+<tr>
+	<td>
 	<?php
 	require_once('recaptchalib.php');
-	if($_SERVER['HTTP_HOST']=='85.83.1.123') $publickey = "6LdnNM4SAAAAAGyaTpT4VCx7Ig4UZJ9YL0vUYTeT"; // you got this from the signup page
-	if($_SERVER['HTTP_HOST']=='localhost') $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN"; // you got this from the signup page
-	if($_SERVER['HTTP_HOST']=='10.180.2.167' )$publickey = "6Le4M84SAAAAAFu5m6IE_LERTQK--fIrEaqHoHuX"; // you got this from the signup page
-    if($_SERVER['HTTP_HOST']=='filehunt.pagodabox.com') $publickey = $_SERVER['CAPTCHA_PUBLIC'];
-    echo '<center>'.recaptcha_get_html($publickey).'</center>
-';
-?>
-<p class="submit">
+	if($_SERVER['HTTP_HOST']=='localhost') $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN";
+    elseif($_SERVER['HTTP_HOST']=='filehunt.pagodabox.com') $publickey = $_SERVER['CAPTCHA_PUBLIC'];
+    echo '<center>'.recaptcha_get_html($publickey).'</center>';
+    ?>
+</td>
+</tr>
+<tr>
 	<input type="hidden" name="start" />
-	<input type="submit" value="Signup"/>
-</p>
+	<td class="submit"><input type="submit" value="Signup"/></td>
+</tr>
+</table>
 </form>
 </div>

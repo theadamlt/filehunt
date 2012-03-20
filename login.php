@@ -70,21 +70,25 @@ if (isset($_GET['attemptedSite']))
 <div id="login">
 
 <form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>" method="post" onsubmit="validate_login()" name="login">
-<p class="name">
-	<input type="text" name="username" placeholder="Username" id="username" />
-	<label for="name">Username</label>
-</p>
+<table>
+<tr>
+	<td><input type="text" name="username" placeholder="Username" id="username" /></td>
+	<td><label for="name">Username</label></td>
+</tr>
 
-<p class="password">
-	<input type="password" name="password" placeholder="Password" id="password" />
-	<label for="password">Password</label>
-</p>
-<p class="checkbox">
-	<label for="checkbox">Remember me</label>
-	<input type="checkbox" name="remember" value="true" checked id="checkbox"></p>
-<p class="submit">
-	<input type="hidden" name="start" />
-	<input type="submit" value="Login" ></p>
+<tr>
+<td><input type="password" name="password" placeholder="Password" id="password" /></td>
+<td><label for="password">Password</label></td>
+</tr>
+
+<tr>
+	<td><label for="checkbox">Remember me</label></td>
+	<td><input type="checkbox" name="remember" value="true" checked id="checkbox"></td>
+</tr>
+<tr>
+	<td class="submit"><input type="submit" value="Login" ></td>
+</tr>
+</table>
 </form>
 <a href="?page=forgot_password">Forgot password?</a>
 </div>

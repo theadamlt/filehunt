@@ -5,7 +5,11 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=reset_password');
 		die();
 	}
-
+if(isset($_SESSION['dbuserid']))
+{
+	header('Location: ?page=search');
+	die();
+}
 
 if (isset($_POST['username']) && isset($_POST['security_code']))
 {
@@ -58,7 +62,7 @@ else
 _END;
 }
 
-if(isset($_POST['password']) && isset($_POST['password2']))
+if(isset($_POST['password']))
 {
 		$password = mysql_enteries_fix_string($_POST['password']);
 		$username = mysql_enteries_fix_string($_POST['username']);

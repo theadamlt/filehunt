@@ -281,8 +281,8 @@ function validateSignup()
 
 function validate_login()
 {
-        document.login.password.value = MD5(document.login.password.value);
-        return true;
+    document.login.password.value = MD5(document.login.password.value);
+    return true;
 }
 
 function validate_password_reset()
@@ -296,4 +296,12 @@ function validate_password_reset()
     {
         return false;
     }
+}
+
+function validate_new_password()
+{
+    document.newpassword.password.value    = MD5(document.newpassword.password.value);
+    document.newpassword.password2.value   = MD5(document.newpassword.password2.value);
+    document.newpassword.curpassword.value = MD5(document.newpassword.curpassword.value);
+    return true;
 }

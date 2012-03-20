@@ -5,7 +5,11 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 		header('Location: index.php?page=forgot_password');
 		die();
 	}
-
+if(isset($_SESSION['dbuserid']))
+{
+	header('Location: ?page=search');
+	die();
+}
 
 
 if(isset($_POST['username']) && isset($_POST['email']))
