@@ -25,21 +25,23 @@ if (isset($_POST['username']) && isset($_POST['security_code']))
 	$email = $row['email'];
 		echo <<< _END
 	<form class="form" name="reset" action="?page=reset_password&yes=true" method="post" onsubmit="validate_password_reset()">
-<p class="password">
-	<input type="password" name="password" id="password1" />
-	<label for="password1">New password</label>
-</p>
-<p class="password">
-	<input type="password" name="password2" id="password2" />
-	<label for="password2">New password again</label>
-</p>
-<input type="hidden" name="username" value="$username" />
-<input type="hidden" name="email" value="$email" />
-<input type="hidden" name="security_code" value="$security_code" />
-<p class="submit">
-	<input type="submit" value="submit" />
-</p>
-</form>
+	<table>
+	<tr>
+		<td><input type="password" name="password" id="password1"></td>
+		<td><label for="password1">New password</label></td>
+	</tr>
+	<tr>
+		<td><input type="password" name="password2" id="password2" /></td>
+		<td><label for="password2">New password again</label></td>
+	</tr>
+	<tr>
+		<input type="hidden" name="username" value="$username" />
+		<input type="hidden" name="email" value="$email" />
+		<input type="hidden" name="security_code" value="$security_code" />
+		<td class="submit"><input type="submit" value="submit" /></td>
+	</tr>
+	</table>
+	</form>
 _END;
 }
 else
@@ -47,18 +49,20 @@ else
 	echo
 <<< _END
 	<form class="form" action="?page=reset_password&yes=true"  method="post">
-<p class="username">
-	<input type="text" name="username" id="username" />
-	<label for="username">Username</label>
-</p>
-<p class="security_code">
-	<input type="text" name="security_code" id="security_code" />
-	<label for="security_code">Security code</label>
-</p>
-<p class="submit">
-	<input type="submit" value="submit" />
-</p>
-</form>
+	<table>
+	<tr>
+		<td><input type="text" name="username" id="username"></td>
+		<td><label for="username">Username</label></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="security_code" id="security_code"></td>
+		<td><label for="security_code">Security code</label></td>
+	</tr>
+	<tr>
+		<td class="submit"><input type="submit" value="submit"></td>
+	</tr>
+	</table>
+	</form>
 _END;
 }
 

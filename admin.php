@@ -19,17 +19,20 @@ if (isset($_SESSION['dbuserid']))
 	echo <<< _END
 <h2>Send mail to all users</h2>
 <form class="form" action="?page=admin" method="post">
-<p class="subject">
-	<input type="text" name="subject" placeholder="Subject" id="subject" />
-	<label for="subject">Subject</label>
-</p>
-<p class="message">
-	<textarea name="message" cols="40" rows="6" placeholder="Message" id="message" ></textarea>
-	<label for="message">Message</label>
-</p>
-<p class="submit">
-	<input type="submit" value="Send"></form>
-</p>
+<table>
+<tr>
+	<td><input type="text" name="subject" placeholder="Subject" id="subject" /></td>
+	<td><label for="subject">Subject</label></td>
+</tr>
+<tr>
+	<td><textarea name="message" cols="40" rows="6" placeholder="Message" id="message" ></textarea></td>
+	<td><label for="message">Message</label></td>
+</tr>
+<tr>
+	<td class="submit"><input type="submit" value="Send"></td>
+</tr>
+</table>
+</form>
 _END;
 	$userid   = $_SESSION['dbuserid'];
 	$sql = "SELECT *
@@ -47,7 +50,7 @@ _END;
 			{
 				while ($row2 = mysql_fetch_array($result2))
 				{
-					mail($row2['email'], ($_POST['subject']), format_string($_POST['message']), 'From: filehunt@filehunt.com');
+					mail($row2['email'], format_string($_POST['subject']), format_string($_POST['message']), 'From: noreply@filehunt.com');
 				}
 				header('Location: ?page=admin&mailSuccess=true');
 				
@@ -184,7 +187,7 @@ _END;
 	";
 	}
 	else echo '
-	<div id="error">There is no reported files</div>
+	<td><div id="error">There is no reported files</div></td>
 	<br />
 	';
 
@@ -260,8 +263,7 @@ _END;
 		';
 	}
 	else echo '
-		<div id="error">There is no old files</div>
-		';
+		<div id="error">There is no old files</div>';
 
 }
 else
