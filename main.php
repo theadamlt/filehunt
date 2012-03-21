@@ -4,9 +4,9 @@ mysql_selector();
 session_start();
 
 if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
-	{
-		$_SESSION['dbuserid']    = $_COOKIE['dbuserid'];
-	}
+{
+	$_SESSION['dbuserid']  = $_COOKIE['dbuserid'];
+}
 
 	if(!isset($_GET['page'])) header('Location: ?page=search');
 
@@ -76,21 +76,33 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			    AND f.uploaded_by = u.rowID
 			    AND me.last_sub_check < f.uploaded_date";
 			$result = mysql_query($sql);
-			echo mysql_error();
-			$sql2 = "SELECT * FROM users WHERE rowID=$_SESSION[dbuserid] LIMIT 1";
+
+			$sql2 = "SELECT *
+					FROM users
+					WHERE rowID = $_SESSION[dbuserid] LIMIT 1";
 			$result2 = mysql_query($sql2);
-			$row = mysql_fetch_array($result2);
+			$user_info = mysql_fetch_array($result2);
+
+
+			//Read user prefs
+			$sql3 = "SELECT * FROM user_pref WHERE userID = $_SESSION[dbuserid] LIMIT 1";
+			$result3 = mysql_query($sql3);
+			if(mysql_num_rows($result3) == 0) $user_pref = array();
+			else $user_pref = mysql_fetch_array($result3);
+			//Debug info
+			// print_r($user_pref);
+			// print_r($user_info);
 			echo '
 		<div id="links">
 			<ul>
 				<li>
-					<span class="loggedin">Logged in as: '.$row['username'].'</span>
+					<span class="loggedin">Logged in as: '.$user_info['username'].'</span>
 				</li>
 				<li>
 					<a href="?page=logout">Logout</a>
 				</li>
 				';
-			if($_GET['page'] == 'myprofile') echo'
+			if($_GET['page'] == 'myprofile' || $_GET['page'] == 'user_pref') echo'
 				<li class=current_page_item>
 					';
 
@@ -141,31 +153,15 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 									<a href="?page=upload">Upload</a>
 								</li>
 								';
-			if($row['admin'] == 1 && $_GET['page'] == 'admin') echo '<li class=current_page_item><a href="?page=admin">Admin</a></li>';
-			elseif($row['admin'] == 1) echo '<li><a href="?page=admin">Admin</a></li>';
-			//Miniform
-			/*echo '
-								<li>
-									//
-									<form action="?page=search" method="post">
-										//
-										<span class="minisearch">
-											//
-											<input type="text" name="search"></span>
-										//
-										<input type="hidden" name="select" value="all">
-										//
-										<input type="submit" value="Search"></form>
-									//
-								</li>
-								//';*/
+			if(isset($user_pref['admin']) && $user_pref['admin'] == '1' && $_GET['page'] == 'admin') echo '<li class=current_page_item><a href="?page=admin">Admin</a></li>';
+			elseif(isset($user_pref['admin']) && $user_pref['admin'] == '1') echo '<li><a href="?page=admin">Admin</a></li>';
 			echo '
 							</ul>
 						</div>
 						';
 		}
 
-	echo '
+	if($_SERVER['HTTP_HOST'] != 'localhost') echo '
 						<br />
 						<script type="text/javascript"><!--
 							google_ad_client = "ca-pub-6531227695181642";
@@ -177,7 +173,8 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 						</script>
 						<script type="text/javascript"
 							src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-						</script>
+						</script>';
+	echo '
 						<div id="logo">
 							<a href="?page=search">
 								<img src="img/logo.png" height=179 width=207 />
@@ -185,7 +182,7 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 						</div>
 						';
 	if(getBrowser() != 'Chrome' && !isset($_COOKIE['rmNotice']))
-		{
+	{
 	 		echo '
 						<div id="error">
 							This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site
@@ -198,6 +195,14 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 							<input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form>
 						<br />
 						';
+	}
+	if(isset($_SESSION['dbuserid']))
+	{
+		if(mysql_num_rows($result3) == 0 && $_GET['page'] != 'user_pref')
+		{
+			echo '<div id="error">You havent specified your <a href="?page=user_pref">user preferences!</a> Please do it. NOW!</div>';
+			array_push($user_pref, 'true');
+		}
 	}
 	if(isset($_POST['rmNotice']))
 	{

@@ -19,6 +19,10 @@ if(isset($_GET['userID']))
 		$numrows = mysql_num_rows($result);
 		if($numrows == 1)
 		{
+			$sql2 = "SELECT * FROM user_pref WHERE userID = $profile";
+			$result2 = mysql_query($sql2);
+			if(mysql_num_rows($result2) == 0) $row2 = array('show_real_name' => '0', 'show_mail' => '0', 'admin' => '0');
+			else $row2 = mysql_fetch_array($result2);
 			$row = mysql_fetch_array($result);
 
 			//Subscribe user message
@@ -61,17 +65,13 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 <center>
 <br />
 ';
-			echo  'Username: '.$row['username'];
-			echo '
-<br />
-<br />
-';
-			echo  'Email: '.$row['email'];
-			echo '
-<br />
-<br />
-';
-			if($row['admin'] == '1') echo  'Admin';
+			echo  'Username: '.$row['username'].'<br /><br />';
+
+			if($row2['show_real_name'] == 1)echo  'Real name: '.$row2['real_name'].'<br /><br />';
+
+			if($row2['show_mail'] == 1)echo  'Email: '.$row['email'].'<br><br>';
+
+			if($row2['admin'] == '1') echo  'Admin';
 			echo '
 </center>
 ';

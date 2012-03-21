@@ -40,14 +40,15 @@
 
 </head>
 <body>
-	<?php
+<?php
 			header('Content-Type: text/html; charset=utf-8');
 			header('Cache-control: public');
 			header('Vary: Accept-Encoding');
 			require_once('main.php');
 		?>
-	<br />
-	<br />
+<br />
+<br />
+<? if($_SERVER['HTTP_HOST'] != 'localhost') echo '
 <script type="text/javascript"><!--
 	google_ad_client = "ca-pub-6531227695181642";
 	/* Filehunt under logo */
@@ -57,8 +58,7 @@
 	//-->
 </script>
 <script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>';?>
 
 </body>
 </html>
