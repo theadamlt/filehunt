@@ -31,24 +31,24 @@ if(isset($_POST['curpassword']) && isset($_POST['password']) && isset($_POST['pa
 					WHERE rowID=$userid LIMIT 1";
 			if($result =  mysql_query($sql))
 			{
-				header('Location: ?page=myprofile&passwordChange=true');
+				header('Location: ?page=user_pref&passwordChange=true');
 				die();
 			}
 			else
 			{
-				header('Location: ?page=myprofile&passwordChange=false');
+				header('Location: ?page=user_pref&passwordChange=false');
 				die();
 			}
 		}
 		else
 		{
-			header('Location: ?page=myprofile&passwordChange=false');
+			header('Location: ?page=user_pref&passwordChange=false');
 			die();
 		}
 	}
 	else
 	{
-		header("Location: ?page=myprofile&passwordChange=false");
+		header("Location: ?page=user_pref&passwordChange=false");
 		die();
 	}
 }
@@ -79,94 +79,8 @@ if(isset($_GET['somethingEmpty']))
 }
 
 ?>
-<div id="signup">
-
-	<?if(isset($_GET['error'])) echo '<div id="error">Error mes</div>
-';?>
-<form class="form" action="?page=user_pref" method="post" name="user_pref">
-	<table>
-		<tr>
-			<td>
-				<input type="text" name="real_name" placeholder="Real name" id="real_name" <?if(isset($user_pref['real_name'])) echo 'value="'.$user_pref['real_name'].'"';?>></td>
-			<td>
-				<label for="name">Real name</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="radio" id="show_name" name="show_name" value="1" <?if(isset($user_pref['show_real_name']) && $user_pref['show_real_name'] == 1) echo 'checked';?>>Yes
-				<br>
-				<input type="radio" name="show_name" value="0" <?if(isset($user_pref['show_real_name']) && $user_pref['show_real_name'] == 0) echo 'checked';?>>No</td>
-			<td>
-				<label for="show_name">Show real name</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="email" id="email" name="email" value=<?=$user_info['email']?>></td>
-			<td>
-				<label for="email">Email</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="radio" id="show_mail" name="show_mail" value="1" <?if(isset($user_pref['show_mail']) && $user_pref['show_mail'] == 1) echo 'checked';?>>
-				Yes
-				<br>
-				<input type="radio" name="show_mail" value="0" <?if(isset($user_pref['show_mail']) && $user_pref['show_mail'] == 0) echo 'checked';?>>
-				No
-				<br></td>
-			<td>
-				<label for="show_mail">Show email</label>
-			</td>
-		</tr>
-		<tr>
-			<td class="submit">
-				<input type="submit" value="Go"/>
-			</td>
-		</tr>
-	</table>
-</form>
-<br>
-<br>
-</div>
-
-<selection class="progress window">
-<details>
-	<summary>Change password</summary>
-	<form class="form" name="newpassword" action="?page=user_pref" onsubmit="validate_new_password()" method="post">
-		<table>
-			<tr>
-				<td>
-					<input type="password" id="curpassword" name="curpassword"></td>
-				<td>
-					<label for="curpassword">Curent password</label>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="password" name="password" id="password"></td>
-				<td>
-					<label for="password">New password</label>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="password" name="password2" id="password2"></td>
-				<td>
-					<label for="password2">New Password again</label>
-				</td>
-			</tr>
-			<tr>
-				<td class="submit">
-					<input type="submit" value="Submit"></td>
-			</tr>
-		</table>
-	</form>
-
-</details>
-</selection>
-
+<div id="signup"><?if(isset($_GET['error'])) echo '<div id="error">Error mes</div>';?><form class="form" action="?page=user_pref" method="post" name="user_pref"><table><tr><td><input type="text" name="real_name" placeholder="Real name" id="real_name" <?if(isset($user_pref['real_name'])) echo 'value="'.$user_pref['real_name'].'"';?>></td><td><label for="name">Real name</label></td></tr><tr><td><input type="radio" id="show_name" name="show_name" value="1" <?if(isset($user_pref['show_real_name']) && $user_pref['show_real_name'] == 1) echo 'checked';?>>Yes<br><input type="radio" name="show_name" value="0" <?if(isset($user_pref['show_real_name']) && $user_pref['show_real_name'] == 0) echo 'checked';?>>No</td><td><label for="show_name">Show real name</label></td></tr><tr><td><input type="email" id="email" name="email" value=<?=$user_info['email']?>></td><td><label for="email">Email</label></td></tr><tr><td><input type="radio" id="show_mail" name="show_mail" value="1" <?if(isset($user_pref['show_mail']) && $user_pref['show_mail'] == 1) echo 'checked';?>>	Yes
+ <br><input type="radio" name="show_mail" value="0" <?if(isset($user_pref['show_mail']) && $user_pref['show_mail'] == 0) echo 'checked';?>>	No <br></td><td><label for="show_mail">Show email</label></td></tr><tr><td class="submit"><input type="submit" value="Go"/></td></tr></table></form><br><br></div><selection class="progress window"><details><summary>Change password</summary><form class="form" name="newpassword" action="?page=user_pref" onsubmit="validate_new_password()" method="post"><table><tr><td><input type="password" id="curpassword" name="curpassword"></td><td><label for="curpassword">Curent password</label></td></tr><tr><td><input type="password" name="password" id="password"></td><td><label for="password">New password</label></td></tr><tr><td><input type="password" name="password2" id="password2"></td><td><label for="password2">New Password again</label></td></tr><tr><td class="submit"><input type="submit" value="Submit"></td></tr></table></form></details></selection>
 <script src="js/jquery.details.min.js"></script>
 <script>
 window.console || (window.console = { 'log': alert });

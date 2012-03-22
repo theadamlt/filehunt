@@ -18,5 +18,11 @@ if(isset($_SESSION['dbuserid']) && isset($_GET['reportedFile']))
 	$result = mysql_query($sql,$con);
 	header('Location: ?page=fileinfo&fileID='.$fileID.'&reportSuccess=true');
 }
-else header('Location: ?page=search');
+elseif(!isset($_SESSION['dbuserid']))
+{
+	// $url = urlencode('&attemptedSite=report_abuse&reportedFile='.$_GET['reportedFile']);
+	// echo $url;
+	header('Location: ?page=login&attemptedSite=report_abuse&reportedFile='.$_GET['reportedFile']);
+	die();
+}
 ?>

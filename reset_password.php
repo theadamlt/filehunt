@@ -24,45 +24,14 @@ if (isset($_POST['username']) && isset($_POST['security_code']))
 	$row = mysql_fetch_array($result);
 	$email = $row['email'];
 		echo <<< _END
-	<form class="form" name="reset" action="?page=reset_password&yes=true" method="post" onsubmit="validate_password_reset()">
-	<table>
-	<tr>
-		<td><input type="password" name="password" id="password1"></td>
-		<td><label for="password1">New password</label></td>
-	</tr>
-	<tr>
-		<td><input type="password" name="password2" id="password2" /></td>
-		<td><label for="password2">New password again</label></td>
-	</tr>
-	<tr>
-		<input type="hidden" name="username" value="$username" />
-		<input type="hidden" name="email" value="$email" />
-		<input type="hidden" name="security_code" value="$security_code" />
-		<td class="submit"><input type="submit" value="submit" /></td>
-	</tr>
-	</table>
-	</form>
+	<form class="form" name="reset" action="?page=reset_password&yes=true" method="post" onsubmit="validate_password_reset()"><table><tr><td><input type="password" name="password" id="password1"></td><td><label for="password1">New password</label></td></tr><tr><td><input type="password" name="password2" id="password2" /></td><td><label for="password2">New password again</label></td></tr><tr><input type="hidden" name="username" value="$username" /><input type="hidden" name="email" value="$email" /><input type="hidden" name="security_code" value="$security_code" /><td class="submit"><input type="submit" value="submit" /></td></tr></table></form>
 _END;
 }
 else
 {
 	echo
 <<< _END
-	<form class="form" action="?page=reset_password&yes=true"  method="post">
-	<table>
-	<tr>
-		<td><input type="text" name="username" id="username"></td>
-		<td><label for="username">Username</label></td>
-	</tr>
-	<tr>
-		<td><input type="text" name="security_code" id="security_code"></td>
-		<td><label for="security_code">Security code</label></td>
-	</tr>
-	<tr>
-		<td class="submit"><input type="submit" value="submit"></td>
-	</tr>
-	</table>
-	</form>
+	<form class="form" action="?page=reset_password&yes=true"  method="post"><table><tr><td><input type="text" name="username" id="username"></td><td><label for="username">Username</label></td></tr><tr><td><input type="text" name="security_code" id="security_code"></td><td><label for="security_code">Security code</label></td></tr><tr><td class="submit"><input type="submit" value="submit"></td></tr></table></form>
 _END;
 }
 

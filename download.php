@@ -7,8 +7,8 @@ $file = $_GET['file'];
 
 $sql        = "SELECT *
 			FROM files
-			WHERE rowID='$file' LIMIT 1";
-$result     = mysql_query($sql,$con);
+			WHERE rowID=$file LIMIT 1";
+$result     = mysql_query($sql);
 $row        = mysql_fetch_array($result);
 $downloaded = $row['times_downloaded'];
 $uploaded_by = $row['uploaded_by'];
@@ -19,7 +19,7 @@ $rowID = $row['rowID'];
 $datestrto = time();
 
 if(isset($_SESSION['dbuserid'])) $downloaded_by = $_SESSION['dbuserid'];
-else $downloaded_by = 'anon';
+else $downloaded_by = 'Anonymous';
 
 $sql = "INSERT INTO downloads(rowID, downloaded_by, fileID, downloaded_date) VALUES(NULL, $downloaded_by, $_GET[file], $datestrto)";
 

@@ -10,69 +10,23 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 if (!isset($_POST['search']))
 {
     echo <<< _END
-<center>
-<h2>Search</h2>
-<form class="form" action="?page=search" method="post" autocomplete="off" name="myForm">
-    <span class="search">
-        <input class="autosuggest" type="text" name="search" placeholder="Search"/>
-        <ul class="result"></ul>
-    </span>
-    <p class="search_for">
-        <select name="select" id="select" >
-            <option value="all">All</option>
-            <option value="filename">Filename</option>
-            <option value="username">Username</option>
-        </select>
-    </p>
-    <p class="submit">
-        <input type="submit" value="Search" name="button1" />
-    </p>
-</form>
-</center>
+<center><h2>Search</h2><form class="form" action="?page=search" method="post" autocomplete="off" name="myForm"><span class="search"><input class="autosuggest" type="text" name="search" placeholder="Search"/><ul class="result"></ul></span><p class="search_for"><select name="select" id="select" ><option value="all">All</option><option value="filename">Filename</option><option value="username">Username</option></select></p><p class="submit"><input type="submit" value="Search" name="button1" /></p></form></center>
 _END;
 } 
 elseif (isset($_POST['search']))
 {
     $search_strip = stripcslashes($_POST['search']);
-    echo '
-<center>
-<h2>Search</h2>
-<form class="form" action="?page=search" method="post" autocomplete="off" name="myForm">
-    <span class="search">
-        <input class="autosuggest" type="text" name="search" value="'.$_POST['search'].'" placeholder="Search"/>
-        <ul class="result"></ul>
-    </span>
-    <p class="search_for">
-        <select name="select" id="select">
-            ';
-    if ($_POST['select'] == 'all') echo '
-            <option value="all" selected=selected>All</option>
-            ';
-    else echo '
-            <option value="all">All</option>
-            ';
-    if ($_POST['select'] == 'filename') echo '
-            <option value="filename" selected=selected>Filename</option>
-            ';
-    else echo '
-            <option value="filename">Filename</option>
-            ';
-    if ($_POST['select'] == 'username') echo '
-            <option value="username" selected=selected>Username</option>
-            ';
-    else echo'
-            <option value="username">Username</option>
-            ';
+    echo '<center><h2>Search</h2><form class="form" action="?page=search" method="post" autocomplete="off" name="myForm"><span class="search"><input class="autosuggest" type="text" name="search" value="'.$_POST['search'].'" placeholder="Search"><ul class="result"></ul></span><p class="search_for"><select name="select" id="select">';
+    if ($_POST['select'] == 'all') echo '<option value="all" selected=selected>All</option>';
+    else echo '<option value="all">All</option>';
 
-    echo '
-        </select>
-    </p>
-    <p class="submit">
-        <input type="submit" value="Search" name="botton1"/>
-    </p>
-</form>
-</center>
-';
+    if ($_POST['select'] == 'filename') echo '<option value="filename" selected=selected>Filename</option>';
+    else echo '<option value="filename">Filename</option>';
+
+    if ($_POST['select'] == 'username') echo '<option value="username" selected=selected>Username</option>';
+    else echo'<option value="username">Username</option>';
+
+    echo '</select></p><p class="submit"><input type="submit" value="Search" name="botton1"/></p></form></center>';
 }
 
 
@@ -124,14 +78,7 @@ if ((isset($_POST['select'])))
 
     if (mysql_num_rows($result) > 0)
     {
-        echo "
-<center>
-<table id='table'>
-    "; //Start table
-        echo '
-    <th>Filename</th>
-    <th>Uploaded by</th>
-    ';
+        echo '<center><table id="table"><th>Filename</th><th>Uploaded by</th>';
         $count = 0;
         while ($row = mysql_fetch_array($result))
         {
@@ -144,40 +91,19 @@ if ((isset($_POST['select'])))
             if($numrows2 == 1) $comment_string = 'comment';
             else $comment_string = 'comments';
              //File size calc
-            if(oddOrEven($count)==1) echo '
-                <tr class="alt">
-                ';
-        elseif(oddOreven($count)==0) echo '
-        <tr>
-            ';
-            echo '
-            <td>
-                <a href=?page=fileinfo&fileID=' . $row['file_row'] . '>' . $row['file'] . '</a>
-            </td>
-            ';
-            echo '
-            <td>
-                <a href=?page=profile&userID=' . $row["user_row"] . '>' . $row["username"] . '</a>
-            </td>
-            ';
-            echo '
-        </tr>
-        ';
+            if(oddOrEven($count)==1) echo '<tr class="alt">';
+
+            elseif(oddOreven($count)==0) echo '<tr><td><a href=?page=fileinfo&fileID=' . $row['file_row'] . '>' . $row['file'] . '</a></td><td><a href=?page=profile&userID=' . $row["user_row"] . '>' . $row["username"] . '</a></td></tr>';
             ++$count;
         }
         
-        echo $row['uploded_by'];
-        echo "
-    </table>
-</center>
-";
+        echo $row['uploaded_by'];
+        echo '</table></center>';
     }
 
     elseif($_POST['select'] == 'filename')
     {
-        echo '
-<div id="error">Nothing matched your search</div>
-';
+        echo '<div id="error">Nothing matched your search</div>';
     }
 
     elseif($_POST['select'] == 'username')
@@ -189,37 +115,17 @@ if ((isset($_POST['select'])))
         if(mysql_num_rows($userresult) != 0)
         {
             $count = 0;
-            echo '
-<center>
-    <table id="table">
-        <th>Username</th>
-        ';
+            echo '<center><table id="table"><th>Username</th>';
 
             while($row2 = mysql_fetch_array($userresult))
             {
-                if(oddOrEven($count)==1) echo "
-        <tr class='alt'>
-            ";
-                elseif(oddOreven($count)==0) echo '
-            <tr>
-                ';
-                echo '
-                <td>
-                    <a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a>
-                </td>
-                ';
-                echo '
-            </tr>
-            ';                
+                if(oddOrEven($count)==1) echo '<tr class="alt">';
+                elseif(oddOreven($count)==0) echo '<tr>';
+                echo '<td><a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a></td></tr>';                
             }
-            echo '
-        </table>
-    </center>
-    ';
+            echo '</table></center>';
         } 
-        else echo '
-    <div id="error">Nothing matched your search</div>
-    ';
+        else echo '<div id="error">Nothing matched your search</div>';
     }
 
     elseif($_POST['select'] == 'all')
@@ -231,41 +137,17 @@ if ((isset($_POST['select'])))
         if(mysql_num_rows($userresult) != 0)
         {
             $count = 0;
-            echo '
-    <center>
-        <table id="table">
-            <th>Username</th>
-            <th>Files</th>
-            ';
+            echo '<center><table id="table"><th>Username</th><th>Files</th>';
 
             while($row2 = mysql_fetch_array($userresult))
             {
-                if(oddOrEven($count)==1) echo "
-            <tr class='alt'>
-                ";
-                elseif(oddOreven($count)==0) echo '
-                <tr>
-                    ';
-                echo '
-                    <td>
-                        <a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a>
-                    </td>
-                    ';
-                echo '
-                    <td>The user has no uploads</td>
-                    ';
-                echo '
-                </tr>
-                ';
+                if(oddOrEven($count)==1) echo '<tr class="alt">';
+                elseif(oddOreven($count)==0) echo '<tr>';
+                echo '<td><a href="?page=profile&userID='.$row2['rowID'].'">'.$row2['username'].'</a></td><td>The user has no uploads</td></tr>';
             }
-            echo '
-            </table>
-        </center>
-        ';
+            echo '</table></center>';
         } 
-        else echo '
-        <div id="error">Nothing matched your search</div>
-        ';
+        else echo '<div id="error">Nothing matched your search</div>';
     }
 }
 ?>

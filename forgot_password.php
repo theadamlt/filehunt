@@ -51,22 +51,6 @@ The filehunt team";
 }
 else
 {
-	echo '
-		<form class="form" action="?page=forgot_password" method="post">
-		<table>
-		<tr>
-			<td><input type="text" name="username" id="username"></td>
-			<td><label for="username">Username</label></td>
-		</tr>
-		<tr>
-			<td><input type="email" name="email" id="email"></td>
-			<td><label for="email">Email</label></td>
-		</tr>
-		<tr>
-			<td class="submit"><input type="submit" value="Submit"></td>
-		</tr>
-		</table>
-		</form>
-	';
+	echo '<form class="form" action="?page=forgot_password" method="post"><table><tr><td><input type="text" name="username" id="username"></td><td><label for="username">Username</label></td></tr><tr><td><input type="email" name="email" id="email"></td><td><label for="email">Email</label></td></tr><tr><td class="submit"><input type="submit" value="Submit"></td></tr></table></form>';
 }
 ?>

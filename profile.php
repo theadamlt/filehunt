@@ -28,53 +28,32 @@ if(isset($_GET['userID']))
 			//Subscribe user message
 			if(isset($_GET['subscribeSuccess']) && $_GET['subscribeSuccess'] == 'true')
 			{
-				echo '<div id="success">You have successfully subscribed to '.$row["username"].'</div>
-<br />
-';
+				echo '<div id="success">You have successfully subscribed to '.$row["username"].'</div><br />';
 			}
 			elseif(isset($_GET['subscribeSuccess']) && $_GET['subscribeSuccess'] == 'false')
 			{
-				echo '
-<div id="error">
-An error occured. You have not subscribed to '.$row['username'].'. Please try again later
-</div>
-<br />
-';
+				echo '<div id="error">An error occured. You have not subscribed to '.$row['username'].'. Please try again later</div><br />';
 			}
 
 			//Unsubscribe user message
 			if(isset($_GET['unsubscribeSuccess']) && $_GET['unsubscribeSuccess'] == 'true')
 			{
-				echo '
-<div id="success">You have successfully unsubscribed to '.$row["username"].'</div>
-<br />
-';
+				echo '<div id="success">You have successfully unsubscribed to '.$row["username"].'</div><br />';	
 			}
 			elseif(isset($_GET['unsubscribeSuccess']) && $_GET['unsubscribeSuccess'] == 'false')
 			{
-				echo '
-<div id="error">
-An error occured. You have not unsubscribed to '.$row['username'].'. Please try again later
-</div>
-<br />
-';
+				echo '<div id="error">An error occured. You have not unsubscribed to '.$row['username'].'. Please try again later</div><br />';
 			}
 
 
-			echo '
-<center>
-<br />
-';
-			echo  'Username: '.$row['username'].'<br /><br />';
+			echo '<center><br />Username: '.$row['username'].'<br /><br />';
 
 			if($row2['show_real_name'] == 1)echo  'Real name: '.$row2['real_name'].'<br /><br />';
 
 			if($row2['show_mail'] == 1)echo  'Email: '.$row['email'].'<br><br>';
 
 			if($row2['admin'] == '1') echo  'Admin';
-			echo '
-</center>
-';
+			echo '</center>';
 
 			if(isset($_SESSION['dbuserid']))
 			{
@@ -86,25 +65,11 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 				$result3 = mysql_query($sql3);
 				if(mysql_num_rows($result3) == 1)
 				{
-					echo "
-<form action='?page=unsubscribe' method='post'>
-<input type='hidden' name='unsubscribeTo' value='$profile' />
-<p class='submit'>
-	<input type='submit' value='Unsubscribe' />
-</p>
-</form>
-";
+					echo "<form action='?page=unsubscribe' method='post'><input type='hidden' name='unsubscribeTo' value='$profile' /><p class='submit'><input type='submit' value='Unsubscribe' /></p></form>";
 				}
 				else
 				{
-					echo "
-<form action='?page=subscribe' method='post'>
-<input type='hidden' name='subscribeTo' value='$profile' />
-<p class='submit'>
-	<input type='submit' value='Subscribe' />
-</p>
-</form>
-";
+					echo "<form action='?page=subscribe' method='post'><input type='hidden' name='subscribeTo' value='$profile' /><p class='submit'><input type='submit' value='Subscribe' /></p></form>";
 				}
 			}
 
@@ -116,12 +81,7 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 			$numrows = mysql_num_rows($result); 
 			if($numrows > 0)
 			{
-				echo '
-<center>
-<br />
-<table id="table">
-	<th>Filename</th>
-	';
+				echo '<center><br /><table id="table"><th>Filename</th>';
 				$count = 0;
 				while($row = mysql_fetch_array($result))
 				{
@@ -134,18 +94,9 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 			        if($numrows2 == 1) $comment_string = 'comment';
 		            else $comment_string = 'comments';
 
-					if(oddOrEven($count)==1) echo '
-	<tr class="alt">
-		';
-					elseif(oddOrEven($count)==0) echo '
-		<tr>
-			';
-					echo '
-			<td>
-				<a href="?page=fileinfo&fileID='.$row['rowID'].'">'.$row["file"].'</a>
-			</td>
-		</tr>
-		';
+					if(oddOrEven($count)==1) echo '<tr class="alt">';
+					elseif(oddOrEven($count)==0) echo '<tr>';
+					echo '<td><a href="?page=fileinfo&fileID='.$row['rowID'].'">'.$row["file"].'</a></td></tr>';	
 					++$count;
 
 				}
@@ -153,10 +104,7 @@ An error occured. You have not unsubscribed to '.$row['username'].'. Please try 
 			}
 			else
 			{
-				echo '
-		<br />
-		<div id="error">The user has no uploads</div>
-		';
+				echo '<br /><div id="error">The user has no uploads</div>';
 			} 
 			
 		}

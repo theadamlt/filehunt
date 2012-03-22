@@ -7,7 +7,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	}
 if(!isset($_SESSION['dbuserid']))
 {
-	header('Location: ?page=search');
+	header('Location: ?page=404');
 	die();
 }
 if(isset($_SESSION['dbuserid']) && isset($_GET['fileID']))
@@ -16,11 +16,10 @@ if(isset($_SESSION['dbuserid']) && isset($_GET['fileID']))
 	$fileID = $_GET['fileID'];
 	$sql = "DELETE
 			FROM files
-			WHERE uploaded_by='$profileID'
+			WHERE uploaded_by=$profileID
 			    AND rowID=$fileID";
 
-	if($result = mysql_query($sql,$con))
-	{
+	$result = mysql_query($sql);
 		//Delete abuse reports
 		$sql2    = "DELETE
 					FROM abuse
@@ -33,11 +32,5 @@ if(isset($_SESSION['dbuserid']) && isset($_GET['fileID']))
 		$result3 = mysql_query($sql3,$con);
 		header('Location: ?page=myprofile&deleteSuccess=true');
 		die();
-	}
-	else
-	{
-		header('Location: ?page=myprofile&deleteSuccess=false');
-		die();
-	}
 }
 ?>

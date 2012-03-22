@@ -8,54 +8,32 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 	$_SESSION['dbuserid']  = $_COOKIE['dbuserid'];
 }
 
-	if(!isset($_GET['page'])) header('Location: ?page=search');
+	if(!isset($_GET['page']))
+	{
+		header('Location: ?page=search');
+	}
 
-		if ((!isset($_SESSION['dbuserid'])))
+		if (!isset($_SESSION['dbuserid']))
 		{
-			echo '<div id="links">
-<ul>
-	';
+			echo '<div id="links"><ul>';
 
-			if($_GET['page'] == 'signup') echo '
-	<li class=current_page_item>
-		';
+			if($_GET['page'] == 'signup') echo '<li class=current_page_item>';
 
-			else echo '
-		<li>
-			';
+			else echo '<li>';
 
-			echo '
-			<a href="?page=signup">Signup</a>
-		</li>
-		';
+			echo '<a href="?page=signup">Signup</a></li>';
 
-			if($_GET['page'] == 'login') echo '
-		<li class=current_page_item>
-			';
+			if($_GET['page'] == 'login') echo '<li class=current_page_item>';
 
-			else echo'
-			<li>
-				';
+			else echo'<li>';
 
-			echo '
-				<a href="?page=login">Login</a>
-			</li>
-			';
+			echo '<a href="?page=login">Login</a></li>';
 
-			if($_GET['page'] == 'search') echo '
-			<li class=current_page_item>
-				';
+			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
 
-			else echo '
-				<li>
-					';
+			else echo '<li>';
 
-			echo '
-					<a href="?page=search">Home</a>
-				</li>
-			</ul>
-		</div>
-		';
+			echo '<a href="?page=search">Home</a></li></ul></div>';
 		}
 		else
 		{
@@ -66,15 +44,15 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			       f.uploaded_date AS f_uploaded_date,
 			       f.uploaded_by AS f_uploaded_by,
 			       f.rowID AS f_rowID
-			FROM subs s,
-			     users u,
-			     users me,
-			     files f
-			WHERE s.subscriber = $_SESSION[dbuserid]
-			    AND me.rowID = $_SESSION[dbuserid]
-			    AND s.subscribed = f.uploaded_by
-			    AND f.uploaded_by = u.rowID
-			    AND me.last_sub_check < f.uploaded_date";
+					FROM subs s,
+					     users u,
+					     users me,
+					     files f
+					WHERE s.subscriber = $_SESSION[dbuserid]
+					    AND me.rowID = $_SESSION[dbuserid]
+					    AND s.subscribed = f.uploaded_by
+					    AND f.uploaded_by = u.rowID
+					    AND me.last_sub_check < f.uploaded_date";
 			$result = mysql_query($sql);
 
 			$sql2 = "SELECT *
@@ -84,7 +62,7 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			$user_info = mysql_fetch_array($result2);
 
 
-			//Read user prefs
+			//user prefs
 			$sql3 = "SELECT * FROM user_pref WHERE userID = $_SESSION[dbuserid] LIMIT 1";
 			$result3 = mysql_query($sql3);
 			if(mysql_num_rows($result3) == 0) $user_pref = array();
@@ -92,78 +70,38 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			//Debug info
 			// print_r($user_pref);
 			// print_r($user_info);
-			echo '
-		<div id="links">
-			<ul>
-				<li>
-					<span class="loggedin">Logged in as: '.$user_info['username'].'</span>
-				</li>
-				<li>
-					<a href="?page=logout">Logout</a>
-				</li>
-				';
-			if($_GET['page'] == 'myprofile' || $_GET['page'] == 'user_pref') echo'
-				<li class=current_page_item>
-					';
+			echo '<div id="links"><ul><li><span class="loggedin">Logged in as: '.$user_info['username'].'</span></li><li><a href="?page=logout">Logout</a></li>';
+			if($_GET['page'] == 'myprofile' || $_GET['page'] == 'user_pref') echo'<li class=current_page_item>';
 
-			else echo '
-					<li>
-						';
+			else echo '<li>';
 
-			echo '
-						<a href="?page=myprofile" >My profile</a>
-					</li>
-					';
+			echo '<a href="?page=myprofile" >My profile</a></li>';
 
-			if($_GET['page'] == 'mysubscriptions') echo '
-					<li class="current_page_item" id="sub">
-						';
+			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item" id="sub">';
 
-			else echo '
-						<li id="sub">
-							';
+			else echo '<li id="sub">';
 
-			echo '
-							<a href="?page=mysubscriptions">My subscriptions ('.mysql_num_rows($result).')</a>
-						</li>
-						';
+			echo '<a href="?page=mysubscriptions">My subscriptions ('.mysql_num_rows($result).')</a></li>';
 
-			if($_GET['page'] == 'search') echo '
-						<li class=current_page_item>
-							';
+			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
 
-			else echo '
-							<li>
-								';
+			else echo '<li>';
 
-			echo '
-								<a href="?page=search">Home</a>
-							</li>
-							';
+			echo '<a href="?page=search">Home</a></li>';
 
-			if($_GET['page'] == 'upload') echo '
-							<li class=current_page_item>
-								';
+			if($_GET['page'] == 'upload') echo '<li class=current_page_item>';
 
-			else echo '
-								<li>
-									';
+			else echo '<li>';
 
-			echo '
-									<a href="?page=upload">Upload</a>
-								</li>
-								';
+			echo '<a href="?page=upload">Upload</a></li>';
+
 			if(isset($user_pref['admin']) && $user_pref['admin'] == '1' && $_GET['page'] == 'admin') echo '<li class=current_page_item><a href="?page=admin">Admin</a></li>';
+
 			elseif(isset($user_pref['admin']) && $user_pref['admin'] == '1') echo '<li><a href="?page=admin">Admin</a></li>';
-			echo '
-							</ul>
-						</div>
-						';
+			echo '</ul></div>';
 		}
 
-	if($_SERVER['HTTP_HOST'] != 'localhost') echo '
-						<br />
-						<script type="text/javascript"><!--
+	if($_SERVER['HTTP_HOST'] != 'localhost') echo '<br /><script type="text/javascript"><!--
 							google_ad_client = "ca-pub-6531227695181642";
 							/* Filehunt top logo */
 							google_ad_slot = "4106923675";
@@ -171,38 +109,20 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 							google_ad_height = 90;
 							//-->
 						</script>
-						<script type="text/javascript"
-							src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 						</script>';
 	echo '
-						<div id="logo">
-							<a href="?page=search">
-								<img src="img/logo.png" height=179 width=207 />
-							</a>
-						</div>
-						';
+						<div id="logo"><a href="?page=search"><img src="img/logo.png" height=179 width=207 /></a></div>';
+
 	if(getBrowser() != 'Chrome' && !isset($_COOKIE['rmNotice']))
 	{
-	 		echo '
-						<div id="error">
-							This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site
-						</div>
-						';
-	 		echo '
-						<form action="?'.$_SERVER['QUERY_STRING'].'" method="post">
-							<input type="hidden" name="rmNotice" value="true">
-							<input type="submit" value="Remove notice">
-							<input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form>
-						<br />
-						';
+	 		echo '<div id="error">This site is optimized for Google Chrome. You are using '.getBrowser().'. Please install Google Chrome to get the most out of this site</div><form action="?'.$_SERVER['QUERY_STRING'].'" method="post"><input type="hidden" name="rmNotice" value="true"><input type="submit" value="Remove notice"><input type="hidden" name="loca" value="'.$_SERVER['QUERY_STRING'].'"></form><br />';
 	}
-	if(isset($_SESSION['dbuserid']))
+
+	if(isset($_SESSION['dbuserid']) && mysql_num_rows($result3) == 0 && $_GET['page'] != 'user_pref')
 	{
-		if(mysql_num_rows($result3) == 0 && $_GET['page'] != 'user_pref')
-		{
 			echo '<div id="error">You havent specified your <a href="?page=user_pref">user preferences!</a> Please do it. NOW!</div>';
 			array_push($user_pref, 'true');
-		}
 	}
 	if(isset($_POST['rmNotice']))
 	{
@@ -216,61 +136,33 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 		$downloadLink = "?page=fileinfo&fileID=$id";
 		if($host == 'filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
 		else $url = $host.'/'.$downloadLink;
-		echo '
-						<div id="success">Upload succeeded</div>
-						';
-		echo "
-						<p>
-							Your file link is:
-							<a href='http://$url'>http://$url</a>
-						</p>
-						";
-		echo "
-						<input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'>
-						<br />
-						";
-		echo '
-						<div id="socailshare">
-							';
+		echo '<div id="success">Upload succeeded</div>';
+		echo "<p>Your file link is:<a href='http://$url'>http://$url</a></p><input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'><br /><div id='socailshare'>";
+
 		facebookShare($url);
 		twitterShare($url);
 		googleShare($url);
-		echo '
-						</div>
-						';
+		echo '</div>';
 	}
-	if(isset($_GET['signupCompleted'])) echo '
-						<div id="success">Signup completed</div>
-						';
+	if(isset($_GET['signupCompleted'])) echo '<div id="success">Signup completed</div>';
+
 	if(isset($_GET['newPassword']))
 	{
 		if($_GET['newPassword']=='true')
 		{
-			echo '
-						<div id="success">Your password has been changed. You can now login</div>
-						';
+			echo '<div id="success">Your password has been changed. You can now login</div>';
 		}
 		else
 		{
-			echo "
-						<div id='error'>
-							Oups... Your password hasen't been changed. Please try again later
-						</div>
-						";
+			echo "<div id='error'>Oups... Your password hasen't been changed. Please try again later</div>";
 		}
 	}
 	if(isset($_GET['newPasswordEmailSent']))
 	{
 		$print_email = $_GET['newPasswordEmailSent'];
-		echo "
-						<div id='success'>An email has been sent to you at $print_email</div>
-						";
+		echo "<div id='success'>An email has been sent to you at $print_email</div>";
 	}
-	if(isset($_GET['captchaErr'])) echo "
-						<div id='error'>
-							The CAPTCHA field was not entered correctly. Please try again
-						</div>
-						";
+	if(isset($_GET['captchaErr'])) echo "<div id='error'>The CAPTCHA field was not entered correctly. Please try again</div>";
 	
 	$page = $_GET['page'];
 
