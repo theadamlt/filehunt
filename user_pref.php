@@ -10,6 +10,17 @@ if(!isset($_SESSION['dbuserid']))
 // $result = mysql_query($sql);
 // $row = mysql_fetch_array($result);
 
+if(isset($_GET['passwordChange']))
+{
+	if($_GET['passwordChange'] == 'true')
+	{
+		echo '<br><div id="success">Your password has been changed!</div><br>';
+	}
+	else
+	{
+		echo "<br><div id='error'>Oups... Your password hasen't been changed. Please try again later</div><br>";
+	}
+}
 
 
 if(isset($_POST['curpassword']) && isset($_POST['password']) && isset($_POST['password2']))

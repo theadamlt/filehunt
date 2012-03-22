@@ -45,8 +45,6 @@ if(isset($_GET['userID']))
 				echo '<div id="error">An error occured. You have not unsubscribed to '.$row['username'].'. Please try again later</div><br />';
 			}
 
-			print_r($facebook);
-
 			echo '<center><br />Username: '.$row['username'].'<br /><br />';
 
 			if($row2['show_real_name'] == 1)echo  'Real name: '.$row2['real_name'].'<br /><br />';
