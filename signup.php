@@ -56,8 +56,9 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 			else
 			{
 				$random = rand(30, 100)*rand(7574,324)*rand(323,876);
+				$date = time();
 				$sql = "INSERT INTO users(rowID, username, password, email, security_code, last_sub_check)
-						VALUES(NULL, '$username', '$password', '$email', $random, '0')";
+						VALUES(NULL, '$username', '$password', '$email', $random, '$date')";
 				if (!$result = mysql_query($sql,$con))
 				{
 					header('Location: ?page=signup&signupError=true');
