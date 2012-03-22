@@ -67,9 +67,20 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			$result3 = mysql_query($sql3);
 			if(mysql_num_rows($result3) == 0) $user_pref = array();
 			else $user_pref = mysql_fetch_array($result3);
-			//Debug info
+
+			// if(isset($user_pref['facebook_id']) && $user_pref['facebook_id'] != '') $user_fb = json_decode(file_get_contents('https://graph.facebook.com/'.$user_pref['facebook_id']));
+			// else $user_fb = array();
+
+			// if(isset($user_pref['twitter_id']) && $user_pref['twitter_id'] != '') $user_twitter = json_decode(file_get_contents('https://api.twitter.com/1/users/show.json?screen_name='.$user_pref['twitter_id']));
+			// else $user_twitter = array();
+
+			// //Debug info
+
 			// print_r($user_pref);
 			// print_r($user_info);
+			// print_r($user_fb);
+			// print_r($user_twitter);
+
 			echo '<div id="links"><ul><li><span class="loggedin">Logged in as: '.$user_info['username'].'</span></li><li><a href="?page=logout">Logout</a></li>';
 			if($_GET['page'] == 'myprofile' || $_GET['page'] == 'user_pref') echo'<li class=current_page_item>';
 
