@@ -64,3 +64,5 @@ FileETag None
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css)$">
 Header unset Last-Modified
 </FilesMatch>
+
+php_value output_handler ob_gzhandler

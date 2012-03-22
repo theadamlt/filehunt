@@ -275,8 +275,8 @@ var MD5 = function (string) {
 function validateSignup()
 {
 	document.signup.password.value = MD5(document.signup.password.value);
-    document.signup.password2.value = MD5(document.signup.password2.value);
-    return true;
+  document.signup.password2.value = MD5(document.signup.password2.value);
+  return true;
 }
 
 function validate_login()
