@@ -34,11 +34,13 @@ else
 			FROM files
 			WHERE uploaded_by=$session_userid";
 
+	echo "<input type='submit' value='My preferences' onclick='window.location.href=\"?page=user_pref\"'><center><h1 class='message'>Your uploaded files</h1>";
+
 	$result = mysql_query($sql,$con);
 	if(mysql_num_rows($result) != 0)
 	{
-	$count = 0; 
-	echo "<input type='submit' value='My preferences' onclick='window.location.href=\"?page=user_pref\"'><center><h1 class='message'>Your uploaded files</h1><table id='table'><th>Filename</th><th>Delete file</th>";
+		echo "<table id='table'><th>Filename</th><th>Delete file</th>";
+	$count = 0;
 		while($row = mysql_fetch_array($result))
 		{
 			$fileRow  = $row['rowID'];

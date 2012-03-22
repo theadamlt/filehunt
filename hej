@@ -1,0 +1,66 @@
+RewriteEngine On
+ErrorDocument 404 http://filehunt.pagodabox.com/index.php?page=404
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access 1 year"
+ExpiresByType image/jpeg "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType text/css "access 1 month"
+ExpiresByType application/pdf "access 1 month"
+ExpiresByType text/x-javascript "access 1 month"
+ExpiresByType application/javascript "access 1 month"
+ExpiresByType application/x-shockwave-flash "access 1 month"
+ExpiresByType image/x-icon "access 1 year"
+ExpiresDefault "access 2 days"
+</IfModule>
+## EXPIRES CACHING ##
+
+#####################################################
+# CONFIGURE media caching
+#
+Header unset ETag
+FileETag None
+<filesMatch "(?i)^.*\.(ico|flv|jpg|jpeg|png|gif|js|css)$">
+Header unset Last-Modified
+Header set Expires "Fri, 21 Dec 2012 00:00:00 GMT"
+Header set Cache-Control "public, no-transform"
+</filesMatch>
+#
+#####################################################
+
+<ifModule mod_deflate.c>
+<filesMatch "\.(js|css|php|png)$">
+SetOutputFilter DEFLATE
+</filesMatch>
+</ifModule>
+
+
+# Set Expires Headers
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+Header set Expires "Thu, 15 Jan 2015 20:00:00 GMT"
+</FilesMatch>
+
+# Set the cache-control max-age
+# 1 year
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+Header set Cache-Control "max-age=31449600, public"
+</FilesMatch>
+# 2 DAYS
+<FilesMatch "\.(xml|txt)$">
+Header set Cache-Control "max-age=172800, public, must-revalidate"
+</FilesMatch>
+# 4 HOURS
+<FilesMatch "\.(html|htm)$">
+Header set Cache-Control "max-age=14400, must-revalidate"
+</FilesMatch>
+
+# Turn off the ETags
+Header unset ETag
+FileETag None
+
+# Turn off the Last Modified header except for html docs
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css)$">
+Header unset Last-Modified
+</FilesMatch>
