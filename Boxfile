@@ -3,7 +3,7 @@ web1:
   ################################################
   ## GENERAL SETTINGS
   ################################################
-  shared_writable_dirs: [/system/cms/cache, /system/cms/logs]
+  shared_writable_dirs: [/system/cms/cache, /system/cms/logs, /api]
  
   ################################################
   ## WEB SPECIFIC SETTINGS
