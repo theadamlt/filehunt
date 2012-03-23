@@ -25,9 +25,9 @@ web1:
 
 
   
-  # error_pages:
-  #   "404": /errors/404.php
-  #   "403": /errors/403.php
+  error_pages:
+    "404": index.php?page=404
+    "403": index.php?page=403
 
   #   path: /api/api.php
   #       permissions:
