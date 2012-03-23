@@ -1,19 +1,9 @@
 web1:
 
-  error_pages:
-    "404": /errors/404.php
-    "403": /errors/403.php
-
-    path: /api/api.php
-        permissions:
-         -
-            rule: allow
-            who: all
- 
   ################################################
   ## GENERAL SETTINGS
   ################################################
-  shared_writable_dirs: [/system/cms/cache, /system/cms/logs, /api]
+  shared_writable_dirs: [/system/cms/cache, /system/cms/logs]
  
   ################################################
   ## WEB SPECIFIC SETTINGS
@@ -32,3 +22,16 @@ web1:
   php_file_uploads: On
   php_upload_max_filesize: 30M
   php_max_file_uploads: 30
+
+
+  
+  # error_pages:
+  #   "404": /errors/404.php
+  #   "403": /errors/403.php
+
+  #   path: /api/api.php
+  #       permissions:
+  #        -
+  #           rule: allow
+  #           who: all
+ 
