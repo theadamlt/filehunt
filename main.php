@@ -80,13 +80,12 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			// print_r($user_info);
 			// print_r($user_fb);
 			// print_r($user_twitter);
-
 			echo '<div id="links"><ul><li><span class="loggedin">Logged in as: '.$user_info['username'].'</span></li><li><a href="?page=logout">Logout</a></li>';
-			if($_GET['page'] == 'myprofile' || $_GET['page'] == 'user_pref') echo'<li class=current_page_item>';
+			if($_GET['page'] == 'myprofile' || $_GET['page'] == 'user_pref') echo'<li class="current_page_item">';
 
 			else echo '<li>';
 
-			echo '<a href="?page=myprofile" >My profile</a></li>';
+			echo '<a href="?page=myprofile">My profile</a>';
 
 			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item" id="sub">';
 
@@ -112,7 +111,7 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			echo '</ul></div>';
 		}
 
-	if($_SERVER['HTTP_HOST'] != 'localhost') echo '<br /><script type="text/javascript"><!--
+	/*if($_SERVER['HTTP_HOST'] != 'localhost')*/ echo '<br /><script type="text/javascript"><!--
 							google_ad_client = "ca-pub-6531227695181642";
 							/* Filehunt top logo */
 							google_ad_slot = "4106923675";

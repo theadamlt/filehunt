@@ -29,15 +29,14 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="js/main.min.js"></script>
 <script>
-	if (!isDetailsSupported)
-	{
-		document.documentElement.className += ' no-details';
-	}
-	</script>
+if (!isDetailsSupported)
+{
+	document.documentElement.className += ' no-details';
+}
+</script>
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
 </head>
 <body>
 <?php
@@ -48,7 +47,7 @@
 		?>
 <br />
 <br />
-<? if($_SERVER['HTTP_HOST'] != 'localhost') echo '
+<? /*if($_SERVER['HTTP_HOST'] != 'localhost')*/ echo '
 <script type="text/javascript"><!--
 	google_ad_client = "ca-pub-6531227695181642";
 	/* Filehunt under logo */
@@ -59,6 +58,5 @@
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>';?>
-
 </body>
 </html>

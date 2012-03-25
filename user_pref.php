@@ -99,6 +99,8 @@ if(isset($_GET['somethingEmpty']))
 ?>
 <div id="signup">
 	<?if(isset($_GET['error'])) echo '<div id="error">Error mes</div>';?>
+<div id="success_id"></div>
+<div id="error"></div>
 <form class="form" action="?page=user_pref" method="post" name="user_pref">
 	<table>
 		<tr>
@@ -132,11 +134,11 @@ if(isset($_GET['somethingEmpty']))
 			</td>
 		</tr>
 		<tr>
-			<td><input type="text" name="facebook_id" id="facebook_id" <?if(isset($user_pref['facebook_id']) && $user_pref['facebook_id'] != '') echo "value='$user_pref[facebook_id]'";?> ></td>
+			<td><input type="text" name="facebook_id" id="facebook_id" <?if(isset($user_pref['facebook_id']) && $user_pref['facebook_id'] != '') echo "value='$user_pref[facebook_id]'";?> onfocusout="validateFacebook()"></td>
 			<td><label for="facebook_id">Facebook id (optional)</label></td>
 		</tr>
 		<tr>
-			<td><input type="text" name="twitter_id" id="twitter_id" <?if(isset($user_pref['twitter_id']) && $user_pref['twitter_id'] != '') echo "value='$user_pref[twitter_id]'";?>></td>
+			<td><input type="text" name="twitter_id" id="twitter_id" onfocusout="validateTwitter()" <?if(isset($user_pref['twitter_id']) && $user_pref['twitter_id'] != '') echo "value='$user_pref[twitter_id]'";?>></td>
 			<td><label for="twitter_id">Twitter id (optional)</label></td>
 		</tr>
 		<tr>

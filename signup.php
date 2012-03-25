@@ -105,11 +105,65 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 }
 }
 ?>
-<h1 style="text-align:center;">Signup</h1><div id="signup"><? if (isset($_GET['signupError'])) echo '<div id="error">Oups... You either left something empty or the passwords didn\'t match. Try again</div>'; ?><form class="form" action="?page=signup" method="post" onsubmit="validateSignup()" name="signup"><table><tr><td><input type="text" name="username" placeholder="Username" id="username" /></td><td><label for="name">Username</label></td></tr><tr><td><input type="password" name="password" placeholder="Password" id="password" /></td><td><label for="password">Password</label></td></tr><tr><td><input type="password" name="password2" placeholder="Password again" id="password2" /></td><td><label for="password2">Password Again*</label></td></tr><tr><td><input type="email" name="email" placeholder="Email" id="email" /></td><td><label for="email">Email*</label></td></tr><tr><td>
-	<?php
+<h1 style="text-align:center;">Signup</h1>
+<div id="signup">
+	<? if (isset($_GET['signupError'])) echo '<div id="error">
+	Oups... You either left something empty or the passwords didn\'t match. Try again
+</div>
+'; ?>
+<div id="signup_success"></div>
+<div id="error"></div>
+<form class="form" action="?page=signup" method="post" onsubmit="validateSignup()" name="signup">
+	<table>
+		<tr>
+			<td>
+				<input type="text" name="username" placeholder="Username" id="username" onfocusout="validateUsername()"/>
+			</td>
+			<td>
+				<label for="name">Username</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="email" name="email" placeholder="Email" id="email" onfocusout="validateEmail()" />
+			</td>
+			<td>
+				<label for="email">Email*</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="password" name="password" placeholder="Password" id="password" />
+			</td>
+			<td>
+				<label for="password">Password*</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="password" name="password2" placeholder="Password again" id="password2" onfocusout="validatePassword()" />
+			</td>
+			<td>
+				<label for="password2">Password Again*</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<?php
 	require_once('recaptchalib.php');
 	if($_SERVER['HTTP_HOST']=='localhost') $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN";
     elseif($_SERVER['HTTP_HOST']=='filehunt.pagodabox.com') $publickey = $_SERVER['CAPTCHA_PUBLIC'];
-    echo '<center>'.recaptcha_get_html($publickey).'</center>';
+    echo '<center>'.recaptcha_get_html($publickey).'</center>
+			';
     ?>
-</td></tr><tr><input type="hidden" name="start" /><td class="submit"><input type="submit" value="Signup"/></td></tr></table></form></div>
+		</td>
+	</tr>
+	<tr>
+		<input type="hidden" name="start" />
+		<td class="submit">
+			<input type="submit" value="Signup"/>
+		</td>
+	</tr>
+</table>
+</form>
+</div>

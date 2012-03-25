@@ -1,5 +1,5 @@
 body {
-    font: 16px/150% Verdana, Tahoma, sans-serif;
+    font: 14px/150% Verdana, Tahoma, sans-serif;
     text-align: center;
 }
 a img
@@ -16,6 +16,12 @@ a img
 #error {
     color: hsl(359, 93%, 47%);
     text-align: center;
+    /*color: white;*/
+    /*background-color: #D00000;*/
+/*    padding: 4px;
+    margin: 10px;*/
+    font-weight: bold;
+    size:10px;
 }
 
 #signup {
@@ -45,6 +51,10 @@ pre {
 
 #links li {
     float: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
 }
 
 #links a {
@@ -75,6 +85,7 @@ pre {
     color: hsl(0, 0%, 100%);
 }
 
+
 #logo {
     text-align: center;
 }
@@ -82,8 +93,29 @@ pre {
 #success {
     text-align: center;
     color: green;
+    /*padding: 4px;
+    margin: 10px;*/
+    font-weight: bold;
+    size:10px;
 }
 
+#success_id {
+    text-align: center;
+    color: green;
+    /*padding: 4px;
+    margin: 10px;*/
+    font-weight: bold;
+    size:10px;
+}
+
+#signup_success p {
+    text-align: center;
+    color: green;
+/*    padding: 4px;
+    margin: 10px;*/
+    font-weight: bold;
+    size:10px;
+}
 .message h1 {
     text-align: center;
     font-size: 18px;

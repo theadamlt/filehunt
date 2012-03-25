@@ -16,5 +16,4 @@ else
 	header('Location: ?page=404');
 	die();
 }
-
 ?>
