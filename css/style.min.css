@@ -1,5 +1,5 @@
 body{font:14px/150% Verdana,Tahoma,sans-serif;text-align:center}a img{border:0}#login{color:black;text-align:center}#error{color:hsl(359,93%,47%);text-align:center;font-weight:bold;size:10px}
-#signup{text-align:center}pre{text-align:center}#links{text-align:left;width:100%;height:35px;margin:0 auto;background-color:hsl(216,22%,49%);float:left;position:relative}
+#error_id{color:hsl(359,93%,47%);text-align:center;font-weight:bold;size:10px}#signup{text-align:center}pre{text-align:center}#links{text-align:left;width:100%;height:35px;margin:0 auto;background-color:hsl(216,22%,49%);float:left;position:relative}
 #links ul{margin:0;padding:0;list-style:none;line-height:normal}#links li{float:left;margin:0;padding:0;list-style:none;display:block}#links a{display:block;float:left;height:25px;padding:10px 20px 0 20px;text-decoration:none;color:hsl(0,0%,100%)}
 #links a:hover{background:hsl(0,0%,100%);color:hsl(70,15%,16%)}#links .current_page_item a{background:hsl(0,0%,100%);color:hsl(70,15%,16%)}#links .loggedin{display:block;float:left;height:25px;padding:10px 20px 0 20px;text-decoration:none;color:hsl(0,0%,100%)}
 #logo{text-align:center}#success{text-align:center;color:green;font-weight:bold;size:10px}#success_id{text-align:center;color:green;font-weight:bold;size:10px}

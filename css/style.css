@@ -24,6 +24,17 @@ a img
     size:10px;
 }
 
+#error_id {
+    color: hsl(359, 93%, 47%);
+    text-align: center;
+    /*color: white;*/
+    /*background-color: #D00000;*/
+/*    padding: 4px;
+    margin: 10px;*/
+    font-weight: bold;
+    size:10px;
+}
+
 #signup {
     text-align: center;
 }

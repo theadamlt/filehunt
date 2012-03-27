@@ -6,9 +6,6 @@ session_start();
 
 //var_dump($_FILES['uploadedfile']);
 
-if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
-{
-
 	$fileName = $_FILES['uploadedfile']['name'];
 	$tmpName  = $_FILES['uploadedfile']['tmp_name'];
 	$fileSize = $_FILES['uploadedfile']['size'];
@@ -49,8 +46,7 @@ if(isset($_POST['upload']) && $_FILES['uploadedfile']['size'] > 0)
 		header("Location: index.php?page=search&uploadSucces=true&id=$fileRow");
 		die();
 	}
-	else echo mysql_error();
-} 
+ 
 else
 {
 	switch($_FILES['uploadedfile']['error'])

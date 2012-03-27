@@ -111,39 +111,37 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (isset($_POST['p
 	Oups... You either left something empty or the passwords didn\'t match. Try again
 </div>
 '; ?>
-<div id="signup_success"></div>
-<div id="error"></div>
-<form class="form" action="?page=signup" method="post" onsubmit="validateSignup()" name="signup">
+<form class="form" action="?page=signup" method="post" onsubmit="return validateSignup()" name="signup">
 	<table>
 		<tr>
 			<td>
 				<input type="text" name="username" placeholder="Username" id="username" onfocusout="validateUsername()"/>
 			</td>
-			<td>
-				<label for="name">Username</label>
+			<td id="username_label">
+				<label for="name">Username*</label>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<input type="email" name="email" placeholder="Email" id="email" onfocusout="validateEmail()" />
 			</td>
-			<td>
+			<td id="email_label">
 				<label for="email">Email*</label>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="password" name="password" placeholder="Password" id="password" />
+				<input type="password" name="password" placeholder="Password" id="password" onfocusout="validatePassword1()"/>
 			</td>
-			<td>
+			<td id="password_label">
 				<label for="password">Password*</label>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="password" name="password2" placeholder="Password again" id="password2" onfocusout="validatePassword()" />
+				<input type="password" name="password2" placeholder="Password again" id="password2" onfocusout="validatePassword2()" />
 			</td>
-			<td>
+			<td id="password_label2">
 				<label for="password2">Password Again*</label>
 			</td>
 		</tr>

@@ -65,6 +65,7 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			//user prefs
 			$sql3 = "SELECT * FROM user_pref WHERE userID = $_SESSION[dbuserid] LIMIT 1";
 			$result3 = mysql_query($sql3);
+			echo mysql_error();
 			if(mysql_num_rows($result3) == 0) $user_pref = array();
 			else $user_pref = mysql_fetch_array($result3);
 
@@ -111,18 +112,18 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			echo '</ul></div>';
 		}
 
-	/*if($_SERVER['HTTP_HOST'] != 'localhost')*/ echo '<br /><script type="text/javascript"><!--
-							google_ad_client = "ca-pub-6531227695181642";
-							/* Filehunt top logo */
-							google_ad_slot = "4106923675";
-							google_ad_width = 728;
-							google_ad_height = 90;
-							//-->
-						</script>
-						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-						</script>';
-	echo '
-						<div id="logo"><a href="?page=search"><img src="img/logo.png" height=179 width=207 /></a></div>';
+	if($_SERVER['HTTP_HOST'] != 'localhost') echo '
+<br /><script type="text/javascript"><!--
+google_ad_client = "ca-pub-6531227695181642";
+/* Filehunt top logo */
+google_ad_slot = "4106923675";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>';
+echo '<div id="logo"><a href="?page=search"><img src="img/logo.png" height=179 width=207 /></a></div>';
 
 	if(getBrowser() != 'Chrome' && !isset($_COOKIE['rmNotice']))
 	{
@@ -144,10 +145,10 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 		$host = $_SERVER['HTTP_HOST'];
 		$id = $_GET['id'];
 		$downloadLink = "?page=fileinfo&fileID=$id";
-		if($host == 'filehunt.pagodabox.com') $url = $host.'/'. $downloadLink;
-		else $url = $host.'/'.$downloadLink;
+		if($host != 'localhost') $url = $host.'/'. $downloadLink;
+		else $url = $host.'/filehunt/'.$downloadLink;
 		echo '<div id="success">Upload succeeded</div>';
-		echo "<p>Your file link is:<a href='http://$url'>http://$url</a></p><input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'><br /><div id='socailshare'>";
+		echo "<p>Your file link is: <a href='http://$url'>http://$url</a></p><input type='button' onclick='copyToClipboard(\"http://$url\")' value='Copy to clipboard'><br /><div id='socailshare'>";
 
 		facebookShare($url);
 		twitterShare($url);

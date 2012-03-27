@@ -99,14 +99,12 @@ if(isset($_GET['somethingEmpty']))
 ?>
 <div id="signup">
 	<?if(isset($_GET['error'])) echo '<div id="error">Error mes</div>';?>
-<div id="success_id"></div>
-<div id="error"></div>
-<form class="form" action="?page=user_pref" method="post" name="user_pref">
+<form class="form" action="?page=user_pref" method="post" onsubmit="return validateUserPref()" name="user_pref">
 	<table>
 		<tr>
 			<td>
-				<input type="text" name="real_name" placeholder="Real name" id="real_name" <?if(isset($user_pref['real_name'])) echo 'value="'.$user_pref['real_name'].'"';?>></td>
-			<td>
+				<input type="text" name="real_name" placeholder="Real name" onfocusout="validateRealName()" id="real_name" <?if(isset($user_pref['real_name'])) echo 'value="'.$user_pref['real_name'].'"';?>></td>
+			<td id="real_name_label">
 				<label for="name">Real name</label>
 			</td>
 		</tr>
@@ -120,8 +118,8 @@ if(isset($_GET['somethingEmpty']))
 		</tr>
 		<tr>
 			<td>
-				<input type="email" id="email" name="email" value=<?=$user_info['email']?>></td>
-			<td>
+				<input type="email" id="email" name="email" onfocusout="validateEmail2()" value=<?=$user_info['email']?>></td>
+			<td id="email_label">
 				<label for="email">Email</label>
 			</td>
 		</tr>
@@ -135,11 +133,11 @@ if(isset($_GET['somethingEmpty']))
 		</tr>
 		<tr>
 			<td><input type="text" name="facebook_id" id="facebook_id" <?if(isset($user_pref['facebook_id']) && $user_pref['facebook_id'] != '') echo "value='$user_pref[facebook_id]'";?> onfocusout="validateFacebook()"></td>
-			<td><label for="facebook_id">Facebook id (optional)</label></td>
+			<td id="facebook_label"><label for="facebook_id">Facebook id (optional)</label></td>
 		</tr>
 		<tr>
 			<td><input type="text" name="twitter_id" id="twitter_id" onfocusout="validateTwitter()" <?if(isset($user_pref['twitter_id']) && $user_pref['twitter_id'] != '') echo "value='$user_pref[twitter_id]'";?>></td>
-			<td><label for="twitter_id">Twitter id (optional)</label></td>
+			<td id="twitter_label"><label for="twitter_id">Twitter id (optional)</label></td>
 		</tr>
 		<tr>
 			<td class="submit">
@@ -147,6 +145,7 @@ if(isset($_GET['somethingEmpty']))
 			</td>
 		</tr>
 	</table>
+	<input type="hidden" name="userid" value=<?=$_SESSION['dbuserid']?>>
 </form>
 <br>
 <br></div>
@@ -155,7 +154,37 @@ if(isset($_GET['somethingEmpty']))
 	<summary>Change password</summary>
 
 
- <form class="form" name="newpassword" action="?page=user_pref" onsubmit="validate_new_password()" method="post"><table><tr><td><input type="password" id="curpassword" name="curpassword"></td><td><label for="curpassword">Curent password</label></td></tr><tr><td><input type="password" name="password" id="password"></td><td><label for="password">New password</label></td></tr><tr><td><input type="password" name="password2" id="password2"></td><td><label for="password2">New Password again</label></td></tr><tr><td class="submit"><input type="submit" value="Submit"></td></tr></table></form></details></selection>
+ <form class="form" name="newpassword" action="?page=user_pref" onsubmit="return validate_new_password()" method="post">
+ 	<table>
+ 		<tr>
+ 			<td>
+ 				<input type="password" id="curpassword" name="curpassword" onfocusout="validateCurrentPassword()"></td>
+ 			<td id="current_password_label">
+ 				<label for="curpassword">Curent password</label>
+ 			</td>
+ 		</tr>
+ 		<tr>
+ 			<td>
+ 				<input type="password" name="password" id="password" onfocusout="validateNewPassword1()"></td>
+ 			<td id="newpassword_label">
+ 				<label for="password">New password</label>
+ 			</td>
+ 		</tr>
+ 		<tr>
+ 			<td>
+ 				<input type="password" name="password2" id="password2" onfocusout="validateNewPassword2()"></td>
+ 			<td id="newpassword2_label">
+ 				<label for="password2">New Password again</label>
+ 			</td>
+ 		</tr>
+ 		<tr>
+ 			<td class="submit">
+ 				<input type="submit" value="Submit"></td>
+ 		</tr>
+ 	</table>
+ </form>
+ </details>
+ </selection>
 
 
 <script src="js/jquery.details.min.js"></script>

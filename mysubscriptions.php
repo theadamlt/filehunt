@@ -80,17 +80,17 @@ if(isset($_SESSION['dbuserid']))
         $count = 0;
 		while($row = mysql_fetch_array($result))
 		{
-
 			$sql2     = "SELECT *
 						FROM comments
 						WHERE fileID='".$row['f_rowID']."'";
-			$result2  = mysql_query($sql2,$con);
+			$result2  = mysql_query($sql2);
 			$numrows2 = mysql_num_rows($result2);
 	        if($numrows2 == 1) $comment_string = 'comment';
             else $comment_string = 'comments'; 
 
 			if(oddOrEven($count)==1) echo "<tr class='alt' id='".$row['f_rowID']."'>";
-            elseif(oddOreven($count)==0) echo '<tr id='.$row['f_rowID'].'><td><a href=?page=fileinfo&fileID=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td><td><a href=?page=profile&userID='.$row['f_uploaded_by'].'>'.$row['u_username'].'</a></td><td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td></tr>';
+            elseif(oddOreven($count)==0) echo '<tr id='.$row['f_rowID'].'>';
+            echo '<td><a href=?page=fileinfo&fileID=' . $row['f_rowID'] . '>' . $row['f_file'] . '</a></td><td><a href=?page=profile&userID='.$row['f_uploaded_by'].'>'.$row['u_username'].'</a></td><td>'.date("d/m/y H:i",$row['f_uploaded_date']).'</td></tr>';
             ++$count;
 		}
 		echo '</table></center>';
