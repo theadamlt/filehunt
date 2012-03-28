@@ -30,7 +30,7 @@ Header set Cache-Control "public, no-transform"
 #####################################################
 
 <ifModule mod_deflate.c>
-<filesMatch "\.(js|css|php|png)$">
+<filesMatch "\.(js|css|png)$">
 SetOutputFilter DEFLATE
 </filesMatch>
 </ifModule>
