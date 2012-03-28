@@ -843,11 +843,17 @@ function validateNewPassword2()
 		}
 	}
 }
+
+var reset_passwordArray = new Array();
+reset_passwordArray['password'] = 'false';
+reset_passwordArray['password2'] = 'false';
+
 function validate_password_reset()
 {
-	if(document.reset.password.value == document.reset.password2.value)
+	if(reset_passwordArray['password'] == 'true' && reset_passwordArray['password2'] == 'true')
 	{ 
 		document.reset.password.value = MD5(document.reset.password.value);
+		document.reset.password2.value = MD5(document.reset.password2.value);
 		return true;
 	}
 	else
@@ -861,22 +867,22 @@ function validateResetPassword1()
 {
 	if(document.reset.password.value.length > 5)
 	{
-			if(document.getElementById('password_error'))
-			{
-				$('#password_error').remove();
-			}
-			if(!document.getElementById('password_success'))
-			{
-				successMessage = document.createElement('img');
-				successMessage.setAttribute('id', 'password_success');
-				successMessage.setAttribute('height', '16');
-				successMessage.setAttribute('width', '16');
-				successMessage.setAttribute('src', './img/success.png');
-				successMessage.setAttribute('title', 'The entered password is valid!');
-				$('#password2').removeAttr('readonly');
-				$('#password_label').prepend(successMessage);
-				reset_passwordArray['password'] = 'true';
-			}
+		if(document.getElementById('password_error'))
+		{
+			$('#password_error').remove();
+		}
+		if(!document.getElementById('password_success'))
+		{
+			successMessage = document.createElement('img');
+			successMessage.setAttribute('id', 'password_success');
+			successMessage.setAttribute('height', '16');
+			successMessage.setAttribute('width', '16');
+			successMessage.setAttribute('src', './img/success.png');
+			successMessage.setAttribute('title', 'The entered password is valid!');
+			$('#password2').removeAttr('readonly');
+			$('#password_label').prepend(successMessage);
+			reset_passwordArray['password'] = 'true';
+		}
 	}
 	else
 	{
@@ -884,6 +890,7 @@ function validateResetPassword1()
 		{
 			$('#password_success').remove();
 		}
+
 		if(!document.getElementById('password_error'))
 		{
 			errorMessage = document.createElement('img');
@@ -894,14 +901,14 @@ function validateResetPassword1()
 			errorMessage.setAttribute('title', 'The entered password is invalid. Must be over 5 characters');
 			$('#password_label').prepend(errorMessage);
 			$('#password2').attr('readonly', 'readonly');
-			signupArray['password'] = 'false';
+			reset_passwordArray['password'] = 'false';
 		}
 	}
 }
 
 function validateResetPassword2()
 {
-	if(document.signup.password.value == document.signup.password2.value)
+	if(document.reset.password.value == document.reset.password2.value)
 	{
 		if(document.getElementById('password2_error'))
 		{
@@ -915,8 +922,8 @@ function validateResetPassword2()
 			successMessage.setAttribute('width', '16');
 			successMessage.setAttribute('src', './img/success.png');
 			successMessage.setAttribute('title', 'The entered passwords is matching!');
-			$('#password_label2').prepend(successMessage);
-			signupArray['password2'] = 'true';
+			$('#password2_label').prepend(successMessage);
+			reset_passwordArray['password2'] = 'true';
 		}
 	}
 	else
@@ -933,8 +940,8 @@ function validateResetPassword2()
 			errorMessage.setAttribute('width', '16');
 			errorMessage.setAttribute('src', './img/error.png');
 			errorMessage.setAttribute('title', 'The entered passwords doesn\'t match');
-			$('#password_label2').prepend(errorMessage);
-			signupArray['password2'] = 'false';
+			$('#password2_label').prepend(errorMessage);
+			reset_passwordArray['password2'] = 'false';
 		}
 	}
 }

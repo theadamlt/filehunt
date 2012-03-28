@@ -28,7 +28,7 @@ if (isset($_POST['username']) && isset($_POST['security_code']))
 		<table>
 			<tr>
 				<td>
-					<input type="password" name="password" id="password1">
+					<input type="password" name="password" id="password1" onfocusout="validateResetPassword1()">
 				</td>
 				<td id="password_label">
 					<label for="password1">New password</label>
@@ -36,7 +36,7 @@ if (isset($_POST['username']) && isset($_POST['security_code']))
 			</tr>
 			<tr>
 				<td>
-					<input type="password" name="password2" id="password2" />	
+					<input type="password" name="password2" id="password2" onfocusout="validateResetPassword2()">	
 				</td>
 				<td id="password2_label">
 					<label for="password2">New password again</label>
@@ -95,7 +95,7 @@ if(isset($_POST['password']))
 				             security_code=$random_new
 				WHERE security_code=$random
 				    AND username='$username' LIMIT 1";
-		if($result =  mysql_query($sql,$con))
+		if($result =  mysql_query($sql))
 		{
 			header('Location: ?page=search&newPassword=true');
 			die();
