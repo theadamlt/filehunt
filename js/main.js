@@ -40,7 +40,7 @@ function plusCount(field)
 }
 
 function copyToClipboard(text) {
-  window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+  window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
 }
 
 
@@ -323,19 +323,6 @@ function validate_login()
 	return true;
 }
 
-function validate_password_reset()
-{
-	if(document.reset.password.value == document.reset.password2.value)
-	{ 
-		document.reset.password.value = MD5(document.reset.password.value);
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 function validateUsername()
 {
 	$.get("validate.php?func=u&u="+document.signup.username.value, function(response) { 
@@ -556,12 +543,12 @@ function validateTwitter()
 	url = 'https://api.twitter.com/1/users/show.json';
 	$.ajax({
 
-    url : "http://api.twitter.com/1/users/show.json?screen_name="+document.user_pref.twitter_id.value,
-    dataType : "jsonp",
-    success : function(data)
-    {
-    	//console.log(data);
-    	if(document.getElementById('twitter_error'))
+	url : "http://api.twitter.com/1/users/show.json?screen_name="+document.user_pref.twitter_id.value,
+	dataType : "jsonp",
+	success : function(data)
+	{
+		//console.log(data);
+		if(document.getElementById('twitter_error'))
 		{
 			$('#twitter_error').remove();
 		}
@@ -575,10 +562,10 @@ function validateTwitter()
 			twitter_message.setAttribute('title', 'The entered ID is valid. Username: '+data['screen_name']);
 			$('#twitter_label').prepend(twitter_message);
 		}
-    },
-    error : function()
-    {
-        if(document.getElementById('twitter_success'))
+	},
+	error : function()
+	{
+		if(document.getElementById('twitter_success'))
 		{
 			$('#twitter_success').remove();
 		}
@@ -592,7 +579,7 @@ function validateTwitter()
 			twitter_message.setAttribute('title', 'The entered ID is invalid');
 			$('#twitter_label').prepend(twitter_message);
 		}
-    },
+	},
 
 });
 }
@@ -604,7 +591,6 @@ function validateUserPref()
 		return false;
 	}
 	else return true;
-	console.log(dump(user_pref_array));
 }
 
 function validateRealName()
@@ -854,6 +840,101 @@ function validateNewPassword2()
 			errorMessage.setAttribute('title', 'The entered passwords doesn\'t match');
 			$('#newpassword2_label').prepend(errorMessage);
 			newpasswordArray['password2'] = 'false';
+		}
+	}
+}
+function validate_password_reset()
+{
+	if(document.reset.password.value == document.reset.password2.value)
+	{ 
+		document.reset.password.value = MD5(document.reset.password.value);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+function validateResetPassword1()
+{
+	if(document.reset.password.value.length > 5)
+	{
+			if(document.getElementById('password_error'))
+			{
+				$('#password_error').remove();
+			}
+			if(!document.getElementById('password_success'))
+			{
+				successMessage = document.createElement('img');
+				successMessage.setAttribute('id', 'password_success');
+				successMessage.setAttribute('height', '16');
+				successMessage.setAttribute('width', '16');
+				successMessage.setAttribute('src', './img/success.png');
+				successMessage.setAttribute('title', 'The entered password is valid!');
+				$('#password2').removeAttr('readonly');
+				$('#password_label').prepend(successMessage);
+				reset_passwordArray['password'] = 'true';
+			}
+	}
+	else
+	{
+		if(document.getElementById('password_success'))
+		{
+			$('#password_success').remove();
+		}
+		if(!document.getElementById('password_error'))
+		{
+			errorMessage = document.createElement('img');
+			errorMessage.setAttribute('id', 'password_error');
+			errorMessage.setAttribute('height', '16');
+			errorMessage.setAttribute('width', '16');
+			errorMessage.setAttribute('src', './img/error.png');
+			errorMessage.setAttribute('title', 'The entered password is invalid. Must be over 5 characters');
+			$('#password_label').prepend(errorMessage);
+			$('#password2').attr('readonly', 'readonly');
+			signupArray['password'] = 'false';
+		}
+	}
+}
+
+function validateResetPassword2()
+{
+	if(document.signup.password.value == document.signup.password2.value)
+	{
+		if(document.getElementById('password2_error'))
+		{
+			$('#password2_error').remove();
+		}
+		if(!document.getElementById('password2_success'))
+		{
+			successMessage = document.createElement('img');
+			successMessage.setAttribute('id', 'password2_success');
+			successMessage.setAttribute('height', '16');
+			successMessage.setAttribute('width', '16');
+			successMessage.setAttribute('src', './img/success.png');
+			successMessage.setAttribute('title', 'The entered passwords is matching!');
+			$('#password_label2').prepend(successMessage);
+			signupArray['password2'] = 'true';
+		}
+	}
+	else
+	{
+		if(document.getElementById('password2_success'))
+		{
+			$('#password2_success').remove();
+		}
+		if(!document.getElementById('password2_error'))
+		{
+			errorMessage = document.createElement('img');
+			errorMessage.setAttribute('id', 'password2_error');
+			errorMessage.setAttribute('height', '16');
+			errorMessage.setAttribute('width', '16');
+			errorMessage.setAttribute('src', './img/error.png');
+			errorMessage.setAttribute('title', 'The entered passwords doesn\'t match');
+			$('#password_label2').prepend(errorMessage);
+			signupArray['password2'] = 'false';
 		}
 	}
 }
