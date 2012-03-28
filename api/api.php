@@ -1,5 +1,5 @@
 <?php
-require_once('../filehunt/lib.php');
+require_once('./filehunt/lib.php');
 mysql_selector();
 if($_SERVER['HTTP_HOST'] == 'localhost') error_reporting(0);
 
