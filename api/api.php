@@ -1,5 +1,5 @@
 <?php
-require_once('./lib.php');
+require_once('../lib.php');
 mysql_selector();
 if($_SERVER['HTTP_HOST'] == 'localhost') error_reporting(0);
 
