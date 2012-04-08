@@ -39,6 +39,11 @@ if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSIO
 			header('Location: ?page=report_abuse&reportedFile='.$_GET['reportedFile']);
 			die();
 		}
+		elseif(isset($_GET['attemptedSite']) && isset($_GET['fileID']) && $_GET['attemptedSite'] == 'fileinfo')
+		{
+			header('Location: ?page=fileinfo&fileID='.$_GET['fileID']);
+			die();
+		}
 		if(isset($_GET['attemptedSite']))
 		{
 			header('Location: ?page='.$_GET['attemptedSite']);
@@ -62,4 +67,41 @@ if (isset($_GET['attemptedSite']))
 }
 	
 ?>
-<h1 style="text-align:center;">Login</h1><?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>' ?><div id="login"><form class="form" action="?<?php echo $_SERVER['QUERY_STRING']?>" method="post" onsubmit="validate_login()" name="login"><table><tr><td><input type="text" name="username" placeholder="Username" id="username" /></td><td><label for="name">Username</label></td></tr><tr><td><input type="password" name="password" placeholder="Password" id="password" /></td><td><label for="password">Password</label></td></tr><tr><td><label for="checkbox">Remember me</label></td><td><input type="checkbox" name="remember" value="true" checked id="checkbox"></td></tr><tr><td class="submit"><input type="submit" value="Login" ></td></tr></table></form><a href="?page=forgot_password">Forgot password?</a></div>
+<h1 style="text-align:center;">Login</h1>
+<?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>
+' ?>
+<div id="login">
+<form class="form" name="login" onsubmit="return reqLogin();">
+	<table>
+		<tr>
+			<td>
+				<input type="text" name="username" placeholder="Username" id="username" />
+			</td>
+			<td>
+				<label for="name">Username</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="password" name="password" placeholder="Password" id="password" />
+			</td>
+			<td>
+				<label for="password">Password</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="checkbox">Remember me</label>
+			</td>
+			<td>
+				<input type="checkbox" name="remember" value="true" checked id="checkbox"></td>
+		</tr>
+		<tr>
+			<td class="submit">
+				<input type="submit" value="Login">
+			</td>
+		</tr>
+	</table>
+</form>
+<a href="?page=forgot_password">Forgot password?</a>
+</div>

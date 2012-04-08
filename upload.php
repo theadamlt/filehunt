@@ -23,6 +23,7 @@ if (isset($_GET['uploadError']))
 			break;
 		case '4':
 			echo '<div id="error">You have to select a file!</div>';
+			break;
 		default:
 			echo '<div id="error">There was an error uploading your file</div>';
 			break;

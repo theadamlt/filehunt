@@ -8,7 +8,9 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 if(isset($_POST['delete']) && isset($_SESSION['dbuserid']) && isset($user_pref['admin']) && $user_pref['admin'] == '1')
 {
 	$date = time() -7257600;
-	$sql = "DELETE FROM files WHERE uploaded_date < $date";
+	$sql = "SELECT * FROM files f, downloads d WHERE uploaded_date < $date";
+	$result = mysql_query($sql);
+	print_r(mysql_fetch_array($result));
 }
 else
 {

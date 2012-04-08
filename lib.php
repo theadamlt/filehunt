@@ -158,12 +158,12 @@ function getBrowser()
 
 function calc_file_size($file)
 {
-
 	$kb = 1024;
 	$mb = 1048576;
 	$gb = 1073741824;
 	$tb = 1099511627776;
-	if($file >= $kb && $file < $mb) $size = round($file/$kb, 1).' Kb';
+	
+	if($file >= $kb && $file < $mb) $size = round($file/$kb, 1).' KB';
 	elseif($file >= $mb && $file < $gb) $size = round($file/$mb, 1).' MB';
 	elseif($file >= $gb && $file < $tb) $size = round($file/$gb, 1).' GB';
 	elseif($file >= $tb) $size = round($file/$tb, 1).'TB';

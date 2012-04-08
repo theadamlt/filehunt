@@ -24,7 +24,7 @@ a img
     size:10px;
 }
 
-#error_id {
+#errormes {
     color: hsl(359, 93%, 47%);
     text-align: center;
     /*color: white;*/
@@ -32,7 +32,7 @@ a img
 /*    padding: 4px;
     margin: 10px;*/
     font-weight: bold;
-    size:10px;
+    size:8px;
 }
 
 #signup {
@@ -267,6 +267,8 @@ input:hover,textarea:hover,input:focus,textarea:focus {
     border-style: solid;
     border-width: medium;
     border-color: black;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #table td,#table th {

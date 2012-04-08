@@ -3,9 +3,11 @@ require_once('lib.php');
 mysql_selector();
 
 session_start();
-
+print_r($_FILES);
+print_r($_FILES['error']);
 //var_dump($_FILES['uploadedfile']);
-
+if($_FILES['uploadedfile']['size'] > 0 && $_FILES['uploadedfile']['error'] == 0)
+{
 	$fileName = $_FILES['uploadedfile']['name'];
 	$tmpName  = $_FILES['uploadedfile']['tmp_name'];
 	$fileSize = $_FILES['uploadedfile']['size'];
@@ -27,9 +29,8 @@ session_start();
 	$user = $_SESSION['dbuserid'];
 	$description = mysql_enteries_fix_string(trim($_POST['description']));
 
-	$sql = "INSERT INTO files (rowID, file, mimetype, DATA, uploaded_by, uploaded_date, SIZE, times_downloaded, description)
-		VALUES (NULL, '$fileName', '$fileType', '$content', '$user', $datestrto, $fileSize, 0,
-                                                                                    '$description')";
+	$sql = "INSERT INTO files (rowID, file, mimetype, data, uploaded_by, uploaded_date, SIZE, times_downloaded, description)
+		VALUES (NULL, '$fileName', '$fileType', '$content', '$user', $datestrto, $fileSize, 0, '$description')";
 	//echo $sql;
 
 	if (mysql_query($sql,$con))
@@ -46,7 +47,12 @@ session_start();
 		header("Location: index.php?page=search&uploadSucces=true&id=$fileRow");
 		die();
 	}
- 
+	else
+	{
+		header('Location: index.php?page=upload&uploadError=0');
+		die();
+	}
+} 
 else
 {
 	switch($_FILES['uploadedfile']['error'])

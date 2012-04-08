@@ -177,6 +177,9 @@ if(isset($_GET['somethingEmpty']))
  				<label for="password2">New Password again</label>
  			</td>
  		</tr>
+ 		<tr id="errormes">
+ 			
+ 		</tr>
  		<tr>
  			<td class="submit">
  				<input type="submit" value="Submit"></td>

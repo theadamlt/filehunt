@@ -121,8 +121,7 @@ google_ad_width = 728;
 google_ad_height = 90;
 //-->
 </script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>';
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>';
 echo '<div id="logo"><a href="?page=search"><img src="img/logo.png" height=179 width=207 /></a></div>';
 
 	if(getBrowser() != 'Chrome' && !isset($_COOKIE['rmNotice']))

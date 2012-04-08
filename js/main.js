@@ -5,8 +5,35 @@ function deleteOwnFile(arg)
 }
 function reportFile(file)
 {
-	var sure = confirm("Are you sure that you want to report this file as abuse?");
-	if(sure == true) window.location.href="?page=report_abuse&reportedFile="+file;
+	$.get('reference.php',
+		{
+		func: 'isloggedin',
+		},
+		function(response)
+		{
+			if(response != 'false')
+			{
+				var sure = confirm("Are you sure that you want to report this file as abuse?");
+				if(sure == true)
+				{
+					$.get('reference.php', 
+					{
+						func: 'report_abuse',
+						file: file,
+					},
+					function(response)
+					{
+						var div = document.getElementById('success')
+						div.innerHTML = 'The file has reported. Thank you';	
+
+					});
+				}	
+			}
+			else
+			{
+				window.location.href='?page=login&attemptedSite=report_abuse&reportedFile='+file;
+			}
+		});
 }
 
 function adminDeleteFile(arg)
@@ -43,458 +70,10 @@ function copyToClipboard(text) {
   window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
 }
 
-
-var isDetailsSupported = (function(doc) {
-  var el = doc.createElement('details'),
-	  fake,
-	  root,
-	  diff;
-  if (!('open' in el)) {
-	return false;
-  }
-  root = doc.body || (function() {
-	var de = doc.documentElement;
-	fake = true;
-	return de.insertBefore(doc.createElement('body'), de.firstElementChild || de.firstChild);
-  }());
-  el.innerHTML = '<summary>a</summary>b';
-  el.style.display = 'block';
-  root.appendChild(el);
-  diff = el.offsetHeight;
-  el.open = true;
-  diff = diff != el.offsetHeight;
-  root.removeChild(el);
-  if (fake) {
-	root.parentNode.removeChild(root);
-  }
-  return diff;
-}(document));
-
-
-var MD5 = function (string) {
- 
-  function RotateLeft(lValue, iShiftBits) {
-	return (lValue<<iShiftBits) | (lValue>>>(32-iShiftBits));
-  }
- 
-  function AddUnsigned(lX,lY) {
-	var lX4,lY4,lX8,lY8,lResult;
-	lX8 = (lX & 0x80000000);
-	lY8 = (lY & 0x80000000);
-	lX4 = (lX & 0x40000000);
-	lY4 = (lY & 0x40000000);
-	lResult = (lX & 0x3FFFFFFF)+(lY & 0x3FFFFFFF);
-	if (lX4 & lY4) {
-	  return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
-	}
-	if (lX4 | lY4) {
-	  if (lResult & 0x40000000) {
-		return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
-	  } else {
-		return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
-	  }
-	} else {
-	  return (lResult ^ lX8 ^ lY8);
-	}
-  }
- 
-  function F(x,y,z) { return (x & y) | ((~x) & z); }
-  function G(x,y,z) { return (x & z) | (y & (~z)); }
-  function H(x,y,z) { return (x ^ y ^ z); }
-  function I(x,y,z) { return (y ^ (x | (~z))); }
- 
-  function FF(a,b,c,d,x,s,ac) {
-	a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
-	return AddUnsigned(RotateLeft(a, s), b);
-  };
- 
-  function GG(a,b,c,d,x,s,ac) {
-	a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
-	return AddUnsigned(RotateLeft(a, s), b);
-  };
- 
-  function HH(a,b,c,d,x,s,ac) {
-	a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
-	return AddUnsigned(RotateLeft(a, s), b);
-  };
- 
-  function II(a,b,c,d,x,s,ac) {
-	a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
-	return AddUnsigned(RotateLeft(a, s), b);
-  };
- 
-  function ConvertToWordArray(string) {
-	var lWordCount;
-	var lMessageLength = string.length;
-	var lNumberOfWords_temp1=lMessageLength + 8;
-	var lNumberOfWords_temp2=(lNumberOfWords_temp1-(lNumberOfWords_temp1 % 64))/64;
-	var lNumberOfWords = (lNumberOfWords_temp2+1)*16;
-	var lWordArray=Array(lNumberOfWords-1);
-	var lBytePosition = 0;
-	var lByteCount = 0;
-	while ( lByteCount < lMessageLength ) {
-	  lWordCount = (lByteCount-(lByteCount % 4))/4;
-	  lBytePosition = (lByteCount % 4)*8;
-	  lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount)<<lBytePosition));
-	  lByteCount++;
-	}
-	lWordCount = (lByteCount-(lByteCount % 4))/4;
-	lBytePosition = (lByteCount % 4)*8;
-	lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80<<lBytePosition);
-	lWordArray[lNumberOfWords-2] = lMessageLength<<3;
-	lWordArray[lNumberOfWords-1] = lMessageLength>>>29;
-	return lWordArray;
-  };
- 
-  function WordToHex(lValue) {
-	var WordToHexValue="",WordToHexValue_temp="",lByte,lCount;
-	for (lCount = 0;lCount<=3;lCount++) {
-	  lByte = (lValue>>>(lCount*8)) & 255;
-	  WordToHexValue_temp = "0" + lByte.toString(16);
-	  WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length-2,2);
-	}
-	return WordToHexValue;
-  };
- 
-  function Utf8Encode(string) {
-	string = string.replace(/\r\n/g,"\n");
-	var utftext = "";
- 
-	for (var n = 0; n < string.length; n++) {
- 
-	  var c = string.charCodeAt(n);
- 
-	  if (c < 128) {
-		utftext += String.fromCharCode(c);
-	  }
-	  else if((c > 127) && (c < 2048)) {
-		utftext += String.fromCharCode((c >> 6) | 192);
-		utftext += String.fromCharCode((c & 63) | 128);
-	  }
-	  else {
-		utftext += String.fromCharCode((c >> 12) | 224);
-		utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-		utftext += String.fromCharCode((c & 63) | 128);
-	  }
- 
-	}
- 
-	return utftext;
-  };
- 
-  var x=Array();
-  var k,AA,BB,CC,DD,a,b,c,d;
-  var S11=7, S12=12, S13=17, S14=22;
-  var S21=5, S22=9 , S23=14, S24=20;
-  var S31=4, S32=11, S33=16, S34=23;
-  var S41=6, S42=10, S43=15, S44=21;
- 
-  string = Utf8Encode(string);
- 
-  x = ConvertToWordArray(string);
- 
-  a = 0x67452301; b = 0xEFCDAB89; c = 0x98BADCFE; d = 0x10325476;
- 
-  for (k=0;k<x.length;k+=16) {
-	AA=a; BB=b; CC=c; DD=d;
-	a=FF(a,b,c,d,x[k+0], S11,0xD76AA478);
-	d=FF(d,a,b,c,x[k+1], S12,0xE8C7B756);
-	c=FF(c,d,a,b,x[k+2], S13,0x242070DB);
-	b=FF(b,c,d,a,x[k+3], S14,0xC1BDCEEE);
-	a=FF(a,b,c,d,x[k+4], S11,0xF57C0FAF);
-	d=FF(d,a,b,c,x[k+5], S12,0x4787C62A);
-	c=FF(c,d,a,b,x[k+6], S13,0xA8304613);
-	b=FF(b,c,d,a,x[k+7], S14,0xFD469501);
-	a=FF(a,b,c,d,x[k+8], S11,0x698098D8);
-	d=FF(d,a,b,c,x[k+9], S12,0x8B44F7AF);
-	c=FF(c,d,a,b,x[k+10],S13,0xFFFF5BB1);
-	b=FF(b,c,d,a,x[k+11],S14,0x895CD7BE);
-	a=FF(a,b,c,d,x[k+12],S11,0x6B901122);
-	d=FF(d,a,b,c,x[k+13],S12,0xFD987193);
-	c=FF(c,d,a,b,x[k+14],S13,0xA679438E);
-	b=FF(b,c,d,a,x[k+15],S14,0x49B40821);
-	a=GG(a,b,c,d,x[k+1], S21,0xF61E2562);
-	d=GG(d,a,b,c,x[k+6], S22,0xC040B340);
-	c=GG(c,d,a,b,x[k+11],S23,0x265E5A51);
-	b=GG(b,c,d,a,x[k+0], S24,0xE9B6C7AA);
-	a=GG(a,b,c,d,x[k+5], S21,0xD62F105D);
-	d=GG(d,a,b,c,x[k+10],S22,0x2441453);
-	c=GG(c,d,a,b,x[k+15],S23,0xD8A1E681);
-	b=GG(b,c,d,a,x[k+4], S24,0xE7D3FBC8);
-	a=GG(a,b,c,d,x[k+9], S21,0x21E1CDE6);
-	d=GG(d,a,b,c,x[k+14],S22,0xC33707D6);
-	c=GG(c,d,a,b,x[k+3], S23,0xF4D50D87);
-	b=GG(b,c,d,a,x[k+8], S24,0x455A14ED);
-	a=GG(a,b,c,d,x[k+13],S21,0xA9E3E905);
-	d=GG(d,a,b,c,x[k+2], S22,0xFCEFA3F8);
-	c=GG(c,d,a,b,x[k+7], S23,0x676F02D9);
-	b=GG(b,c,d,a,x[k+12],S24,0x8D2A4C8A);
-	a=HH(a,b,c,d,x[k+5], S31,0xFFFA3942);
-	d=HH(d,a,b,c,x[k+8], S32,0x8771F681);
-	c=HH(c,d,a,b,x[k+11],S33,0x6D9D6122);
-	b=HH(b,c,d,a,x[k+14],S34,0xFDE5380C);
-	a=HH(a,b,c,d,x[k+1], S31,0xA4BEEA44);
-	d=HH(d,a,b,c,x[k+4], S32,0x4BDECFA9);
-	c=HH(c,d,a,b,x[k+7], S33,0xF6BB4B60);
-	b=HH(b,c,d,a,x[k+10],S34,0xBEBFBC70);
-	a=HH(a,b,c,d,x[k+13],S31,0x289B7EC6);
-	d=HH(d,a,b,c,x[k+0], S32,0xEAA127FA);
-	c=HH(c,d,a,b,x[k+3], S33,0xD4EF3085);
-	b=HH(b,c,d,a,x[k+6], S34,0x4881D05);
-	a=HH(a,b,c,d,x[k+9], S31,0xD9D4D039);
-	d=HH(d,a,b,c,x[k+12],S32,0xE6DB99E5);
-	c=HH(c,d,a,b,x[k+15],S33,0x1FA27CF8);
-	b=HH(b,c,d,a,x[k+2], S34,0xC4AC5665);
-	a=II(a,b,c,d,x[k+0], S41,0xF4292244);
-	d=II(d,a,b,c,x[k+7], S42,0x432AFF97);
-	c=II(c,d,a,b,x[k+14],S43,0xAB9423A7);
-	b=II(b,c,d,a,x[k+5], S44,0xFC93A039);
-	a=II(a,b,c,d,x[k+12],S41,0x655B59C3);
-	d=II(d,a,b,c,x[k+3], S42,0x8F0CCC92);
-	c=II(c,d,a,b,x[k+10],S43,0xFFEFF47D);
-	b=II(b,c,d,a,x[k+1], S44,0x85845DD1);
-	a=II(a,b,c,d,x[k+8], S41,0x6FA87E4F);
-	d=II(d,a,b,c,x[k+15],S42,0xFE2CE6E0);
-	c=II(c,d,a,b,x[k+6], S43,0xA3014314);
-	b=II(b,c,d,a,x[k+13],S44,0x4E0811A1);
-	a=II(a,b,c,d,x[k+4], S41,0xF7537E82);
-	d=II(d,a,b,c,x[k+11],S42,0xBD3AF235);
-	c=II(c,d,a,b,x[k+2], S43,0x2AD7D2BB);
-	b=II(b,c,d,a,x[k+9], S44,0xEB86D391);
-	a=AddUnsigned(a,AA);
-	b=AddUnsigned(b,BB);
-	c=AddUnsigned(c,CC);
-	d=AddUnsigned(d,DD);
-  }
- 
-  var temp = WordToHex(a)+WordToHex(b)+WordToHex(c)+WordToHex(d);
- 
-  return temp.toLowerCase();
-};
-
-function dump(arr,level) {
-var dumped_text = "";
-if(!level) level = 0;
-
-//The padding given at the beginning of the line.
-var level_padding = "";
-for(var j=0;j<level+1;j++) level_padding += "    ";
-
-if(typeof(arr) == 'object') { //Array/Hashes/Objects
- for(var item in arr) {
-  var value = arr[item];
- 
-  if(typeof(value) == 'object') { //If it is an array,
-   dumped_text += level_padding + "'" + item + "' ...\n";
-   dumped_text += dump(value,level+1);
-  } else {
-   dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
-  }
- }
-} else { //Stings/Chars/Numbers etc.
- dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
-}
-return dumped_text;
-} 
-
-var signupArray = new Array();
-signupArray['username'] = 'false';
-signupArray['email'] = 'false';
-signupArray['password'] = 'false';
-signupArray['password2'] = 'false'
-
-function validateSignup()
-{
-	if(signupArray['username'] == 'true' && signupArray['email'] == 'true' && signupArray['password'] == 'true' && signupArray['password2'] == 'true')
-	{
-		document.signup.password.value = MD5(document.signup.password.value);
-		document.signup.password2.value = MD5(document.signup.password2.value);
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 function validate_login()
 {
 	document.login.password.value = MD5(document.login.password.value);
 	return true;
-}
-
-function validateUsername()
-{
-	$.get("validate.php?func=u&u="+document.signup.username.value, function(response) { 
-		if(response == 'false')
-		{
-			if(!document.getElementById('username_error'))
-			{
-				if(document.getElementById('username_success'))
-				{
-					$('#username_success').remove();
-				}
-				if(!document.getElementById('username_error'))
-				{
-					errorImg = document.createElement('img');
-					errorImg.setAttribute('src', './img/error.png')
-					errorImg.setAttribute('height', '16');
-					errorImg.setAttribute('width', '16');
-					errorImg.setAttribute('id', 'username_error');
-					errorImg.setAttribute('title', 'The entered username is either not available or invalid');
-					$('#username_label').prepend(errorImg);
-					signupArray['username'] = 'false';
-				}
-			}
-		}
-		else
-		{
-			if(document.getElementById('username_error'))
-			{
-				$('#username_error').remove();
-			}
-			if(!document.getElementById('username_success'))
-			{
-				successImg = document.createElement('img');
-				successImg.setAttribute('src', './img/success.png')
-				successImg.setAttribute('height', '16');
-				successImg.setAttribute('width', '16');
-				successImg.setAttribute('title', 'The entered username is available and valid');
-				successImg.setAttribute('id', 'username_success');
-				$('#username_label').prepend(successImg);
-				signupArray['username'] = 'true';
-			}
-		}
-	});
-}
-
-function validateEmail()
-{
-	if(document.signup.email.value != '')
-	{
-	$.get("validate.php?func=m&m="+document.signup.email.value, function(response) { 
-	if(response == 'false')
-	{
-		
-		if(document.getElementById('email_success'))
-		{
-			$('#email_success').remove();
-		}
-		if(!document.getElementById('email_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'email_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered email is either not available or invalid');
-			$('#email_label').prepend(errorMessage);
-			signupArray['email'] = 'false';
-		}
-	}
-	else
-	{
-		if(document.getElementById('email_error'))
-		{
-			$('#email_error').remove();
-		}
-		if(!document.getElementById('email_success'))
-		{
-			successMessage = document.createElement('img');
-			successMessage.setAttribute('id', 'email_success');
-			successMessage.setAttribute('height', '16');
-			successMessage.setAttribute('width', '16');
-			successMessage.setAttribute('src', './img/success.png');
-			successMessage.setAttribute('title', 'The entered email is available and valid!');
-			$('#email_label').prepend(successMessage);
-			signupArray['email'] = 'true';
-		}
-	}
-
-	});
-	}
-}
-
-function validatePassword1()
-{
-	if(document.signup.password.value.length > 5)
-	{
-			if(document.getElementById('password_error'))
-			{
-				$('#password_error').remove();
-			}
-			if(!document.getElementById('password_success'))
-			{
-				successMessage = document.createElement('img');
-				successMessage.setAttribute('id', 'password_success');
-				successMessage.setAttribute('height', '16');
-				successMessage.setAttribute('width', '16');
-				successMessage.setAttribute('src', './img/success.png');
-				successMessage.setAttribute('title', 'The entered password is valid!');
-				$('#password2').removeAttr('readonly');
-				$('#password_label').prepend(successMessage);
-				signupArray['password'] = 'true';
-			}
-	}
-	else
-	{
-		if(document.getElementById('password_success'))
-		{
-			$('#password_success').remove();
-		}
-		if(!document.getElementById('password_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'password_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered password is invalid. Must be over 5 characters');
-			$('#password_label').prepend(errorMessage);
-			$('#password2').attr('readonly', 'readonly');
-			signupArray['password'] = 'false';
-		}
-	}
-}
-
-function validatePassword2()
-{
-	if(document.signup.password.value == document.signup.password2.value)
-	{
-		if(document.getElementById('password2_error'))
-		{
-			$('#password2_error').remove();
-		}
-		if(!document.getElementById('password2_success'))
-		{
-			successMessage = document.createElement('img');
-			successMessage.setAttribute('id', 'password2_success');
-			successMessage.setAttribute('height', '16');
-			successMessage.setAttribute('width', '16');
-			successMessage.setAttribute('src', './img/success.png');
-			successMessage.setAttribute('title', 'The entered passwords is matching!');
-			$('#password_label2').prepend(successMessage);
-			signupArray['password2'] = 'true';
-		}
-	}
-	else
-	{
-		if(document.getElementById('password2_success'))
-		{
-			$('#password2_success').remove();
-		}
-		if(!document.getElementById('password2_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'password2_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered passwords doesn\'t match');
-			$('#password_label2').prepend(errorMessage);
-			signupArray['password2'] = 'false';
-		}
-	}
 }
 
 function validateFacebook()
@@ -583,7 +162,6 @@ function validateTwitter()
 
 });
 }
-var user_pref_array = new Array();
 function validateUserPref()
 {
 	if(document.getElementById('real_name_error') || document.getElementById('email_error'))
@@ -640,7 +218,7 @@ function validateEmail2()
 		$.get("validate.php?func=om&m="+document.user_pref.email.value+'&u='+document.user_pref.userid.value, function(response) { 
 		if(response == 'false')
 		{
-			
+
 			if(document.getElementById('email_success'))
 			{
 				$('#email_success').remove();
@@ -714,7 +292,47 @@ function validate_new_password()
 		document.newpassword.curpassword.value = MD5(document.newpassword.curpassword.value);
 		return true;
 	}
-	else return false;
+	else
+	{
+		if(!document.getElementById('errormessage'))
+		{
+			el = document.createElement('td');
+			el.setAttribute('id', 'errormessage');
+			el.innerHTML = 'Somethings not right. Check the errors above';
+			$('#errormes').prepend(el);
+		}
+		if(newpasswordArray['curpassword'] == 'false' && !document.getElementById('curpassword_error'))
+		{
+			errorImg = document.createElement('img');
+			errorImg.setAttribute('src', './img/error.png')
+			errorImg.setAttribute('height', '16');
+			errorImg.setAttribute('width', '16');
+			errorImg.setAttribute('id', 'curpassword_error');
+			errorImg.setAttribute('title', 'The entered password is not right');
+			$('#current_password_label').prepend(errorImg);
+		}
+		if(newpasswordArray['password1'] == 'false' && !document.getElementById('newpassword_error'))
+		{
+			errorMessage = document.createElement('img');
+			errorMessage.setAttribute('id', 'newpassword_error');
+			errorMessage.setAttribute('height', '16');
+			errorMessage.setAttribute('width', '16');
+			errorMessage.setAttribute('src', './img/error.png');
+			errorMessage.setAttribute('title', 'The entered password is invalid. Must be over 5 characters');
+			$('#newpassword_label').prepend(errorMessage);
+		}
+		if(newpasswordArray['password2'] == 'false' && !document.getElementById('newpassword2_error'))
+		{
+			errorMessage = document.createElement('img');
+			errorMessage.setAttribute('id', 'newpassword2_error');
+			errorMessage.setAttribute('height', '16');
+			errorMessage.setAttribute('width', '16');
+			errorMessage.setAttribute('src', './img/error.png');
+			errorMessage.setAttribute('title', 'The entered passwords doesn\'t match');
+			$('#newpassword2_label').prepend(errorMessage);
+		}
+		return false;
+	}
 }
 
 function validateNewPassword1()
@@ -737,6 +355,7 @@ function validateNewPassword1()
 				$('#newpassword_label').prepend(successMessage);
 				newpasswordArray['password1'] = 'true';
 			}
+
 	}
 	else
 	{
@@ -944,4 +563,867 @@ function validateResetPassword2()
 			reset_passwordArray['password2'] = 'false';
 		}
 	}
+}
+
+function validateUsername(username)
+{
+	var reg = /^[A-Za-z0-9 ]{3,20}$/;
+	return reg.test(username);
+}
+
+function validateEmail(email)
+{
+	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	return reg.test(email);
+}
+
+function validatePassword(password)
+{
+	if(password.length > 5) return true;
+	else return false;
+}
+
+function validatePasswordMatch(password1, password2)
+{
+	if(password1 == password2) return true;
+	else return false;
+}
+
+function validateSignupOnsubmit()
+{
+	//Send request
+	$.get("validate.php", {
+		func:'signup_all',
+		recaptcha_challenge_field:document.getElementById('recaptcha_challenge_field').value,
+		recaptcha_response_field:document.getElementById('recaptcha_response_field').value,
+		u: document.signup.username.value,
+		e: document.signup.email.value
+		}, function(response) {
+		//If server responds no
+		var password = document.signup.password.value;
+		var password2 = document.signup.password2.value;
+		var username = document.signup.username.value;
+		var email = document.signup.email.value;	
+		if(response == 'true')
+		{
+			
+			if(validatePassword(password))
+			{
+				passwordlength_success = true;
+			}
+			else
+			{
+				if(!document.getElementById('password_error'))
+				{
+					errorMessage = document.createElement('img');
+					errorMessage.setAttribute('id', 'password_error');
+					errorMessage.setAttribute('height', '16');
+					errorMessage.setAttribute('width', '16');
+					errorMessage.setAttribute('src', './img/error.png');
+					errorMessage.setAttribute('title', 'The entered password invalid, must be over 5 charachers');
+					$('#password_label').prepend(errorMessage);
+				}
+				passwordlength_success = false;
+			}
+
+			if(validatePasswordMatch(password, password2) && passwordlength_success == true)
+			{
+				passwordmatch_success = true;
+			}
+			else
+			{
+				if(!document.getElementById('password2_error'))
+				{
+					errorMessage = document.createElement('img');
+					errorMessage.setAttribute('id', 'password2_error');
+					errorMessage.setAttribute('height', '16');
+					errorMessage.setAttribute('width', '16');
+					errorMessage.setAttribute('src', './img/error.png');
+					errorMessage.setAttribute('title', 'The entered passwords does not match');
+					$('#password_label2').prepend(errorMessage);
+				}
+				passwordmatch_success = false;
+			}
+			if(!validateEmail(email))
+			{
+				if(!document.getElementById('email_error'))
+				{
+					errorMessage = document.createElement('img');
+					errorMessage.setAttribute('id', 'email_error');
+					errorMessage.setAttribute('height', '16');
+					errorMessage.setAttribute('width', '16');
+					errorMessage.setAttribute('src', './img/error.png');
+					errorMessage.setAttribute('title', 'The entered email is either not available or invalid');
+					$('#email_label').prepend(errorMessage);
+				}
+				email_success = false;
+			}
+			else email_success = true;
+
+			if(!validateUsername(username))
+			{
+				errorImg = document.createElement('img');
+				errorImg.setAttribute('src', './img/error.png')
+				errorImg.setAttribute('height', '16');
+				errorImg.setAttribute('width', '16');
+				errorImg.setAttribute('id', 'username_error');
+				errorImg.setAttribute('title', 'The entered username is either not available or invalid');
+				$('#username_label').prepend(errorImg);
+				username_success = false
+			}				
+			else username_success = true;
+
+			if(email_success == true && username_success == true && passwordlength_success == true && passwordmatch_success == true)
+			{
+				$.post('reference.php', {
+					func: 'signup',
+					username: username,
+					email: email,
+					password: MD5(password),
+					recaptcha_challenge_field: document.signup.recaptcha_challenge_field.value,
+					recaptcha_response_field: document.signup.recaptcha_response_field.value,
+				}, function(response)
+					{
+						if(response == 'capcha_error')
+						{
+							window.location="?page=signup&capchaError=true";
+						}
+						else if(response == 'true')
+						{
+							//TODO fix redirect på success
+							window.location="?page=search&signupCompleted=true";
+						}
+					});
+			}
+			else
+			{
+				//return false;
+			}
+		}
+		else
+		{
+			//return
+
+			var errors = $.parseJSON(response);
+			if(errors['username_available'] == 'false')
+			{
+				if(!document.getElementById('username_error'))
+				{
+					errorImg = document.createElement('img');
+					errorImg.setAttribute('src', './img/error.png')
+					errorImg.setAttribute('height', '16');
+					errorImg.setAttribute('width', '16');
+					errorImg.setAttribute('id', 'username_error');
+					errorImg.setAttribute('title', 'The entered username is either not available or invalid');
+					$('#username_label').prepend(errorImg);
+				}
+			}
+			else
+			{
+				if(!validateUsername(username))
+				{
+					errorImg = document.createElement('img');
+					errorImg.setAttribute('src', './img/error.png')
+					errorImg.setAttribute('height', '16');
+					errorImg.setAttribute('width', '16');
+					errorImg.setAttribute('id', 'username_error');
+					errorImg.setAttribute('title', 'The entered username is either not available or invalid');
+					$('#username_label').prepend(errorImg);
+				}
+			}
+			
+			if(errors['email_available'] == 'false')
+			{
+				if(!document.getElementById('email_error'))
+				{
+					errorMessage = document.createElement('img');
+					errorMessage.setAttribute('id', 'email_error');
+					errorMessage.setAttribute('height', '16');
+					errorMessage.setAttribute('width', '16');
+					errorMessage.setAttribute('src', './img/error.png');
+					errorMessage.setAttribute('title', 'The entered email is either not available or invalid');
+					$('#email_label').prepend(errorMessage);
+				}
+			}
+			else
+			{
+				if(!validateEmail(email))
+				{
+					if(!document.getElementById('email_error'))
+					{
+						errorMessage = document.createElement('img');
+						errorMessage.setAttribute('id', 'email_error');
+						errorMessage.setAttribute('height', '16');
+						errorMessage.setAttribute('width', '16');
+						errorMessage.setAttribute('src', './img/error.png');
+						errorMessage.setAttribute('title', 'The entered email is either not available or invalid');
+						$('#email_label').prepend(errorMessage);
+					}
+				}
+			}
+			if(!validatePassword(password))
+			{
+				if(!document.getElementById('password_error'))
+				{
+					errorMessage = document.createElement('img');
+					errorMessage.setAttribute('id', 'password_error');
+					errorMessage.setAttribute('height', '16');
+					errorMessage.setAttribute('width', '16');
+					errorMessage.setAttribute('src', './img/error.png');
+					errorMessage.setAttribute('title', 'The entered password invalid, must be over 5 charachers');
+					$('#password_label').prepend(errorMessage);
+				}
+				password_length = false;
+			}
+			else password_length = true;
+
+			if(!validatePasswordMatch(password, password2) && password_length == false)
+			{
+				if(!document.getElementById('password2_error'))
+				{
+					errorMessage = document.createElement('img');
+					errorMessage.setAttribute('id', 'password2_error');
+					errorMessage.setAttribute('height', '16');
+					errorMessage.setAttribute('width', '16');
+					errorMessage.setAttribute('src', './img/error.png');
+					errorMessage.setAttribute('title', 'The entered passwords does not match');
+					$('#password_label2').prepend(errorMessage);
+				}
+			}
+		}
+
+		});
+}
+
+function myprofile()
+{
+	$.post('reference.php', 
+		{
+			func: 'myprofile',
+		}, function(data)
+		{
+
+			var json = $.parseJSON(data);
+			if(json.length > 0)
+			{
+				var container = document.getElementById('center');
+				var table = document.createElement('table')
+				table.setAttribute('id', 'table');
+				var theader = document.createElement('tr');
+				var theadertxt1 = document.createElement('th');
+				theadertxt1.innerHTML = 'Filename';
+				var theadertxt2 = document.createElement('th');
+				theadertxt2.innerHTML = 'Delete file';
+				theader.appendChild(theadertxt1);
+				theader.appendChild(theadertxt2);
+				table.appendChild(theader);
+				container.appendChild(table);
+
+				for(var i=0; i<json.length; i++)
+				{
+					var rowID = json[i]['rowID'];
+					var fileName = json[i]['file'];
+					var row = document.createElement('tr');
+					if(isEven(i)) row.setAttribute('class', 'alt');
+					var td1 = document.createElement('td');
+
+					var td1Link = document.createElement('a');
+					td1Link.setAttribute('href', '?page=fileinfo&fileID='+rowID);
+					td1Link.innerHTML = fileName;
+					td1.appendChild(td1Link);
+
+					var td2 = document.createElement('td');
+					td2Link = document.createElement('a');
+					td2Link.setAttribute('title', 'Delete file');
+					td2Link.setAttribute('onclick', 'deleteOwnFile('+rowID+',myprofile)');
+					td2Link.setAttribute('href', '#');
+					td2Img = document.createElement('img');
+					td2Img.setAttribute('src', './img/trash.png');
+					td2Img.setAttribute('height', '32');
+					td2Img.setAttribute('width', '32');
+					td2Link.appendChild(td2Img);
+					td2.appendChild(td2Link);
+					row.appendChild(td1);
+					row.appendChild(td2);
+					$('#table').append(row);
+				}
+			}
+			else
+			{
+				errorMessage = document.createElement('div');
+				errorMessage.setAttribute('id', 'error');
+				errorMessage.innerHTML = 'You have no uploads!';
+				$('#center').append(errorMessage);
+			}
+
+		});
+}
+
+function mySubscriptions()
+{
+	$.get('reference.php',
+		{
+			func: 'mysubscriptions',
+			action: 'mysubscriptions',
+		}, function(data)
+		{
+			var json = $.parseJSON(data);
+			if(json.length > 0)
+			{
+				var mysubs = document.createElement('details');
+				var summary = document.createElement('summary');
+				summary.innerHTML = 'My subscribtions('+json.length+')';
+				mysubs.appendChild(summary);
+				for(var i=0; i<json.length; i++)
+				{
+					var link = document.createElement('a');
+					link.setAttribute('href', '?page=profile&userID='+json[i]['u_rowID']);
+					link.innerHTML = json[i]['u_username'];
+					mysubs.appendChild(link);
+					var linebreak = document.createElement('br');
+					mysubs.appendChild(linebreak);
+
+				}
+				$('#mysubs').prepend(mysubs);
+			}
+			else
+			{
+				var errorDiv = document.createElement('div');
+				errorDiv.setAttribute('id', 'error');
+				errorDiv.innerHTML = 'You have no subscriptions';
+				$('#mysubs').prepend(errorDiv);
+			}
+
+		});
+}
+
+function mySubscribers()
+{
+	$.get('reference.php',
+		{
+			func: 'mysubscriptions',
+			action: 'mysubscribers',
+		}, function(data)
+		{
+			var json = $.parseJSON(data);
+			if(json.length > 0)
+			{
+				var mysubs = document.createElement('details');
+				var summary = document.createElement('summary');
+				summary.innerHTML = 'My subscribers('+json.length+')';
+				mysubs.appendChild(summary);
+				for(var i=0; i<json.length; i++)
+				{
+					var link = document.createElement('a');
+					link.setAttribute('href', '?page=profile&userID='+json[i]['u_rowID']);
+					link.innerHTML = json[i]['u_username'];
+					mysubs.appendChild(link);
+					var linebreak = document.createElement('br');
+					mysubs.appendChild(linebreak);
+
+				}
+				$('#mysubs').append(mysubs);
+			}
+			else
+			{
+				var errorDiv = document.createElement('div');
+				errorDiv.setAttribute('id', 'error');
+				errorDiv.innerHTML = 'You have no subscriptions';
+				$('#mysubs').append(errorDiv);
+			}
+			
+		});
+}
+
+
+function myNewFiles()
+{
+	$('#center').empty();
+	$.get('reference.php',
+		{
+			func: 'mysubscriptions',
+			action: 'files',
+		}, function(data)
+		{
+			var json = $.parseJSON(data);
+			if(json.length > 0)
+			{
+
+				var container = document.getElementById('center');
+				var linebreak = document.createElement('br');
+				container.appendChild(linebreak);
+
+				var table = document.createElement('table')
+				table.setAttribute('id', 'table');
+
+				var theader = document.createElement('tr');
+
+				var theadertxt1 = document.createElement('th');
+				theadertxt1.innerHTML = 'Filename';
+
+				var theadertxt2 = document.createElement('th');
+				theadertxt2.innerHTML = 'Uploaded by';
+
+				var theadertxt3 = document.createElement('th');
+				theadertxt3.innerHTML = 'Uploaded date';
+
+				theader.appendChild(theadertxt1);
+				theader.appendChild(theadertxt2);
+				theader.appendChild(theadertxt3);
+
+				table.appendChild(theader);
+				container.appendChild(table);
+				
+				for(var i=0; i<json.length; i++)
+				{
+					var rowID        = json[i]['f_rowID'];
+					var fileName     = json[i]['f_file'];
+					var uploadedByID = json[i]['f_uploaded_by'];
+					var uploadedBy   = json[i]['u_username'];
+					var uploadedDate = json[i]['f_uploaded_date'];
+					// var uploadedById = json[i]['f_rowID']
+					var row = document.createElement('tr');
+					if(isEven(i)) row.setAttribute('class', 'alt');
+
+					//filename
+					var td1 = document.createElement('td');
+					var td1Link = document.createElement('a');
+					td1Link.setAttribute('href', '?page=fileinfo&fileID='+rowID);
+					td1Link.innerHTML = fileName;
+					td1.appendChild(td1Link);
+					
+					//Uploaded by
+					var td2 = document.createElement('td');
+					td2Link = document.createElement('a');
+					td2Link.setAttribute('href', '?page=profile&userID='+uploadedBy);
+					td2Link.innerHTML = uploadedBy;
+					td2.appendChild(td2Link);
+
+					//date
+					td3 = document.createElement('td');
+					td3.innerHTML = timeConverter(uploadedDate);
+
+					row.appendChild(td1);
+					row.appendChild(td2);
+					row.appendChild(td3);
+					table.appendChild(row);
+
+				}
+				$('#center').append(table);
+
+				linebreak = document.createElement('br');
+				$('#center').append(linebreak);
+
+				var span = document.createElement('span');
+				span.setAttribute('class', 'submit');
+				var button = document.createElement('input');
+				button.setAttribute('type', 'button');
+				button.setAttribute('onclick', 'clearSubList()');
+				button.setAttribute('value', 'Clear list');
+				span.appendChild(button);
+				$('#center').append(span);
+			}
+			else
+			{
+				var errorDiv = document.createElement('div');
+				errorDiv.setAttribute('id', 'error');
+				errorDiv.innerHTML = 'You have no unseen files';
+				var linebreak = document.createElement('br');
+				$('#center').append(linebreak);
+				$('#center').append(errorDiv);
+			}
+			
+		});
+}
+
+function clearSubList()
+{
+	$.get('reference.php', 
+		{
+			func: 'clear_sub_list',
+		},
+		function(response)
+		{
+			myNewFiles();
+		});
+}
+
+function loadComments(fileID)
+{
+	$('#comments').empty();
+	$.get('reference.php', 
+	{
+		func: 'comments',
+		file: fileID,			
+	}, 
+	function(response)
+	{
+		var header = document.createElement('h1');
+		header.innerHTML = 'Comments';
+		$('#comments').append(header);
+		if(response == 'false')
+		{
+			// var isLoggedIn = isLoggedIn();
+			if(isLoggedIn() != 'false')
+			{
+				var errorMessage = document.createElement('div');
+				errorMessage.setAttribute('id', 'error');
+				errorMessage.innerHTML = 'There is no comments for this file. Why dont you leave one?';
+				var linebreak = document.createElement('br');
+				$('#comments').append(linebreak);
+				$('#comments').append(errorMessage);
+			}
+		}
+		else
+		{
+			var json = $.parseJSON(response);
+			var table = document.createElement('table');
+			table.setAttribute('id', 'table');
+
+			var theader = document.createElement('tr');
+			var theadertxt1 = document.createElement('th');
+			theadertxt1.innerHTML = 'Comment by';
+
+			var theadertxt2 = document.createElement('th');
+			theadertxt2.innerHTML = 'Date commented';
+
+			var theadertxt3 = document.createElement('th');
+			theadertxt3.innerHTML = 'Comment';
+			theader.appendChild(theadertxt1);
+			theader.appendChild(theadertxt2);
+			theader.appendChild(theadertxt3);
+			table.appendChild(theader);
+
+			for(var i=0; i<json.length; i++)
+			{
+				var rowID         = json[i]['user_row'];
+				var commentBy     = json[i]['username'];
+				var comment       = json[i]['comment'];
+				var dateCommented = json[i]['date_commented'];
+
+				var row = document.createElement('tr');
+				if(isEven(i)) row.setAttribute('class', 'alt');
+
+				//Comment by
+				var td1 = document.createElement('td');
+				var td1Link = document.createElement('a');
+				td1Link.setAttribute('href', '?page=profile&userID='+rowID);
+				td1Link.innerHTML = commentBy;
+				td1.appendChild(td1Link);
+					
+				//Date commented
+				var td2 = document.createElement('td');
+				td2.innerHTML = timeConverter(dateCommented);
+
+				//Comment
+				td3 = document.createElement('td');
+				td3.innerHTML = comment;
+
+				row.appendChild(td1);
+				row.appendChild(td2);
+				row.appendChild(td3);
+				table.appendChild(row);
+			}
+			$('#comments').append(table);
+		}
+	});
+}
+
+
+function fileInfo()
+{
+	qs();	
+	var fileID = qsParm['fileID'];
+	$.get('reference.php', 
+		{
+			func: 'fileinfo',
+			file: fileID,
+			action: 'is_reported',
+		}, function(response)
+		{
+			if(response == 'true')
+			{
+				var warning = document.createElement('div');
+				warning.setAttribute('id', 'error');
+				warning.innerHTML = 'Be careful! This file has been reported at abuse! We are on the case. You can still download the file, but: BE CAREFUL!';
+				$('#warning').prepend(warning);
+			}
+		});
+
+	$.get('reference.php', 
+	{
+		func: 'fileinfo',
+		action: 'fileinfo',
+		file: fileID,
+
+	},
+	function(response)
+	{
+		if(response == 'false')
+		{
+			window.location.href = '?page=search';
+		}
+		else
+		{
+			var json = $.parseJSON(response);
+			var rowID        = json[0]['f_rowID'];
+			var uploadedByID = json[0]['f_uploaded_by'];
+			var uploadedBy   = json[0]['u_username'];
+			var uploadedById = json[0]['u_rowID'];
+			var uploadedDate = json[0]['f_uploaded_date'];
+			var mimeType     = json[0]['f_mimetype'];
+			var size         = json[0]['f_size'];
+
+			var table = document.createElement('table');
+			table.setAttribute('id', 'table');
+
+			var header1 = document.createElement('th');
+			header1.innerHTML = 'Uploaded by'
+
+			var header2 = document.createElement('th')
+			header2.innerHTML = 'Size';
+
+			var header3 = document.createElement('th');
+			header3.innerHTML = 'Date uploaded';
+
+			var header4 = document.createElement('th');
+			header4.innerHTML = 'Mimetype';
+
+			if(mimeType.substring(0,6) == 'image/')
+			{
+				var header5 = document.createElement('th');
+				header5.innerHTML = 'Dimension';
+			}
+
+			var header6 = document.createElement('th');
+			header6.innerHTML = 'Times downloaded';
+
+			table.appendChild(header1);
+			table.appendChild(header2);
+			table.appendChild(header3);
+			table.appendChild(header4);
+			if(mimeType.substring(0,6) == 'image/') table.appendChild(header5);
+			table.appendChild(header6);
+
+			
+
+			// var uploadedById = json[i]['f_rowID']
+			var row = document.createElement('tr');
+			row.setAttribute('class', 'alt');
+					
+			//Uploaded by
+			var td1 = document.createElement('td');
+			td1Link = document.createElement('a');
+			td1Link.setAttribute('href', '?page=profile&userID='+uploadedById);
+			td1Link.innerHTML = uploadedBy;
+			td1.appendChild(td1Link);
+
+			//Size
+			var td2 = document.createElement('td');
+			td2.innerHTML = calcFileSize(size);
+
+			//Date
+			td3 = document.createElement('td');
+			td3.innerHTML = timeConverter(uploadedDate);
+
+			//Mimetype
+			td4 = document.createElement('td');
+			td4.innerHTML = mimeType;
+
+			//If image, get dimentions
+			if(mimeType.substring(0,6) == 'image/')
+			{
+				var td5 = document.createElement('td');
+				var img = new Image();
+				img.src = './printimage.php?id='+rowID;
+				img.onload = function()
+				{
+					width = this.width;
+					height = this.height;
+					td5.innerHTML = 'Height: '+height+'Width: '+width;
+				}				
+			}
+
+			//Times downloaded
+			var td6 = document.createElement('td');
+			var td6Link = document.createElement('a');
+			td6Link.setAttribute('href', '?page=download_analysis&file='+fileID);
+			$.get('reference.php', 
+				{
+					func: 'fileinfo',
+					action: 'times_downloaded',
+					file: fileID,
+				},
+				function(response)
+				{
+					td6Link.innerHTML = response;
+				});
+			td6.appendChild(td6Link);
+
+			row.appendChild(td1);
+			row.appendChild(td2);
+			row.appendChild(td3);
+			row.appendChild(td4);
+			if(mimeType.substring(0,6) == 'image/') row.appendChild(td5);
+			row.appendChild(td6);
+
+			table.appendChild(row);
+			$('#cont').prepend(table);
+			var linebreak = document.createElement('br');
+			$('#cont').append(linebreak);
+			$('#cont').append(linebreak);
+			$('#cont').append(linebreak);
+			
+		}
+		var mimeType = json[0]['f_mimetype'];
+		var rowID  	 = json[0]['f_rowID'];
+		if(mimeType.substring(0,6) == 'image/')
+		{
+			var pic = document.createElement('img');
+			pic.setAttribute('src', 'printimage.php?id='+rowID);
+			pic.style.width = '30%';
+			pic.style.height = 'auto';
+
+			var linebreak = document.createElement('br');
+			$('#cont').append(linebreak);
+			$('#cont').append(pic);
+
+		}
+
+	});
+	loadComments(fileID);
+
+	$.get('reference.php',
+		{
+		func: 'isloggedin',
+		},
+		function(response)
+		{
+			if(response != 'false')
+			{
+				var linebreak = document.createElement('br');
+				$('#commentform').append(linebreak);
+				var form = document.createElement('form');
+				form.setAttribute('class', 'form');
+				form.setAttribute('name', 'comment');
+				//form.setAttribute('action', '');
+				//form.setAttribute('method', 'post');
+				//form.setAttribute('onsubmit', 'placeComment()');
+
+				//Message
+				var span1 = document.createElement('span');
+
+				textArea1 = document.createElement('textarea');
+				textArea1.setAttribute('name', 'comment');
+				textArea1.setAttribute('cols', '40');
+				textArea1.setAttribute('rows', '6');
+				textArea1.setAttribute('Placeholder', 'Comment');
+				textArea1.setAttribute('id', 'message');
+				span1.appendChild(textArea1);
+
+				//Submit
+				var span2 = document.createElement('p')
+				span2.setAttribute('class', 'submit');
+				var hidden = document.createElement('input');
+				hidden.setAttribute('type', 'hidden');
+				hidden.setAttribute('name', 'submit');
+				hidden.setAttribute('value', 'true');
+				var submit = document.createElement('input');
+				submit.setAttribute('value', 'Submit');
+				submit.setAttribute('type', 'button');
+				submit.setAttribute('onclick', 'placeComment()');
+				span2.appendChild(submit);
+
+				form.appendChild(hidden);
+				form.appendChild(span1);
+				form.appendChild(span2);
+				$('#commentform').append(form);
+			}
+			else
+			{
+				var errorMessage = document.createElement('div');
+				errorMessage.setAttribute('id', 'error');
+				errorMessage.innerHTML = 'In order to comment, you need to ';
+				var errLink = document.createElement('a');
+				errLink.setAttribute('href', '?page=login&attemptedSite=fileinfo&file='+fileID);
+				errLink.innerHTML = 'login';
+				errorMessage.appendChild(errLink);
+				$('#commentform').append(errorMessage);
+			}
+		});
+}
+
+function placeComment()
+{
+	qs()
+	var fileID = qsParm['fileID']; 
+	if(document.comment.comment.value != '')
+	{
+		$.get('reference.php',
+			{
+			func: 'place_comment',
+			comment: document.comment.comment.value,
+			file: fileID,
+			},
+			function(response)
+			{
+				loadComments(fileID);
+				document.comment.comment.value = '';
+				$('.rmMe').remove();
+			});
+	}
+	else
+	{
+		var err = document.createElement('div');
+		err.setAttribute('id', 'error');
+		err.setAttribute('class', 'rmMe');
+		err.innerHTML = 'The textfield is not filled out correctly';
+		$('#commentform').append(err);
+	}
+}
+
+function reqLogin()
+{
+	
+	var checked = document.login.remember.checked;
+	var username = document.login.username.value;
+	var password = document.login.password.value;
+	$.post('reference.php',
+	{
+		func: 'login',
+		u: username,
+		p: MD5(password),
+		remember: checked,
+	},
+	function(response)
+	{
+		if(response == 'true')
+		{
+			if(qs['attemptedSite'] && qs['attemptedSite'] == 'report_abuse' && qs['reportedFile'])
+			{
+				window.location.href="?page=report_abuse&reportedFile="+qs['reportedFile'];
+			}
+			else if(qs['attemptedSite'] && qs['fileID'] && qs['attemptedSite'] == 'fileinfo')
+			{
+				window.location.href="?page=fileinfo&fileID="+qs['fileID'];
+			}
+			else if(qs['attemptedSite'])
+			{
+				window.location.href="?page="+qs['attemptedSite'];
+			}
+			else
+			{
+				window.location.href="?page=search";
+			}
+		}
+		else
+		{
+			var errormessage = document.createElement('div');
+			errormessage.setAttribute('id', 'error');
+			errormessage.innerHTML = 'The username and password does not match';
+			$('#login').prepend(errormessage);
+		}
+
+	});
+	return false;
 }
