@@ -1354,8 +1354,7 @@ function fileInfo()
 
 function placeComment()
 {
-	qs()
-	var fileID = qsParm['fileID']; 
+	var fileID = qs['fileID']; 
 	if(document.comment.comment.value != '')
 	{
 		$.get('reference.php',
