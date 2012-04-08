@@ -1132,8 +1132,7 @@ function loadComments(fileID)
 
 function fileInfo()
 {
-	qs();	
-	var fileID = qsParm['fileID'];
+	qs['fileID'];
 	$.get('reference.php', 
 		{
 			func: 'fileinfo',
