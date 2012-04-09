@@ -25,7 +25,7 @@ function reportFile(file)
 					function(response)
 					{
 						var div = document.getElementById('success')
-						div.innerHTML = 'The file has reported. Thank you';	
+						$('#success').html('The file has reported. Thank you').hide().fadeIn();	
 
 					});
 				}	
@@ -120,6 +120,7 @@ function userPref()
 			{
 				if(response == 'true')
 				{
+					$('.upError').fadeOut();
 					$('.upSuccess').empty();
 					$('.upSuccess').hide().html('Your preferences has successfully been updated').fadeIn();
 					$('html,body').animate({
@@ -128,6 +129,7 @@ function userPref()
 				}
 				else
 				{
+					$('.upSuccess').fadeOut();
 					$('.upError').empty();
 					$('.upError').hide().html('Something went wrong. Please try again later').fadeIn();
 					$('html,body').animate({
@@ -141,6 +143,7 @@ function userPref()
 	}
 	else
 	{
+		$('.upSuccess').fadeOut();
 		$('.upError').hide().html('Something\'s not right. The entered name or email is invalid').fadeIn();
 		$('html,body').animate({
 			scrollTop: $(".upError").offset().top
@@ -152,8 +155,8 @@ function userPref()
 
 function newPassword()
 {
-	var password = MD5(document.newpassword.password.value);
-	var password2 = MD5(document.newpassword.password2.value);
+	var password    = MD5(document.newpassword.password.value);
+	var password2   = MD5(document.newpassword.password2.value);
 	var curPassword = MD5(document.newpassword.curpassword.value);
 
 	if(password == password2 && password.length > 5)
@@ -180,7 +183,7 @@ function newPassword()
 					$('html,body').animate({
 					scrollTop: $("#success").offset().top
 					}, 1000);
-					$('.npError').empty();
+					$('.npError').fadeOut();
 					$('#np').removeAttr('open');
 					document.newpassword.password.value = null;
 					document.newpassword.password2.value = null;
