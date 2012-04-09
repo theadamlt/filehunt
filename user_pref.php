@@ -6,14 +6,10 @@ if(!isset($_SESSION['dbuserid']))
 }
 ?>
 <div id="success" class="npSuccess"></div>
-<br />
 <div id="signup">
-	<br />
-	<?if(isset($_GET['error'])) echo '<div id="error">Error mes</div>';?>
 <div id="error" class="upError"></div>
-<br>
 <div id="success" class="upSuccess"></div>
-<br>
+<h1>Preferences</h1>
 <form class="form" onsubmit="return userPref()" name="user_pref">
 	<table>
 		<tr>

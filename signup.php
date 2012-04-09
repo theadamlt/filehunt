@@ -1,3 +1,11 @@
+<?php
+if(isset($_SESSION['dbuserid']))
+{
+	header('Location: ?page=search');
+	die();
+}
+?>
+
 <h1 style="text-align:center;">Signup</h1>
 <div id="signup">
 	<? if (isset($_GET['capchaError'])) echo '<div id="error">

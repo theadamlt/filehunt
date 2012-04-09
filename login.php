@@ -11,56 +11,6 @@ if (isset($_SESSION['dbuserid']))
 	header('Location: ?page=search');
 	die();
 }
-
-
-if (isset($_POST['username']) && (isset($_POST['password'])) && (!isset($_SESSION['dbuserid'])))
-{
-	$username = mysql_enteries_fix_string($_POST['username']);
-	$password = mysql_enteries_fix_string($_POST['password']);
-
-	$sql = "SELECT *
-			FROM users
-			WHERE username='$username'
-			    AND password='$password' LIMIT 1";
-	$result = mysql_query($sql);
-
-	if (mysql_num_rows($result) == 1)
-	{	
-		$row = mysql_fetch_array($result);
-		$_SESSION['dbuserid'] = $row['rowID'];
-
-		if($_POST['remember'])
-		{
-			setcookie("dbuserid", $row['rowID'], time()+604800);
-		}
-
-		if(isset($_GET['attemptedSite']) && $_GET['attemptedSite']=='report_abuse' && isset($_GET['reportedFile']))
-		{
-			header('Location: ?page=report_abuse&reportedFile='.$_GET['reportedFile']);
-			die();
-		}
-		elseif(isset($_GET['attemptedSite']) && isset($_GET['fileID']) && $_GET['attemptedSite'] == 'fileinfo')
-		{
-			header('Location: ?page=fileinfo&fileID='.$_GET['fileID']);
-			die();
-		}
-		if(isset($_GET['attemptedSite']))
-		{
-			header('Location: ?page='.$_GET['attemptedSite']);
-			die();
-		}
-		else
-		{
-			header('Location: ?page=search');
-			die();
-		}
-	} 
-	else
-	{
-		header('Location: ?page=login&wrongLogin=true');
-		die();
-	}
-}
 if (isset($_GET['attemptedSite']))
 {
 	echo "<div id='error'>You need to login first!</div>";
@@ -68,9 +18,8 @@ if (isset($_GET['attemptedSite']))
 	
 ?>
 <h1 style="text-align:center;">Login</h1>
-<?if (isset($_GET['wrongLogin'])) echo '<div id="error">Wrong username or password</div>
-' ?>
 <div id="login">
+<div id="error"></div>
 <form class="form" name="login" onsubmit="return reqLogin();">
 	<table>
 		<tr>

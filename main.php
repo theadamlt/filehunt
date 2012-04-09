@@ -167,12 +167,6 @@ echo '<div id="logo"><a href="?page=search"><img src="img/logo.png" height=179 w
 			echo "<div id='error'>Oups... Your password hasen't been changed. Please try again later</div>";
 		}
 	}
-	if(isset($_GET['newPasswordEmailSent']))
-	{
-		$print_email = $_GET['newPasswordEmailSent'];
-		echo "<div id='success'>An email has been sent to you at $print_email</div>";
-	}
-	if(isset($_GET['captchaErr'])) echo "<div id='error'>The CAPTCHA field was not entered correctly. Please try again</div>";
 	
 	$page = $_GET['page'];
 

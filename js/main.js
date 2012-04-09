@@ -103,8 +103,7 @@ function userPref()
 	var twitterID    = document.user_pref.twitter_id.value;
 	var facebookID   = document.user_pref.facebook_id.value;
 
-	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-	if(IsEmpty(realName) == true && reg.test(email) == true)
+	if(IsEmpty(realName) == true && validateEmail(email))
 	{
 		$.get('reference.php',
 			{
@@ -346,7 +345,7 @@ function validateSignupOnsubmit()
 			
 			if(validatePassword(password))
 			{
-				passwordlength_success = true;
+				var passwordlength_success = true;
 			}
 			else
 			{
@@ -360,12 +359,12 @@ function validateSignupOnsubmit()
 					errorMessage.setAttribute('title', 'The entered password invalid, must be over 5 charachers');
 					$('#password_label').prepend(errorMessage);
 				}
-				passwordlength_success = false;
+				var passwordlength_success = false;
 			}
 
 			if(validatePasswordMatch(password, password2) && passwordlength_success == true)
 			{
-				passwordmatch_success = true;
+				var passwordmatch_success = true;
 			}
 			else
 			{
@@ -379,7 +378,7 @@ function validateSignupOnsubmit()
 					errorMessage.setAttribute('title', 'The entered passwords does not match');
 					$('#password_label2').prepend(errorMessage);
 				}
-				passwordmatch_success = false;
+				var passwordmatch_success = false;
 			}
 			if(!validateEmail(email))
 			{
@@ -393,9 +392,9 @@ function validateSignupOnsubmit()
 					errorMessage.setAttribute('title', 'The entered email is either not available or invalid');
 					$('#email_label').prepend(errorMessage);
 				}
-				email_success = false;
+				 var email_success = false;
 			}
-			else email_success = true;
+			else var email_success = true;
 
 			if(!validateUsername(username))
 			{
@@ -1153,12 +1152,43 @@ function reqLogin()
 		}
 		else
 		{
-			var errormessage = document.createElement('div');
-			errormessage.setAttribute('id', 'error');
-			errormessage.innerHTML = 'The username and password does not match';
-			$('#login').prepend(errormessage);
+			$('#error').html('The username and password does not match').hide().fadeIn();
+			$('html,body').animate({
+				scrollTop: $("#error").offset().top
+			}, 1000);
 		}
 
 	});
+	return false;
+}
+
+function forgotPassword()
+{
+	var email = document.forgot_password.email.value;
+	var username = document.forgot_password.username.value;
+	$.get('reference.php',
+		{
+			func: 'forgot_password',
+			email: email,
+			username: username,
+		},
+		function(response)
+		{
+			if(response == 'false')
+			{
+				$('#error').html('The entered username and email does not match').hide().fadeIn();
+			}
+			else if(response == 'email_error')
+			{
+				$('#error').empty().html('An error occured. Please try again later').hide().fadeIn();
+			}
+			else
+			{
+				$('#error').empty();
+				$('#forgot').empty();
+				$('#success').html('An email has been sent to you at '+email).hide().fadeIn();
+			}
+
+		});
 	return false;
 }
