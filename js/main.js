@@ -1186,6 +1186,7 @@ function forgotPassword()
 			{
 				$('#error').empty();
 				$('#forgot').empty();
+				$('#mes').remove();
 				$('#success').html('An email has been sent to you at '+email).hide().fadeIn();
 			}
 

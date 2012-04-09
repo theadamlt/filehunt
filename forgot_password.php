@@ -13,7 +13,7 @@ if(isset($_SESSION['dbuserid']))
 ?>
 <h1>Forgot password</h1>
 <br>
-<p>Please enter you username and email-address</p>
+<p id="mes">Please enter you username and email-address</p>
 <div id="error"></div>
 <div id="success"></div>
 <div id="forgot">
