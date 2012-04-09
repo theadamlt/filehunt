@@ -1,10 +1,10 @@
 <?php
 require_once('lib.php');
 if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
-	{
-		header('Location: index.php?page=login');
-		die();
-	}
+{
+	header('Location: index.php?page=login');
+	die();
+}
 
 if (isset($_SESSION['dbuserid']))
 {

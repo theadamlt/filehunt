@@ -3,6 +3,7 @@ function deleteOwnFile(arg)
 	var sure = confirm("Are you sure that you want to delete that file?");
 	if(sure == true) window.location.href="?page=delete_file&fileID="+arg;
 }
+
 function reportFile(file)
 {
 	$.get('reference.php',
@@ -66,402 +67,138 @@ function plusCount(field)
 	}
 }
 
-function copyToClipboard(text) {
-  window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
-}
-
-function validate_login()
+function copyToClipboard(text)
 {
-	document.login.password.value = MD5(document.login.password.value);
-	return true;
+	window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
 }
 
 function validateFacebook()
 {
 	url = 'https://graph.facebook.com/'+document.user_pref.facebook_id.value;
-	$.ajax({
-	url: url,
-	dataType: "json",
-	success: function(data){
-		if(document.getElementById('facebook_error'))
-		{
-			$('#facebook_error').remove();
-		}
-		if(!document.getElementById('facebook_success'))
-		{
-			fb_message = document.createElement('img');
-			fb_message.setAttribute('id', 'facebook_success');
-			fb_message.setAttribute('src', './img/success.png');
-			fb_message.setAttribute('height', '16');
-			fb_message.setAttribute('width', '16');
-			fb_message.setAttribute('title', 'The entered ID is valid. Username: '+data['name']);
-			$('#facebook_label').prepend(fb_message);
-		}
-	},
-	error: function(data){
-		if(document.getElementById('facebook_success'))
-		{
-			$('#facebook_success').remove();
-		}
-		if(!document.getElementById('facebook_error'))
-		{
-			fb_message = document.createElement('img');
-			fb_message.setAttribute('id', 'facebook_error');
-			fb_message.setAttribute('src', './img/error.png');
-			fb_message.setAttribute('height', '16');
-			fb_message.setAttribute('width', '16');
-			fb_message.setAttribute('title', 'The entered ID is invalid');
-			$('#facebook_label').prepend(fb_message);
-		}
-	}
-	});
+	$.get( url, function(result){
+    console.log(result);
+});
 }
+
 
 function validateTwitter()
 {
-	url = 'https://api.twitter.com/1/users/show.json';
-	$.ajax({
-
-	url : "http://api.twitter.com/1/users/show.json?screen_name="+document.user_pref.twitter_id.value,
-	dataType : "jsonp",
-	success : function(data)
+	$.get('https://api.twitter.com/1/users/show.json',
 	{
-		//console.log(data);
-		if(document.getElementById('twitter_error'))
-		{
-			$('#twitter_error').remove();
-		}
-		if(!document.getElementById('twitter_success'))
-		{
-			twitter_message = document.createElement('img');
-			twitter_message.setAttribute('id', 'twitter_success');
-			twitter_message.setAttribute('src', './img/success.png');
-			twitter_message.setAttribute('height', '16');
-			twitter_message.setAttribute('width', '16');
-			twitter_message.setAttribute('title', 'The entered ID is valid. Username: '+data['screen_name']);
-			$('#twitter_label').prepend(twitter_message);
-		}
+		screen_name: 'theadamlt',
+		include_entities: 'false',
 	},
-	error : function()
+	function(response)
 	{
-		if(document.getElementById('twitter_success'))
-		{
-			$('#twitter_success').remove();
-		}
-		if(!document.getElementById('twitter_error'))
-		{
-			twitter_message = document.createElement('img');
-			twitter_message.setAttribute('id', 'twitter_error');
-			twitter_message.setAttribute('src', './img/error.png');
-			twitter_message.setAttribute('height', '16');
-			twitter_message.setAttribute('width', '16');
-			twitter_message.setAttribute('title', 'The entered ID is invalid');
-			$('#twitter_label').prepend(twitter_message);
-		}
-	},
-
-});
-}
-function validateUserPref()
-{
-	if(document.getElementById('real_name_error') || document.getElementById('email_error'))
-	{
-		return false;
-	}
-	else return true;
-}
-
-function validateRealName()
-{
-	if(document.user_pref.real_name.value == '')
-	{
-		if(document.getElementById('real_name_success'))
-		{
-			$('#real_name_success').remove();
-		}
-		if(!document.getElementById('real_name_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'real_name_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered name is not valid');
-			$('#real_name_label').prepend(errorMessage);
-			user_pref_array['real_name'] = 'false';
-		}	
-	}
-	else
-	{
-		if(document.getElementById('real_name_error'))
-		{
-			$('#real_name_error').remove();
-		}
-		if(!document.getElementById('real_name_success'))
-		{
-			successMessage = document.createElement('img');
-			successMessage.setAttribute('id', 'real_name_success');
-			successMessage.setAttribute('height', '16');
-			successMessage.setAttribute('width', '16');
-			successMessage.setAttribute('src', './img/success.png');
-			successMessage.setAttribute('title', 'The entered name is valid!');
-			$('#real_name_label').prepend(successMessage);
-			user_pref_array['real_name'] = 'true';
-		}
-	}
-}
-
-function validateEmail2()
-{
-	if(document.user_pref.email.value != '')
-	{
-		$.get("validate.php?func=om&m="+document.user_pref.email.value+'&u='+document.user_pref.userid.value, function(response) { 
-		if(response == 'false')
-		{
-
-			if(document.getElementById('email_success'))
-			{
-				$('#email_success').remove();
-			}
-			if(!document.getElementById('email_error'))
-			{
-				errorMessage = document.createElement('img');
-				errorMessage.setAttribute('id', 'email_error');
-				errorMessage.setAttribute('height', '16');
-				errorMessage.setAttribute('width', '16');
-				errorMessage.setAttribute('src', './img/error.png');
-				errorMessage.setAttribute('title', 'The entered email is either not available or invalid');
-				$('#email_label').prepend(errorMessage);
-				user_pref_array['email'] = 'false';
-			}
-		}
-		else
-		{
-			if(document.getElementById('email_error'))
-			{
-				$('#email_error').remove();
-			}
-			if(!document.getElementById('email_success'))
-			{
-				successMessage = document.createElement('img');
-				successMessage.setAttribute('id', 'email_success');
-				successMessage.setAttribute('height', '16');
-				successMessage.setAttribute('width', '16');
-				successMessage.setAttribute('src', './img/success.png');
-				successMessage.setAttribute('title', 'The entered email is available and valid!');
-				$('#email_label').prepend(successMessage);
-				user_pref_array['email'] = 'true';
-			}
-		}
-
-		});
-	}
-	else
-	{
-		if(document.getElementById('email_success'))
-		{
-			$('#email_success').remove();
-		}
-		if(!document.getElementById('email_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'email_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered email is either not available or invalid');
-			$('#email_label').prepend(errorMessage);
-			user_pref_array['email'] = 'false';
-		}
-	}
-}
-
-
-
-var newpasswordArray = new Array();
-newpasswordArray['password1'] = 'false';
-newpasswordArray['password2'] = 'false';
-newpasswordArray['curpassword'] = 'false';
-function validate_new_password()
-{
-
-	if(newpasswordArray['curpassword'] == 'true' && newpasswordArray['password1'] == 'true' && newpasswordArray['password2'] == 'true')
-	{
-		document.newpassword.password.value    = MD5(document.newpassword.password.value);
-		document.newpassword.password2.value   = MD5(document.newpassword.password2.value);
-		document.newpassword.curpassword.value = MD5(document.newpassword.curpassword.value);
-		return true;
-	}
-	else
-	{
-		if(!document.getElementById('errormessage'))
-		{
-			el = document.createElement('td');
-			el.setAttribute('id', 'errormessage');
-			el.innerHTML = 'Somethings not right. Check the errors above';
-			$('#errormes').prepend(el);
-		}
-		if(newpasswordArray['curpassword'] == 'false' && !document.getElementById('curpassword_error'))
-		{
-			errorImg = document.createElement('img');
-			errorImg.setAttribute('src', './img/error.png')
-			errorImg.setAttribute('height', '16');
-			errorImg.setAttribute('width', '16');
-			errorImg.setAttribute('id', 'curpassword_error');
-			errorImg.setAttribute('title', 'The entered password is not right');
-			$('#current_password_label').prepend(errorImg);
-		}
-		if(newpasswordArray['password1'] == 'false' && !document.getElementById('newpassword_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'newpassword_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered password is invalid. Must be over 5 characters');
-			$('#newpassword_label').prepend(errorMessage);
-		}
-		if(newpasswordArray['password2'] == 'false' && !document.getElementById('newpassword2_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'newpassword2_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered passwords doesn\'t match');
-			$('#newpassword2_label').prepend(errorMessage);
-		}
-		return false;
-	}
-}
-
-function validateNewPassword1()
-{
-	if(document.newpassword.password.value.length > 5)
-	{
-			if(document.getElementById('newpassword_error'))
-			{
-				$('#newpassword_error').remove();
-			}
-			if(!document.getElementById('newpassword_success'))
-			{
-				successMessage = document.createElement('img');
-				successMessage.setAttribute('id', 'newpassword_success');
-				successMessage.setAttribute('height', '16');
-				successMessage.setAttribute('width', '16');
-				successMessage.setAttribute('src', './img/success.png');
-				successMessage.setAttribute('title', 'The entered password is valid!');
-				$('#password2').removeAttr('readonly');
-				$('#newpassword_label').prepend(successMessage);
-				newpasswordArray['password1'] = 'true';
-			}
-
-	}
-	else
-	{
-		if(document.getElementById('newpassword_success'))
-		{
-			$('#newpassword_success').remove();
-		}
-		if(!document.getElementById('newpassword_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'newpassword_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered password is invalid. Must be over 5 characters');
-			$('#newpassword_label').prepend(errorMessage);
-			$('#password2').attr('readonly', 'readonly');
-			newpasswordArray['password1'] = 'false';
-		}
-	}
-}
-
-function validateCurrentPassword()
-{
-	$.get("validate.php?func=p&u="+document.user_pref.userid.value+'&p='+MD5(document.newpassword.curpassword.value), function(response) { 
-		if(response == 'false')
-		{
-			if(!document.getElementById('curpassword_error'))
-			{
-				if(document.getElementById('curpassword_success'))
-				{
-					$('#curpassword_success').remove();
-				}
-				if(!document.getElementById('curpassword_error'))
-				{
-					errorImg = document.createElement('img');
-					errorImg.setAttribute('src', './img/error.png')
-					errorImg.setAttribute('height', '16');
-					errorImg.setAttribute('width', '16');
-					errorImg.setAttribute('id', 'curpassword_error');
-					errorImg.setAttribute('title', 'The entered password is not right');
-					$('#current_password_label').prepend(errorImg);
-					newpasswordArray['curpassword'] = 'false';
-				}
-			}
-		}
-		else
-		{
-			if(document.getElementById('curpassword_error'))
-			{
-				$('#curpassword_error').remove();
-			}
-			if(!document.getElementById('curpassword_success'))
-			{
-				successImg = document.createElement('img');
-				successImg.setAttribute('src', './img/success.png')
-				successImg.setAttribute('height', '16');
-				successImg.setAttribute('width', '16');
-				successImg.setAttribute('title', 'The entered password right!');
-				successImg.setAttribute('id', 'curpassword_success');
-				$('#current_password_label').prepend(successImg);
-				newpasswordArray['curpassword'] = 'true';
-			}
-		}
+		console.log(response);
 	});
 }
 
-function validateNewPassword2()
+function userPref()
 {
-	if(document.newpassword.password.value == document.newpassword.password2.value)
+	var realName     = document.user_pref.real_name.value;
+	var email        = document.user_pref.email.value;
+	var showRealName = document.user_pref.show_name.checked;
+	var showEmail    = document.user_pref.show_mail.checked;
+	var twitterID    = document.user_pref.twitter_id.value;
+	var facebookID   = document.user_pref.facebook_id.value;
+
+	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	if(IsEmpty(realName) == true && reg.test(email) == true)
 	{
-		if(document.getElementById('newpassword2_error'))
-		{
-			$('#newpassword2_error').remove();
-		}
-		if(!document.getElementById('newpassword2_success'))
-		{
-			successMessage = document.createElement('img');
-			successMessage.setAttribute('id', 'newpassword2_success');
-			successMessage.setAttribute('height', '16');
-			successMessage.setAttribute('width', '16');
-			successMessage.setAttribute('src', './img/success.png');
-			successMessage.setAttribute('title', 'The entered passwords is matching!');
-			$('#newpassword2_label').prepend(successMessage);
-			newpasswordArray['password2'] = 'true';
-		}
+		$.get('reference.php',
+			{
+				func: 'user_pref',
+				real_name: realName,
+				email: email,
+				show_real_name: showRealName,
+				show_email: showEmail,
+				twitter_id: twitterID,
+				facebook_id: facebookID,
+
+			},
+			function(response)
+			{
+				if(response == 'true')
+				{
+					$('.upSuccess').empty();
+					$('.upSuccess').hide().html('Your preferences has successfully been updated').fadeIn();
+					$('html,body').animate({
+						scrollTop: $(".upSuccess").offset().top
+						}, 1000);
+				}
+				else
+				{
+					$('.upError').empty();
+					$('.upError').hide().html('Something went wrong. Please try again later').fadeIn();
+					$('html,body').animate({
+						scrollTop: $(".upError").offset().top
+						}, 1000);
+				}
+
+			});
+
+		
 	}
 	else
 	{
-		if(document.getElementById('newpassword2_success'))
-		{
-			$('#newpassword2_success').remove();
-		}
-		if(!document.getElementById('newpassword2_error'))
-		{
-			errorMessage = document.createElement('img');
-			errorMessage.setAttribute('id', 'newpassword2_error');
-			errorMessage.setAttribute('height', '16');
-			errorMessage.setAttribute('width', '16');
-			errorMessage.setAttribute('src', './img/error.png');
-			errorMessage.setAttribute('title', 'The entered passwords doesn\'t match');
-			$('#newpassword2_label').prepend(errorMessage);
-			newpasswordArray['password2'] = 'false';
-		}
+		$('.upError').hide().html('Something\'s not right. The entered name or email is invalid').fadeIn();
+		$('html,body').animate({
+			scrollTop: $(".upError").offset().top
+		}, 1000);
 	}
+	return false;
+	
 }
+
+function newPassword()
+{
+	var password = MD5(document.newpassword.password.value);
+	var password2 = MD5(document.newpassword.password2.value);
+	var curPassword = MD5(document.newpassword.curpassword.value);
+
+	if(password == password2 && password.length > 5)
+	{
+		$.get('reference.php', 
+			{
+				func: 'new_password',
+				p1: password,
+				p2: password2,
+				cp: curPassword,
+			},
+			function(response)
+			{
+				if(response == 'false')
+				{
+					$('.npError').hide().html('Something went wrong. Maybe your current password was wrong, or the new passwords didn\'t match?').fadeIn();
+					$('html,body').animate({
+					scrollTop: $(".npError").offset().top
+					}, 1000);
+				}
+				else
+				{
+					$('.npSuccess').hide().html('Your password has been changed').fadeIn('slow');
+					$('html,body').animate({
+					scrollTop: $("#success").offset().top
+					}, 1000);
+					$('.npError').empty();
+					$('#np').removeAttr('open');
+					document.newpassword.password.value = null;
+					document.newpassword.password2.value = null;
+					document.newpassword.curpassword.value = null;
+				}
+
+			});
+	}
+	else
+	{
+		$('.npError').hide().html('Something went wrong. Maybe your current password was entered wrong, or the new passwords didn\'t match? The password must be over 5 characters').fadeIn();
+	}
+	return false;
+	
+}
+
+
 
 var reset_passwordArray = new Array();
 reset_passwordArray['password'] = 'false';

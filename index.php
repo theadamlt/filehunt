@@ -27,6 +27,7 @@ else echo '<script src="js/main.js"></script><script type="text/javascript" src=
 <link rel="stylesheet" type="text/css" href="css/style.min.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 <script>
 if (!isDetailsSupported)
 {

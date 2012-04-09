@@ -339,25 +339,6 @@ function getObjectLength(o) {
 	return length;
 }
 
-// var qsParm = new Array();
-
-// function qs()
-// {
-// 	var qsParm = new Array();
-// 	var query = window.location.search.substring(1);
-// 	var parms = query.split('&');
-// 	for (var i = 0; i < parms.length; i++) {
-// 		var pos = parms[i].indexOf('=');
-// 		if (pos > 0) {
-// 			var key = parms[i].substring(0, pos);
-// 			var val = parms[i].substring(pos + 1);
-// 			qsParm[key] = val;
-// 		}
-// 	}
-// 	return qsPram;
-// }
-
-
 var qs = (function(a) {
         if (a == "") return {};
         var b = {};
@@ -369,3 +350,13 @@ var qs = (function(a) {
         }
         return b;
     })(window.location.search.substr(1).split('&'));
+
+function IsEmpty(str)
+{
+	//first remove all spaces using the following regex
+	str= str.replace(/^\s+|\s+$/, '');
+
+	//then we check for the length of the string if its 0 or not
+	if(str.length == 0) return false;
+	else return true;
+}

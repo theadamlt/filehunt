@@ -4,106 +4,21 @@ if(!isset($_SESSION['dbuserid']))
 	header('Location: ?page=login&attemptedSite=user_pref');
 	die();
 }
-
-
-// $sql = "SELECT * FROM user_pref WHERE userID = $_SESSION[dbuserid] LIMIT 1";
-// $result = mysql_query($sql);
-// $row = mysql_fetch_array($result);
-
-if(isset($_GET['passwordChange']))
-{
-	if($_GET['passwordChange'] == 'true')
-	{
-		echo '<br><div id="success">Your password has been changed!</div><br>';
-	}
-	else
-	{
-		echo "<br><div id='error'>Oups... Your password hasen't been changed. Please try again later</div><br>";
-	}
-}
-
-
-if(isset($_POST['curpassword']) && isset($_POST['password']) && isset($_POST['password2']))
-{
-	$password    = mysql_enteries_fix_string($_POST['password']);
-	$password2   = mysql_enteries_fix_string($_POST['password2']);
-	$curpassword = mysql_enteries_fix_string($_POST['curpassword']);
-
-	if($password == $password2)
-	{
-		$sql = "SELECT * FROM users WHERE rowID=$_SESSION[dbuserid]";
-		$result = mysql_query($sql);
-		$row = mysql_fetch_array($result);
-		if($row['password'] == $curpassword)
-		{
-			$userid = $_SESSION['dbuserid'];
-			$sql = "UPDATE users
-					SET password='$password'
-					WHERE rowID=$userid LIMIT 1";
-			if($result =  mysql_query($sql))
-			{
-				header('Location: ?page=user_pref&passwordChange=true');
-				die();
-			}
-			else
-			{
-				header('Location: ?page=user_pref&passwordChange=false');
-				die();
-			}
-		}
-		else
-		{
-			header('Location: ?page=user_pref&passwordChange=false');
-			die();
-		}
-	}
-	else
-	{
-		header("Location: ?page=user_pref&passwordChange=false");
-		die();
-	}
-}
-
-if(isset($_POST['real_name']))
-{
-	if(empty($_POST['real_name']) || empty($_POST['email']))
-	{
-		header('Location: ?page=user_pref&somethingEmpty=true');
-		die();
-	}
-	if(isset($_POST['show_name'])) $show_name = 1;
-	else $show_name = 0;
-
-	if(isset($_POST['show_mail'])) $show_mail = 1;
-	else $show_mail = 0;
-
-	$facebook_id = trim($_POST['facebook_id']);
-	$twitter_id = trim($_POST['twitter_id']);
-
-	$real_name = trim(ucfirst($_POST['real_name']));
-	if(empty($user_pref)) $sql = "INSERT INTO user_pref (rowID, userID, real_name, show_real_name, show_mail, admin, facebook_id, twitter_id)
-		VALUES(NULL, $_SESSION[dbuserid], '$real_name', $show_name, $show_mail, 0, '$facebook_id', '$twitter_id')";
-
-	else $sql = "UPDATE user_pref SET real_name = '$real_name', show_real_name = $show_name, show_mail = $show_mail, facebook_id = '$facebook_id', twitter_id = '$twitter_id' WHERE userID = $_SESSION[dbuserid]";
-	$result = mysql_query($sql);
-	header('Location: ?page=user_pref');
-	die();
-}
-
-
-if(isset($_GET['somethingEmpty']))
-{
-	echo '<div id="error">You left something empty!</div>';
-}
-
 ?>
+<div id="success" class="npSuccess"></div>
+<br />
 <div id="signup">
+	<br />
 	<?if(isset($_GET['error'])) echo '<div id="error">Error mes</div>';?>
-<form class="form" action="?page=user_pref" method="post" onsubmit="return validateUserPref()" name="user_pref">
+<div id="error" class="upError"></div>
+<br>
+<div id="success" class="upSuccess"></div>
+<br>
+<form class="form" onsubmit="return userPref()" name="user_pref">
 	<table>
 		<tr>
 			<td>
-				<input type="text" name="real_name" placeholder="Real name" onfocusout="validateRealName()" id="real_name" <?if(isset($user_pref['real_name'])) echo 'value="'.$user_pref['real_name'].'"';?>></td>
+				<input type="text" name="real_name" placeholder="Real name" id="real_name" <?if(isset($user_pref['real_name'])) echo 'value="'.$user_pref['real_name'].'"';?>></td>
 			<td id="real_name_label">
 				<label for="name">Real name</label>
 			</td>
@@ -118,7 +33,7 @@ if(isset($_GET['somethingEmpty']))
 		</tr>
 		<tr>
 			<td>
-				<input type="email" id="email" name="email" onfocusout="validateEmail2()" value=<?=$user_info['email']?>></td>
+				<input type="email" id="email" name="email" value=<?=$user_info['email']?>></td>
 			<td id="email_label">
 				<label for="email">Email</label>
 			</td>
@@ -132,11 +47,13 @@ if(isset($_GET['somethingEmpty']))
 			</td>
 		</tr>
 		<tr>
-			<td><input type="text" name="facebook_id" id="facebook_id" <?if(isset($user_pref['facebook_id']) && $user_pref['facebook_id'] != '') echo "value='$user_pref[facebook_id]'";?> onfocusout="validateFacebook()"></td>
+			<td>
+				<input type="text" name="facebook_id" id="facebook_id" <?if(isset($user_pref['facebook_id']) && $user_pref['facebook_id'] != '') echo "value='$user_pref[facebook_id]'";?>>
+			</td>
 			<td id="facebook_label"><label for="facebook_id">Facebook id (optional)</label></td>
 		</tr>
 		<tr>
-			<td><input type="text" name="twitter_id" id="twitter_id" onfocusout="validateTwitter()" <?if(isset($user_pref['twitter_id']) && $user_pref['twitter_id'] != '') echo "value='$user_pref[twitter_id]'";?>></td>
+			<td><input type="text" name="twitter_id" id="twitter_id" <?if(isset($user_pref['twitter_id']) && $user_pref['twitter_id'] != '') echo "value='$user_pref[twitter_id]'";?>></td>
 			<td id="twitter_label"><label for="twitter_id">Twitter id (optional)</label></td>
 		</tr>
 		<tr>
@@ -150,29 +67,31 @@ if(isset($_GET['somethingEmpty']))
 <br>
 <br></div>
 <selection class="progress window">
-<details>
+<details id="np">
 	<summary>Change password</summary>
 
-
- <form class="form" name="newpassword" action="?page=user_pref" onsubmit="return validate_new_password()" method="post">
+<div class="npError" id="error"></div>
+<br>
+ <form class="form" name="newpassword" onsubmit="return newPassword()">
  	<table>
  		<tr>
  			<td>
- 				<input type="password" id="curpassword" name="curpassword" onfocusout="validateCurrentPassword()"></td>
+ 				<input type="password" id="curpassword" name="curpassword" >
+ 			</td>
  			<td id="current_password_label">
  				<label for="curpassword">Curent password</label>
  			</td>
  		</tr>
  		<tr>
  			<td>
- 				<input type="password" name="password" id="password" onfocusout="validateNewPassword1()"></td>
+ 				<input type="password" name="password" id="password" ></td>
  			<td id="newpassword_label">
  				<label for="password">New password</label>
  			</td>
  		</tr>
  		<tr>
  			<td>
- 				<input type="password" name="password2" id="password2" onfocusout="validateNewPassword2()"></td>
+ 				<input type="password" name="password2" id="password2" ></td>
  			<td id="newpassword2_label">
  				<label for="password2">New Password again</label>
  			</td>
