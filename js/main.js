@@ -1,7 +1,21 @@
 function deleteOwnFile(arg)
 {
 	var sure = confirm("Are you sure that you want to delete that file?");
-	if(sure == true) window.location.href="?page=delete_file&fileID="+arg;
+	if(sure == true)
+	{
+		$.get('reference.php',
+			{
+				f: arg,
+				func: 'delete_file',
+			},
+			function(response)
+			{
+				$('#center').empty();
+    			myprofile();
+			});
+
+	} 
+	//window.location.href="?page=delete_file&fileID="+arg;
 }
 
 function reportFile(file)
@@ -783,7 +797,17 @@ function clearSubList()
 		},
 		function(response)
 		{
-			myNewFiles();
+			var noti = document.getElementById('mysubsbar');
+			$.get('reference.php',
+			{
+				func: 'mysubscriptions',
+				action: 'files_num',
+			},
+			function(newFiles)
+			{
+				noti.innerHTML = "Subscriptions ("+newFiles+")";
+				myNewFiles();
+			});	
 		});
 }
 
@@ -911,6 +935,9 @@ function fileInfo()
 			var uploadedDate = json[0]['f_uploaded_date'];
 			var mimeType     = json[0]['f_mimetype'];
 			var size         = json[0]['f_size'];
+			var file         = json[0]['f_file'];
+
+			$('#header').html(file);
 
 			var table = document.createElement('table');
 			table.setAttribute('id', 'table');
@@ -1195,4 +1222,138 @@ function forgotPassword()
 
 		});
 	return false;
+}
+
+function navBar()
+{
+	$.get('reference.php', 
+		{
+			func: 'isloggedin',
+		},
+		function(response)
+		{
+			if(response != 'false')
+			{
+				$.get('reference.php',
+					{
+						func: 'mysubscriptions',
+						action: 'files_num',
+					},
+					function(newFiles)
+					{
+						var json = $.parseJSON(response);
+
+						var bar = document.getElementById('links');
+
+						var ul = document.createElement('ul');
+
+						var loggedInAs = document.createElement('span');
+						loggedInAs.setAttribute('class', 'loggedin');
+						loggedInAs.innerHTML = 'Logged in as: '+json['username'];
+						ul.appendChild(loggedInAs);
+
+						var logout = document.createElement('li');
+						logout.id="logout";
+						var logoutLink = document.createElement('a');
+						logoutLink.href="?page=logout";
+						logoutLink.innerHTML = 'Logout';
+						logout.appendChild(logoutLink);
+						ul.appendChild(logout);
+
+						var myprofile = document.createElement('li');
+						myprofile.id="myprofile";
+						var myprofileLink = document.createElement('a');
+						myprofileLink.href="?page=myprofile";
+						myprofileLink.innerHTML = 'My profile';
+						myprofile.appendChild(myprofileLink);
+						ul.appendChild(myprofile);
+
+						var mysubscriptions = document.createElement('li');
+						mysubscriptions.id="mysubscriptions";
+						var mysubscriptionsLink = document.createElement('a');
+						mysubscriptionsLink.href="?page=mysubscriptions";
+						mysubscriptionsLink.id="mysubsbar";
+						mysubscriptionsLink.innerHTML = 'Subscriptions ('+newFiles+')';
+						mysubscriptions.appendChild(mysubscriptionsLink);
+						ul.appendChild(mysubscriptions);
+
+						var home = document.createElement('li');
+						home.id="home";
+						var homeLink = document.createElement('a');
+						homeLink.href="?page=search";
+						homeLink.innerHTML = 'Home';
+						home.appendChild(homeLink);
+						ul.appendChild(home);
+
+						var upload = document.createElement('li');
+						upload.id="home";
+						var uploadLink = document.createElement('a');
+						uploadLink.href="?page=upload";
+						uploadLink.innerHTML = 'Upload';
+						upload.appendChild(uploadLink);
+						ul.appendChild(upload);
+
+						if(json['admin'] == '1')
+						{
+							var admin = document.createElement('li');
+							admin.id="admin";
+							var adminLink = document.createElement('a');
+							adminLink.href="?page=admin";
+							adminLink.innerHTML = 'Admin';
+							admin.appendChild(adminLink);
+							ul.appendChild(admin);
+						}
+
+						bar.appendChild(ul);
+
+						if(qs['page'] == 'myprofile' || qs['page'] == 'mysubscriptions' || qs['page'] == 'upload' || qs['page'] == 'admin')
+							document.getElementById(qs['page']).setAttribute('class', 'current_page_item');
+						else if(qs['page'] == 'user_pref') 
+								document.getElementById('myprofile').setAttribute('class', 'current_page_item');
+						else if(qs['page'] == 'search') 
+								document.getElementById('home').setAttribute('class', 'current_page_item');
+						
+					});
+
+				
+			}
+			else
+			{
+				var bar = document.getElementById('links');
+
+				var ul = document.createElement('ul');
+
+				var signup = document.createElement('li');
+				signup.id="signup";
+				var signupLink = document.createElement('a');
+				signupLink.href="?page=signup";
+				signupLink.innerHTML = 'Signup';
+				signup.appendChild(signupLink);
+				ul.appendChild(signup);
+
+				var login = document.createElement('li');
+				login.id="login";
+				var loginLink = document.createElement('a');
+				loginLink.href="?page=login";
+				loginLink.innerHTML = 'Login';
+				login.appendChild(loginLink);
+				ul.appendChild(login);
+
+				var home = document.createElement('li');
+				home.id="home";
+				var homeLink = document.createElement('a');
+				homeLink.href="?page=search";
+				homeLink.innerHTML = 'Home';
+				home.appendChild(homeLink);
+				ul.appendChild(home);
+
+				bar.appendChild(ul);
+
+				if(qs['page'] != 'search')
+					document.getElementById(qs['page']).setAttribute('class', 'current_page_item');
+				else 
+					document.getElementById('home').setAttribute('class', 'current_page_item');
+
+			}
+		});
 }

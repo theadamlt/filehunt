@@ -33,12 +33,14 @@ if (!isDetailsSupported)
 {
 	document.documentElement.className += ' no-details';
 }
+navBar();
 </script>
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 </head>
 <body>
+	<div id="links"></div>
 <?php
 header('Content-Type: text/html; charset=utf-8');
 header('Cache-control: public');

@@ -2,10 +2,10 @@
 require_once('lib.php');
 mysql_selector();
 
+
+// print_r($_FILES);
+// die();
 session_start();
-print_r($_FILES);
-print_r($_FILES['error']);
-//var_dump($_FILES['uploadedfile']);
 if($_FILES['uploadedfile']['size'] > 0 && $_FILES['uploadedfile']['error'] == 0)
 {
 	$fileName = $_FILES['uploadedfile']['name'];
@@ -29,8 +29,8 @@ if($_FILES['uploadedfile']['size'] > 0 && $_FILES['uploadedfile']['error'] == 0)
 	$user = $_SESSION['dbuserid'];
 	$description = mysql_enteries_fix_string(trim($_POST['description']));
 
-	$sql = "INSERT INTO files (rowID, file, mimetype, data, uploaded_by, uploaded_date, SIZE, times_downloaded, description)
-		VALUES (NULL, '$fileName', '$fileType', '$content', '$user', $datestrto, $fileSize, 0, '$description')";
+	$sql = "INSERT INTO files (rowID, file, mimetype, data, uploaded_by, uploaded_date, size, description)
+		VALUES (NULL, '$fileName', '$fileType', '$content', '$user', $datestrto, $fileSize, '$description')";
 	//echo $sql;
 
 	if (mysql_query($sql,$con))
@@ -38,12 +38,13 @@ if($_FILES['uploadedfile']['size'] > 0 && $_FILES['uploadedfile']['error'] == 0)
 		$sql = "SELECT *
 				FROM files
 				WHERE file='$fileName'
-				    AND SIZE=$fileSize
+				    AND size=$fileSize
 				    AND uploaded_by=$user
 				    AND uploaded_date=$datestrto LIMIT 1";
-		$result = mysql_query($sql,$con);
+		$result = mysql_query($sql);
 		$row = mysql_fetch_array($result);
 		$fileRow = $row['rowID'];
+
 		header("Location: index.php?page=search&uploadSucces=true&id=$fileRow");
 		die();
 	}

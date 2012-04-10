@@ -15,25 +15,25 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 
 		if (!isset($_SESSION['dbuserid']))
 		{
-			echo '<div id="links"><ul>';
+			// echo '<div id="links"><ul>';
 
-			if($_GET['page'] == 'signup') echo '<li class=current_page_item>';
+			// if($_GET['page'] == 'signup') echo '<li class=current_page_item>';
 
-			else echo '<li>';
+			// else echo '<li>';
 
-			echo '<a href="?page=signup">Signup</a></li>';
+			// echo '<a href="?page=signup">Signup</a></li>';
 
-			if($_GET['page'] == 'login') echo '<li class=current_page_item>';
+			// if($_GET['page'] == 'login') echo '<li class=current_page_item>';
 
-			else echo'<li>';
+			// else echo'<li>';
 
-			echo '<a href="?page=login">Login</a></li>';
+			// echo '<a href="?page=login">Login</a></li>';
 
-			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
+			// if($_GET['page'] == 'search') echo '<li class=current_page_item>';
 
-			else echo '<li>';
+			// else echo '<li>';
 
-			echo '<a href="?page=search">Home</a></li></ul></div>';
+			// echo '<a href="?page=search">Home</a></li></ul></div>';
 		}
 		else
 		{
@@ -81,35 +81,6 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			// print_r($user_info);
 			// print_r($user_fb);
 			// print_r($user_twitter);
-			echo '<div id="links"><ul><li><span class="loggedin">Logged in as: '.$user_info['username'].'</span></li><li><a href="?page=logout">Logout</a></li>';
-			if($_GET['page'] == 'myprofile' || $_GET['page'] == 'user_pref') echo'<li class="current_page_item">';
-
-			else echo '<li>';
-
-			echo '<a href="?page=myprofile">My profile</a>';
-
-			if($_GET['page'] == 'mysubscriptions') echo '<li class="current_page_item" id="sub">';
-
-			else echo '<li id="sub">';
-
-			echo '<a href="?page=mysubscriptions">My subscriptions ('.mysql_num_rows($result).')</a></li>';
-
-			if($_GET['page'] == 'search') echo '<li class=current_page_item>';
-
-			else echo '<li>';
-
-			echo '<a href="?page=search">Home</a></li>';
-
-			if($_GET['page'] == 'upload') echo '<li class=current_page_item>';
-
-			else echo '<li>';
-
-			echo '<a href="?page=upload">Upload</a></li>';
-
-			if(isset($user_pref['admin']) && $user_pref['admin'] == '1' && $_GET['page'] == 'admin') echo '<li class=current_page_item><a href="?page=admin">Admin</a></li>';
-
-			elseif(isset($user_pref['admin']) && $user_pref['admin'] == '1') echo '<li><a href="?page=admin">Admin</a></li>';
-			echo '</ul></div>';
 		}
 
 	if($_SERVER['HTTP_HOST'] != 'localhost') echo '
