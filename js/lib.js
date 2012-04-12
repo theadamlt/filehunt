@@ -351,12 +351,11 @@ var qs = (function(a) {
         return b;
     })(window.location.search.substr(1).split('&'));
 
-function IsEmpty(str)
-{
+function empty(str) {
 	//first remove all spaces using the following regex
-	str= str.replace(/^\s+|\s+$/, '');
+	str = str.replace(/^\s+|\s+$/, '');
 
 	//then we check for the length of the string if its 0 or not
-	if(str.length == 0) return false;
-	else return true;
+	if (str.length == 0) return true;
+	else return false;
 }

@@ -117,7 +117,7 @@ function userPref()
 	var twitterID    = document.user_pref.twitter_id.value;
 	var facebookID   = document.user_pref.facebook_id.value;
 
-	if(IsEmpty(realName) == true && validateEmail(email))
+	if(!empty(realName) && validateEmail(email))
 	{
 		$.get('reference.php',
 			{
@@ -936,6 +936,7 @@ function fileInfo()
 			var mimeType     = json[0]['f_mimetype'];
 			var size         = json[0]['f_size'];
 			var file         = json[0]['f_file'];
+			var description = json[0]['f_description']
 
 			$('#header').html(file);
 
@@ -1013,6 +1014,7 @@ function fileInfo()
 			var td6 = document.createElement('td');
 			var td6Link = document.createElement('a');
 			td6Link.setAttribute('href', '?page=download_analysis&file='+fileID);
+			td6Link.setAttribute('id', 'timesDownloaded');
 			$.get('reference.php', 
 				{
 					func: 'fileinfo',
@@ -1042,6 +1044,17 @@ function fileInfo()
 		}
 		var mimeType = json[0]['f_mimetype'];
 		var rowID  	 = json[0]['f_rowID'];
+
+		if(!empty(description))
+		{
+			var fieldset = document.createElement('fieldset');
+			var legend = document.createElement('legend');
+			legend.innerHTML = 'Description';
+			fieldset.innerHTML = description;
+			fieldset.appendChild(legend);
+			$('#cont').append(fieldset);
+		}
+
 		if(mimeType.substring(0,6) == 'image/')
 		{
 			var pic = document.createElement('img');
@@ -1356,4 +1369,31 @@ function navBar()
 
 			}
 		});
+}
+
+function download()
+{
+	var file = qs['fileID'];
+	window.location.href="download.php?file="+file;
+	var el = document.getElementById('timesDownloaded');
+	var num = el.innerHTML;
+	el.innerHTML = parseInt(num) + 1;
+}
+
+function mail()
+{
+	var subject = document.mail.subject.value;
+	var message = document.mail.message.value;
+
+	$.get('reference.php',
+		{
+			subject: subject,
+			message: message,
+			func: 'mail',
+		},
+		function(response)
+		{
+			console.log(response);
+		});
+	return false;
 }

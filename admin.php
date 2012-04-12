@@ -21,27 +21,26 @@ if (isset($_GET['mailSuccess']))
 if (isset($_GET['deleteSuccess']))
 	echo '<div id="success">The file was successfully deleted</div>';
 
-echo <<< _END
-<h2>Send mail to all users</h2><form class="form" action="?page=admin" method="post"><table><tr><td><input type="text" name="subject" placeholder="Subject" id="subject" /></td><td><label for="subject">Subject</label></td></tr><tr><td><textarea name="message" cols="40" rows="6" placeholder="Message" id="message" ></textarea></td><td><label for="message">Message</label></td></tr><tr><td class="submit"><input type="submit" value="Send"></td></tr></table></form>
-_END;
 $userid = $_SESSION['dbuserid'];
-if (isset($_POST['subject']) && isset($_POST['message']))
-{
-	$sql2 = "SELECT * FROM users";
-	$result2 = mysql_query($sql2);
-	if ($_POST['subject'] != '' && $_POST['message'] != '')
-	{
-		while ($row2 = mysql_fetch_array($result2))
-		{
-			mail($row2['email'], format_string($_POST['subject']), format_string($_POST['message']), 'From: noreply@filehunt.com');
-		}
-		header('Location: ?page=admin&mailSuccess=true');
+// if (isset($_POST['subject']) && isset($_POST['message']))
+// {
+// 	$sql2 = "SELECT * FROM users";
+// 	$result2 = mysql_query($sql2);
+// 	if ($_POST['subject'] != '' && $_POST['message'] != '')
+// 	{
+// 		while ($row2 = mysql_fetch_array($result2))
+// 		{
+// 			mail($row2['email'], format_string($_POST['subject']), format_string($_POST['message']), 'From: noreply@filehunt.com');
+// 		}
+// 		header('Location: ?page=admin&mailSuccess=true');
 
-	}
-	else
-		echo 'You left someting empty!';
+// 	}
+// 	else
+// 		echo 'You left someting empty!';
 
-}
+// }
+
+
 $sql = "SELECT a.rowID AS a_rowID,
 	       a.fileID AS a_fileID,
 	       a.report_by AS a_report_by,
@@ -49,7 +48,6 @@ $sql = "SELECT a.rowID AS a_rowID,
 	       f.rowID AS f_rowID,
 	       f.uploaded_by AS f_uploaded_by,
 	       f.size AS f_size,
-	       f.times_downloaded AS f_times_downloaded,
 	       f.file AS f_file,
 	       f.uploaded_date AS f_uploaded_date,
 	       u.rowID AS u_rowID,
@@ -119,7 +117,6 @@ else
 //$date = time() /*-7257600*/;
 $date = strtotime('-3 month', time());
 $sql = "SELECT * FROM files f, downloads d WHERE uploaded_date < $date";
-echo $sql;
 $result = mysql_query($sql);
 $row = mysql_fetch_array($result);
 // //List 3 month old files
@@ -163,3 +160,29 @@ $row = mysql_fetch_array($result);
 // }
 // else echo '<br><div id="error">There is no old files</div>';
 ?>
+
+<h2>Send mail to all users</h2>
+<form class="form" onsubmit="return mail();" name="mail">
+	<table>
+		<tr>
+			<td>
+				<input type="text" name="subject" placeholder="Subject" id="subject" />
+			</td>
+			<td>
+				<label for="subject">Subject</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea name="message" cols="40" rows="6" placeholder="Message" id="message" ></textarea>
+			</td>
+			<td>
+				<label for="message">Message</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="submit">
+				<input type="submit" value="Send"></td>
+		</tr>
+	</table>
+</form>
