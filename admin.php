@@ -162,7 +162,8 @@ $row = mysql_fetch_array($result);
 ?>
 
 <h2>Send mail to all users</h2>
-<form class="form" onsubmit="return mail();" name="mail">
+<div id="mes"></div>
+<form action="#" class="form" onsubmit="return sendMail()" name="mail" id="mail">
 	<table>
 		<tr>
 			<td>

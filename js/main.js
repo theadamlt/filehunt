@@ -1,3 +1,5 @@
+var linebreak = document.createElement('br');
+
 function deleteOwnFile(arg)
 {
 	var sure = confirm("Are you sure that you want to delete that file?");
@@ -1380,20 +1382,42 @@ function download()
 	el.innerHTML = parseInt(num) + 1;
 }
 
-function mail()
+
+function sendMail()
 {
 	var subject = document.mail.subject.value;
 	var message = document.mail.message.value;
-
-	$.get('reference.php',
-		{
-			subject: subject,
-			message: message,
-			func: 'mail',
-		},
-		function(response)
-		{
-			console.log(response);
-		});
+		
+		$.get('reference.php',
+			{
+				func: 'mail',
+				subject: subject,
+				message: message,
+			},
+			function(response)
+			{
+				if(response == 'false')
+				{
+					var errorMessage = document.createElement('div');
+					errorMessage.id="error";
+					errorMessage.innerHTML = "An error occured. Please try again later";
+					$('#mes').append(errorMessage).hide().fadeIn();
+					$('html,body').animate({
+						scrollTop: $("#mes").offset().top
+					}, 1000);
+				}
+				else
+				{
+					var message = document.createElement('div');
+					message.id="success";
+					message.innerHTML = "The mails was successfully sent";
+					$('#mes').append(message).hide().fadeIn();
+					$('html,body').animate({
+						scrollTop: $("#mes").offset().top
+					}, 1000);
+					$('#mail').empty();
+				}
+				
+			});
 	return false;
 }

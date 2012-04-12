@@ -9,8 +9,12 @@ if(mysql_num_rows($result) != 1)
 
 $sql = "SELECT * FROM users";
 $result = mysql_query($sql);
+$error = array();
 while ($row = mysql_fetch_array($result))
 {
-	mail($row['email'], format_string($_REQUEST['subject']), format_string($_REQUEST['message']), 'From: noreply@filehunt.com');
+	if(!mail($row['email'], format_string($_REQUEST['subject']), format_string($_REQUEST['message']), 'From: noreply@filehunt.com'))
+		$error[] = $row['rowID'];
 }
+if(!empty($error)) echo 'false';
+else echo 'true';
 ?>
