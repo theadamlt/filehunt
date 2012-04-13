@@ -1421,3 +1421,17 @@ function sendMail()
 			});
 	return false;
 }
+
+function profile()
+{
+	var userID = qs['userID'];
+	$.get('reference.php', 
+		{
+			func: 'profile',
+			userID: userID,
+		},
+		function(response)
+		{
+
+		});
+}
