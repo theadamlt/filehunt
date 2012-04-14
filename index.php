@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="google-site-verification" content="2iJhMBF2ixUIrJXnBSedVKJgYP5lqyq03vfCf51qlBY" />
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<?
-	if($_SERVER['HTTP_HOST'] != 'localhost')
-	{
-		echo "
+<meta name="google-site-verification" content="2iJhMBF2ixUIrJXnBSedVKJgYP5lqyq03vfCf51qlBY" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<?
+if($_SERVER['HTTP_HOST'] != 'localhost')
+{
+echo "
 <script type='text/javascript'>
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-29716641-1']);
@@ -17,16 +17,16 @@ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 </script>
-<script src=\"js/main.min.js\"></script><script src=\"js/lib.min.js\"></script><link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.min.css\" />";
+<script src=\"js/main.min.js\"></script><script src=\"js/lib.min.js\"></script><link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.min.css\" /><script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\"></script>";
 }
-else echo '<script src="js/main.js"></script><script type="text/javascript" src="js/lib.js"></script><link rel="stylesheet" type="text/css" href="css/style.css" />';?>
-<title>Filehunt beta
-	<?= $_SERVER['HTTP_HOST'];?></title>
+else echo '<script src="js/main.js"></script><script type="text/javascript" src="js/lib.js"></script><link rel="stylesheet" type="text/css" href="css/style.css"><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>';?>
+
+<title>Filehunt beta <?= $_SERVER['HTTP_HOST'];?></title>
 <link rel="icon" type="image/png" href="img/favicon.png" />
 
 <link rel="stylesheet" type="text/css" href="css/style.min.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 <script>
 if (!isDetailsSupported)
 {

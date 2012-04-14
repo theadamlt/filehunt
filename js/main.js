@@ -417,14 +417,17 @@ function validateSignupOnsubmit()
 
 			if(!validateUsername(username))
 			{
-				errorImg = document.createElement('img');
-				errorImg.setAttribute('src', './img/error.png')
-				errorImg.setAttribute('height', '16');
-				errorImg.setAttribute('width', '16');
-				errorImg.setAttribute('id', 'username_error');
-				errorImg.setAttribute('title', 'The entered username is either not available or invalid');
-				$('#username_label').prepend(errorImg);
-				username_success = false
+				if(!document.getElementById('username_error'))
+				{
+					errorImg = document.createElement('img');
+					errorImg.setAttribute('src', './img/error.png')
+					errorImg.setAttribute('height', '16');
+					errorImg.setAttribute('width', '16');
+					errorImg.setAttribute('id', 'username_error');
+					errorImg.setAttribute('title', 'The entered username is either not available or invalid');
+					$('#username_label').prepend(errorImg);
+				}
+				username_success = false;
 			}				
 			else username_success = true;
 
@@ -445,7 +448,7 @@ function validateSignupOnsubmit()
 						}
 						else if(response == 'true')
 						{
-							//TODO fix redirect på success
+							//TODO fix redirect pÃ¥ success
 							window.location="?page=search&signupCompleted=true";
 						}
 					});
@@ -1164,10 +1167,10 @@ function placeComment()
 function reqLogin()
 {
 	
-	var checked = document.login.remember.checked;
+	var checked  = document.login.remember.checked;
 	var username = document.login.username.value;
 	var password = document.login.password.value;
-	$.post('reference.php',
+	$.get('reference.php',
 	{
 		func: 'login',
 		u: username,

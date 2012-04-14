@@ -16,9 +16,21 @@ if(isset($_SESSION['dbuserid']))
 			       FROM users u,
 			       user_pref up
 			WHERE u.rowID = $_SESSION[dbuserid]
-			    AND u.rowID=up.userID";
+			AND u.rowID=up.userID";
 	$result = mysql_query($sql);
-	echo json_encode(mysql_fetch_array($result));
+	$response = json_encode(mysql_fetch_array($result));
+	if($response == 'false')
+	{
+		$sql = "SELECT *
+				FROM users
+				WHERE rowID = $_SESSION[dbuserid]";
+		$result = mysql_query($sql);
+		echo json_encode(mysql_fetch_array($result));
+	}
+	else echo $response;
 }
-else echo 'false';
+else
+{
+	echo 'false';
+}
 ?>

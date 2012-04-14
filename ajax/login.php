@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_SESSION['dbuserid']))
 {
 	die('Illegal request');
@@ -13,7 +14,9 @@ $result = mysql_query($sql);
 if (mysql_num_rows($result) == 1)
 {	
 	$row = mysql_fetch_array($result);
+	
 	$_SESSION['dbuserid'] = $row['rowID'];
+
 	if($_REQUEST['remember'] == 'true')
 	{
 		setcookie("dbuserid", $row['rowID'], time()+604800);
