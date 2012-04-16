@@ -38,4 +38,6 @@ else $sql = "UPDATE user_pref
 
 if($result = mysql_query($sql)) echo 'true';
 else echo 'false';
+
+echo mysql_error();
 ?>
