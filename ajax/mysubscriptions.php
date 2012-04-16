@@ -18,6 +18,12 @@ if($_REQUEST['action'] == 'mysubscriptions')
 	}
 	echo json_encode($rows);
 }
+elseif($_REQUEST['action'] == 'mysubscriptions_num')
+{
+	$sql = "SELECT * FROM subs WHERE subscriber=$_SESSION[dbuserid]";
+	$result = mysql_query($sql);
+	echo mysql_num_rows($result);
+}
 
 elseif($_REQUEST['action'] == 'mysubscribers')
 {

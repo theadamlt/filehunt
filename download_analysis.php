@@ -15,6 +15,7 @@ if(isset($_GET['file']))
 // 	$result = mysql_query($sql);
 // 	if(mysql_num_rows($result) == 1)
 // 	{
+	
 	$sql = "SELECT d.rowID AS d_rowID,
 			       d.downloaded_by AS d_downloaded_by,
 				   d.fileID AS d_fileID,

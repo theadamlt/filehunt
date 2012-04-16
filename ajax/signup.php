@@ -7,8 +7,8 @@
 
 	$resp = recaptcha_check_answer ($privatekey,
     $_SERVER["REMOTE_ADDR"],
-    $_POST["recaptcha_challenge_field"],
-    $_POST["recaptcha_response_field"]);
+    $_REQUEST["recaptcha_challenge_field"],
+    $_REQUEST["recaptcha_response_field"]);
 
 	if (!$resp->is_valid)
 	{
@@ -18,17 +18,16 @@
   	}
   	else
 	{
-			$username  = mysql_enteries_fix_string($_POST['username']);
-			$password  = mysql_enteries_fix_string($_POST['password']);
-			$email     = mysql_enteries_fix_string($_POST['email']);
+			$username  = mysql_enteries_fix_string($_REQUEST['username']);
+			$password  = mysql_enteries_fix_string($_REQUEST['password']);
+			$email     = mysql_enteries_fix_string($_REQUEST['email']);
 			$random = rand(30, 100)*rand(7574,324)*rand(323,876);
 			$date = time();
 			$sql = "INSERT INTO users(rowID, username, password, email, security_code, last_sub_check)
-					VALUES(NULL, '$username', '$password', '$email', $random, '$date')";
-			$result = mysql_query($sql,$con);
+					VALUES(NULL, '$username', '$password', '$email', $random, $date)";
+			$result = mysql_query($sql);
 			
 				$subject = "Filehunt signup";
-				$password_lenght = strlen($password);
 				$body = "Hi!
 
 					Welcome to filehunt!
@@ -36,18 +35,20 @@
 
 					Sincerly
 					The fileHunt team";
-				mail($email, $subject, $body, 'From: Filehunt@filehunt.com');
+
+				if($_SERVER['HTTP_HOST'] != 'localhost')
+					mail($email, $subject, $body, 'From: Filehunt@filehunt.com');
 					
 				$sql    = "SELECT *
 							FROM users
 							WHERE username='$username' LIMIT 1";
 				$result = mysql_query($sql,$con);
 				$row    = mysql_fetch_array($result);
-				session_start();
+				//session_start();
 				$_SESSION['dbuserid']   = $row['rowID'];
 				echo 'true';
 			
 
-		}
+	}
 
 ?>

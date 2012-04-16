@@ -344,8 +344,10 @@ function validatePasswordMatch(password1, password2)
 	else return false;
 }
 
+
+//REWRITE!!
 function validateSignupOnsubmit()
-{
+{ 
 	//Send request
 	$.get("validate.php", {
 		func:'signup_all',
@@ -433,7 +435,7 @@ function validateSignupOnsubmit()
 
 			if(email_success == true && username_success == true && passwordlength_success == true && passwordmatch_success == true)
 			{
-				$.post('reference.php', {
+				$.get('reference.php', {
 					func: 'signup',
 					username: username,
 					email: email,
@@ -442,14 +444,16 @@ function validateSignupOnsubmit()
 					recaptcha_response_field: document.signup.recaptcha_response_field.value,
 				}, function(response)
 					{
+						console.log(response);
 						if(response == 'capcha_error')
 						{
 							window.location="?page=signup&capchaError=true";
 						}
-						else if(response == 'true')
+						else
 						{
 							//TODO fix redirect pÃ¥ success
-							window.location="?page=search&signupCompleted=true";
+							window.location.href="?page=search&signupCompleted=true"
+							
 						}
 					});
 			}
@@ -616,6 +620,8 @@ function myprofile()
 
 		});
 }
+
+
 
 function mySubscriptions()
 {

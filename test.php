@@ -1,39 +1,26 @@
 <?php
-echo 0x0+2;
-echo "<br />";
-echo 0x0+3.5;
-echo "<br />";
-echo 0x0+2e1;
-echo "<br />";
-echo "<br />";
-
-
-$x = "!";
-$y = 0;
-echo "Increments: <br />";
-while ($y < 4) {
-	$x++;
-	$y++;
-	echo $x."<br />";
-}
-
-echo "Decrements: <br />";
-while ($y > 0) {
-	$x--;
-	$y--;
-	echo $x."<br />";
-}
-
-
-echo "That last fella' <br />";
-$x = "y";
-
-echo (int)($x < "yy"), "<br />";
-$x++;
-echo (int)($x < "yy"), "<br />";
-$x++;
-echo (int)($x < "yy"), "<br />";
-
-echo true+1;
-
+if(isset($_GET['u']))
+echo file_get_contents('http://jquery-howto.blogspot.com/2009/04/display-loading-gif-image-while-loading.html');
 ?>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+<button id="btnLoad">Load Content</button>
+<details id="content">
+	<summary>Click me</summary>
+	<div id="hej"></div>
+</details>
+
+<script>
+
+var done = false;
+$("#content").click(function(){
+	if(done == false)
+	{
+		done = true;
+  // Put an animated GIF image insight of content
+  $("#hej").empty().html('<img src="ajax-loader.gif" />');
+
+  // Make AJAX call
+  $("#hej").load("test.php?u=hej");
+	}
+	});
+</script>

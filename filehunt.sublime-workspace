@@ -1,0 +1,1347 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"mysubs",
+				"mysubscriptions"
+			],
+			[
+				"mysi",
+				"mysubscriptions"
+			],
+			[
+				"success",
+				"successfully"
+			],
+			[
+				"err",
+				"errorMessage"
+			],
+			[
+				"app",
+				"append"
+			],
+			[
+				"sub",
+				"subject"
+			],
+			[
+				"field",
+				"fieldset	<fieldset>"
+			],
+			[
+				"mysb",
+				"mysubscriptions"
+			],
+			[
+				"curp",
+				"curPage"
+			],
+			[
+				"sign",
+				"signup"
+			],
+			[
+				"my",
+				"mysubsbar"
+			],
+			[
+				"new",
+				"newFiles"
+			],
+			[
+				"logo",
+				"logoutLink"
+			],
+			[
+				"log",
+				"logout"
+			],
+			[
+				"logge",
+				"loggedInAs"
+			],
+			[
+				"isl",
+				"isloggedin"
+			],
+			[
+				"remove",
+				"removeAttr"
+			],
+			[
+				"copyTo",
+				"copy_to_clipboard"
+			],
+			[
+				"text",
+				"textarea"
+			],
+			[
+				"faceb",
+				"facebookID"
+			],
+			[
+				"show",
+				"showEmail"
+			],
+			[
+				"userpref",
+				"user_pref"
+			],
+			[
+				"remo",
+				"removeAttr"
+			],
+			[
+				"att",
+				"attemptedSite"
+			],
+			[
+				"atte",
+				"attemp"
+			],
+			[
+				"errorm",
+				"errormessage"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"but",
+				"button	<button>"
+			],
+			[
+				"Date",
+				"dateCommented"
+			],
+			[
+				"comment",
+				"commentBy"
+			],
+			[
+				"th",
+				"theadertxt1"
+			],
+			[
+				"theadr",
+				"theadertxt3"
+			],
+			[
+				"theadert",
+				"theadertxt3"
+			],
+			[
+				"the",
+				"theadertxt2"
+			],
+			[
+				"func",
+				"function"
+			],
+			[
+				"td5",
+				"td5Link"
+			],
+			[
+				"file",
+				"fileID"
+			],
+			[
+				"append",
+				"appendChild"
+			],
+			[
+				"appen",
+				"appendChild"
+			],
+			[
+				"fileinfo",
+				"fileinfo"
+			],
+			[
+				"time",
+				"timeConverter"
+			],
+			[
+				"Uplo",
+				"uploadedDate"
+			],
+			[
+				"apped",
+				"appendChild"
+			],
+			[
+				"mysub",
+				"mysubscriptions"
+			],
+			[
+				"mysqlfetc",
+				"mysql_fetch_array"
+			],
+			[
+				"mys",
+				"mysubscriptions"
+			],
+			[
+				"parse_",
+				"parse_ini_file"
+			],
+			[
+				"url",
+				"urldecode"
+			],
+			[
+				"thea",
+				"theader"
+			],
+			[
+				"theader",
+				"theadertxt2"
+			],
+			[
+				"theadertxt",
+				"theadertxt1"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"true",
+				"true"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"invalid",
+				"invalid"
+			],
+			[
+				"signup",
+				"signupErrors"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"arr",
+				"Array"
+			],
+			[
+				"newpass",
+				"newpasswordArray"
+			],
+			[
+				"fuc",
+				"function"
+			],
+			[
+				"userpre",
+				"user_pref_array"
+			],
+			[
+				"user_",
+				"user_pref"
+			],
+			[
+				"img",
+				"img	img"
+			],
+			[
+				"succe",
+				"successImg"
+			],
+			[
+				"error",
+				"errorMessage"
+			],
+			[
+				"userp",
+				"user_pref_array"
+			],
+			[
+				"user_pref",
+				"user_pref_array"
+			],
+			[
+				"real_name",
+				"real_name_error"
+			],
+			[
+				"sig",
+				"signupArray"
+			],
+			[
+				"document",
+				"document"
+			],
+			[
+				"cha",
+				"characters"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"documen",
+				"document"
+			],
+			[
+				"docume",
+				"document"
+			],
+			[
+				"vil",
+				"visibility"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"mu",
+				"mysubscribtions	(global, function)"
+			],
+			[
+				"twitt",
+				"twitter_id"
+			],
+			[
+				"twi",
+				"twitter_id"
+			],
+			[
+				"sho",
+				"show_name"
+			],
+			[
+				"pref",
+				"prefs"
+			],
+			[
+				"facebook",
+				"facebook_id"
+			],
+			[
+				"user_pre",
+				"user_pref_id"
+			],
+			[
+				"ch",
+				"checkDate"
+			],
+			[
+				"real",
+				"real_name"
+			],
+			[
+				"array",
+				"array_push"
+			],
+			[
+				"some",
+				"somethingEmpty"
+			],
+			[
+				"post",
+				"_POST"
+			],
+			[
+				"httpho",
+				"HTTP_HOST"
+			],
+			[
+				"user",
+				"user_pref"
+			],
+			[
+				"resul",
+				"result"
+			],
+			[
+				"mysqlerr",
+				"mysql_error"
+			],
+			[
+				"session_de",
+				"session_destroy"
+			],
+			[
+				"Ar",
+				"Arial, Helvetica, sans-serif"
+			],
+			[
+				"br",
+				"browsers"
+			],
+			[
+				"brow",
+				"browser"
+			],
+			[
+				"browse",
+				"browsers"
+			],
+			[
+				"strp",
+				"strpos"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"current",
+				"current_page_item"
+			],
+			[
+				"mysqlfetcha",
+				"mysql_fetch_array"
+			],
+			[
+				"mysqlfetch",
+				"mysql_fetch_array"
+			],
+			[
+				"localhost",
+				"localhost_con"
+			],
+			[
+				"ro",
+				"rowID"
+			],
+			[
+				"userid",
+				"userID2"
+			],
+			[
+				"Mb",
+				"mb"
+			],
+			[
+				"mysql_fetch",
+				"mysql_fetch_assoc"
+			],
+			[
+				"mysql",
+				"mysql_password"
+			],
+			[
+				"pagoda",
+				"pagodapassword"
+			],
+			[
+				"kB",
+				"kb"
+			],
+			[
+				"ty",
+				"try	(keyword, instance)"
+			],
+			[
+				"date",
+				"datestrto"
+			],
+			[
+				"mysqlnum",
+				"mysql_num_rows"
+			],
+			[
+				"displa",
+				"display	display: block"
+			],
+			[
+				"getl",
+				"getlogin  (function)"
+			],
+			[
+				"ge",
+				"getlogin"
+			],
+			[
+				"cl",
+				"close	(builtin, function)"
+			],
+			[
+				"def",
+				"def	Function"
+			],
+			[
+				"mysql_fet",
+				"mysql_field_type"
+			],
+			[
+				"Rewrit",
+				"RewriteRule"
+			],
+			[
+				"a",
+				"Adam"
+			],
+			[
+				"Sublime",
+				"SublimeDartHighlighter"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "test.php",
+			"settings":
+			{
+				"buffer_size": 661,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/main.js",
+			"settings":
+			{
+				"buffer_size": 39159,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 2299,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ajax/mysubscriptions.php",
+			"settings":
+			{
+				"buffer_size": 2732,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/YUI Compressor/YUI Compressor.sublime-build",
+	"command_palette":
+	{
+		"height": 54.0,
+		"selected_items":
+		[
+			[
+				"disab",
+				"Package Control: Disable Package"
+			],
+			[
+				"server",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"gist",
+				"Gist: Insert Gist"
+			],
+			[
+				"enal",
+				"Package Control: Enable Package"
+			],
+			[
+				"li",
+				"Package Control: List Packages"
+			],
+			[
+				"",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"open i",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"repl",
+				"SublimeREPL: Shell"
+			],
+			[
+				"instak",
+				"Package Control: Install Package"
+			],
+			[
+				"HTML",
+				"Set Syntax: HTML"
+			],
+			[
+				"GIST",
+				"Gist: Open Gist"
+			],
+			[
+				"form",
+				"Format: Javascript"
+			],
+			[
+				"fetch",
+				"Fetch"
+			],
+			[
+				"fetc",
+				"Fetch"
+			],
+			[
+				"forma",
+				"Format: Javascript"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"update",
+				"Gist: Update File"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"open",
+				"Gist: Open Gist"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upgr",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"upgrd",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upd",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"upda",
+				"Gist: Update File"
+			],
+			[
+				"upgrad",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"todo",
+				"Todo: List All"
+			],
+			[
+				"quote",
+				"ChangeQuotes"
+			],
+			[
+				"inse",
+				"Gist: Insert Gist"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"lorem",
+				"Snippet: Lorem ipsum"
+			],
+			[
+				"snippet",
+				"Snippet: Lorem ipsum"
+			],
+			[
+				"change",
+				"ChangeQuotes"
+			],
+			[
+				"quot",
+				"ChangeQuotes"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"insert",
+				"Gist: Insert Gist"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"ph",
+				"Set Syntax: PHP"
+			],
+			[
+				"create",
+				"Gist: Create Public Gist"
+			],
+			[
+				"lint",
+				"CSSLint: Run CSSLint"
+			],
+			[
+				"lit",
+				"Snippet: Add New BSD license to a plain text file"
+			],
+			[
+				"inser",
+				"Gist: Insert Gist"
+			],
+			[
+				"tidy",
+				"Tidy PHP"
+			],
+			[
+				"gisr",
+				"Gist: Insert Gist"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"project",
+				"Project: Add Folder"
+			],
+			[
+				"new",
+				"Rope: New Project"
+			],
+			[
+				"upgra",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"prefixr",
+				"Preferences: Prefixr Key Bindings – Default"
+			],
+			[
+				"apac",
+				"Set Syntax: Apache Conf"
+			],
+			[
+				"disca",
+				"Package Control: Disable Package"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"clip",
+				"Clipboard History"
+			],
+			[
+				"enabl",
+				"Package Control: Enable Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"inserta",
+				"Tag: Insert as Tag"
+			],
+			[
+				"repo",
+				"Package Control: Add Repository"
+			],
+			[
+				"for",
+				"Format: Php"
+			],
+			[
+				"terminal",
+				"Preferences: Terminal Settings – Default"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 290.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/adam/Dropbox/Programming/PHP/filehunt/js/main.js",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/dev/test.html",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/delete_file_admin.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/dev/index.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/dev/scripts/shBrushPhp.js",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/dev/index.html",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/clear_sub_list.php",
+		"/home/adam/Dropbox/Programming/js/lort",
+		"/home/adam/Dropbox/Programming/docs/index.php",
+		"/home/adam/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/adam/.config/sublime-text-2/Packages/AdvancedNewFile/Default (Linux).sublime-keymap",
+		"/home/adam/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/download_analysis.php",
+		"/home/adam/Dropbox/Tab_Document_Gf.rtf",
+		"/home/adam/Dropbox/Programming/PHP/adam/wp-app.php",
+		"/home/adam/Dropbox/Programming/PHP/adam/.git/config",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/reference.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/isloggedin.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/commit",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/commit.sh",
+		"/home/adam/Dropbox/Programming/workspace/All-install/src/main.sh",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/logout.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/login.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/login.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/profile.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/lib.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/forgot_password.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/fileinfo.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/delete_file.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/comments.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/new_password.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/mysubscriptions.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/index.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/main.php",
+		"/home/adam/Dropbox/Programming/c/test/test.c",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/filehunt.sql",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/myprofile.php",
+		"/home/adam/.config/sublime-text-2/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/download.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/printimage.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/delete_old_files.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/Boxfile",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/.htaccess",
+		"/home/adam/theadamlt-dcpu16-emulator-7d7a80e/bin/test.dcpu16",
+		"/home/adam/theadamlt-dcpu16-emulator-7d7a80e/dcpu16.c",
+		"/home/adam/Desktop/desktop.lang",
+		"/usr/share/gtksourceview-2.0/language-specs/desktop.lang",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/img/abuse.png",
+		"/home/adam/Downloads/tableblue.html",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/css/style.css",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/user_pref.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/upload.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/signup.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/search.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/mysubscriptions.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/forgot_password.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/fileinfo.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/admin.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/mail.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/hej.dcpu16",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/lol.dcpu16",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/lol.dcpu",
+		"/home/adam/Dropbox/Packages/User/Package Control.sublime-settings",
+		"/home/adam/Dropbox/Programming/Random/sublime_packages/packages.json",
+		"/home/adam/Dropbox/Programming/Random/DCPU-16 Sublime highlight/DCPU-16.tmLanguage",
+		"/home/adam/Dropbox/Programming/Random/DCPU-16 Sublime highlight/README.md",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/js/lib.js",
+		"/home/adam/Dropbox/Programming/Javascript/lib/lib.js",
+		"/home/adam/Desktop/gistfile1.html",
+		"/home/adam/Dropbox/Programming/Javascript/lib/index.html",
+		"/home/adam/Dropbox/Programming/Javascript/lib/README.md",
+		"/home/adam/Dropbox/Programming/PHP/adam_php_lib/README.md",
+		"/home/adam/Dropbox/Programming/PHP/adam_php_lib/index.html",
+		"/home/adam/Dropbox/Programming/PHP/dj/style.css",
+		"/home/adam/Dropbox/Programming/PHP/adam_php_lib/index.php",
+		"/home/adam/Dropbox/Programming/PHP/adam_php_lib/javascripts/main.js",
+		"/home/adam/Dropbox/Programming/PHP/adam_php_lib/params.json",
+		"/home/adam/.config/sublime-text-2/Packages/User/Fetch.sublime-settings",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/js/.gitignore",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/.gitignore",
+		"/home/adam/gistfile1.html",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/delete_file.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/uploadaction.php",
+		"/home/adam/Dropbox/Programming/Javascript/test/index.html",
+		"/home/adam/Dropbox/Programming/Javascript/test/clipboard.swf",
+		"/home/adam/Downloads/zeroclipboard/test.html",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/user_pref.php",
+		"/home/adam/Downloads/response.json",
+		"/home/adam/Dropbox/Programming/PHP/ex/index.php",
+		"/home/adam/Dropbox/Programming/Python/Structurer 2/lol.json",
+		"/home/adam/Dropbox/Programming/Python/Structurer 2/website.json",
+		"/home/adam/Dropbox/Programming/Python/Structurer 2/main.py",
+		"/home/adam/Dropbox/Programming/Python/Structurer 2/version.json",
+		"/home/adam/Downloads/jazz/Makefile.am",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/clear_sub_list.php",
+		"/home/adam/JazzBuild/BuildLog",
+		"/home/adam/Downloads/jazz/LinuxInstall.txt",
+		"/home/adam/Downloads/jazz/INSTALL",
+		"/home/adam/.cache/.fr-ZPlBHW/jazz/INSTALL",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/report_abuse.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/report_file.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/place_comment.php",
+		"/home/adam/Downloads/Microsoft Windows 7 Ultimate/Tutorial.txt",
+		"/home/adam/Dropbox/Programming/PHP/adam_php_lib/lib.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/ajax/myprofile.php",
+		"/home/adam/Downloads/QueryData.js",
+		"/home/adam/Dropbox/Programming/PHP/filehunt/search_term.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/index.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/simpletodo_api/index.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/index.php.html",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/api.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/simpletodo_api/controllers/UserInfo.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/simpletodo_api/controllers/Todo.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/simpletodo_api/data/277ffec223163f2d8733108bd754a6afdc399111/1323343689.txt",
+		"/home/adam/.config/sublime-text-2/Packages/Terminal/Terminal.sublime-settings",
+		"/home/adam/.bashrc",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/simpletodo_api/models/myProfile.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/simpletodo_api/models/TodoItem.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/test.php",
+		"/home/adam/Dropbox/Programming/PHP/filehunt_api/error_codes.ini",
+		"/home/adam/Dropbox/Programming/PHP/frapi",
+		"/home/adam/Dropbox/Programming/PHP/Dukseliste/main.php",
+		"/home/adam/Dropbox/Programming/Random/HaXe/build.hxml",
+		"/home/adam/Dropbox/Programming/Random/HaXe/Index.hx",
+		"/home/adam/Dropbox/Programming/Random/HaXe/www/index.php",
+		"/home/adam/Dropbox/Programming/Random/HaXe/www/lib/php/Boot.class.php",
+		"/home/adam/Dropbox/Programming/Random/HaXe/www/lib/Std.class.php",
+		"/home/adam/Dropbox/Programming/Random/HaXe/www/lib/Hash.class.php"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"ajax/user_pref.php",
+			"user_pref.php",
+			"lol.json,/home/adam/Dropbox/Programming/PHP/filehunt",
+			"lol.json",
+			"main.js",
+			"myprofile.php,/home/adam/Dropbox/Programming/PHP/filehunt",
+			"myprofile.php",
+			"/home/adam/Dropbox,/home/adam/Dropbox/Programming/PHP/dj",
+			"/home/adam/Dropbox",
+			"",
+			"/home/adam/Dropbox/Programming/PHP/dj",
+			"djilehunt",
+			"/home/adam/Dropbox/Programming/PHP/filehunt",
+			"/home/adam/Dropbox/Programming/PHP/filehunt/lib.php",
+			"/home/adam/Dropbox/Programming/PHP/adam_php_lib/lib.php",
+			"lib.php",
+			"search.php",
+			"/home/adam/Dropbox/Programming/PHP/filehunt"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"parseJ",
+			"<",
+			"table",
+			"header",
+			"return false",
+			"fileinfo",
+			"fileInfo",
+			"myNewFil",
+			"mysubs",
+			"empty()",
+			"var password    = MD5(document.newpassword.password.value);\n	var password2   = MD5(document.newpassword.password2.value);\n	var curPassword = MD5(document.newpassword.curpassword.value);",
+			");",
+			"$_POST",
+			"userPref",
+			"qs",
+			"qsParm",
+			"createElement",
+			"wrongLogin",
+			"login()",
+			"\"",
+			"#center",
+			"clear",
+			"myNewFiles",
+			"center",
+			"login",
+			"$.parseJSON",
+			"Mimetype",
+			"Uploaded by",
+			"message",
+			"echo",
+			"signup",
+			"validatePassword",
+			"return true",
+			"validatePassword()",
+			"validatePassword",
+			"<input",
+			"captcha_check_ans",
+			"dump",
+			"table",
+			"user_pref_array",
+			"newpasswordArray",
+			"user_pref_array",
+			"validateEmail",
+			"user_pref_arra",
+			"validateRea",
+			"invali",
+			"errorMessage",
+			"document.getElementById('error')",
+			"array",
+			"child",
+			"';",
+			"deny",
+			"img",
+			"console.log",
+			"consolo.log",
+			"2",
+			"passwordC",
+			"label",
+			"$sql_username",
+			"row",
+			"num",
+			"details",
+			"mail",
+			"php",
+			"mail",
+			"form",
+			"error",
+			"errot",
+			"// die();",
+			"password2",
+			"header(",
+			"?page=search",
+			");",
+			"#form",
+			".form",
+			"solid",
+			"table",
+			"window",
+			"session_start();",
+			"Nana",
+			"background",
+			"textnav",
+			"navhome",
+			"navwebsite",
+			"h2div",
+			"#background",
+			"navhome",
+			"navweb",
+			"nav",
+			"session_start();",
+			"tel",
+			"mysqli",
+			"DocumentRoot",
+			"htaccess",
+			"mysqli",
+			"env",
+			"VirtualHost",
+			"browse",
+			"100",
+			"subscribe",
+			"jquery",
+			"center",
+			"jquery",
+			"ob_start()",
+			"print",
+			"15",
+			"curl",
+			"signupEmpty",
+			"signup",
+			"error",
+			"Oups... Your password hasen't been changed. Please try again later",
+			"newPasswo",
+			"newPass",
+			"Logged in as",
+			"dbemail",
+			"dbpassword",
+			"dbusername",
+			"rowID",
+			"dbuserid",
+			"password",
+			"$_SESSION[dbpassword]",
+			"$_SESSION[\"dbpassword]",
+			"$_SESSION[\"dbpassword\"]",
+			"$_SESSION['password']",
+			"$_SESSION['dbpassword']",
+			"$userID2",
+			"UPDATE",
+			"iss"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"die();",
+			"Baldur",
+			"",
+			"method=\"post\"",
+			"method=\"get\"",
+			"<img alt=\"Image\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "test.php",
+					"settings":
+					{
+						"buffer_size": 661,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								610,
+								610
+							]
+						],
+						"settings":
+						{
+							"is_xml": false,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/main.js",
+					"settings":
+					{
+						"buffer_size": 39159,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17563,
+								17563
+							]
+						],
+						"settings":
+						{
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/jQuery/Syntaxes/jQueryJavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8101.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "index.php",
+					"settings":
+					{
+						"buffer_size": 2299,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1140,
+								1140
+							]
+						],
+						"settings":
+						{
+							"is_xml": false,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "ajax/mysubscriptions.php",
+					"settings":
+					{
+						"buffer_size": 2732,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								645,
+								645
+							]
+						],
+						"settings":
+						{
+							"is_xml": false,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.sftp":
+	{
+		"height": 88.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"index.php",
+				"PHP/codeigniter/index.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/adam/Dropbox/Programming/PHP/Dukseliste/Dukseliste.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 217.0,
+	"status_bar_visible": true
+}
