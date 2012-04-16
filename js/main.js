@@ -692,7 +692,7 @@ function mySubscribers()
 			{
 				var errorDiv = document.createElement('div');
 				errorDiv.setAttribute('id', 'error');
-				errorDiv.innerHTML = 'You have no subscriptions';
+				errorDiv.innerHTML = 'You have no subscribers';
 				$('#mysubs').append(errorDiv);
 			}
 			

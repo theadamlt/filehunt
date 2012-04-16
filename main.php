@@ -65,7 +65,6 @@ if(isset($_COOKIE['dbuserid']) && !isset($_SESSION['dbuserid']))
 			//user prefs
 			$sql3 = "SELECT * FROM user_pref WHERE userID = $_SESSION[dbuserid] LIMIT 1";
 			$result3 = mysql_query($sql3);
-			echo mysql_error();
 			if(mysql_num_rows($result3) == 0) $user_pref = array();
 			else $user_pref = mysql_fetch_array($result3);
 

@@ -25,7 +25,7 @@ $sql = "SELECT *
 		WHERE userID = $_SESSION[dbuserid]";
 $result = mysql_query($sql);
 
-if(mysql_num_rows($result) == 1) $sql = "INSERT INTO user_pref (rowID, userID, real_name, show_real_name, show_mail, ADMIN, facebook_id, twitter_id) 
+if(mysql_num_rows($result) == 0) $sql = "INSERT INTO user_pref (rowID, userID, real_name, show_real_name, show_mail, ADMIN, facebook_id, twitter_id) 
 	VALUES(NULL, $_SESSION[dbuserid], '$real_name', $show_name, $show_mail, 0, '$facebook_id', '$twitter_id')";
 
 else $sql = "UPDATE user_pref
