@@ -1,9 +1,5 @@
 <?php
 
-
-//The www domain for mysql connection function
-define('pagoda', 'filehunt.pagodabox.com');
-
 //Define Environment
 define('ENVIRONMENT', 'development');
 /*
@@ -110,7 +106,7 @@ function mysql_selector()
 
 
 	if($host == 'localhost' || $host == '62.199.33.99' || $host == '85.83.1.123') localhost_con('filehunt');
-	else if($host == pagoda) mysql_con('tunnel.pagodabox.com:3306', 'luba', $_SERVER['DB_PASSWORD'], 'filehunt');
+	else if($host == 'filehunt.pagodabox.com') mysql_con('tunnel.pagodabox.com:3306', 'luba', $_SERVER['DB_PASSWORD'], 'filehunt');
 	else localhost_con('filehunt');
 }
 
