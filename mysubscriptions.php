@@ -15,11 +15,18 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	<span id="mysubscribers_pointer"></span><span class="mysubscribers"></span>
 
 	<div class="mysubscribers_content" style="display: none"></div>
+	<br>
+	<br>
+	<span id="newfiles_pointer"></span><span class="newfiles"></span>
+
+	<div class="newfiles_content" style="display: none"></div>
 </div>
+
+
 
 
 <script type="text/javascript">
 mySubscriptions();
 mySubscribers();
-// myNewFiles();
+myNewFiles2();
 </script>

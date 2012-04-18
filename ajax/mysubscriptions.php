@@ -91,15 +91,8 @@ elseif($_REQUEST['action'] == 'files_num')
 {
 	$sql = "SELECT s.rowID AS s_rowID,
 			       s.subscriber AS s_subscriber,
-			       s.subscribed,
-			       u.rowID AS u_rowID,
-			       u.username AS u_username,
 			       me.last_sub_check AS u_last_sub_check,
-			       f.file AS f_file,
-			       f.uploaded_date AS f_uploaded_date,
-			       f.uploaded_by AS f_uploaded_by,
-			       f.size AS f_size,
-			       f.rowID AS f_rowID
+			       me.rowID AS me_rowID
 			FROM subs s,
 			     users u,
 			     users me,
@@ -110,6 +103,7 @@ elseif($_REQUEST['action'] == 'files_num')
 			    AND f.uploaded_by = u.rowID
 			    AND me.last_sub_check < f.uploaded_date";
 	$result = mysql_query($sql);
+	echo mysql_error();
 	echo mysql_num_rows($result);
 }
 ?>
