@@ -1312,10 +1312,9 @@ function myNewFiles2() {
 					for (var i = 0; i < json.length; i++) {
 						var rowID = json[i]['f_rowID'];
 						var fileName = json[i]['f_file'];
-						var uploadedByID = json[i]['f_uploaded_by'];
+						var uploadedById = json[i]['f_uploaded_by'];
 						var uploadedBy = json[i]['u_username'];
 						var uploadedDate = json[i]['f_uploaded_date'];
-						var uploadedById = json[i]['f_rowID'];
 						var row = document.createElement('tr');
 						if (isEven(i)) row.setAttribute('class', 'alt');
 						// filename
@@ -1327,7 +1326,7 @@ function myNewFiles2() {
 						//Uploaded by 
 						var td2 = document.createElement('td');
 						td2Link = document.createElement('a');
-						td2Link.setAttribute('href', '?page=profile&userID=' + uploadedBy);
+						td2Link.setAttribute('href', '?page=profile&userID=' + uploadedById);
 						td2Link.innerHTML = uploadedBy;
 						td2.appendChild(td2Link);
 						//date
