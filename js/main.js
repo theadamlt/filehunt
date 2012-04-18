@@ -1356,4 +1356,5 @@ function myNewFiles2() {
 			$('.newfiles').attr('id', 'error').html('You have no unseen files');
 		}
 	});
+
 }
