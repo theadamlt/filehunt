@@ -5,34 +5,21 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 	die();
 }
 ?>
+<div class="subscribtions">
+	<span id="mysubscribtions_pointer"></span><span class="mysubscribtions"></span>
 
-<div id="mysubs"><br /></div>
-<center id="center"></center>
-<script src="js/jquery.details.min.js"></script>
-<script>
-mySubscriptions()
-mySubscribers()
-myNewFiles()
+	<div class="mysubscribtions_content" style="display: none"></div>
 
-window.console || (window.console = { 'log': alert });
-$(function() {
-// Add conditional classname based on support
-$('html').addClass($.fn.details.support ? 'details' : 'no-details');
+	<br><br>
 
-// Show a message based on support
-//$('body').prepend($.fn.details.support ? 'Native support detected; the plugin will only add ARIA annotations and fire custom open/close events.' : 'Emulation active; you are watching the plugin in action!');
+	<span id="mysubscribers_pointer"></span><span class="mysubscribers"></span>
 
-// Emulate <details> where necessary and enable open/close event handlers
-$('details').details();
+	<div class="mysubscribers_content" style="display: none"></div>
+</div>
 
-// Bind some example event handlers
-$('details').on({
-'open.details': function() {
-//console.log('opened');
-},
-'close.details': function() {
-//console.log('closed');
-}
-});
-});
+
+<script type="text/javascript">
+mySubscriptions();
+mySubscribers();
+// myNewFiles();
 </script>

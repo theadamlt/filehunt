@@ -50,7 +50,15 @@ if (isset($_GET['attemptedSite']))
 				<input type="submit" value="Login">
 			</td>
 		</tr>
+		<tr>
+			<td><a href="?page=forgot_password">Forgot password?</a></td>
+		</tr>
+		<tr>
+			<td>Don't have an account?</td>
+		</tr>
+		<tr>
+			<td><a href="?page=signup">Signup</a></td>
+		</tr>
 	</table>
 </form>
-<a href="?page=forgot_password">Forgot password?</a>
 </div>

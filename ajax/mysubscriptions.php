@@ -29,7 +29,7 @@ elseif($_REQUEST['action'] == 'mysubscribers')
 {
 	$sql = "SELECT s.rowID AS s_rowID,
 			       s.subscriber AS s_subscriber,
-			       s.subscribed,
+			       s.subscribed AS s_subscribed,
 			       u.rowID AS u_rowID,
 			       u.username AS u_username
 			FROM subs s,
@@ -43,7 +43,18 @@ elseif($_REQUEST['action'] == 'mysubscribers')
 		$rows[] = $r;
 	}
 	echo json_encode($rows);
+	echo mysql_error();
 }
+
+elseif($_REQUEST['action'] == 'mysubscribers_num')
+{
+	$sql = "SELECT *
+			FROM subs
+			WHERE subscribed=$_SESSION[dbuserid]";
+	$result = mysql_query($sql);
+	echo mysql_num_rows($result);
+}
+
 
 elseif($_REQUEST['action'] == 'files')
 {

@@ -621,85 +621,6 @@ function myprofile()
 		});
 }
 
-
-
-function mySubscriptions()
-{
-	$.get('reference.php',
-		{
-			func: 'mysubscriptions',
-			action: 'mysubscriptions',
-		}, function(data)
-		{
-			var json = $.parseJSON(data);
-			if(json.length > 0)
-			{
-				var mysubs = document.createElement('details');
-				var summary = document.createElement('summary');
-				summary.innerHTML = 'My subscribtions('+json.length+')';
-				mysubs.appendChild(summary);
-				for(var i=0; i<json.length; i++)
-				{
-					var link = document.createElement('a');
-					link.setAttribute('href', '?page=profile&userID='+json[i]['u_rowID']);
-					link.innerHTML = json[i]['u_username'];
-					mysubs.appendChild(link);
-					var linebreak = document.createElement('br');
-					mysubs.appendChild(linebreak);
-
-				}
-				$('#mysubs').prepend(mysubs);
-			}
-			else
-			{
-				var errorDiv = document.createElement('div');
-				errorDiv.setAttribute('id', 'error');
-				errorDiv.innerHTML = 'You have no subscriptions';
-				$('#mysubs').prepend(errorDiv);
-			}
-
-		});
-}
-
-function mySubscribers()
-{
-	$.get('reference.php',
-		{
-			func: 'mysubscriptions',
-			action: 'mysubscribers',
-		}, function(data)
-		{
-			var json = $.parseJSON(data);
-			if(json.length > 0)
-			{
-				var mysubs = document.createElement('details');
-				var summary = document.createElement('summary');
-				summary.innerHTML = 'My subscribers('+json.length+')';
-				mysubs.appendChild(summary);
-				for(var i=0; i<json.length; i++)
-				{
-					var link = document.createElement('a');
-					link.setAttribute('href', '?page=profile&userID='+json[i]['u_rowID']);
-					link.innerHTML = json[i]['u_username'];
-					mysubs.appendChild(link);
-					var linebreak = document.createElement('br');
-					mysubs.appendChild(linebreak);
-
-				}
-				$('#mysubs').append(mysubs);
-			}
-			else
-			{
-				var errorDiv = document.createElement('div');
-				errorDiv.setAttribute('id', 'error');
-				errorDiv.innerHTML = 'You have no subscribers';
-				$('#mysubs').append(errorDiv);
-			}
-			
-		});
-}
-
-
 function myNewFiles()
 {
 	$('#center').empty();
@@ -1441,6 +1362,165 @@ function profile()
 		},
 		function(response)
 		{
+
+		});
+}
+
+function loadsubs()
+{
+	var details = document.createElement('details');
+	details.setAttribute('class', 'mysubbers');
+	var summary = document.createElement('summary');
+	summary.innerHTML = 'Subs click me';
+	details.appendChild(summary);
+
+	var cont = document.createElement('span');
+	cont.setAttribute('class', 'conthere');
+	details.appendChild(cont);
+	$('.cont').append(details);
+}
+
+function clickme()
+{
+	$('.mysubbers').click(function(){
+		$('.conthere').html('hej');
+	});
+
+}
+
+function mySubscriptions()
+{
+	$.get('reference.php',
+		{
+			func: 'mysubscriptions',
+			action: 'mysubscriptions_num',
+		}, function(data)
+		{
+			
+			if(data > 0)
+			{
+				$('#mysubscribtions_pointer').html('► ');
+				var open = false;
+
+				var loaded = false;
+				$('.mysubscribtions').attr('title','Click me').html('My subscriptions('+data+')');
+
+				$(".mysubscribtions").click(function () {
+
+					
+					var pointer = $('#mysubscribtions_pointer').html();
+					if(pointer == '► ') $('#mysubscribtions_pointer').html('▼ ');
+					else $('#mysubscribtions_pointer').html('► ');
+			
+					if(loaded == false)
+					{
+						var img = document.createElement('img');
+						img.setAttribute('src', 'img/load.gif');
+						$('.mysubscribtions_content').append(img);	
+						$('.mysubscribtions_content').slideToggle('fast');		
+
+						$.get('reference.php',
+						{
+							func: 'mysubscriptions',
+							action: 'mysubscriptions',
+						}, function(data)
+						{
+							$('.mysubscribtions_content').empty();
+							var json = $.parseJSON(data);
+							for(var i=0; i<json.length; i++)
+							{
+								var link = document.createElement('a');
+								link.setAttribute('href', '?page=profile&userID='+json[i]['u_rowID']);
+								link.innerHTML = json[i]['u_username'];
+								$('.mysubscribtions_content').append(link);
+								var linebreak = document.createElement('br');
+								$('.mysubscribtions_content').append(linebreak);
+								loaded = true;
+							}
+
+							
+						});
+
+					}
+					else
+					{
+						$('.mysubscribtions_content').slideToggle('fast');
+					}
+				});
+
+			}
+			else
+			{
+				$('.mysubscribtions').id('error').html('You have no subscriptions');
+			}
+
+		});
+}
+
+function mySubscribers()
+{
+	$.get('reference.php',
+		{
+			func: 'mysubscriptions',
+			action: 'mysubscribers_num',
+		}, function(data)
+		{
+			if(data > 0)
+			{
+				$('#mysubscribers_pointer').html('► ');
+				var open = false;
+
+				var loaded = false;
+				$('.mysubscribers').attr('title','Click me').html('My subscribers('+data+')');
+
+				$(".mysubscribers").click(function () {
+
+					
+					var pointer = $('#mysubscribers_pointer').html();
+					if(pointer == '► ') $('#mysubscribers_pointer').html('▼ ');
+					else $('#mysubscribers_pointer').html('► ');
+			
+					if(loaded == false)
+					{
+						var img = document.createElement('img');
+						img.setAttribute('src', 'img/load.gif');
+						$('.mysubscribers_content').append(img);	
+						$('.mysubscribers_content').slideToggle('fast');		
+
+						$.get('reference.php',
+						{
+							func: 'mysubscriptions',
+							action: 'mysubscribers',
+						}, function(data)
+						{
+							$('.mysubscribers_content').empty();
+							var json = $.parseJSON(data);
+							for(var i=0; i<json.length; i++)
+							{
+								var link = document.createElement('a');
+								link.setAttribute('href', '?page=profile&userID='+json[i]['u_rowID']);
+								link.innerHTML = json[i]['u_username'];
+								$('.mysubscribers_content').append(link);
+								var linebreak = document.createElement('br');
+								$('.mysubscribers_content').append(linebreak);
+								loaded = true;
+							}
+
+							
+						});
+
+					}
+					else
+					{
+						$('.mysubscribers_content').slideToggle('fast');
+					}
+				});
+
+			}
+			else
+			{
+				$('.mysubscribers').attr('id', 'error').html('You have no subscribers');
+			}
 
 		});
 }
