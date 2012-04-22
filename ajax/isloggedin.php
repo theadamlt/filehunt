@@ -1,6 +1,10 @@
 <?php
-if(isset($_SESSION['dbuserid']))
-{
+
+if ( __FILE__ == $_SERVER['SCRIPT_FILENAME'] ) {
+	die('Illegal request');
+}
+
+if ( isset( $_SESSION['dbuserid'] ) ) {
 	$sql = "SELECT u.rowID AS userID,
 			       u.username AS username,
 			       u.email AS email,
@@ -17,20 +21,18 @@ if(isset($_SESSION['dbuserid']))
 			       user_pref up
 			WHERE u.rowID = $_SESSION[dbuserid]
 			AND u.rowID=up.userID";
-	$result = mysql_query($sql);
-	$response = json_encode(mysql_fetch_array($result));
-	if($response == 'false')
-	{
+	$result = mysql_query( $sql );
+	$response = json_encode( mysql_fetch_array( $result ) );
+	if ( $response == 'false' ) {
 		$sql = "SELECT *
 				FROM users
 				WHERE rowID = $_SESSION[dbuserid]";
-		$result = mysql_query($sql);
-		echo json_encode(mysql_fetch_array($result));
+		$result = mysql_query( $sql );
+		echo json_encode( mysql_fetch_array( $result ) );
 	}
 	else echo $response;
 }
-else
-{
+else {
 	echo 'false';
 }
 ?>

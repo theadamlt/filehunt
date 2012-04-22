@@ -6,23 +6,30 @@
 <?
 if($_SERVER['HTTP_HOST'] != 'localhost')
 {
-echo "
-<script type='text/javascript'>
+echo '
+<script type="text/javascript">
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-29716641-1']);
-_gaq.push(['_trackPageview']);
+_gaq.push(["_setAccount", "UA-29716641-1"]);
+_gaq.push(["_trackPageview"]);
 (function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
 })();
 </script>
-<script src=\"js/main.min.js\"></script><script src=\"js/lib.min.js\"></script><link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.min.css\" /><script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\"></script>";
+<script src="js/main.min.js"></script><script src="js/lib.min.js"></script><link rel="stylesheet" type="text/css" href="css/style.min.css" /><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script src="js/jquery-ui-1.8.19.custom.min.js"></script><link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.19.custom.css">';
 }
-else echo '<script src="js/main.js"></script><script type="text/javascript" src="js/lib.js"></script><link rel="stylesheet" type="text/css" href="css/style.css"><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>';?>
+else echo '
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="js/main.js"></script>
+<script type="text/javascript" src="js/lib.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+<script src="js/jquery-ui-1.8.19.custom.js"></script>
+<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.19.custom.css">';?>
 
 <title>Filehunt beta <?= $_SERVER['HTTP_HOST'];?></title>
 <link rel="icon" type="image/png" href="img/favicon.png" />
+
 
 <link rel="stylesheet" type="text/css" href="css/style.min.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

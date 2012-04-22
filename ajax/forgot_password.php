@@ -1,17 +1,21 @@
 <?php
-$username = mysql_enteries_fix_string($_REQUEST['username']);
-$email = mysql_enteries_fix_string($_REQUEST['email']);
+
+if ( __FILE__ == $_SERVER['SCRIPT_FILENAME'] ) {
+	die('Illegal request');
+}
+
+$username = mysql_enteries_fix_string( $_REQUEST['username'] );
+$email = mysql_enteries_fix_string( $_REQUEST['email'] );
 $sql = "SELECT *
 		FROM users
 		WHERE username='$username'
 		    AND email='$email' LIMIT 1";
-$result = mysql_query($sql);
-if(mysql_num_rows($result) != 1)
-{
-	die('false');
+$result = mysql_query( $sql );
+if ( mysql_num_rows( $result ) != 1 ) {
+	die( 'false' );
 }
 
-$row = mysql_fetch_array($result);
+$row = mysql_fetch_array( $result );
 
 $username_r = $row['username'];
 
@@ -26,8 +30,7 @@ $sec_code
 Sincerly
 The filehunt team";
 
-if(mail($row['email'], 'Filehunt password reset', $message, 'From: noreply@filehunt.com'))
-{ 
+if ( mail( $row['email'], 'Filehunt password reset', $message, 'From: noreply@filehunt.com' ) ) {
 	echo 'true';
 }
 else echo 'email_error';

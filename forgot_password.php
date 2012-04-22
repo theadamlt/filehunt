@@ -1,13 +1,11 @@
 <?php
-require_once('lib.php');
-if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
-{
-	header('Location: index.php?page='.substr(end(explode('/', $_SERVER['SCRIPT_FILENAME'])),0,-4).'?'.$_SERVER['QUERY_STRING']);
+require_once 'lib.php';
+if ( __FILE__ == $_SERVER['SCRIPT_FILENAME'] ) {
+	header( 'Location: index.php?page='.substr( end( explode( '/', $_SERVER['SCRIPT_FILENAME'] ) ), 0, -4 ).'?'.$_SERVER['QUERY_STRING'] );
 	die();
 }
-if(isset($_SESSION['dbuserid']))
-{
-	header('Location: ?page=search');
+if ( isset( $_SESSION['dbuserid'] ) ) {
+	header( 'Location: ?page=search' );
 	die();
 }
 ?>

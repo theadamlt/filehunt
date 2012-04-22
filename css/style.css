@@ -398,11 +398,11 @@ a:visited {
 }
 
 a:hover {
-    color: orange;
+    color: hsl(39, 100%, 50%);
 }
 
 a:active {
-    color: orange;
+    color: hsl(39, 100%, 50%);
 }
 
 details,summary {

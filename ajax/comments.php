@@ -1,4 +1,7 @@
 <?php
+if ( __FILE__ == $_SERVER['SCRIPT_FILENAME'] ) {
+	die('Illegal request');
+}
 $sql = "SELECT c.rowID AS comment_rowID,
 			c.fileID AS fileID,
 			c.comment_by AS comment_by_id,
@@ -10,17 +13,15 @@ $sql = "SELECT c.rowID AS comment_rowID,
      			users u
 			WHERE c.fileID=$_REQUEST[file]
     		AND c.comment_by=u.rowID";
-	$result  = mysql_query($sql);
-	if(mysql_num_rows($result) == 0) echo 'false';
-	else
-	{
-		$rows = array();
-		while($r = mysql_fetch_array($result))
-		{
-			$rows[] = $r;
-		}
-
-		echo json_encode($rows);
+$result  = mysql_query( $sql );
+if ( mysql_num_rows( $result ) == 0 ) echo 'false';
+else {
+	$rows = array();
+	while ( $r = mysql_fetch_array( $result ) ) {
+		$rows[] = $r;
 	}
+
+	echo json_encode( $rows );
+}
 
 ?>

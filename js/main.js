@@ -155,7 +155,7 @@ function newPassword() {
 					scrollTop: $("#success").offset().top
 				}, 1000);
 				$('.npError').fadeOut();
-				$('#np').removeAttr('open');
+				$('#np-wrapper').fadeOut('slow');
 				document.newpassword.password.value = null;
 				document.newpassword.password2.value = null;
 				document.newpassword.curpassword.value = null;
@@ -272,10 +272,6 @@ function validatePasswordMatch(password1, password2) {
 	if (password1 == password2) return true;
 	else return false;
 }
-
-
-//REWRITE!!
-
 
 function validateSignupOnsubmit() {
 	//Send request
@@ -453,7 +449,7 @@ function myprofile() {
 
 		var json = $.parseJSON(data);
 		if (json.length > 0) {
-			var container = document.getElementById('center');
+			var container = document.getElementById('myfiles');
 			var table = document.createElement('table')
 			table.setAttribute('id', 'table');
 			var theader = document.createElement('tr');
@@ -497,106 +493,16 @@ function myprofile() {
 			errorMessage = document.createElement('div');
 			errorMessage.setAttribute('id', 'error');
 			errorMessage.innerHTML = 'You have no uploads!';
-			$('#center').append(errorMessage);
+			$('#tabs-1').append(errorMessage);
 		}
 
 	});
 }
 
-function myNewFiles() {
-	$('#center').empty();
-	$.get('reference.php', {
-		func: 'mysubscriptions',
-		action: 'files',
-	}, function(data) {
-		var json = $.parseJSON(data);
-		if (json.length > 0) {
-
-			var container = document.getElementById('center');
-			var linebreak = document.createElement('br');
-			container.appendChild(linebreak);
-
-			var table = document.createElement('table')
-			table.setAttribute('id', 'table');
-
-			var theader = document.createElement('tr');
-
-			var theadertxt1 = document.createElement('th');
-			theadertxt1.innerHTML = 'Filename';
-
-			var theadertxt2 = document.createElement('th');
-			theadertxt2.innerHTML = 'Uploaded by';
-
-			var theadertxt3 = document.createElement('th');
-			theadertxt3.innerHTML = 'Uploaded date';
-
-			theader.appendChild(theadertxt1);
-			theader.appendChild(theadertxt2);
-			theader.appendChild(theadertxt3);
-
-			table.appendChild(theader);
-			container.appendChild(table);
-
-			for (var i = 0; i < json.length; i++) {
-				var rowID = json[i]['f_rowID'];
-				var fileName = json[i]['f_file'];
-				var uploadedByID = json[i]['f_uploaded_by'];
-				var uploadedBy = json[i]['u_username'];
-				var uploadedDate = json[i]['f_uploaded_date'];
-				// var uploadedById = json[i]['f_rowID']
-				var row = document.createElement('tr');
-				if (isEven(i)) row.setAttribute('class', 'alt');
-
-				//filename
-				var td1 = document.createElement('td');
-				var td1Link = document.createElement('a');
-				td1Link.setAttribute('href', '?page=fileinfo&fileID=' + rowID);
-				td1Link.innerHTML = fileName;
-				td1.appendChild(td1Link);
-
-				//Uploaded by
-				var td2 = document.createElement('td');
-				td2Link = document.createElement('a');
-				td2Link.setAttribute('href', '?page=profile&userID=' + uploadedBy);
-				td2Link.innerHTML = uploadedBy;
-				td2.appendChild(td2Link);
-
-				//date
-				td3 = document.createElement('td');
-				td3.innerHTML = timeConverter(uploadedDate);
-
-				row.appendChild(td1);
-				row.appendChild(td2);
-				row.appendChild(td3);
-				table.appendChild(row);
-
-			}
-			$('#center').append(table);
-
-			linebreak = document.createElement('br');
-			$('#center').append(linebreak);
-
-			var span = document.createElement('span');
-			span.setAttribute('class', 'submit');
-			var button = document.createElement('input');
-			button.setAttribute('type', 'button');
-			button.setAttribute('onclick', 'clearSubList()');
-			button.setAttribute('value', 'Clear list');
-			span.appendChild(button);
-			$('#center').append(span);
-		} else {
-			var errorDiv = document.createElement('div');
-			errorDiv.setAttribute('id', 'error');
-			errorDiv.innerHTML = 'You have no unseen files';
-			var linebreak = document.createElement('br');
-			$('#center').append(linebreak);
-			$('#center').append(errorDiv);
-		}
-
-	});
-}
 
 function clearSubList() {
+
+	$('.newfiles_content').empty();
 	$.get('reference.php', {
 		func: 'clear_sub_list',
 	}, function(response) {
@@ -612,14 +518,14 @@ function clearSubList() {
 }
 
 function loadComments(fileID) {
-	$('#comments').empty();
+	$('#comments_table').empty();
 	$.get('reference.php', {
 		func: 'comments',
 		file: fileID,
 	}, function(response) {
-		var header = document.createElement('h1');
-		header.innerHTML = 'Comments';
-		$('#comments').append(header);
+		// var header = document.createElement('h1');
+		// header.innerHTML = 'Comments';
+		// $('#comments').append(header);
 		if (response == 'false') {
 			// var isLoggedIn = isLoggedIn();
 			if (isLoggedIn() != 'false') {
@@ -627,13 +533,14 @@ function loadComments(fileID) {
 				errorMessage.setAttribute('id', 'error');
 				errorMessage.innerHTML = 'There is no comments for this file. Why dont you leave one?';
 				var linebreak = document.createElement('br');
-				$('#comments').append(linebreak);
-				$('#comments').append(errorMessage);
+				$('#comments_table').prepend(linebreak);
+				$('#comments_table').prepend(errorMessage);
 			}
 		} else {
 			var json = $.parseJSON(response);
 			var table = document.createElement('table');
 			table.setAttribute('id', 'table');
+			table.setAttribute('style', 'width:75%;');
 
 			var theader = document.createElement('tr');
 			var theadertxt1 = document.createElement('th');
@@ -678,7 +585,7 @@ function loadComments(fileID) {
 				row.appendChild(td3);
 				table.appendChild(row);
 			}
-			$('#comments').append(table);
+			$('#comments_table').append(table);
 		}
 	});
 }
@@ -810,7 +717,7 @@ function fileInfo() {
 			row.appendChild(td6);
 
 			table.appendChild(row);
-			$('#cont').prepend(table);
+			$('#info').prepend(table);
 			var linebreak = document.createElement('br');
 			$('#cont').append(linebreak);
 			$('#cont').append(linebreak);
@@ -826,18 +733,35 @@ function fileInfo() {
 			legend.innerHTML = 'Description';
 			fieldset.innerHTML = description;
 			fieldset.appendChild(legend);
-			$('#cont').append(fieldset);
+			$('#info').append(linebreak);
+			$('#info').append(fieldset);
 		}
 
 		if (mimeType.substring(0, 6) == 'image/') {
+
+			// var listItem = document.createElement('li');
+			// var liLink = document.createElement('a');
+			// liLink.setAttribute('href', '#preview');
+			// liLink.innerHTML = 'Image preview';
+			// liLink.setAttribute('class', 'ui-state-default ui-corner-top');
+			// listItem.appendChild(liLink);
+			// $('#tabs_wrap').append(listItem);
+			$('#showme').css('visibility', 'visible');
+
+			// var prevDiv = document.createElement('div');
+			// prevDiv.setAttribute('id', 'preview');
+
+			// $('#tabs').append(prevDiv);
 			var pic = document.createElement('img');
 			pic.setAttribute('src', 'printimage.php?id=' + rowID);
-			pic.style.width = '30%';
+			pic.style.width = '70%';
 			pic.style.height = 'auto';
 
 			var linebreak = document.createElement('br');
-			$('#cont').append(linebreak);
-			$('#cont').append(pic);
+			// $('#cont').append(linebreak);
+			// $('#cont').append(pic);
+
+			$('#preview').append(pic);
 
 		}
 
@@ -1027,7 +951,7 @@ function navBar() {
 				ul.appendChild(home);
 
 				var upload = document.createElement('li');
-				upload.id = "home";
+				upload.id = "upload";
 				var uploadLink = document.createElement('a');
 				uploadLink.href = "?page=upload";
 				uploadLink.innerHTML = 'Upload';
@@ -1258,7 +1182,7 @@ function mySubscribers() {
 
 
 
-function myNewFiles2() {
+function myNewFiles() {
 	$.get('reference.php', {
 		func: 'mysubscriptions',
 		action: 'files_num'
@@ -1288,69 +1212,79 @@ function myNewFiles2() {
 					}, function(data) {
 						var json = $.parseJSON(data);
 
-					var table = document.createElement('table');
-					table.setAttribute('id', 'table');
+						var table = document.createElement('table');
+						table.setAttribute('id', 'table');
 
-					var theader = document.createElement('tr');
+						var theader = document.createElement('tr');
 
-					var theadertxt1 = document.createElement('th');
-					theadertxt1.innerHTML = 'Filename';
+						var theadertxt1 = document.createElement('th');
+						theadertxt1.innerHTML = 'Filename';
 
-					var theadertxt2 = document.createElement('th');
-					theadertxt2.innerHTML = 'Uploaded by';
+						var theadertxt2 = document.createElement('th');
+						theadertxt2.innerHTML = 'Uploaded by';
 
-					var theadertxt3 = document.createElement('th');
-					theadertxt3.innerHTML = 'Uploaded date';
+						var theadertxt3 = document.createElement('th');
+						theadertxt3.innerHTML = 'Uploaded date';
 
-					theader.appendChild(theadertxt1);
-					theader.appendChild(theadertxt2);
-					theader.appendChild(theadertxt3);
+						theader.appendChild(theadertxt1);
+						theader.appendChild(theadertxt2);
+						theader.appendChild(theadertxt3);
 
-					table.appendChild(theader);
-					
+						table.appendChild(theader);
 
-					for (var i = 0; i < json.length; i++) {
-						var rowID = json[i]['f_rowID'];
-						var fileName = json[i]['f_file'];
-						var uploadedById = json[i]['f_uploaded_by'];
-						var uploadedBy = json[i]['u_username'];
-						var uploadedDate = json[i]['f_uploaded_date'];
-						var row = document.createElement('tr');
-						if (isEven(i)) row.setAttribute('class', 'alt');
-						// filename
-						var td1 = document.createElement('td');
-						var td1Link = document.createElement('a');
-						td1Link.setAttribute('href', '?page=fileinfo&fileID=' + rowID);
-						td1Link.innerHTML = fileName;
-						td1.appendChild(td1Link);
-						//Uploaded by 
-						var td2 = document.createElement('td');
-						td2Link = document.createElement('a');
-						td2Link.setAttribute('href', '?page=profile&userID=' + uploadedById);
-						td2Link.innerHTML = uploadedBy;
-						td2.appendChild(td2Link);
-						//date
-						td3 = document.createElement('td');
-						td3.innerHTML = timeConverter(uploadedDate);
 
-						row.appendChild(td1);
-						row.appendChild(td2);
-						row.appendChild(td3);
-						table.appendChild(row);
-					}
-					$('.newfiles_content').empty();
-					$('.newfiles_content').append(table);
+						for (var i = 0; i < json.length; i++) {
+							var rowID = json[i]['f_rowID'];
+							var fileName = json[i]['f_file'];
+							var uploadedById = json[i]['f_uploaded_by'];
+							var uploadedBy = json[i]['u_username'];
+							var uploadedDate = json[i]['f_uploaded_date'];
+							var row = document.createElement('tr');
+							if (isEven(i)) row.setAttribute('class', 'alt');
+							// filename
+							var td1 = document.createElement('td');
+							var td1Link = document.createElement('a');
+							td1Link.setAttribute('href', '?page=fileinfo&fileID=' + rowID);
+							td1Link.innerHTML = fileName;
+							td1.appendChild(td1Link);
+							//Uploaded by 
+							var td2 = document.createElement('td');
+							td2Link = document.createElement('a');
+							td2Link.setAttribute('href', '?page=profile&userID=' + uploadedById);
+							td2Link.innerHTML = uploadedBy;
+							td2.appendChild(td2Link);
+							//date
+							td3 = document.createElement('td');
+							td3.innerHTML = timeConverter(uploadedDate);
+
+							row.appendChild(td1);
+							row.appendChild(td2);
+							row.appendChild(td3);
+							table.appendChild(row);
+						}
+						$('.newfiles_content').empty();
+						$('.newfiles_content').append(table);
+						var button = document.createElement('input');
+						button.setAttribute('class', 'submit');
+						button.setAttribute('value', 'Clear list');
+						button.setAttribute('onclick', 'clearSubList();');
+						button.setAttribute('type', 'button');
+
+						$('.newfiles_content').append(button);
 					});
-					
+
 
 
 				} else {
 					$('.newfiles_content').slideToggle('fast');
 				}
+
 			});
 
-		}
-		else {
+		} else {
+
+			$('#newfiles_pointer').empty();
+			$('.newfiles').css('cursor', 'default');
 			$('#newfiles_pointer').append(linebreak);
 			$('#newfiles_pointer').append(linebreak);
 			$('.newfiles').attr('id', 'error').html('You have no unseen files');

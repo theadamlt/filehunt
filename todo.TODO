@@ -1,0 +1,15 @@
+Ajax:
+ ☐ Admin
+ ☐ Un/Subscribe
+
+ ☐ Bigger tasks:
+ ☐ Complete jquery tabs navigation, no refreshing of page
+ ☐ Api +auth
+
+
+ Design:
+  ✔ Userpref/Myprofile med jquery ui tabs @done (2012-04-21 23:39)
+ ☐ Fileinfo with jquery tabs
+ ☐ Profile with jquery tabs
+ ☐ Api reference page with js syntax highlighter
+ ☐ Responsive

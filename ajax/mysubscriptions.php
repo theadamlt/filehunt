@@ -1,6 +1,10 @@
 <?php
-if($_REQUEST['action'] == 'mysubscriptions')
-{
+
+if ( __FILE__ == $_SERVER['SCRIPT_FILENAME'] ) {
+	die('Illegal request');
+}
+
+if ( $_REQUEST['action'] == 'mysubscriptions' ) {
 	$sql = "SELECT s.rowID AS s_rowID,
 			       s.subscriber AS s_subscriber,
 			       s.subscribed,
@@ -10,23 +14,20 @@ if($_REQUEST['action'] == 'mysubscriptions')
 			     users u
 			WHERE s.subscriber=$_SESSION[dbuserid]
 			    AND s.subscribed=u.rowID";
-	$result = mysql_query($sql);
+	$result = mysql_query( $sql );
 	$rows = array();
-	while($r = mysql_fetch_array($result))
-	{
+	while ( $r = mysql_fetch_array( $result ) ) {
 		$rows[] = $r;
 	}
-	echo json_encode($rows);
+	echo json_encode( $rows );
 }
-elseif($_REQUEST['action'] == 'mysubscriptions_num')
-{
+elseif ( $_REQUEST['action'] == 'mysubscriptions_num' ) {
 	$sql = "SELECT * FROM subs WHERE subscriber=$_SESSION[dbuserid]";
-	$result = mysql_query($sql);
-	echo mysql_num_rows($result);
+	$result = mysql_query( $sql );
+	echo mysql_num_rows( $result );
 }
 
-elseif($_REQUEST['action'] == 'mysubscribers')
-{
+elseif ( $_REQUEST['action'] == 'mysubscribers' ) {
 	$sql = "SELECT s.rowID AS s_rowID,
 			       s.subscriber AS s_subscriber,
 			       s.subscribed AS s_subscribed,
@@ -36,28 +37,25 @@ elseif($_REQUEST['action'] == 'mysubscribers')
 			     users u
 			WHERE s.subscribed=$_SESSION[dbuserid]
 			    AND s.subscriber=u.rowID";
-	$result = mysql_query($sql);
+	$result = mysql_query( $sql );
 	$rows = array();
-	while($r = mysql_fetch_array($result))
-	{
+	while ( $r = mysql_fetch_array( $result ) ) {
 		$rows[] = $r;
 	}
-	echo json_encode($rows);
+	echo json_encode( $rows );
 	echo mysql_error();
 }
 
-elseif($_REQUEST['action'] == 'mysubscribers_num')
-{
+elseif ( $_REQUEST['action'] == 'mysubscribers_num' ) {
 	$sql = "SELECT *
 			FROM subs
 			WHERE subscribed=$_SESSION[dbuserid]";
-	$result = mysql_query($sql);
-	echo mysql_num_rows($result);
+	$result = mysql_query( $sql );
+	echo mysql_num_rows( $result );
 }
 
 
-elseif($_REQUEST['action'] == 'files')
-{
+elseif ( $_REQUEST['action'] == 'files' ) {
 	$sql = "SELECT s.rowID AS s_rowID,
 			       s.subscriber AS s_subscriber,
 			       s.subscribed,
@@ -78,17 +76,15 @@ elseif($_REQUEST['action'] == 'files')
 			    AND s.subscribed = f.uploaded_by
 			    AND f.uploaded_by = u.rowID
 			    AND me.last_sub_check < f.uploaded_date";
-	$result = mysql_query($sql);
+	$result = mysql_query( $sql );
 	$rows = array();
-	while($r = mysql_fetch_array($result))
-	{
+	while ( $r = mysql_fetch_array( $result ) ) {
 		$rows[] = $r;
 	}
-	echo json_encode($rows);	
+	echo json_encode( $rows );
 }
 
-elseif($_REQUEST['action'] == 'files_num')
-{
+elseif ( $_REQUEST['action'] == 'files_num' ) {
 	$sql = "SELECT s.rowID AS s_rowID,
 			       s.subscriber AS s_subscriber,
 			       me.last_sub_check AS u_last_sub_check,
@@ -102,8 +98,7 @@ elseif($_REQUEST['action'] == 'files_num')
 			    AND s.subscribed = f.uploaded_by
 			    AND f.uploaded_by = u.rowID
 			    AND me.last_sub_check < f.uploaded_date";
-	$result = mysql_query($sql);
-	echo mysql_error();
-	echo mysql_num_rows($result);
+	$result = mysql_query( $sql );
+	echo mysql_num_rows( $result );
 }
 ?>

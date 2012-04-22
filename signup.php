@@ -1,20 +1,18 @@
 <?php
-if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
-{
-	header('Location: index.php?page='.substr(end(explode('/', $_SERVER['SCRIPT_FILENAME'])),0,-4).'?'.$_SERVER['QUERY_STRING']);
+if ( __FILE__ == $_SERVER['SCRIPT_FILENAME'] ) {
+	header( 'Location: index.php?page='.substr( end( explode( '/', $_SERVER['SCRIPT_FILENAME'] ) ), 0, -4 ).'?'.$_SERVER['QUERY_STRING'] );
 	die();
 }
 
-if(isset($_SESSION['dbuserid']))
-{
-	header('Location: ?page=search');
+if ( isset( $_SESSION['dbuserid'] ) ) {
+	header( 'Location: ?page=search' );
 	die();
 }
 ?>
 
 <h1 style="text-align:center;">Signup</h1>
 <div id="signup">
-	<? if (isset($_GET['capchaError'])) echo '<div id="error">
+	<?php if ( isset( $_GET['capchaError'] ) ) echo '<div id="error">
 	Oups... The capcha was\'t entered correctly. Try again</div>'; ?>
 <form class="form" onsubmit="return validateSignupOnsubmit()" name="signup">
 	<table>
@@ -53,11 +51,11 @@ if(isset($_SESSION['dbuserid']))
 		<tr>
 			<td>
 				<?php
-	require_once('recaptchalib.php');
-	if($_SERVER['HTTP_HOST']=='localhost') $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN";
-    elseif($_SERVER['HTTP_HOST']=='filehunt.pagodabox.com') $publickey = $_SERVER['CAPTCHA_PUBLIC'];
-    echo '<center>'.recaptcha_get_html($publickey).'</center>';
-    ?>
+require_once 'recaptchalib.php';
+if ( $_SERVER['HTTP_HOST']=='localhost' ) $publickey = "6LewEM4SAAAAAEzOcFxG0mJ1g1FE-SGb9KtQZAeN";
+elseif ( $_SERVER['HTTP_HOST']=='filehunt.pagodabox.com' ) $publickey = $_SERVER['CAPTCHA_PUBLIC'];
+echo '<center>'.recaptcha_get_html( $publickey ).'</center>';
+?>
 		</td>
 	</tr>
 	<tr>

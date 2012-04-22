@@ -1,11 +1,7 @@
-function isLoggedIn()
-{
-	$.get('reference.php',
-	{
+function isLoggedIn() {
+	$.get('reference.php', {
 		func: 'isloggedin',
-	},
-	function(response)
-	{
+	}, function(response) {
 		return response;
 	});
 }
@@ -20,13 +16,12 @@ function calcFileSize(file) {
 	gb = 1073741824;
 	tb = 1099511627776;
 
-	if (file >= kb && file < mb) size = Math.round(file / kb*10)/10 + ' KB';
-	else if (file >= mb && file < gb) size = Math.round(file / mb*10)/10 + ' MB';
-	else if (file >= gb && file < tb) size = Math.round(file / gb*10)/10 + ' GB';
-	else if (file >= tb) size = Math.round(file / tb*10)/10 + 'TB';
-	else
-	{
-		size = Math.round(file*10)/10;
+	if (file >= kb && file < mb) size = Math.round(file / kb * 10) / 10 + ' KB';
+	else if (file >= mb && file < gb) size = Math.round(file / mb * 10) / 10 + ' MB';
+	else if (file >= gb && file < tb) size = Math.round(file / gb * 10) / 10 + ' GB';
+	else if (file >= tb) size = Math.round(file / tb * 10) / 10 + 'TB';
+	else {
+		size = Math.round(file * 10) / 10;
 		if (size == 1) size = size + ' Byte';
 		else size = size + ' Bytes';
 	}
@@ -340,16 +335,15 @@ function getObjectLength(o) {
 }
 
 var qs = (function(a) {
-        if (a == "") return {};
-        var b = {};
-        for (var i = 0; i < a.length; ++i)
-        {
-            var p=a[i].split('=');
-            if (p.length != 2) continue;
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-        }
-        return b;
-    })(window.location.search.substr(1).split('&'));
+	if (a == "") return {};
+	var b = {};
+	for (var i = 0; i < a.length; ++i) {
+		var p = a[i].split('=');
+		if (p.length != 2) continue;
+		b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	}
+	return b;
+})(window.location.search.substr(1).split('&'));
 
 function empty(str) {
 	//first remove all spaces using the following regex

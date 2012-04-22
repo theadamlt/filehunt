@@ -1,13 +1,17 @@
 <?php
+
+if ( __FILE__ == $_SERVER['SCRIPT_FILENAME'] ) {
+	die('Illegal request');
+}
+
 $sql = "SELECT *
 			FROM files
 			WHERE uploaded_by=$_SESSION[dbuserid]";
-$result = mysql_query($sql);
+$result = mysql_query( $sql );
 // array_push($array, mysql_fetch_array($result));
 $rows = array();
-while($r = mysql_fetch_assoc($result))
-{
-    $rows[] = $r;
+while ( $r = mysql_fetch_assoc( $result ) ) {
+	$rows[] = $r;
 }
-echo json_encode($rows);
+echo json_encode( $rows );
 ?>
