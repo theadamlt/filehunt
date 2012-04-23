@@ -1018,9 +1018,9 @@
 	position: relative;
 	padding: .2em;
 	zoom: 1;
-	width: 50%;
+	width: 60%;
 	float: right;
-	left: -25%;
+	left: -16%;
 }
 
 /* position:  relative prevents IE scroll bug (element with position:  relative inside container with overflow:  auto appear as "fixed") */
